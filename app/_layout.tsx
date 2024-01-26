@@ -22,7 +22,11 @@ SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
-    SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
+    "LatoBlack": require('../assets/fonts/latoblack.ttf'),
+    "LatoMedium": require('../assets/fonts/latomedium.ttf'),
+    "LatoBold": require('../assets/fonts/latobold.ttf'),
+    "LatoRegular": require('../assets/fonts/latoregular.ttf'),
+    "LatoSemibold": require('../assets/fonts/latosemibold.ttf'),
     ...FontAwesome.font,
   });
 
