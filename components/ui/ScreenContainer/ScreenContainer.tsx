@@ -9,7 +9,7 @@ interface ScreenContainerProps {
 const ScreenContainer: React.FC<ScreenContainerProps> = ({ children }) => {
   return (
     <View className="h-full bg-background">
-      <SafeAreaView className="mt-10">{children}</SafeAreaView>
+      <SafeAreaView>{children}</SafeAreaView>
     </View>
   );
 };

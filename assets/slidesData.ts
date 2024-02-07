@@ -1,30 +1,30 @@
 export default [
   {
     id: '1',
-    title: 'Take care of your health',
+    title: 'Military Kitchen Planner',
     description:
-      'The app that covers multiple features — personal information, applying to consultation, chat with doctors etc.',
+      'Додаток допомагає військовим планувати свої трапези, враховуючи калорійність, поживність та легкість приготування.',
     imageSource: require('./images/slide-1.png')
   },
   {
     id: '2',
-    title: "Don't forget checkups",
+    title: 'Графік прийому їжі',
     description:
-      "We are notifying our users about checkups and upcoming visits. It's a common thing to forget about them, so we are here for you.",
+      'Військові можуть створювати та переглядати свій щоденний графік прийому їжі, щоб забезпечити оптимальне харчування у військовому положенні.',
     imageSource: require('./images/slide-1.png')
   },
   {
     id: '3',
-    title: 'Convenient health history',
+    title: 'Рецепти та харчові обмеження',
     description:
-      "You don't need to carry the papers of your health history — everything will be in this app. Isn't it a miracle?",
+      '"Military Kitchen Planner" надає доступ до різноманітних рецептів, враховуючи військові дієтичні обмеження та умови обслуговування',
     imageSource: require('./images/slide-1.png')
   },
   {
     id: '4',
-    title: 'Children information',
+    title: 'Публікування своїх рецептів',
     description:
-      'We understand how it is important to take care of your children, so you will have your child’s information as well.',
+      'Додаток дозволяє військовим створювати свої рецепти та за потреби публікувати їх для розвитку своєї кулінарної культури',
     imageSource: require('./images/slide-1.png')
   }
 ];

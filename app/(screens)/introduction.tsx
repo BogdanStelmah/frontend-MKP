@@ -38,7 +38,6 @@ const Introduction: React.FC<IntroductionProps> = () => {
     return (
       <Button
         label="Get Started"
-        isDisabled={false}
         type="filled"
         onPress={() => router.navigate('/registration')}
         borderRadius="rounded-lg"
@@ -49,14 +48,9 @@ const Introduction: React.FC<IntroductionProps> = () => {
   return (
     <ScreenContainer>
       <View>
-        <View className="flex flex-row-reverse ml-5 h-5">
+        <View className="flex flex-row-reverse ml-5 mb-4/25 h-5">
           {currentSlideIndex < slidesData.length - 1 && (
-            <Button
-              label="Skip"
-              isDisabled={false}
-              type=""
-              onPress={() => router.navigate('/registration')}
-            />
+            <Button label="Skip" type="" onPress={() => router.navigate('/registration')} />
           )}
         </View>
         <View className="h-3/4">

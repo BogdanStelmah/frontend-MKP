@@ -3,22 +3,24 @@ import { View, TouchableOpacity, Text } from 'react-native';
 
 interface ButtonProps {
   label: string;
-  isDisabled: boolean;
+  isDisabled?: boolean;
   size?: 'full-width';
   type: string;
   children?: any;
   onPress: any;
   borderRadius?: string;
+  className?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
   label,
-  isDisabled,
+  isDisabled = false,
   size,
   type,
   children,
   onPress,
-  borderRadius
+  borderRadius,
+  className
 }) => {
   const sizeStyle = size === 'full-width' ? 'w-full' : '';
 
@@ -41,7 +43,14 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity
       activeOpacity={0.6}
-      className={['transition', sizeStyle, buttonStyle, disabledStyle, borderRadius].join(' ')}
+      className={[
+        'transition',
+        sizeStyle,
+        buttonStyle,
+        disabledStyle,
+        borderRadius,
+        className
+      ].join(' ')}
       disabled={isDisabled}
       onPress={onPress}>
       <View className="flex-row items-center justify-center">
