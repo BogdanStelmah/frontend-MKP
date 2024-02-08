@@ -9,8 +9,8 @@ interface ScreenTitleProps {
 const ScreenTitle: React.FC<ScreenTitleProps> = ({ title, description }) => {
   return (
     <View>
-      <Text className="font-lato-semibold text-lg text-black-main mb-3">{title}</Text>
-      <Text className="font-lato-medium text-sm text-black-main">{description}</Text>
+      <Text className="font-lato-semibold text-2lg text-black-greyscale-main mb-3">{title}</Text>
+      <Text className="font-lato-medium text-sm text-black-greyscale-main">{description}</Text>
     </View>
   );
 };

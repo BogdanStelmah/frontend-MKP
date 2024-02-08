@@ -24,19 +24,19 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const sizeStyle = size === 'full-width' ? 'w-full' : '';
 
-  const disabledStyle = isDisabled ? (type === 'filled' ? 'bg-blue-disabled' : '') : '';
+  const disabledStyle = isDisabled ? (type === 'filled' ? 'bg-disable' : '') : '';
 
   const buttonStyle =
     type === 'outlined'
-      ? 'border border-blue-primary p-3'
-      : type === 'filled' && 'bg-blue-primary p-3 h-[48px]';
+      ? 'border border-green-secondary-2 p-3'
+      : type === 'filled' && 'bg-green-secondary-2 p-3 h-[48px]';
 
   const textStyle =
     type === 'outlined'
-      ? 'font-barlow-semibold text-blue-primary text-md'
+      ? 'font-barlow-semibold text-green-secondary-2 text-md'
       : type === 'filled'
-        ? 'font-barlow-semibold text-white-greyscale text-md'
-        : 'font-barlow-regular text-grey-greyscale text-xs';
+        ? 'font-barlow-semibold text-white-primary text-md'
+        : 'font-barlow-regular text-disable text-sm';
 
   return (
     <TouchableOpacity

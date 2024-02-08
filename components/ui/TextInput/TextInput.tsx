@@ -33,14 +33,14 @@ const TextInput: React.FC<TextInputProps> = ({
   return (
     <View className="h-[96px]">
       <Text
-        className="inline-block font-barlow-medium text-grey-greyscale
-          font-barlow text-2xs mb-0.5">
+        className="inline-block font-barlow-medium text-brown-camouflage
+          font-barlow text-xs mb-0.5">
         {label}
       </Text>
 
       <DefaultTextInput
         className={[
-          'w-full h-[46px] text-black-main border border-grey-greyscale px-3 py-3.5 rounded-lg text-[15px] focus:border-blue-primary',
+          'w-full h-[46px] text-black-greyscale-main border border-brown-camouflage px-3 py-3.5 rounded-lg text-[15px] focus:border-yellow-camouflage',
           error && 'border-red-secondary',
           className
         ].join(' ')}
@@ -54,7 +54,7 @@ const TextInput: React.FC<TextInputProps> = ({
         onBlur={onBlur}
       />
 
-      {error && <Text className="text-red-secondary text-2xs h-[20px]">{helperText}</Text>}
+      {error && <Text className="text-red-secondary text-xs h-[20px]">{helperText}</Text>}
     </View>
   );
 };
