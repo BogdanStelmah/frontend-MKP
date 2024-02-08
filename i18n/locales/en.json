@@ -1,0 +1,22 @@
+{
+  "introduction": {
+    "skip": "Skip",
+    "get-started": "Get Started",
+    "slide1": {
+      "title": "Military Kitchen Planner",
+      "description": "The military can create and view their daily meal schedule to ensure optimal nutrition in martial law."
+    },
+    "slide2": {
+      "title": "Meal schedule",
+      "description": "The military can create and view their daily meal schedule to ensure optimal nutrition in martial law."
+    },
+    "slide3": {
+      "title": "Recipes and food restrictions",
+      "description": "\"Military Kitchen Planner\" provides access to a variety of recipes, taking into account military dietary restrictions and service conditions."
+    },
+    "slide4": {
+      "title": "Publishing your recipes",
+      "description": "The app allows the military to create their own recipes and, if necessary, publish them to develop their culinary culture."
+    }
+  }
+}

@@ -2,12 +2,13 @@ import { useRouter } from 'expo-router';
 import React, { useCallback, useRef, useState } from 'react';
 import { FlatList, View } from 'react-native';
 
-import slidesData from '@/assets/slidesData';
+import { slidesData } from '@/common/dictionary/slidesData.dictionary';
 import Button from '@/components/ui/Button';
 import Paginator from '@/components/ui/Paginator';
 import ProgressButton from '@/components/ui/ProgressButton';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import Slide from '@/components/ui/Slide';
+import i18n from '@/i18n/i18n';
 
 interface IntroductionProps {}
 
@@ -37,8 +38,9 @@ const Introduction: React.FC<IntroductionProps> = () => {
     }
     return (
       <Button
-        label="Get Started"
+        label={i18n.t('introduction.get-started')}
         type="filled"
+        size="full-width"
         onPress={() => router.navigate('/registration')}
         borderRadius="rounded-lg"
       />
@@ -48,9 +50,13 @@ const Introduction: React.FC<IntroductionProps> = () => {
   return (
     <ScreenContainer>
       <View>
-        <View className="flex flex-row-reverse ml-5 mb-4/25 h-5">
+        <View className="flex flex-row-reverse ml-5 my-[17px] h-5">
           {currentSlideIndex < slidesData.length - 1 && (
-            <Button label="Skip" type="" onPress={() => router.navigate('/registration')} />
+            <Button
+              label={i18n.t('introduction.skip')}
+              type=""
+              onPress={() => router.navigate('/registration')}
+            />
           )}
         </View>
         <View className="h-3/4">

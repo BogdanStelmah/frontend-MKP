@@ -50,9 +50,6 @@ module.exports = {
         md: ['16px', '24px'],
         lg: ['28px', '36px']
       },
-      spacing: {
-        '4/25': '1.0625rem' // 17px
-      },
       boxShadow: {
         card: '0px 4px 16px rgba(29, 101, 137, 0.15)'
       }

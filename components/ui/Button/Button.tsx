@@ -28,10 +28,8 @@ const Button: React.FC<ButtonProps> = ({
 
   const buttonStyle =
     type === 'outlined'
-      ? 'border border-blue-primary p-3 w-full'
-      : type === 'filled'
-        ? 'bg-blue-primary p-3 w-full h-[48px]'
-        : 'w-7';
+      ? 'border border-blue-primary p-3'
+      : type === 'filled' && 'bg-blue-primary p-3 h-[48px]';
 
   const textStyle =
     type === 'outlined'
