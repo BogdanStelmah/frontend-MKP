@@ -18,5 +18,22 @@
       "title": "Публікування своїх рецептів",
       "description": "Додаток дозволяє військовим створювати свої рецепти та за потреби публікувати їх для розвитку своєї кулінарної культури."
     }
+  },
+  "validations": {
+    "invalid-email-format": "Електронний лист має бути правильно відформатований",
+    "email-cannot-be-longer": "Email не може бути довшим за {{number}} літер",
+    "email-must-contain-only": "Електронна пошта повинна містити тільки латинські літери",
+    "first-name-cannot-be-longer": "Ім'я не може бути довшим за {{number}} літер",
+    "first-name-can-contain-only": "Ім'я може містити тільки літери, одинарні лапки, дефіси",
+    "last-name-cannot-be-longer": "Прізвище не може бути довшим за {{number}} літер",
+    "last-name-can-contain-only": "Прізвище може містити тільки літери, одинарні лапки, дефіси",
+    "password-is-required": "Пароль є обов'язковим полем",
+    "password-must-be-at-least-characters-long": "Пароль повинен містити щонайменше {{number}} символів",
+    "password-must-contain-at-least-one-special-symbol": "Пароль повинен містити хоча б один спеціальний символ",
+    "password-must-contain-at-least-one-number": "Пароль повинен містити хоча б одну цифру",
+    "password-must-contain-only": "Пароль повинен містити тільки латинські літери",
+    "confirm-password-is-required": "Підтвердити пароль - обов'язкове поле",
+    "passwords-must-match": "Паролі повинні збігатися",
+    "please-complete-this-required-field": "Будь ласка, заповніть це обов'язкове поле"
   }
 }

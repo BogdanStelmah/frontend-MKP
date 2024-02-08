@@ -3,7 +3,7 @@ import { I18n } from 'i18n-js';
 
 import { LangEnum } from '@/common/enums/language.enum';
 
-const deviceLanguage = getLocales()[0].languageCode;
+const deviceLanguage = getLocales()[0]?.languageCode;
 
 // Set the key-value pairs for the different languages you want to support.
 const i18n = new I18n({

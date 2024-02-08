@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface ScreenContainerProps {
@@ -8,9 +8,11 @@ interface ScreenContainerProps {
 
 const ScreenContainer: React.FC<ScreenContainerProps> = ({ children }) => {
   return (
-    <View className="h-full bg-background">
-      <SafeAreaView>{children}</SafeAreaView>
-    </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View className="h-full bg-background">
+        <SafeAreaView>{children}</SafeAreaView>
+      </View>
+    </TouchableWithoutFeedback>
   );
 };
 

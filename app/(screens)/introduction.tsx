@@ -8,7 +8,7 @@ import Paginator from '@/components/ui/Paginator';
 import ProgressButton from '@/components/ui/ProgressButton';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import Slide from '@/components/ui/Slide';
-import i18n from '@/i18n/i18n';
+import i18n from '@/i18n';
 
 interface IntroductionProps {}
 
@@ -20,6 +20,10 @@ const Introduction: React.FC<IntroductionProps> = () => {
   const handleViewableItemsChanged = useCallback(({ viewableItems }: any) => {
     setCurrentSlideIndex(viewableItems[0].index);
   }, []);
+
+  const redirectToRegister = () => {
+    router.navigate('/registration');
+  };
 
   const handleScroll = () => {
     if (currentSlideIndex < slidesData.length - 1) {
@@ -41,7 +45,7 @@ const Introduction: React.FC<IntroductionProps> = () => {
         label={i18n.t('introduction.get-started')}
         type="filled"
         size="full-width"
-        onPress={() => router.navigate('/registration')}
+        onPress={redirectToRegister}
         borderRadius="rounded-lg"
       />
     );
@@ -52,13 +56,10 @@ const Introduction: React.FC<IntroductionProps> = () => {
       <View>
         <View className="flex flex-row-reverse ml-5 my-[17px] h-5">
           {currentSlideIndex < slidesData.length - 1 && (
-            <Button
-              label={i18n.t('introduction.skip')}
-              type=""
-              onPress={() => router.navigate('/registration')}
-            />
+            <Button label={i18n.t('introduction.skip')} type="" onPress={redirectToRegister} />
           )}
         </View>
+
         <View className="h-3/4">
           <FlatList
             data={slidesData}
@@ -76,6 +77,7 @@ const Introduction: React.FC<IntroductionProps> = () => {
         <View className="mb-10">
           <Paginator currentSlideIndex={currentSlideIndex} slidesData={slidesData} />
         </View>
+
         <View className="flex flex-row justify-center mx-4 h-20">{getButton()}</View>
       </View>
     </ScreenContainer>

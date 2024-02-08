@@ -18,5 +18,22 @@
       "title": "Publishing your recipes",
       "description": "The app allows the military to create their own recipes and, if necessary, publish them to develop their culinary culture."
     }
+  },
+  "validations": {
+    "invalid-email-format": "Email must be formatted correctly",
+    "email-cannot-be-longer": "Email cannot be longer than {{number}} letters",
+    "email-must-contain-only": "Email must contain only Latin letters",
+    "first-name-cannot-be-longer": "First name cannot be longer than {{number}} letters",
+    "first-name-can-contain-only": "First name can contain only letters, single quotes, hyphens",
+    "last-name-cannot-be-longer": "Last name cannot be longer than {{number}} letters",
+    "last-name-can-contain-only": "Last name can contain only letters, single quotes, hyphens",
+    "password-is-required": "Password is a required field",
+    "password-must-be-at-least-characters-long": "Password must be at least {{number}} characters long",
+    "password-must-contain-at-least-one-special-symbol": "Password must contain at least one special symbol",
+    "password-must-contain-at-least-one-number": "Password must contain at least one number",
+    "password-must-contain-only": "Password must contain only Latin letters",
+    "confirm-password-is-required": "Confirm password is a required field",
+    "passwords-must-match": "Passwords must match",
+    "please-complete-this-required-field": "Please complete this required field"
   }
 }
