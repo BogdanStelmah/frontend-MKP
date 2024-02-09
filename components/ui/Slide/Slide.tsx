@@ -1,5 +1,9 @@
 import React from 'react';
-import { View, Text, Image, ImageSourcePropType } from 'react-native';
+import { Image, ImageSourcePropType, View } from 'react-native';
+
+import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
+import Text2lg from '@/components/ui/Typography/Text2lg';
+import TextMd from '@/components/ui/Typography/TextMd';
 
 interface SlideProps {
   item: {
@@ -15,12 +19,17 @@ const Slide: React.FC<SlideProps> = ({ item }) => {
     <View className="w-screen">
       <Image source={item.imageSource} className="w-full h-[280] mb-2" />
       <View className="mx-5">
-        <Text className="text-black-greyscale-main font-barlow-bold text-2lg text-center mb-3">
+        <Text2lg
+          fontWeight={FontWeightEnum.BOLD}
+          extraStyles="text-black-greyscale-main text-center mb-3">
           {item.title}
-        </Text>
-        <Text className="text-black-greyscale-main opacity-70 font-barlow-medium text-md text-center">
+        </Text2lg>
+
+        <TextMd
+          fontWeight={FontWeightEnum.MEDIUM}
+          extraStyles="text-black-greyscale-main opacity-70 text-center">
           {item.description}
-        </Text>
+        </TextMd>
       </View>
     </View>
   );

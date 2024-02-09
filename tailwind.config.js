@@ -17,9 +17,9 @@ module.exports = {
       colors: {
         transparent: '#00000000',
         green: {
-          primary: '#4B5320', // new
-          secondary: '#335C33', // new use
-          'secondary-2': '#4F7942' // new
+          primary: '#4B5320',
+          secondary: '#335C33',
+          'secondary-2': '#4F7942'
         },
         brown: {
           camouflage: '#827A60'

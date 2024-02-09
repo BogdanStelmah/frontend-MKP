@@ -1,5 +1,8 @@
 import React from 'react';
-import { KeyboardType, View, Text, TextInput as DefaultTextInput } from 'react-native';
+import { KeyboardType, TextInput as DefaultTextInput, View } from 'react-native';
+
+import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
+import TextXs from '@/components/ui/Typography/TextXs';
 
 interface TextInputProps {
   label: string;
@@ -32,15 +35,15 @@ const TextInput: React.FC<TextInputProps> = ({
 }) => {
   return (
     <View className="h-[96px]">
-      <Text
-        className="inline-block font-barlow-medium text-brown-camouflage
-          font-barlow text-xs mb-0.5">
+      <TextXs
+        fontWeight={FontWeightEnum.MEDIUM}
+        extraStyles="inline-block text-brown-camouflage mb-0.5">
         {label}
-      </Text>
+      </TextXs>
 
       <DefaultTextInput
         className={[
-          'w-full h-[46px] text-black-greyscale-main border border-brown-camouflage px-3 py-3.5 rounded-lg text-[15px] focus:border-yellow-camouflage',
+          'font-lato-medium w-full h-[46px] text-black-greyscale-main border border-brown-camouflage px-3 py-3.5 rounded-lg text-[15px] focus:border-yellow-camouflage',
           error && 'border-red-secondary',
           className
         ].join(' ')}
@@ -54,7 +57,11 @@ const TextInput: React.FC<TextInputProps> = ({
         onBlur={onBlur}
       />
 
-      {error && <Text className="text-red-secondary text-xs h-[20px]">{helperText}</Text>}
+      {error && (
+        <TextXs fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-red-secondary h-[20px]">
+          {helperText}
+        </TextXs>
+      )}
     </View>
   );
 };

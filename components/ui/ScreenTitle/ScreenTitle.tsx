@@ -1,5 +1,9 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+
+import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
+import Text2lg from '@/components/ui/Typography/Text2lg';
+import TextSm from '@/components/ui/Typography/TextSm';
 
 interface ScreenTitleProps {
   title: string;
@@ -9,8 +13,13 @@ interface ScreenTitleProps {
 const ScreenTitle: React.FC<ScreenTitleProps> = ({ title, description }) => {
   return (
     <View>
-      <Text className="font-lato-semibold text-2lg text-black-greyscale-main mb-3">{title}</Text>
-      <Text className="font-lato-medium text-sm text-black-greyscale-main">{description}</Text>
+      <Text2lg fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-black-greyscale-main mb-3">
+        {title}
+      </Text2lg>
+
+      <TextSm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-black-greyscale-main">
+        {description}
+      </TextSm>
     </View>
   );
 };

@@ -33,10 +33,10 @@ const Button: React.FC<ButtonProps> = ({
 
   const textStyle =
     type === 'outlined'
-      ? 'font-barlow-semibold text-green-secondary-2 text-md'
+      ? 'font-lato-semibold text-green-secondary-2 text-md'
       : type === 'filled'
-        ? 'font-barlow-semibold text-white-primary text-md'
-        : 'font-barlow-regular text-disable text-sm';
+        ? 'font-lato-semibold text-white-primary text-md'
+        : 'font-lato-regular text-disable text-sm';
 
   return (
     <TouchableOpacity
