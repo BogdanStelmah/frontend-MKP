@@ -15,6 +15,7 @@ import ScreenTitle from '@/components/ui/ScreenTitle';
 import { FormTextInput } from '@/components/ui/TextInput';
 import TextSm from '@/components/ui/Typography/TextSm';
 import i18n from '@/i18n';
+import userApi from '@/service/user.service';
 
 interface IFormInput {
   email: string;
@@ -36,10 +37,20 @@ const SignIn: React.FC = () => {
     resolver: yupResolver(signInSchema)
   });
 
+  const redirectToPersonalIno = () => router.push('/personalInfo');
+
   const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
     setIsLoadingSubmitForm(true);
 
-    setIsLoadingSubmitForm(false);
+    userApi
+      .loginUser({ email, password })
+      .then((res) => {
+        redirectToPersonalIno();
+      })
+      .catch((error) =>
+        setError('password', { message: i18n.t('sign-in.password-or-email-incorrect') })
+      )
+      .finally(() => setIsLoadingSubmitForm(false));
   };
 
   return (

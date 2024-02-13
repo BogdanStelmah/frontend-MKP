@@ -33,6 +33,7 @@
   "sign-in": {
     "title": "Гайда заходь. Тебе не вистачало!",
     "forgot-password": "Забули пароль?",
+    "password-or-email-incorrect": "Неправильний пароль або адреса електронної пошти",
     "or": "АБО",
     "sign-in": "Увійти",
     "sign-in-with-google": "Увійдіть за допомогою Google",

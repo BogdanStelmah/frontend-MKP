@@ -61,7 +61,7 @@ export class HttpService {
     return res.data;
   }
 
-  async login(apiVersion: string, user: any) {
+  async login(apiVersion: string, user: IUser) {
     return await this.fetchingServiceWithHeaders.post(this.getFullApiUrl(apiVersion), user);
   }
 

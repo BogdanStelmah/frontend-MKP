@@ -3,6 +3,7 @@ import { AxiosError } from 'axios';
 import HttpService from './http.service';
 
 import { IUser } from '@/common/types/types';
+import { writeToken } from '@/service/helper';
 
 class UserService extends HttpService {
   constructor() {
@@ -18,8 +19,15 @@ class UserService extends HttpService {
     return this.register(this.registerApi, user);
   }
 
-  loginUser(user: any) {
-    return this.login(this.loginApi, user);
+  async loginUser(user: any) {
+    try {
+      const { data } = await this.login(this.loginApi, user);
+      writeToken(data.access_token);
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status === 401) {
+        throw new Error('Invalid email or password');
+      }
+    }
   }
 
   googleLoginUser() {

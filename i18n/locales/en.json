@@ -32,9 +32,8 @@
   },
   "sign-in": {
     "title": "Let's sign in. You have been missed!",
-    "email": "Email",
-    "password": "Password",
     "forgot-password": "Forgot password?",
+    "password-or-email-incorrect": "Password or email is incorrect",
     "or": "OR",
     "sign-in": "Sign in",
     "sign-in-with-google": "Sign in with Google",
