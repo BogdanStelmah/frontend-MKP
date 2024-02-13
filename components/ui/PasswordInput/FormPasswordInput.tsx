@@ -1,32 +1,27 @@
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
 
-import TextInput from './TextInput';
+import PasswordInput from './PasswordInput';
 
-interface FormTextInputProps {
+interface FormPasswordInputProps {
   name: string;
   placeholder: string;
   control: Control<any, any> | undefined;
   label: string;
-  isSecureTextEntry?: boolean;
-  extraStyles?: string;
 }
 
-const FormTextInput: React.FC<FormTextInputProps> = ({
+const FormPasswordInput: React.FC<FormPasswordInputProps> = ({
   name,
   label,
   control,
-  placeholder,
-  isSecureTextEntry = false,
-  extraStyles = ''
+  placeholder
 }) => {
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
-        <TextInput
-          extraStyles={extraStyles}
+        <PasswordInput
           label={label}
           placeholder={placeholder}
           onChangeText={onChange}
@@ -34,11 +29,10 @@ const FormTextInput: React.FC<FormTextInputProps> = ({
           value={value}
           error={!!error}
           helperText={error?.message}
-          isSecureTextEntry={isSecureTextEntry}
         />
       )}
     />
   );
 };
 
-export default FormTextInput;
+export default FormPasswordInput;

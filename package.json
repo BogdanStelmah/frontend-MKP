@@ -16,7 +16,9 @@
   "dependencies": {
     "@expo/vector-icons": "^14.0.0",
     "@hookform/resolvers": "^3.3.4",
+    "@react-native-async-storage/async-storage": "^1.21.0",
     "@react-navigation/native": "^6.0.2",
+    "axios": "^1.6.7",
     "expo": "~50.0.3",
     "expo-font": "~11.10.2",
     "expo-linking": "~6.2.2",

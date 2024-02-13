@@ -7,10 +7,15 @@ interface TextSmProps {
   children: React.ReactNode;
   fontWeight: FontWeightEnum;
   extraStyles?: string;
+  onPress?: () => void;
 }
 
-const TextSm: React.FC<TextSmProps> = ({ children, extraStyles, fontWeight }) => {
-  return <Text className={`font-lato-${fontWeight} text-sm ${extraStyles}`}>{children}</Text>;
+const TextSm: React.FC<TextSmProps> = ({ children, extraStyles, fontWeight, onPress }) => {
+  return (
+    <Text className={`font-lato-${fontWeight} text-sm ${extraStyles}`} onPress={onPress}>
+      {children}
+    </Text>
+  );
 };
 
 export default TextSm;

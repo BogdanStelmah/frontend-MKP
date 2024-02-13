@@ -25,6 +25,10 @@ const Introduction: React.FC<IntroductionProps> = () => {
     router.navigate('/registration');
   };
 
+  const redirectToSignIn = () => {
+    router.navigate('/signIn');
+  };
+
   const handleScroll = () => {
     if (currentSlideIndex < slidesData.length - 1) {
       sliderRef.current.scrollToIndex({ index: currentSlideIndex + 1 });
@@ -41,13 +45,22 @@ const Introduction: React.FC<IntroductionProps> = () => {
       );
     }
     return (
-      <Button
-        label={i18n.t('introduction.get-started')}
-        type="filled"
-        size="full-width"
-        onPress={redirectToRegister}
-        borderRadius="rounded-lg"
-      />
+      <View className="w-full">
+        <Button
+          label={i18n.t('introduction.get-started')}
+          type="filled"
+          onPress={redirectToRegister}
+          borderRadius="rounded-lg"
+          extraStyles="mb-3"
+        />
+
+        <Button
+          label={i18n.t('introduction.already-have-an-account')}
+          type="outlined"
+          onPress={redirectToSignIn}
+          borderRadius="rounded-lg"
+        />
+      </View>
     );
   };
 

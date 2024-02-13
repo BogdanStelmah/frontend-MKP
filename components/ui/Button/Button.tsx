@@ -5,11 +5,11 @@ interface ButtonProps {
   label: string;
   isDisabled?: boolean;
   size?: 'full-width';
-  type: string;
+  type: 'outlined' | 'filled' | string;
   children?: any;
   onPress: any;
   borderRadius?: string;
-  className?: string;
+  extraStyles?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -20,7 +20,7 @@ const Button: React.FC<ButtonProps> = ({
   children,
   onPress,
   borderRadius,
-  className
+  extraStyles
 }) => {
   const sizeStyle = size === 'full-width' ? 'w-full' : '';
 
@@ -47,7 +47,7 @@ const Button: React.FC<ButtonProps> = ({
         buttonStyle,
         disabledStyle,
         borderRadius,
-        className
+        extraStyles
       ].join(' ')}
       disabled={isDisabled}
       onPress={onPress}>

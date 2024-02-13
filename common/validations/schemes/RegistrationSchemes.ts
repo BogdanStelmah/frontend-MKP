@@ -2,7 +2,7 @@ import * as yup from 'yup';
 
 import { fields } from '@/common/validations/fields';
 
-export const loginCodeSchema = yup.object().shape({
+export const signInSchema = yup.object().shape({
   email: fields.email,
   password: fields.loginPassword
 });

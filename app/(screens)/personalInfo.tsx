@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 const PersonalInfo = () => {
   return (
     <View style={styles.container}>
-      <Text>Registration</Text>
+      <Text>PersonalInfo</Text>
     </View>
   );
 };

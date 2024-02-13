@@ -2,6 +2,7 @@
   "introduction": {
     "skip": "Пропустити",
     "get-started": "Почати роботу",
+    "already-have-an-account": "Уже маю обліковий запис",
     "slide1": {
       "title": "Military Kitchen Planner",
       "description": "Додаток допомагає військовим планувати свої трапези, враховуючи калорійність, поживність та легкість приготування."
@@ -19,6 +20,25 @@
       "description": "Додаток дозволяє військовим створювати свої рецепти та за потреби публікувати їх для розвитку своєї кулінарної культури."
     }
   },
+  "registration": {
+    "sign-up": "Реєстрація",
+    "description": "Після заповнення даних у полях нище, ви отримаєте доступ до всіх функцій додатку.",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "password-placeholder": "Введіть пароль",
+    "confirm-password": "Підтвердити пароль",
+    "confirm-password-placeholder": "Підтвердіть пароль",
+    "continue": "Продовжити"
+  },
+  "sign-in": {
+    "title": "Гайда заходь. Тебе не вистачало!",
+    "forgot-password": "Забули пароль?",
+    "or": "АБО",
+    "sign-in": "Увійти",
+    "sign-in-with-google": "Увійдіть за допомогою Google",
+    "dont-have-account": "У вас ще немає облікового запису?",
+    "sign-up": "Зареєструватися"
+  },
   "validations": {
     "invalid-email-format": "Електронний лист має бути правильно відформатований",
     "email-cannot-be-longer": "Email не може бути довшим за {{number}} літер",
@@ -34,6 +54,7 @@
     "password-must-contain-only": "Пароль повинен містити тільки латинські літери",
     "confirm-password-is-required": "Підтвердити пароль - обов'язкове поле",
     "passwords-must-match": "Паролі повинні збігатися",
-    "please-complete-this-required-field": "Будь ласка, заповніть це обов'язкове поле"
+    "please-complete-this-required-field": "Будь ласка, заповніть це обов'язкове поле",
+    "email-already-exists": "Ця електронна адреса вже має обліковий запис"
   }
 }

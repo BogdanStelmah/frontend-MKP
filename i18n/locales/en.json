@@ -2,6 +2,7 @@
   "introduction": {
     "skip": "Skip",
     "get-started": "Get Started",
+    "already-have-an-account": "I already have an account",
     "slide1": {
       "title": "Military Kitchen Planner",
       "description": "The military can create and view their daily meal schedule to ensure optimal nutrition in martial law."
@@ -18,6 +19,27 @@
       "title": "Publishing your recipes",
       "description": "The app allows the military to create their own recipes and, if necessary, publish them to develop their culinary culture."
     }
+  },
+  "registration": {
+    "sign-up": "Registration",
+    "description": "After filling in the data in the fields below, you will have access to all the functions of the application.",
+    "email": "Email",
+    "password": "Password",
+    "password-placeholder": "Enter password",
+    "confirm-password": "Confirm password",
+    "confirm-password-placeholder": "Confirm your password",
+    "continue": "Continue"
+  },
+  "sign-in": {
+    "title": "Let's sign in. You have been missed!",
+    "email": "Email",
+    "password": "Password",
+    "forgot-password": "Forgot password?",
+    "or": "OR",
+    "sign-in": "Sign in",
+    "sign-in-with-google": "Sign in with Google",
+    "dont-have-an-account": "Don't have an account yet?",
+    "sign-up": "Sign up"
   },
   "validations": {
     "invalid-email-format": "Email must be formatted correctly",

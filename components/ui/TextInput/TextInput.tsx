@@ -12,7 +12,7 @@ interface TextInputProps {
   helperText?: string;
   isSecureTextEntry?: boolean;
   maxLength?: number;
-  className?: string;
+  extraStyles?: string;
   keyboardType?: KeyboardType;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
   onChangeText?: any;
@@ -29,7 +29,7 @@ const TextInput: React.FC<TextInputProps> = ({
   value,
   isSecureTextEntry = false,
   keyboardType,
-  className,
+  extraStyles,
   maxLength,
   autoCapitalize = 'none'
 }) => {
@@ -45,7 +45,7 @@ const TextInput: React.FC<TextInputProps> = ({
         className={[
           'font-lato-medium w-full h-[46px] text-black-greyscale-main border border-brown-camouflage px-3 py-3.5 rounded-lg text-[15px] focus:border-yellow-camouflage',
           error && 'border-red-secondary',
-          className
+          extraStyles
         ].join(' ')}
         placeholder={placeholder}
         value={value}
