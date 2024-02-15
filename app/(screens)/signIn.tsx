@@ -5,6 +5,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
+import { IGoogleUser } from '@/common/types/types';
 import { signInSchema } from '@/common/validations';
 import Button from '@/components/ui/Button';
 import Footer from '@/components/ui/Footer';
@@ -44,12 +45,18 @@ const SignIn: React.FC = () => {
 
     userApi
       .loginUser({ email, password })
-      .then((res) => {
-        redirectToPersonalIno();
-      })
-      .catch((error) =>
-        setError('password', { message: i18n.t('sign-in.password-or-email-incorrect') })
-      )
+      .then(() => redirectToPersonalIno())
+      .catch(() => setError('password', { message: i18n.t('sign-in.password-or-email-incorrect') }))
+      .finally(() => setIsLoadingSubmitForm(false));
+  };
+
+  const handleGoogleLogin = ({ idToken }: IGoogleUser) => {
+    setIsLoadingSubmitForm(true);
+
+    userApi
+      .googleLoginUser(idToken || '')
+      .then(() => redirectToPersonalIno())
+      .catch((error) => console.error(error.message))
       .finally(() => setIsLoadingSubmitForm(false));
   };
 
@@ -97,7 +104,7 @@ const SignIn: React.FC = () => {
             <View className="flex-1 h-px bg-disable opacity-60" />
           </View>
 
-          <GoogleButton onPress={() => console.log('google')} />
+          <GoogleButton handleGetUserInfo={handleGoogleLogin} />
         </View>
 
         <Footer

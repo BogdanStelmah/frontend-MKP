@@ -9,7 +9,7 @@ interface ScreenContainerProps {
 const ScreenContainer: React.FC<ScreenContainerProps> = ({ children }) => {
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-      <View className="h-full bg-background ">
+      <View className="h-full bg-background">
         <SafeAreaView>{children}</SafeAreaView>
       </View>
     </TouchableWithoutFeedback>

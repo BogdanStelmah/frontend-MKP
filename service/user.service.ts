@@ -12,7 +12,7 @@ class UserService extends HttpService {
 
   registerApi = '/auth/register';
   loginApi = '/auth/login';
-  googleLoginApi = '/auth/google';
+  googleLoginApi = '/auth/loginWithGoogle';
   isEmailExistsApi = '/users/isEmailExists';
 
   registerUser(user: IUser) {
@@ -22,7 +22,7 @@ class UserService extends HttpService {
   async loginUser(user: any) {
     try {
       const { data } = await this.login(this.loginApi, user);
-      writeToken(data.access_token);
+      await writeToken(data.access_token);
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status === 401) {
         throw new Error('Invalid email or password');
@@ -30,8 +30,15 @@ class UserService extends HttpService {
     }
   }
 
-  googleLoginUser() {
-    return this.googleLogin(this.loginApi);
+  async googleLoginUser(idToken: string) {
+    try {
+      const { data } = await this.googleLogin(this.googleLoginApi, idToken);
+      await writeToken(data.access_token);
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status === 401) {
+        throw new Error('Problem with google account. Please try again.');
+      }
+    }
   }
 
   async isEmailExists(email: string) {

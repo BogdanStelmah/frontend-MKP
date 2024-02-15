@@ -1,3 +1,4 @@
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { useRouter } from 'expo-router';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
@@ -16,6 +17,7 @@ const PersonalInfo = () => {
         type=""
         onPress={() => {
           removeToken();
+          GoogleSignin.signOut();
           router.push('/introduction');
         }}
       />

@@ -66,14 +66,14 @@ const Introduction: React.FC<IntroductionProps> = () => {
 
   return (
     <ScreenContainer>
-      <View>
-        <View className="flex flex-row-reverse ml-5 my-[17px] h-5">
-          {currentSlideIndex < slidesData.length - 1 && (
-            <Button label={i18n.t('introduction.skip')} type="" onPress={redirectToRegister} />
-          )}
-        </View>
+      <View className="h-full flex justify-between">
+        <View className="h-4/5">
+          <View className="flex flex-row-reverse ml-5 my-[17px] h-5">
+            {currentSlideIndex < slidesData.length - 1 && (
+              <Button label={i18n.t('introduction.skip')} type="" onPress={redirectToRegister} />
+            )}
+          </View>
 
-        <View className="h-3/4">
           <FlatList
             data={slidesData}
             renderItem={({ item }) => <Slide item={item} />}
@@ -85,13 +85,13 @@ const Introduction: React.FC<IntroductionProps> = () => {
             bounces={false}
             ref={sliderRef}
           />
+
+          <View className="mb-10">
+            <Paginator currentSlideIndex={currentSlideIndex} slidesData={slidesData} />
+          </View>
         </View>
 
-        <View className="mb-10">
-          <Paginator currentSlideIndex={currentSlideIndex} slidesData={slidesData} />
-        </View>
-
-        <View className="flex flex-row justify-center mx-4 h-20">{getButton()}</View>
+        <View className="flex flex-row justify-center mx-4 h-[124px]">{getButton()}</View>
       </View>
     </ScreenContainer>
   );

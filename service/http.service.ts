@@ -32,8 +32,6 @@ export class HttpService {
   }
 
   async post(data: any, apiVersion: string) {
-    console.log(retrieveToken);
-
     const res = await this.fetchingServiceWithHeaders.post(this.getFullApiUrl(apiVersion), data);
     return res.data;
   }
@@ -62,11 +60,15 @@ export class HttpService {
   }
 
   async login(apiVersion: string, user: IUser) {
-    return await this.fetchingServiceWithHeaders.post(this.getFullApiUrl(apiVersion), user);
+    return await this.fetchingService.post(this.getFullApiUrl(apiVersion), user);
   }
 
-  async googleLogin(apiVersion: string) {
-    return await this.fetchingServiceWithHeaders.post(this.getFullApiUrl(apiVersion));
+  async googleLogin(apiVersion: string, token: string) {
+    return await this.fetchingService.post(
+      this.getFullApiUrl(apiVersion),
+      {},
+      { headers: { Authorization: token } }
+    );
   }
 
   async register(apiVersion: string, user: IUser) {
