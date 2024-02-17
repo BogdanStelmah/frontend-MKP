@@ -1,13 +1,14 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
-import { useRouter } from 'expo-router';
-import React from 'react';
+import { router } from 'expo-router';
+import React, { useContext } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import Button from '@/components/ui/Button';
+import { AuthContext } from '@/context/AuthContext';
 import { removeToken } from '@/service/helper';
 
 const PersonalInfo = () => {
-  const router = useRouter();
+  const { logout } = useContext(AuthContext);
 
   return (
     <View style={styles.container}>
@@ -16,8 +17,7 @@ const PersonalInfo = () => {
         label="Logout"
         type=""
         onPress={() => {
-          removeToken();
-          GoogleSignin.signOut();
+          logout();
           router.push('/introduction');
         }}
       />

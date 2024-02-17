@@ -1,11 +1,13 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import '../global.css';
-import AuthProvider from '@/context/AuthContext';
+
+import { AuthContext, AuthProvider } from '@/context/AuthContext';
+import { retrieveToken } from '@/service/helper';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -40,15 +42,35 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <AuthProvider>
+      <RootLayoutNav />
+    </AuthProvider>
+  );
 }
 
 function RootLayoutNav() {
+  const { login } = useContext(AuthContext);
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      const token = await retrieveToken();
+
+      if (token) {
+        login();
+        router.navigate('/personalInfo');
+      } else {
+        router.navigate('/introduction');
+      }
+    };
+
+    fetchToken();
+  }, []);
+
   return (
-    <AuthProvider>
-      <Stack screenOptions={{ headerShown: false }}>
-        <Stack.Screen name="(screens)" />
-      </Stack>
-    </AuthProvider>
+    <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="(guest-routes)" />
+      <Stack.Screen name="(main-routes)" />
+    </Stack>
   );
 }

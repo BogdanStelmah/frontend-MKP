@@ -1,32 +1,39 @@
-import React, { ReactNode, useState } from 'react';
+import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import React, { createContext, ReactNode, useState } from 'react';
 
-export const AuthContext = React.createContext({
+import { removeToken } from '@/service/helper';
+
+interface AuthContextType {
+  isAuthenticated: boolean;
+  login: () => void;
+  logout: () => void;
+}
+
+export const AuthContext = createContext<AuthContextType>({
   isAuthenticated: false,
-  signIn: () => {},
-  signOut: () => {}
+  login: () => {},
+  logout: () => {}
 });
 
-interface IAuthProviderProps {
+interface AuthProviderProps {
   children: ReactNode;
 }
 
-const AuthProvider: React.FC<IAuthProviderProps> = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
+export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+  const [isAuthenticated, setAuthenticated] = useState(false);
+
+  const login = () => setAuthenticated(true);
+
+  const logout = async () => {
+    await removeToken();
+    await GoogleSignin.signOut();
+
+    setAuthenticated(false);
+  };
 
   return (
-    <AuthContext.Provider
-      value={{
-        isAuthenticated,
-        signIn: () => {
-          setIsAuthenticated(true);
-        },
-        signOut: () => {
-          setIsAuthenticated(false);
-        }
-      }}>
+    <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
       {children}
     </AuthContext.Provider>
   );
 };
-
-export default AuthProvider;

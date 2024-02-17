@@ -4,11 +4,17 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 interface ScreenContainerProps {
   children: React.ReactNode;
+  isTouchableWithoutFeedback?: boolean;
 }
 
-const ScreenContainer: React.FC<ScreenContainerProps> = ({ children }) => {
+const ScreenContainer: React.FC<ScreenContainerProps> = ({
+  children,
+  isTouchableWithoutFeedback = true
+}) => {
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+    <TouchableWithoutFeedback
+      onPress={isTouchableWithoutFeedback ? Keyboard.dismiss : undefined}
+      accessible={false}>
       <View className="h-full bg-background">
         <SafeAreaView>{children}</SafeAreaView>
       </View>

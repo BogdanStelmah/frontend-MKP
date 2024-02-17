@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
@@ -24,8 +24,6 @@ interface IFormInput {
 }
 
 const SignIn: React.FC = () => {
-  const router = useRouter();
-
   const [isLoadingSubmitForm, setIsLoadingSubmitForm] = useState<boolean>(false);
 
   const {

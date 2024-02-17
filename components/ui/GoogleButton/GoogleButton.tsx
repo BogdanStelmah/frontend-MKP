@@ -19,7 +19,6 @@ const GoogleButton: React.FC<GoogleButtonProps> = ({ handleGetUserInfo }) => {
     try {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
-      await GoogleSignin.signOut();
 
       handleGetUserInfo(userInfo);
     } catch (error: any) {

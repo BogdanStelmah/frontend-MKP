@@ -1,4 +1,4 @@
-import { useRouter } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useCallback, useRef, useState } from 'react';
 import { FlatList, View } from 'react-native';
 
@@ -13,7 +13,6 @@ import i18n from '@/i18n';
 interface IntroductionProps {}
 
 const Introduction: React.FC<IntroductionProps> = () => {
-  const router = useRouter();
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const sliderRef = useRef<any>(null);
 
@@ -65,7 +64,7 @@ const Introduction: React.FC<IntroductionProps> = () => {
   };
 
   return (
-    <ScreenContainer>
+    <ScreenContainer isTouchableWithoutFeedback={false}>
       <View className="h-full flex justify-between">
         <View className="h-4/5">
           <View className="flex flex-row-reverse ml-5 my-[17px] h-5">
