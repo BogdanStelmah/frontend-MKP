@@ -15,7 +15,7 @@ interface TextInputProps {
   extraStyles?: string;
   keyboardType?: KeyboardType;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
-  onChangeText?: any;
+  onChangeText?: (value: string) => void;
   onBlur?: any;
 }
 

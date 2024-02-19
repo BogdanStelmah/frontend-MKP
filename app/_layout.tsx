@@ -60,7 +60,7 @@ function RootLayoutNav() {
         login();
         router.navigate('/personalInfo');
       } else {
-        router.navigate('/introduction');
+        router.navigate('/code-verification');
       }
     };
 

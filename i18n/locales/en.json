@@ -40,7 +40,21 @@
     "dont-have-an-account": "Don't have an account yet?",
     "sign-up": "Sign up"
   },
+  "forgot-password": {
+    "title": "Forgot password",
+    "description": "Enter your email address and we will send you a code to reset your password.",
+    "reset-password": "Reset password",
+    "remember-your-password": "Remember your password?",
+    "back-to-sign-in": "Sign in"
+  },
+  "code-verification": {
+    "title": "Code verification",
+    "description": "Enter the code we sent to your email. If you did not receive the code, click the 'Send code again' button.",
+    "code": "Code",
+    "verify": "Verify"
+  },
   "validations": {
+    "email-incorrect": "Invalid email address",
     "invalid-email-format": "Email must be formatted correctly",
     "email-cannot-be-longer": "Email cannot be longer than {{number}} letters",
     "email-must-contain-only": "Email must contain only Latin letters",
@@ -55,6 +69,9 @@
     "password-must-contain-only": "Password must contain only Latin letters",
     "confirm-password-is-required": "Confirm password is a required field",
     "passwords-must-match": "Passwords must match",
-    "please-complete-this-required-field": "Please complete this required field"
+    "please-complete-this-required-field": "Please complete this required field",
+    "code-is-required": "Code is a required field",
+    "code-must-be-6-digits-long": "Code must be 6 digits long",
+    "code-must-contain-only-numbers": "Code must contain only numbers"
   }
 }

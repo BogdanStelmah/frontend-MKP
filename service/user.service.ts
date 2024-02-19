@@ -14,6 +14,8 @@ class UserService extends HttpService {
   loginApi = '/auth/login';
   googleLoginApi = '/auth/loginWithGoogle';
   isEmailExistsApi = '/users/isEmailExists';
+  resetPasswordApi = '/auth/reset-password';
+  verifyResetCodeApi = '/auth/verify-reset-code';
 
   registerUser(user: IUser) {
     return this.register(this.registerApi, user);
@@ -37,6 +39,26 @@ class UserService extends HttpService {
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status === 401) {
         throw new Error('Problem with google account. Please try again.');
+      }
+    }
+  }
+
+  async resetPassword(email: string) {
+    try {
+      return await this.post({ email }, this.resetPasswordApi);
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status === 400) {
+        throw new Error(e.response.data.message);
+      }
+    }
+  }
+
+  async verifyResetCode(email: string, code: string) {
+    try {
+      return await this.post({ email, code }, this.verifyResetCodeApi);
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status === 404) {
+        throw new Error(e.response.data.message);
       }
     }
   }

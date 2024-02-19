@@ -13,6 +13,14 @@ export const registrationScheme = yup.object().shape({
   confirmPassword: fields.confirmPassword
 });
 
+export const forgotPasswordScheme = yup.object().shape({
+  email: fields.email
+});
+
+export const codeVerificationScheme = yup.object().shape({
+  code: fields.code
+});
+
 export const partnerPersonalDetails = yup.object().shape({
   firstName: fields.firstName,
   lastName: fields.lastName

@@ -62,7 +62,7 @@ const SignIn: React.FC = () => {
     <ScreenContainer>
       <View className="mx-4 h-full flex justify-between">
         <View>
-          <ScreenTitle title={i18n.t('sign-in.title')} />
+          <ScreenTitle title={i18n.t('sign-in.title')} extraStyles="mb-[56px]" />
 
           <FormTextInput
             name="email"
@@ -90,7 +90,8 @@ const SignIn: React.FC = () => {
 
           <TextSm
             fontWeight={FontWeightEnum.MEDIUM}
-            extraStyles="text-green-secondary-2 my-4 opacity-70 text-center">
+            extraStyles="text-green-secondary-2 my-4 opacity-70 text-center"
+            onPress={() => router.navigate('/forgot-password')}>
             {i18n.t('sign-in.forgot-password')}
           </TextSm>
 

@@ -8,18 +8,21 @@ import TextSm from '@/components/ui/Typography/TextSm';
 interface ScreenTitleProps {
   title: string;
   description?: string;
+  extraStyles?: string;
 }
 
-const ScreenTitle: React.FC<ScreenTitleProps> = ({ title, description }) => {
+const ScreenTitle: React.FC<ScreenTitleProps> = ({ title, description, extraStyles }) => {
   return (
-    <View>
-      <Text2lg fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-black-greyscale-main mb-3">
+    <View className={extraStyles}>
+      <Text2lg fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-black-greyscale-main">
         {title}
       </Text2lg>
 
-      <TextSm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-black-greyscale-main">
-        {description}
-      </TextSm>
+      {description && (
+        <TextSm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-black-greyscale-main mt-3">
+          {description}
+        </TextSm>
+      )}
     </View>
   );
 };

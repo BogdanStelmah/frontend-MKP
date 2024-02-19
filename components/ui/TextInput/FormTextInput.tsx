@@ -1,5 +1,6 @@
 import React from 'react';
 import { Control, Controller } from 'react-hook-form';
+import { KeyboardType } from 'react-native';
 
 import TextInput from './TextInput';
 
@@ -8,8 +9,10 @@ interface FormTextInputProps {
   placeholder: string;
   control: Control<any, any> | undefined;
   label: string;
+  maxLength?: number;
   isSecureTextEntry?: boolean;
   extraStyles?: string;
+  keyboardType?: KeyboardType;
 }
 
 const FormTextInput: React.FC<FormTextInputProps> = ({
@@ -18,7 +21,9 @@ const FormTextInput: React.FC<FormTextInputProps> = ({
   control,
   placeholder,
   isSecureTextEntry = false,
-  extraStyles = ''
+  extraStyles = '',
+  maxLength,
+  keyboardType
 }) => {
   return (
     <Controller
@@ -29,6 +34,8 @@ const FormTextInput: React.FC<FormTextInputProps> = ({
           extraStyles={extraStyles}
           label={label}
           placeholder={placeholder}
+          maxLength={maxLength}
+          keyboardType={keyboardType}
           onChangeText={onChange}
           onBlur={onBlur}
           value={value}

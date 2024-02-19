@@ -78,5 +78,11 @@ export const fields = {
   confirmPassword: yup
     .string()
     .required(i18n.t('validations.confirm-password-is-required') as string)
-    .oneOf([yup.ref('password'), ''], i18n.t('validations.passwords-must-match') as string)
+    .oneOf([yup.ref('password'), ''], i18n.t('validations.passwords-must-match') as string),
+
+  code: yup
+    .string()
+    .required(i18n.t('validations.code-is-required'))
+    .length(6, i18n.t('validations.code-must-be-6-digits-long'))
+    .matches(/^[0-9]+$/, i18n.t('validations.code-must-contain-only-numbers'))
 };

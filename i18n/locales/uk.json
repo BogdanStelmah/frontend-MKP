@@ -40,7 +40,21 @@
     "dont-have-account": "У вас ще немає облікового запису?",
     "sign-up": "Зареєструватися"
   },
+  "forgot-password": {
+    "title": "Відновлення паролю",
+    "description": "Введіть свою електронну адресу, і ми надішлемо вам код для зміни пароля.",
+    "reset-password": "Скинути пароль",
+    "remember-your-password": "Пам'ятаєте свій пароль?",
+    "back-to-sign-in": "Увійти"
+  },
+  "code-verification": {
+    "title": "Перевірка коду",
+    "description": "Введіть код, який ми відправили на вашу пошту. Якщо ви не отримали код, натисніть кнопку 'Відправити код ще раз'.",
+    "code": "Код",
+    "verify": "Перевірити"
+  },
   "validations": {
+    "email-incorrect": "Невірна адреса електронної пошти",
     "invalid-email-format": "Електронний лист має бути правильно відформатований",
     "email-cannot-be-longer": "Email не може бути довшим за {{number}} літер",
     "email-must-contain-only": "Електронна пошта повинна містити тільки латинські літери",
@@ -56,6 +70,9 @@
     "confirm-password-is-required": "Підтвердити пароль - обов'язкове поле",
     "passwords-must-match": "Паролі повинні збігатися",
     "please-complete-this-required-field": "Будь ласка, заповніть це обов'язкове поле",
-    "email-already-exists": "Ця електронна адреса вже має обліковий запис"
+    "email-already-exists": "Ця електронна адреса вже має обліковий запис",
+    "code-is-required": "Код є обов'язковим полем",
+    "code-must-be-6-digits-long": "Код повинен складатися з 6 цифр",
+    "code-must-contain-only-numbers": "Код повинен містити лише цифри"
   }
 }
