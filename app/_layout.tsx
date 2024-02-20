@@ -2,12 +2,12 @@ import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
 import { router, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import '../global.css';
 
-import { AuthContext, AuthProvider } from '@/context/AuthContext';
 import { retrieveToken } from '@/service/helper';
+import { useUserStore } from '@/store/userStore';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -42,15 +42,11 @@ export default function RootLayout() {
     return null;
   }
 
-  return (
-    <AuthProvider>
-      <RootLayoutNav />
-    </AuthProvider>
-  );
+  return <RootLayoutNav />;
 }
 
 function RootLayoutNav() {
-  const { login } = useContext(AuthContext);
+  const login = useUserStore((state) => state.login);
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -60,7 +56,7 @@ function RootLayoutNav() {
         login();
         router.navigate('/personalInfo');
       } else {
-        router.navigate('/code-verification');
+        router.navigate('/introduction');
       }
     };
 

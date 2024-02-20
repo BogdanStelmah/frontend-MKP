@@ -17,6 +17,11 @@ export const forgotPasswordScheme = yup.object().shape({
   email: fields.email
 });
 
+export const changePasswordScheme = yup.object().shape({
+  password: fields.password,
+  confirmPassword: fields.confirmPassword
+});
+
 export const codeVerificationScheme = yup.object().shape({
   code: fields.code
 });

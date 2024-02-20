@@ -8,6 +8,7 @@ const GuestRoutesLayout = () => {
       <Stack.Screen name="signIn" />
       <Stack.Screen name="registration" />
       <Stack.Screen name="forgot-password" />
+      <Stack.Screen name="change-password" />
     </Stack>
   );
 };

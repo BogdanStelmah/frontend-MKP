@@ -55,6 +55,7 @@
   },
   "validations": {
     "email-incorrect": "Invalid email address",
+    "code-incorrect": "Invalid code",
     "invalid-email-format": "Email must be formatted correctly",
     "email-cannot-be-longer": "Email cannot be longer than {{number}} letters",
     "email-must-contain-only": "Email must contain only Latin letters",

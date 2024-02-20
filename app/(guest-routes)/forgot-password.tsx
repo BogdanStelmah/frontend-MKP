@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
@@ -11,14 +11,14 @@ import ScreenContainer from '@/components/ui/ScreenContainer';
 import ScreenTitle from '@/components/ui/ScreenTitle';
 import { FormTextInput } from '@/components/ui/TextInput';
 import i18n from '@/i18n';
-import userApi from '@/service/user.service';
+import { useUserStore } from '@/store/userStore';
 
 interface IFormInput {
   email: string;
 }
 
 const SignIn: React.FC = () => {
-  const [isLoadingSubmitForm, setIsLoadingSubmitForm] = useState<boolean>(false);
+  const resetPassword = useUserStore((state) => state.resetPassword);
 
   const {
     control,
@@ -30,14 +30,15 @@ const SignIn: React.FC = () => {
     resolver: yupResolver(forgotPasswordScheme)
   });
 
-  const onSubmit: SubmitHandler<IFormInput> = async ({ email }) => {
-    setIsLoadingSubmitForm(true);
+  const navigateToCodeVerification = () => router.navigate('/code-verification');
 
-    userApi
-      .resetPassword(email)
-      .then(() => router.navigate('/code-verification'))
-      .catch(() => setError('email', { message: i18n.t('validations.email-incorrect') }))
-      .finally(() => setIsLoadingSubmitForm(false));
+  const onSubmit: SubmitHandler<IFormInput> = async ({ email }) => {
+    try {
+      await resetPassword(email);
+      navigateToCodeVerification();
+    } catch (e: any) {
+      setError('email', { message: e?.message });
+    }
   };
 
   return (

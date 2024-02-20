@@ -4,7 +4,7 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
-import { codeVerificationScheme } from '@/common/validations';
+import { changePasswordScheme } from '@/common/validations';
 import Button from '@/components/ui/Button';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import ScreenTitle from '@/components/ui/ScreenTitle';
@@ -13,11 +13,12 @@ import i18n from '@/i18n';
 import { useUserStore } from '@/store/userStore';
 
 interface IFormInput {
-  code: string;
+  password: string;
+  confirmPassword: string;
 }
 
 const SignIn: React.FC = () => {
-  const verifyResetCode = useUserStore((state) => state.verifyResetCode);
+  const changePassword = useUserStore((state) => state.changePassword);
 
   const {
     control,
@@ -26,41 +27,44 @@ const SignIn: React.FC = () => {
     setError
   } = useForm<IFormInput>({
     mode: 'onChange',
-    resolver: yupResolver(codeVerificationScheme)
+    resolver: yupResolver(changePasswordScheme)
   });
 
-  const redirectToPersonalIno = () => router.push('/change-password');
+  const navigateToPersonalInfo = () => router.navigate('/personalInfo');
 
-  const onSubmit: SubmitHandler<IFormInput> = async ({ code }) => {
+  const onSubmit: SubmitHandler<IFormInput> = async ({ password }) => {
     try {
-      await verifyResetCode(code);
-      redirectToPersonalIno();
+      await changePassword(password);
+      navigateToPersonalInfo();
     } catch (e: any) {
-      setError('code', { message: e?.message });
+      setError('password', { message: e?.message });
     }
   };
 
   return (
     <ScreenContainer>
       <View className="mx-4">
-        <ScreenTitle
-          title={i18n.t('code-verification.title')}
-          description={i18n.t('code-verification.description')}
-          extraStyles="mb-[56px]"
+        <ScreenTitle title="Встановлення нового пароль" extraStyles="mb-[56px]" />
+
+        <FormTextInput
+          name="password"
+          label={i18n.t('registration.password')}
+          placeholder={i18n.t('registration.password-placeholder')}
+          control={control}
+          isSecureTextEntry
         />
 
         <FormTextInput
-          name="code"
-          label={i18n.t('code-verification.code')}
-          placeholder="XXXXXX"
+          name="confirmPassword"
+          label={i18n.t('registration.confirm-password')}
+          placeholder={i18n.t('registration.confirm-password-placeholder')}
           control={control}
-          maxLength={6}
-          keyboardType="numeric"
+          isSecureTextEntry
         />
 
         <View className="mt-7">
           <Button
-            label={i18n.t('code-verification.verify')}
+            label="Змінити"
             type="filled"
             isDisabled={!isValid}
             onPress={handleSubmit(onSubmit)}

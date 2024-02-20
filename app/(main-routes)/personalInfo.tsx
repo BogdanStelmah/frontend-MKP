@@ -1,14 +1,12 @@
-import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { router } from 'expo-router';
-import React, { useContext } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
 import Button from '@/components/ui/Button';
-import { AuthContext } from '@/context/AuthContext';
-import { removeToken } from '@/service/helper';
+import { useUserStore } from '@/store/userStore';
 
 const PersonalInfo = () => {
-  const { logout } = useContext(AuthContext);
+  const logout = useUserStore((state) => state.logout);
 
   return (
     <View style={styles.container}>

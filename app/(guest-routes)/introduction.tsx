@@ -20,13 +20,9 @@ const Introduction: React.FC<IntroductionProps> = () => {
     setCurrentSlideIndex(viewableItems[0].index);
   }, []);
 
-  const redirectToRegister = () => {
-    router.navigate('/registration');
-  };
+  const redirectToRegister = () => router.navigate('/registration');
 
-  const redirectToSignIn = () => {
-    router.navigate('/signIn');
-  };
+  const redirectToSignIn = () => router.navigate('/signIn');
 
   const handleScroll = () => {
     if (currentSlideIndex < slidesData.length - 1) {
