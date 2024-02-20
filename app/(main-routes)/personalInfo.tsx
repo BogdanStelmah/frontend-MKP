@@ -6,7 +6,7 @@ import Button from '@/components/ui/Button';
 import { useUserStore } from '@/store/userStore';
 
 const PersonalInfo = () => {
-  const logout = useUserStore((state) => state.logout);
+  const logout = useUserStore.use.logout();
 
   return (
     <View style={styles.container}>

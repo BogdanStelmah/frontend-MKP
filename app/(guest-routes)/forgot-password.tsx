@@ -18,7 +18,7 @@ interface IFormInput {
 }
 
 const SignIn: React.FC = () => {
-  const resetPassword = useUserStore((state) => state.resetPassword);
+  const resetPassword = useUserStore.use.resetPassword();
 
   const {
     control,

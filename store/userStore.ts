@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import i18n from '@/i18n';
 import { removeToken } from '@/service/helper';
 import userApi from '@/service/user.service';
+import { createSelectors } from '@/store/helper';
 
 type UserState = {
   email: string;
@@ -28,7 +29,7 @@ const initialUserState: UserState = {
   isLoading: false
 };
 
-export const useUserStore = create<UserState & UserActions>()((set, getState) => ({
+export const useUserStoreBase = create<UserState & UserActions>()((set, getState) => ({
   ...initialUserState,
 
   setEmail: (email) => set(() => ({ email })),
@@ -84,3 +85,5 @@ export const useUserStore = create<UserState & UserActions>()((set, getState) =>
     }
   }
 }));
+
+export const useUserStore = createSelectors(useUserStoreBase);

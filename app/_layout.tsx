@@ -46,7 +46,7 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const login = useUserStore((state) => state.login);
+  const login = useUserStore.use.login();
 
   useEffect(() => {
     const fetchToken = async () => {

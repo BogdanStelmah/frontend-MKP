@@ -17,7 +17,7 @@ interface IFormInput {
 }
 
 const SignIn: React.FC = () => {
-  const verifyResetCode = useUserStore((state) => state.verifyResetCode);
+  const verifyResetCode = useUserStore.use.verifyResetCode();
 
   const {
     control,

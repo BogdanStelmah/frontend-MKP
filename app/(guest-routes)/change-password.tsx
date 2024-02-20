@@ -18,7 +18,7 @@ interface IFormInput {
 }
 
 const SignIn: React.FC = () => {
-  const changePassword = useUserStore((state) => state.changePassword);
+  const changePassword = useUserStore.use.changePassword();
 
   const {
     control,
