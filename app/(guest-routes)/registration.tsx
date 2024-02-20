@@ -53,7 +53,8 @@ const Registration: React.FC = () => {
         redirectToPersonalIno();
         setIsLoadingSubmitForm(false);
       })
-      .catch((error) => console.error(error.message));
+      .catch((error) => console.error(error.message))
+      .finally(() => setIsLoadingSubmitForm(false));
   };
 
   return (
@@ -99,6 +100,7 @@ const Registration: React.FC = () => {
           label={i18n.t('registration.continue')}
           type="filled"
           isDisabled={!isValid}
+          isLoading={isLoadingSubmitForm}
           onPress={handleSubmit(onSubmit)}
           borderRadius="rounded-lg"
           extraStyles="mb-4"

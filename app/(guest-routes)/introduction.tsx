@@ -1,4 +1,5 @@
 import { router } from 'expo-router';
+import LottieView from 'lottie-react-native';
 import React, { useCallback, useRef, useState } from 'react';
 import { FlatList, View } from 'react-native';
 

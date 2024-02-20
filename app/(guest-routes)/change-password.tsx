@@ -19,6 +19,7 @@ interface IFormInput {
 
 const SignIn: React.FC = () => {
   const changePassword = useUserStore.use.changePassword();
+  const isLoading = useUserStore.use.isLoading();
 
   const {
     control,
@@ -67,6 +68,7 @@ const SignIn: React.FC = () => {
             label="Змінити"
             type="filled"
             isDisabled={!isValid}
+            isLoading={isLoading}
             onPress={handleSubmit(onSubmit)}
             borderRadius="rounded-lg"
           />

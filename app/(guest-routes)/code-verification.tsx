@@ -18,6 +18,7 @@ interface IFormInput {
 
 const SignIn: React.FC = () => {
   const verifyResetCode = useUserStore.use.verifyResetCode();
+  const isLoading = useUserStore.use.isLoading();
 
   const {
     control,
@@ -63,6 +64,7 @@ const SignIn: React.FC = () => {
             label={i18n.t('code-verification.verify')}
             type="filled"
             isDisabled={!isValid}
+            isLoading={isLoading}
             onPress={handleSubmit(onSubmit)}
             borderRadius="rounded-lg"
           />

@@ -83,6 +83,7 @@ const SignIn: React.FC = () => {
               label={i18n.t('sign-in.sign-in')}
               type="filled"
               isDisabled={!isValid}
+              isLoading={isLoadingSubmitForm}
               onPress={handleSubmit(onSubmit)}
               borderRadius="rounded-lg"
             />

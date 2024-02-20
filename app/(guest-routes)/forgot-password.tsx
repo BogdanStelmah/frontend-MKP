@@ -19,6 +19,7 @@ interface IFormInput {
 
 const SignIn: React.FC = () => {
   const resetPassword = useUserStore.use.resetPassword();
+  const isLoading = useUserStore.use.isLoading();
 
   const {
     control,
@@ -62,6 +63,7 @@ const SignIn: React.FC = () => {
             label={i18n.t('forgot-password.reset-password')}
             type="filled"
             isDisabled={!isValid}
+            isLoading={isLoading}
             onPress={handleSubmit(onSubmit)}
             borderRadius="rounded-lg"
           />
