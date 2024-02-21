@@ -1,3 +1,4 @@
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,13 +13,16 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({
   isTouchableWithoutFeedback = true
 }) => {
   return (
-    <TouchableWithoutFeedback
-      onPress={isTouchableWithoutFeedback ? Keyboard.dismiss : undefined}
-      accessible={false}>
-      <View className="h-full bg-background">
-        <SafeAreaView>{children}</SafeAreaView>
-      </View>
-    </TouchableWithoutFeedback>
+    <>
+      <StatusBar style="dark" />
+      <TouchableWithoutFeedback
+        onPress={isTouchableWithoutFeedback ? Keyboard.dismiss : undefined}
+        accessible={false}>
+        <View className="h-full bg-background">
+          <SafeAreaView>{children}</SafeAreaView>
+        </View>
+      </TouchableWithoutFeedback>
+    </>
   );
 };
 

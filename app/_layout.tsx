@@ -1,13 +1,9 @@
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 import { useFonts } from 'expo-font';
-import { router, Stack } from 'expo-router';
-import * as SplashScreen from 'expo-splash-screen';
+import { SplashScreen, Stack } from 'expo-router';
 import React, { useEffect } from 'react';
 
 import '../global.css';
-
-import { retrieveToken } from '@/service/helper';
-import { useUserStore } from '@/store/userStore';
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -32,12 +28,6 @@ export default function RootLayout() {
     if (error) throw error;
   }, [error]);
 
-  useEffect(() => {
-    if (loaded) {
-      SplashScreen.hideAsync();
-    }
-  }, [loaded]);
-
   if (!loaded) {
     return null;
   }
@@ -46,25 +36,9 @@ export default function RootLayout() {
 }
 
 function RootLayoutNav() {
-  const login = useUserStore.use.login();
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      const token = await retrieveToken();
-
-      if (token) {
-        login();
-        router.navigate('/personalInfo');
-      } else {
-        router.navigate('/introduction');
-      }
-    };
-
-    fetchToken();
-  }, []);
-
   return (
     <Stack screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="index" />
       <Stack.Screen name="(guest-routes)" />
       <Stack.Screen name="(main-routes)" />
     </Stack>

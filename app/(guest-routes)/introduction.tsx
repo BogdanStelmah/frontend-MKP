@@ -1,5 +1,4 @@
 import { router } from 'expo-router';
-import LottieView from 'lottie-react-native';
 import React, { useCallback, useRef, useState } from 'react';
 import { FlatList, View } from 'react-native';
 
@@ -29,6 +28,10 @@ const Introduction: React.FC<IntroductionProps> = () => {
     if (currentSlideIndex < slidesData.length - 1) {
       sliderRef.current.scrollToIndex({ index: currentSlideIndex + 1 });
     }
+  };
+
+  const handleSkip = () => {
+    sliderRef.current.scrollToIndex({ index: 4 });
   };
 
   const getButton = () => {
@@ -66,7 +69,7 @@ const Introduction: React.FC<IntroductionProps> = () => {
         <View className="h-4/5">
           <View className="flex flex-row-reverse ml-5 my-[17px] h-5">
             {currentSlideIndex < slidesData.length - 1 && (
-              <Button label={i18n.t('introduction.skip')} type="" onPress={redirectToRegister} />
+              <Button label={i18n.t('introduction.skip')} type="" onPress={handleSkip} />
             )}
           </View>
 

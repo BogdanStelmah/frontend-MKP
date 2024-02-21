@@ -18,6 +18,10 @@
     "slide4": {
       "title": "Publishing your recipes",
       "description": "The app allows the military to create their own recipes and, if necessary, publish them to develop their culinary culture."
+    },
+    "slide5": {
+      "title": "Create an account",
+      "description": "\"MKP\" allows users to create their own account to store their preferences, recipes, and meal plans in a secure and easily accessible format."
     }
   },
   "registration": {

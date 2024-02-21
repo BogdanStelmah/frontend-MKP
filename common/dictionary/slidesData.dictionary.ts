@@ -24,5 +24,11 @@ export const slidesData = [
     title: i18n.t('introduction.slide4.title'),
     description: i18n.t('introduction.slide4.description'),
     imageSource: require('../../assets/images/slide-1.png')
+  },
+  {
+    id: '5',
+    title: i18n.t('introduction.slide5.title'),
+    description: i18n.t('introduction.slide5.description'),
+    imageSource: require('../../assets/images/slide-1.png')
   }
 ];
