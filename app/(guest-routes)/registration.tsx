@@ -7,6 +7,7 @@ import { View } from 'react-native';
 import { registrationScheme } from '@/common/validations/schemes';
 import BackButton from '@/components/ui/BackButton';
 import Button from '@/components/ui/Button';
+import { FormPasswordInput } from '@/components/ui/PasswordInput';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import ScreenTitle from '@/components/ui/ScreenTitle';
 import FormTextInput from '@/components/ui/TextInput/FormTextInput';
@@ -78,20 +79,18 @@ const Registration: React.FC = () => {
               control={control}
             />
 
-            <FormTextInput
+            <FormPasswordInput
               name="password"
               label={i18n.t('registration.password')}
               placeholder={i18n.t('registration.password-placeholder')}
               control={control}
-              isSecureTextEntry
             />
 
-            <FormTextInput
+            <FormPasswordInput
               name="confirmPassword"
               label={i18n.t('registration.confirm-password')}
               placeholder={i18n.t('registration.confirm-password-placeholder')}
               control={control}
-              isSecureTextEntry
             />
           </View>
         </View>

@@ -40,7 +40,8 @@ const GoogleButton: React.FC<GoogleButtonProps> = ({ handleGetUserInfo }) => {
       isDisabled={false}
       label={i18n.t('sign-in.sign-in-with-google')}
       borderRadius="rounded-lg"
-      onPress={handleSignInWithGoogle}>
+      onPress={handleSignInWithGoogle}
+    >
       <GoogleIcon />
     </Button>
   );

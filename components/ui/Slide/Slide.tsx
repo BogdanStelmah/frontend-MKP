@@ -21,13 +21,15 @@ const Slide: React.FC<SlideProps> = ({ item }) => {
       <View className="mx-5">
         <Text2lg
           fontWeight={FontWeightEnum.BOLD}
-          extraStyles="text-black-greyscale-main text-center mb-3">
+          extraStyles="text-black-greyscale-main text-center mb-3"
+        >
           {item.title}
         </Text2lg>
 
         <TextMd
           fontWeight={FontWeightEnum.MEDIUM}
-          extraStyles="text-black-greyscale-main opacity-70 text-center">
+          extraStyles="text-black-greyscale-main opacity-70 text-center"
+        >
           {item.description}
         </TextMd>
       </View>

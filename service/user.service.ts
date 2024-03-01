@@ -6,10 +6,6 @@ import { IUser } from '@/common/types/types';
 import { writeToken } from '@/service/helper';
 
 class UserService extends HttpService {
-  constructor() {
-    super();
-  }
-
   registerApi = '/auth/register';
   loginApi = '/auth/login';
   googleLoginApi = '/auth/loginWithGoogle';

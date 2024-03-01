@@ -6,7 +6,6 @@ import { useUserStore } from '@/store';
 
 const Index = () => {
   const login = useUserStore.use.login();
-
   useEffect(() => {
     const fetchToken = async () => {
       const token = await retrieveToken();

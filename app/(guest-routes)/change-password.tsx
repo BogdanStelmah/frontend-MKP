@@ -6,6 +6,7 @@ import { View } from 'react-native';
 
 import { changePasswordScheme } from '@/common/validations';
 import Button from '@/components/ui/Button';
+import { FormPasswordInput } from '@/components/ui/PasswordInput';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import ScreenTitle from '@/components/ui/ScreenTitle';
 import { FormTextInput } from '@/components/ui/TextInput';
@@ -47,20 +48,18 @@ const SignIn: React.FC = () => {
       <View className="mx-4">
         <ScreenTitle title="Встановлення нового пароль" extraStyles="mb-[56px]" />
 
-        <FormTextInput
+        <FormPasswordInput
           name="password"
           label={i18n.t('registration.password')}
           placeholder={i18n.t('registration.password-placeholder')}
           control={control}
-          isSecureTextEntry
         />
 
-        <FormTextInput
+        <FormPasswordInput
           name="confirmPassword"
           label={i18n.t('registration.confirm-password')}
           placeholder={i18n.t('registration.confirm-password-placeholder')}
           control={control}
-          isSecureTextEntry
         />
 
         <View className="mt-7">

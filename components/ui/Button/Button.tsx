@@ -60,7 +60,8 @@ const Button: React.FC<ButtonProps> = ({
         extraStyles
       ].join(' ')}
       disabled={_isDisabled}
-      onPress={onPress}>
+      onPress={onPress}
+    >
       {isLoading ? (
         <View className="flex justify-center h-full">
           <LottieView autoPlay style={{ height: 17 }} source={loaderSrc} />

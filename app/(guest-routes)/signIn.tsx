@@ -92,7 +92,8 @@ const SignIn: React.FC = () => {
           <TextSm
             fontWeight={FontWeightEnum.MEDIUM}
             extraStyles="text-green-secondary-2 my-4 opacity-70 text-center"
-            onPress={() => router.navigate('/forgot-password')}>
+            onPress={() => router.navigate('/forgot-password')}
+          >
             {i18n.t('sign-in.forgot-password')}
           </TextSm>
 

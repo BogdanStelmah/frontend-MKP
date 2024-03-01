@@ -22,7 +22,8 @@ const Modal: React.FC<ModalProps> = ({ title, onClose, children, isVisible }) =>
       isVisible={isVisible}
       className="m-0"
       backdropOpacity={0.3}
-      onBackdropPress={onClose}>
+      onBackdropPress={onClose}
+    >
       <View className="flex-1" />
 
       <View className="p-4 bg-background rounded-t-lg">

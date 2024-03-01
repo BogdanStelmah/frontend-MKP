@@ -7,7 +7,7 @@ import i18n from '@/i18n';
 export const IS_REQUIRED = i18n.t('validations.please-complete-this-required-field');
 
 export const onlyLatinLettersRegex = /^[\x00-\x7F]*[A-Za-z]+[\x00-\x7F]*$/;
-export const onlyLettersHyphensAndSingleQuotes = /^[^\d!"#$%&()*+,./:;<=>?@\[\\\]^_{|}~]*$/;
+export const onlyLettersHyphensAndSingleQuotes = /^[^\d!"#$%&()*+,./:;<=>?@[\\\]^_{|}~]*$/;
 
 export const fields = {
   email: yup
@@ -19,7 +19,7 @@ export const fields = {
       i18n.t('validations.email-cannot-be-longer', { number: '253' }) as string,
       (val) => val !== undefined && val.toString().length <= 253
     )
-    .matches(/^[^!+&#"(),:;/<>\[\]\\]*$/, i18n.t('validations.invalid-email-format') as string)
+    .matches(/^[^!+&#"(),:;/<>[\]\\]*$/, i18n.t('validations.invalid-email-format') as string)
     .matches(onlyLatinLettersRegex, i18n.t('validations.email-must-contain-only') as string)
     .test('double-hyphen', i18n.t('validations.invalid-email-format') as string, (val) => {
       return val !== undefined && !val.includes('--');
@@ -66,7 +66,7 @@ export const fields = {
       i18n.t('validations.password-must-be-at-least-characters-long', { number: '8' }) as string
     )
     .matches(
-      /^.*[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?].*$/,
+      /^.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?].*$/,
       i18n.t('validations.password-must-contain-at-least-one-special-symbol') as string
     )
     .matches(

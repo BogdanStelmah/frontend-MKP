@@ -41,7 +41,8 @@ const ProgressButton: React.FC<ProgressButtonProps> = ({ progress, handleScroll 
       <TouchableOpacity
         activeOpacity={0.6}
         onPress={handleScroll}
-        className="bg-green-secondary w-16 h-16 rounded-full absolute ml-2 mt-2">
+        className="bg-green-secondary w-16 h-16 rounded-full absolute ml-2 mt-2"
+      >
         <View className="mt-5 ml-6">
           <NextIcon />
         </View>
