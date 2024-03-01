@@ -69,7 +69,7 @@ const Introduction: React.FC<IntroductionProps> = () => {
         <View className="h-4/5">
           <View className="flex flex-row-reverse ml-5 my-[17px] h-5">
             {currentSlideIndex < slidesData.length - 1 && (
-              <Button label={i18n.t('introduction.skip')} type="" onPress={handleSkip} />
+              <Button label={i18n.t('introduction.skip')} onPress={handleSkip} />
             )}
           </View>
 

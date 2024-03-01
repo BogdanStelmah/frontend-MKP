@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import { Option } from '@/common/types';
+import { TypeOption } from '@/common/types';
 import RadioButton from '@/components/ui/RadioButton/RadioButton';
 
 interface RadioGroupProps {
-  options: Option[];
-  onSelect: (selectedOption: Option) => void;
+  options: TypeOption[];
+  onSelect: (selectedOption: TypeOption) => void;
+  value?: TypeOption;
   extraStyles?: string;
   extraStylesRadioButton?: string;
 }
@@ -14,17 +15,18 @@ interface RadioGroupProps {
 const RadioGroup: React.FC<RadioGroupProps> = ({
   options,
   onSelect,
+  value,
   extraStyles,
   extraStylesRadioButton
 }) => {
-  const [selectedOption, setSelectedOption] = useState<Option>();
+  const [selectedOption, setSelectedOption] = useState<TypeOption | undefined>(value);
 
-  const handleOptionSelect = (option: Option) => {
+  const handleOptionSelect = (option: TypeOption) => {
     setSelectedOption(option);
     onSelect(option);
   };
 
-  const handlerChecked = (option: Option): boolean => {
+  const handlerChecked = (option: TypeOption): boolean => {
     if (selectedOption?.value) return selectedOption?.value === option.value;
     return false;
   };

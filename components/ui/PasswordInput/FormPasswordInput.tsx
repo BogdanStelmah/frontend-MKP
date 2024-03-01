@@ -1,29 +1,23 @@
 import React from 'react';
-import { Control, Controller } from 'react-hook-form';
+import { Controller } from 'react-hook-form';
 
 import PasswordInput from './PasswordInput';
 
-interface FormPasswordInputProps {
-  name: string;
+import { FormProps } from '@/common/types';
+
+interface FormPasswordInputProps extends FormProps {
   placeholder: string;
-  control: Control<any, any> | undefined;
   label: string;
 }
 
-const FormPasswordInput: React.FC<FormPasswordInputProps> = ({
-  name,
-  label,
-  control,
-  placeholder
-}) => {
+const FormPasswordInput: React.FC<FormPasswordInputProps> = ({ name, control, ...props }) => {
   return (
     <Controller
       control={control}
       name={name}
       render={({ field: { onChange, onBlur, value }, fieldState: { error } }) => (
         <PasswordInput
-          label={label}
-          placeholder={placeholder}
+          {...props}
           onChangeText={onChange}
           onBlur={onBlur}
           value={value}

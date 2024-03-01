@@ -17,7 +17,8 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({
       <StatusBar style="dark" />
       <TouchableWithoutFeedback
         onPress={isTouchableWithoutFeedback ? Keyboard.dismiss : undefined}
-        accessible={false}>
+        accessible={false}
+      >
         <View className="h-full bg-background">
           <SafeAreaView>{children}</SafeAreaView>
         </View>

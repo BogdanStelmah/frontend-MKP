@@ -21,7 +21,8 @@ const Footer: React.FC<FooterProps> = ({ text, linkText, onPress, extraStyles })
       <TextSm
         fontWeight={FontWeightEnum.MEDIUM}
         extraStyles="text-green-secondary-2 pl-1"
-        onPress={onPress}>
+        onPress={onPress}
+      >
         {linkText}
       </TextSm>
     </View>

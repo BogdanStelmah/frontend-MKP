@@ -3,13 +3,13 @@ import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
-import { Option } from '@/common/types';
+import { TypeOption } from '@/common/types';
 import Text2Sm from '@/components/ui/Typography/Text2sm';
 
 interface RadioButtonProps {
-  option: Option;
+  option: TypeOption;
   checked: boolean;
-  onPress?: (option: Option) => void;
+  onPress?: (option: TypeOption) => void;
   extraStyles?: string;
 }
 
@@ -28,7 +28,7 @@ const RadioButton: React.FC<RadioButtonProps> = ({ option, onPress, extraStyles,
     })
   };
 
-  const handlePress = (option: Option) => {
+  const handlePress = (option: TypeOption) => {
     onPress && onPress(option);
   };
 

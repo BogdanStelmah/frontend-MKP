@@ -1,5 +1,7 @@
 import * as yup from 'yup';
 
+import { GenderEnum } from '@/common/enums/gender.enum';
+import { GenderOption } from '@/common/types';
 import i18n from '@/i18n';
 
 export const IS_REQUIRED = i18n.t('validations.please-complete-this-required-field');
@@ -53,6 +55,7 @@ export const fields = {
       onlyLettersHyphensAndSingleQuotes,
       i18n.t('validations.last-name-can-contain-only') as string
     ),
+
   loginPassword: yup.string().required(IS_REQUIRED),
 
   password: yup
@@ -84,5 +87,10 @@ export const fields = {
     .string()
     .required(i18n.t('validations.code-is-required'))
     .length(6, i18n.t('validations.code-must-be-6-digits-long'))
-    .matches(/^[0-9]+$/, i18n.t('validations.code-must-contain-only-numbers'))
+    .matches(/^[0-9]+$/, i18n.t('validations.code-must-contain-only-numbers')),
+
+  gender: yup.object<GenderOption>().shape({
+    label: yup.string().required(),
+    value: yup.mixed<GenderEnum>().oneOf(Object.values(GenderEnum)).required()
+  })
 };

@@ -28,5 +28,6 @@ export const codeVerificationScheme = yup.object().shape({
 
 export const partnerPersonalDetails = yup.object().shape({
   firstName: fields.firstName,
-  lastName: fields.lastName
+  lastName: fields.lastName,
+  gender: fields.gender
 });
