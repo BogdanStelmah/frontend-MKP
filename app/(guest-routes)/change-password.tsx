@@ -31,7 +31,7 @@ const SignIn: React.FC = () => {
     resolver: yupResolver(changePasswordScheme)
   });
 
-  const navigateToPersonalInfo = () => router.navigate('/personalInfo');
+  const navigateToPersonalInfo = () => router.navigate('/personal-info');
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ password }) => {
     try {

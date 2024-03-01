@@ -36,7 +36,7 @@ const SignIn: React.FC = () => {
     resolver: yupResolver(signInSchema)
   });
 
-  const redirectToPersonalIno = () => router.push('/personalInfo');
+  const redirectToPersonalIno = () => router.push('personal-info');
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
     setIsLoadingSubmitForm(true);

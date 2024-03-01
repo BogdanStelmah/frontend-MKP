@@ -13,7 +13,7 @@ const Index = () => {
 
       if (token) {
         login();
-        router.navigate('/personalInfo');
+        router.navigate('/personal-info');
       } else {
         router.navigate('/introduction');
       }

@@ -33,7 +33,7 @@ const Registration: React.FC = () => {
   });
 
   const redirectToBack = () => router.back();
-  const redirectToPersonalIno = () => router.push('/personalInfo');
+  const redirectToPersonalIno = () => router.push('/personal-info');
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
     setIsLoadingSubmitForm(true);
