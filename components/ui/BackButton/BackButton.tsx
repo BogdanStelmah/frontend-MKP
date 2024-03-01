@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 
 import ChevronLeftIcon from '@/assets/icons/chevron-left.svg';
 
@@ -9,8 +9,10 @@ interface BackButtonProps {
 
 const BackButton: React.FC<BackButtonProps> = ({ onPress }) => {
   return (
-    <TouchableOpacity className="w-[10px]" onPress={onPress}>
-      <ChevronLeftIcon />
+    <TouchableOpacity onPress={onPress}>
+      <View className="w-7 h-7 flex justify-center">
+        <ChevronLeftIcon />
+      </View>
     </TouchableOpacity>
   );
 };

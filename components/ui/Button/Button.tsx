@@ -3,23 +3,23 @@ import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
 
 interface ButtonProps {
-  label: string;
+  label?: string;
   isDisabled?: boolean;
   isLoading?: boolean;
   size?: 'full-width';
-  type: 'outlined' | 'filled' | string;
+  type?: 'outlined' | 'filled';
   children?: any;
-  onPress: any;
+  onPress?: () => void;
   borderRadius?: string;
   extraStyles?: string;
 }
 
 const Button: React.FC<ButtonProps> = ({
-  label,
+  label = '',
   isDisabled = false,
   isLoading = false,
   size,
-  type,
+  type = '',
   children,
   onPress,
   borderRadius,
@@ -67,7 +67,7 @@ const Button: React.FC<ButtonProps> = ({
         </View>
       ) : (
         <View className="flex-row items-center justify-center">
-          {children && <View className="mr-2">{children}</View>}
+          {children && <View className={label && 'mr-2'}>{children}</View>}
           <Text className={textStyle}>{label}</Text>
         </View>
       )}

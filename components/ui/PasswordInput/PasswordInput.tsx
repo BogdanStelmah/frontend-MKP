@@ -51,11 +51,11 @@ const PasswordInput: React.FC<PasswordInputProps> = ({
       />
       <View className="absolute top-[30px] right-2">
         {isSecureTextEntry ? (
-          <Button label="" isDisabled={false} type="" onPress={showPassword}>
+          <Button onPress={showPassword}>
             <EyeIcon />
           </Button>
         ) : (
-          <Button label="" isDisabled={false} type="" onPress={hidePassword}>
+          <Button onPress={hidePassword}>
             <EyeOffIcon />
           </Button>
         )}
