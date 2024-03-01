@@ -1,5 +1,12 @@
 import React from 'react';
-import { KeyboardType, TextInput as DefaultTextInput, View } from 'react-native';
+import {
+  GestureResponderEvent,
+  KeyboardType,
+  NativeSyntheticEvent,
+  TextInput as DefaultTextInput,
+  TextInputFocusEventData,
+  TouchableOpacity
+} from 'react-native';
 
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
 import TextXs from '@/components/ui/Typography/TextXs';
@@ -11,12 +18,14 @@ interface TextInputProps {
   error?: boolean;
   helperText?: string;
   isSecureTextEntry?: boolean;
+  isEditable?: boolean;
   maxLength?: number;
   extraStyles?: string;
   keyboardType?: KeyboardType;
   autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
   onChangeText?: (value: string) => void;
-  onBlur?: any;
+  onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
+  onPress?: (event: GestureResponderEvent) => void;
 }
 
 const TextInput: React.FC<TextInputProps> = ({
@@ -31,13 +40,16 @@ const TextInput: React.FC<TextInputProps> = ({
   keyboardType,
   extraStyles,
   maxLength,
-  autoCapitalize = 'none'
+  autoCapitalize = 'none',
+  isEditable = true,
+  onPress
 }) => {
   return (
-    <View className="h-[96px]">
+    <TouchableOpacity className="h-[96px]" activeOpacity={100} onPress={onPress}>
       <TextXs
         fontWeight={FontWeightEnum.MEDIUM}
-        extraStyles="inline-block text-brown-camouflage mb-0.5">
+        extraStyles="inline-block text-brown-camouflage mb-0.5"
+      >
         {label}
       </TextXs>
 
@@ -47,6 +59,7 @@ const TextInput: React.FC<TextInputProps> = ({
           error && 'border-red-secondary',
           extraStyles
         ].join(' ')}
+        editable={isEditable}
         placeholder={placeholder}
         value={value}
         secureTextEntry={isSecureTextEntry}
@@ -62,7 +75,7 @@ const TextInput: React.FC<TextInputProps> = ({
           {helperText}
         </TextXs>
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 
