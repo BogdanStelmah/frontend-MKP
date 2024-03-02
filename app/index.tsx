@@ -6,15 +6,25 @@ import { useUserStore } from '@/store';
 
 const Index = () => {
   const login = useUserStore.use.login();
+  const isUserHasPersonalInfo = useUserStore.use.isUserHasPersonalInfo();
+
   useEffect(() => {
     const fetchToken = async () => {
       const token = await retrieveToken();
 
-      if (token) {
-        login();
+      if (!token) {
+        router.navigate('/introduction');
+        return await SplashScreen.hideAsync();
+      }
+
+      login();
+
+      const hasPersonalInfo = await isUserHasPersonalInfo();
+
+      if (!hasPersonalInfo) {
         router.navigate('/personal-info');
       } else {
-        router.navigate('/introduction');
+        router.navigate('/recipe-search');
       }
 
       await SplashScreen.hideAsync();

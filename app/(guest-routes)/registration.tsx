@@ -12,7 +12,8 @@ import ScreenContainer from '@/components/ui/ScreenContainer';
 import ScreenTitle from '@/components/ui/ScreenTitle';
 import FormTextInput from '@/components/ui/TextInput/FormTextInput';
 import i18n from '@/i18n';
-import userApi from '@/service/user.service';
+import { userApi } from '@/service';
+import { useUserStore } from '@/store';
 
 interface IFormInput {
   email: string;
@@ -21,6 +22,7 @@ interface IFormInput {
 }
 
 const Registration: React.FC = () => {
+  const registerUser = useUserStore.use.registerUser();
   const [isLoadingSubmitForm, setIsLoadingSubmitForm] = useState<boolean>(false);
 
   const {
@@ -34,7 +36,7 @@ const Registration: React.FC = () => {
   });
 
   const redirectToBack = () => router.back();
-  const redirectToPersonalIno = () => router.push('/personal-info');
+  const redirectToPersonalIno = () => router.push('');
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
     setIsLoadingSubmitForm(true);
@@ -48,9 +50,8 @@ const Registration: React.FC = () => {
       return;
     }
 
-    userApi
-      .registerUser({ email, password })
-      .then((res) => {
+    registerUser({ email, password })
+      .then(() => {
         redirectToPersonalIno();
         setIsLoadingSubmitForm(false);
       })

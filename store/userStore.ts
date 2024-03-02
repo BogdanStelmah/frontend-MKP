@@ -1,9 +1,11 @@
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
+import { AxiosError } from 'axios';
 import { create } from 'zustand';
 
+import { IUser } from '@/common/types';
 import i18n from '@/i18n';
+import { userApi, writeToken } from '@/service';
 import { removeToken } from '@/service/helper';
-import userApi from '@/service/user.service';
 import { createSelectors } from '@/store/helper';
 
 type UserState = {
@@ -17,9 +19,13 @@ type UserActions = {
   setEmail: (email: UserState['email']) => void;
   login: () => void;
   logout: () => void;
+  loginUser: (user: IUser) => Promise<void>;
+  googleLoginUser: (idToken: string) => Promise<void>;
+  registerUser: (user: IUser) => Promise<void>;
   resetPassword: (email: UserState['email']) => Promise<void>;
   verifyResetCode: (code: string) => Promise<void>;
   changePassword: (password: string) => Promise<void>;
+  isUserHasPersonalInfo: () => Promise<boolean | undefined>;
 };
 
 const initialUserState: UserState = {
@@ -36,12 +42,63 @@ export const useUserStoreBase = create<UserState & UserActions>()((set, getState
 
   login: () => set(() => ({ isAuthenticated: true })),
 
+  loginUser: async (user: IUser) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      const { access_token } = await userApi.loginUser(user);
+      await writeToken(access_token);
+
+      set(() => ({ email: user.email, isAuthenticated: true, isLoading: false }));
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  googleLoginUser: async (idToken: string) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      const { access_token } = await userApi.googleLoginUser(idToken);
+      await writeToken(access_token);
+
+      set(() => ({ isAuthenticated: true, isLoading: false }));
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
   logout: async () => {
     set(() => ({ isLoading: true }));
     await removeToken();
     await GoogleSignin.signOut();
 
     set(() => ({ ...initialUserState }));
+  },
+
+  registerUser: async (user: IUser) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      const { access_token } = await userApi.registerUser(user);
+      await writeToken(access_token);
+
+      set(() => ({ email: user.email, isLoading: false }));
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
   },
 
   resetPassword: async (email: UserState['email']) => {
@@ -80,6 +137,21 @@ export const useUserStoreBase = create<UserState & UserActions>()((set, getState
       set(() => ({ code: '' }));
     } catch (e) {
       throw Error(i18n.t('validations.code-incorrect'));
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  isUserHasPersonalInfo: async () => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      return await userApi.isUserHasPersonalInfo();
+    } catch (e) {
+      console.log(e);
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
     } finally {
       set(() => ({ isLoading: false }));
     }

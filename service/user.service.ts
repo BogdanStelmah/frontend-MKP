@@ -1,85 +1,69 @@
-import { AxiosError } from 'axios';
-
-import HttpService from './http.service';
-
 import { IUser } from '@/common/types/types';
-import { writeToken } from '@/service/helper';
+import { requestApi, requestApiUnauthorized } from '@/service/apiAxios';
 
-class UserService extends HttpService {
-  registerApi = '/auth/register';
-  loginApi = '/auth/login';
-  googleLoginApi = '/auth/loginWithGoogle';
-  isEmailExistsApi = '/users/isEmailExists';
-  resetPasswordApi = '/auth/resetPassword';
-  verifyResetCodeApi = '/auth/verifyResetCode';
-  updatePasswordApi = '/auth/updatePassword';
+const REGISTER_API = '/auth/register';
+const LOGIN_API = '/auth/login';
+const GOOGLE_LOGIN_API = '/auth/loginWithGoogle';
+const IS_EMAIL_EXISTS_API = '/users/isEmailExists';
+const IS_USER_HAS_PERSONAL_INFO_API = '/users/isUserHasPersonalInfo';
+const RESET_PASSWORD_API = '/auth/resetPassword';
+const VERIFY_RESET_CODE_API = '/auth/verifyResetCode';
+const UPDATE_PASSWORD_API = '/auth/updatePassword';
 
-  registerUser(user: IUser) {
-    return this.register(this.registerApi, user);
-  }
-
-  async loginUser(user: any) {
-    try {
-      const { data } = await this.login(this.loginApi, user);
-      await writeToken(data.access_token);
-    } catch (e) {
-      if (e instanceof AxiosError && e.response?.status) {
-        throw new Error('Invalid email or password');
-      }
-    }
-  }
-
-  async googleLoginUser(idToken: string) {
-    try {
-      const { data } = await this.googleLogin(this.googleLoginApi, idToken);
-      await writeToken(data.access_token);
-    } catch (e) {
-      if (e instanceof AxiosError && e.response?.status) {
-        throw new Error('Problem with google account. Please try again.');
-      }
-    }
-  }
-
-  async resetPassword(email: string) {
-    try {
-      return await this.post({ email }, this.resetPasswordApi);
-    } catch (e) {
-      if (e instanceof AxiosError && e.response?.status) {
-        throw new Error(e.response.data.message);
-      }
-    }
-  }
-
-  async verifyResetCode(email: string, code: string) {
-    try {
-      return await this.post({ email, code }, this.verifyResetCodeApi);
-    } catch (e) {
-      if (e instanceof AxiosError && e.response?.status) {
-        throw new Error(e.response.data.message);
-      }
-    }
-  }
-
-  async isEmailExists(email: string) {
-    try {
-      return await this.get(this.isEmailExistsApi, { email });
-    } catch (e) {
-      if (e instanceof AxiosError && e.response?.status) {
-        throw new Error(e.response.data.message[0]);
-      }
-    }
-  }
-
-  async updatePassword(password: string, email: string, code: string) {
-    try {
-      return await this.patch({ password, code }, email, this.updatePasswordApi);
-    } catch (e) {
-      if (e instanceof AxiosError && e.response?.status) {
-        throw new Error(e.response.data.message);
-      }
-    }
-  }
+export interface IRegisterResult {
+  access_token: string;
 }
 
-const userApi = new UserService();
-export default userApi;
+const registerUser = async (user: IUser) => {
+  return (await requestApiUnauthorized<IRegisterResult>('POST', REGISTER_API, { data: user })).data;
+};
+
+const loginUser = async (user: IUser) => {
+  return (await requestApiUnauthorized<IRegisterResult>('POST', LOGIN_API, { data: user })).data;
+};
+
+const googleLoginUser = async (idToken: string) => {
+  return (
+    await requestApiUnauthorized<IRegisterResult>('POST', GOOGLE_LOGIN_API, {
+      headers: { Authorization: idToken }
+    })
+  ).data;
+};
+
+const resetPassword = async (email: string) => {
+  return (await requestApiUnauthorized<void>('POST', RESET_PASSWORD_API, { data: { email } })).data;
+};
+
+const verifyResetCode = async (email: string, code: string) => {
+  return (
+    await requestApiUnauthorized<boolean>('POST', VERIFY_RESET_CODE_API, { data: { email, code } })
+  ).data;
+};
+
+const isEmailExists = async (email: string) => {
+  return (await requestApiUnauthorized<boolean>('GET', IS_EMAIL_EXISTS_API, { params: { email } }))
+    .data;
+};
+
+const updatePassword = async (password: string, email: string, code: string) => {
+  return (
+    await requestApiUnauthorized<void>('PATCH', `${UPDATE_PASSWORD_API}/${email}`, {
+      data: { password, code }
+    })
+  ).data;
+};
+
+const isUserHasPersonalInfo = async () => {
+  return (await requestApi<boolean>('GET', IS_USER_HAS_PERSONAL_INFO_API)).data;
+};
+
+export const userApi = {
+  registerUser,
+  loginUser,
+  googleLoginUser,
+  resetPassword,
+  verifyResetCode,
+  isEmailExists,
+  updatePassword,
+  isUserHasPersonalInfo
+};

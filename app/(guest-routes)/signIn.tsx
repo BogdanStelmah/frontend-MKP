@@ -1,6 +1,6 @@
 import { yupResolver } from '@hookform/resolvers/yup';
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
@@ -16,7 +16,7 @@ import ScreenTitle from '@/components/ui/ScreenTitle';
 import { FormTextInput } from '@/components/ui/TextInput';
 import TextSm from '@/components/ui/Typography/TextSm';
 import i18n from '@/i18n';
-import userApi from '@/service/user.service';
+import { useUserStore } from '@/store';
 
 interface IFormInput {
   email: string;
@@ -24,7 +24,9 @@ interface IFormInput {
 }
 
 const SignIn: React.FC = () => {
-  const [isLoadingSubmitForm, setIsLoadingSubmitForm] = useState<boolean>(false);
+  const isLoading = useUserStore.use.isLoading();
+  const googleLoginUser = useUserStore.use.googleLoginUser();
+  const loginUser = useUserStore.use.loginUser();
 
   const {
     control,
@@ -36,26 +38,20 @@ const SignIn: React.FC = () => {
     resolver: yupResolver(signInSchema)
   });
 
-  const redirectToPersonalIno = () => router.push('personal-info');
+  const redirectToPersonalIno = () => router.push('');
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
-    setIsLoadingSubmitForm(true);
-
-    userApi
-      .loginUser({ email, password })
+    loginUser({ email, password })
       .then(() => redirectToPersonalIno())
-      .catch(() => setError('password', { message: i18n.t('sign-in.password-or-email-incorrect') }))
-      .finally(() => setIsLoadingSubmitForm(false));
+      .catch(() =>
+        setError('password', { message: i18n.t('sign-in.password-or-email-incorrect') })
+      );
   };
 
   const handleGoogleLogin = ({ idToken }: IGoogleUser) => {
-    setIsLoadingSubmitForm(true);
-
-    userApi
-      .googleLoginUser(idToken || '')
+    googleLoginUser(idToken || '')
       .then(() => redirectToPersonalIno())
-      .catch((error) => console.error(error.message))
-      .finally(() => setIsLoadingSubmitForm(false));
+      .catch((error) => console.error(error.message));
   };
 
   return (
@@ -83,7 +79,7 @@ const SignIn: React.FC = () => {
               label={i18n.t('sign-in.sign-in')}
               type="filled"
               isDisabled={!isValid}
-              isLoading={isLoadingSubmitForm}
+              isLoading={isLoading}
               onPress={handleSubmit(onSubmit)}
               borderRadius="rounded-lg"
             />
