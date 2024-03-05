@@ -11,7 +11,7 @@ import {
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
 import TextXs from '@/components/ui/Typography/TextXs';
 
-interface TextInputProps {
+export interface TextInputProps {
   label: string;
   placeholder: string;
   value?: string;
@@ -40,7 +40,7 @@ const TextInput: React.FC<TextInputProps> = ({
   ...props
 }) => {
   return (
-    <TouchableOpacity className="h-[96px]" activeOpacity={100} onPress={onPress}>
+    <TouchableOpacity className="h-[84px]" activeOpacity={100} onPress={onPress}>
       <TextXs
         fontWeight={FontWeightEnum.MEDIUM}
         extraStyles="inline-block text-brown-camouflage mb-0.5"
@@ -50,7 +50,7 @@ const TextInput: React.FC<TextInputProps> = ({
 
       <DefaultTextInput
         className={[
-          'font-lato-medium w-full h-[46px] text-black-greyscale-main border border-brown-camouflage px-3 py-3.5 rounded-lg text-[15px] focus:border-yellow-camouflage',
+          'font-lato-medium w-full h-[46px] text-black-greyscale-main border border-brown-camouflage px-3 pb-[2px] rounded-lg text-[15px] focus:border-yellow-camouflage',
           error && 'border-red-secondary',
           extraStyles
         ].join(' ')}

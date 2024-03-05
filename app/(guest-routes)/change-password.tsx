@@ -47,12 +47,14 @@ const SignIn: React.FC = () => {
       <View className="mx-4">
         <ScreenTitle title={i18n.t('change-password.title')} extraStyles="mb-[56px]" />
 
-        <FormPasswordInput
-          name="password"
-          label={i18n.t('change-password.new-password')}
-          placeholder={i18n.t('change-password.new-password-placeholder')}
-          control={control}
-        />
+        <View className="mb-3">
+          <FormPasswordInput
+            name="password"
+            label={i18n.t('change-password.new-password')}
+            placeholder={i18n.t('change-password.new-password-placeholder')}
+            control={control}
+          />
+        </View>
 
         <FormPasswordInput
           name="confirmPassword"
@@ -61,7 +63,7 @@ const SignIn: React.FC = () => {
           control={control}
         />
 
-        <View className="mt-7">
+        <View className="mt-10">
           <Button
             label={i18n.t('change-password.change-password')}
             type="filled"

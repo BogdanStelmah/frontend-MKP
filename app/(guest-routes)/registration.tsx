@@ -72,27 +72,33 @@ const Registration: React.FC = () => {
             description={i18n.t('registration.description')}
           />
 
-          <View className="mt-[56px]">
-            <FormTextInput
-              name="email"
-              label={i18n.t('registration.email')}
-              placeholder="e.g. bohdan@gmail.com"
-              control={control}
-            />
+          <View className="pt-[56px] gap-y-[12px]">
+            <View>
+              <FormTextInput
+                name="email"
+                label={i18n.t('registration.email')}
+                placeholder="e.g. bohdan@gmail.com"
+                control={control}
+              />
+            </View>
 
-            <FormPasswordInput
-              name="password"
-              label={i18n.t('registration.password')}
-              placeholder={i18n.t('registration.password-placeholder')}
-              control={control}
-            />
+            <View>
+              <FormPasswordInput
+                name="password"
+                label={i18n.t('registration.password')}
+                placeholder={i18n.t('registration.password-placeholder')}
+                control={control}
+              />
+            </View>
 
-            <FormPasswordInput
-              name="confirmPassword"
-              label={i18n.t('registration.confirm-password')}
-              placeholder={i18n.t('registration.confirm-password-placeholder')}
-              control={control}
-            />
+            <View>
+              <FormPasswordInput
+                name="confirmPassword"
+                label={i18n.t('registration.confirm-password')}
+                placeholder={i18n.t('registration.confirm-password-placeholder')}
+                control={control}
+              />
+            </View>
           </View>
         </View>
 

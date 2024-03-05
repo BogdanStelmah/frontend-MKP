@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import LottieView from 'lottie-react-native';
 import React from 'react';
 import { View, TouchableOpacity, Text } from 'react-native';
@@ -6,8 +7,9 @@ interface ButtonProps {
   label?: string;
   isDisabled?: boolean;
   isLoading?: boolean;
+  isWarning?: boolean;
   size?: 'full-width';
-  type?: 'outlined' | 'filled';
+  type?: 'outlined' | 'filled' | 'text';
   children?: any;
   onPress?: () => void;
   borderRadius?: string;
@@ -18,8 +20,9 @@ const Button: React.FC<ButtonProps> = ({
   label = '',
   isDisabled = false,
   isLoading = false,
+  isWarning = false,
   size,
-  type = '',
+  type = 'text',
   children,
   onPress,
   borderRadius,
@@ -27,21 +30,29 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   const _isDisabled = isDisabled ? true : isLoading;
 
-  const sizeStyle = size === 'full-width' ? 'w-full' : '';
+  const styleMap = {
+    mainBlock: classNames(
+      {
+        transition: true,
+        'w-full': size === 'full-width',
+        'border border-green-secondary-2 p-3 h-[48px]': type === 'outlined',
+        'bg-green-secondary-2 p-3 h-[48px]': type === 'filled',
+        'bg-disable': _isDisabled && type === 'filled',
 
-  const disabledStyle = _isDisabled ? (type === 'filled' ? 'bg-disable' : '') : '';
+        'border-red-secondary': type === 'outlined' && isWarning,
+        'bg-red-secondary': type === 'filled' && isWarning
+      },
+      borderRadius,
+      extraStyles
+    ),
+    textStyle: classNames({
+      'font-lato-semibold text-green-secondary-2 text-md': type === 'outlined',
+      'font-lato-semibold text-white-primary text-md': type === 'filled',
+      'font-lato-regular text-disable text-sm': type === 'text',
 
-  const buttonStyle =
-    type === 'outlined'
-      ? 'border border-green-secondary-2 p-3 h-[48px]'
-      : type === 'filled' && 'bg-green-secondary-2 p-3 h-[48px]';
-
-  const textStyle =
-    type === 'outlined'
-      ? 'font-lato-semibold text-green-secondary-2 text-md'
-      : type === 'filled'
-        ? 'font-lato-semibold text-white-primary text-md'
-        : 'font-lato-regular text-disable text-sm';
+      'text-red-secondary': type === 'outlined' && isWarning
+    })
+  };
 
   const loaderSrc =
     type === 'filled'
@@ -51,14 +62,7 @@ const Button: React.FC<ButtonProps> = ({
   return (
     <TouchableOpacity
       activeOpacity={0.6}
-      className={[
-        'transition',
-        sizeStyle,
-        buttonStyle,
-        disabledStyle,
-        borderRadius,
-        extraStyles
-      ].join(' ')}
+      className={styleMap.mainBlock}
       disabled={_isDisabled}
       onPress={onPress}
     >
@@ -69,7 +73,7 @@ const Button: React.FC<ButtonProps> = ({
       ) : (
         <View className="flex-row items-center justify-center">
           {children && <View className={label && 'mr-2'}>{children}</View>}
-          <Text className={textStyle}>{label}</Text>
+          <Text className={styleMap.textStyle}>{label}</Text>
         </View>
       )}
     </TouchableOpacity>

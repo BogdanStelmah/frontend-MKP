@@ -59,7 +59,7 @@ const SignIn: React.FC = () => {
           keyboardType="numeric"
         />
 
-        <View className="mt-7">
+        <View className="mt-10">
           <Button
             label={i18n.t('code-verification.verify')}
             type="filled"

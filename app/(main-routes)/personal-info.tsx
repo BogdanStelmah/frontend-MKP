@@ -54,30 +54,36 @@ const PersonalInfo = () => {
             description={i18n.t('personal-info.description')}
           />
 
-          <View className="space-y-1 mt-6">
-            <FormTextInput
-              name="firstName"
-              label={i18n.t('personal-info.first-name')}
-              placeholder={i18n.t('personal-info.first-name-placeholder')}
-              control={control}
-            />
+          <View className="pt-6 gap-3">
+            <View>
+              <FormTextInput
+                name="firstName"
+                label={i18n.t('personal-info.first-name')}
+                placeholder={i18n.t('personal-info.first-name-placeholder')}
+                control={control}
+              />
+            </View>
 
-            <FormTextInput
-              name="lastName"
-              label={i18n.t('personal-info.last-name')}
-              placeholder={i18n.t('personal-info.last-name-placeholder')}
-              control={control}
-            />
+            <View>
+              <FormTextInput
+                name="lastName"
+                label={i18n.t('personal-info.last-name')}
+                placeholder={i18n.t('personal-info.last-name-placeholder')}
+                control={control}
+              />
+            </View>
 
-            <FormDropdownInput
-              name="gender"
-              label={i18n.t('personal-info.gender')}
-              buttonLabel={i18n.t('personal-info.save')}
-              placeholder={i18n.t('personal-info.gender-placeholder')}
-              title={i18n.t('personal-info.gender-title')}
-              options={genderDictionary}
-              control={control}
-            />
+            <View>
+              <FormDropdownInput
+                name="gender"
+                label={i18n.t('personal-info.gender')}
+                buttonLabel={i18n.t('personal-info.save')}
+                placeholder={i18n.t('personal-info.gender-placeholder')}
+                title={i18n.t('personal-info.gender-title')}
+                options={genderDictionary}
+                control={control}
+              />
+            </View>
           </View>
         </View>
 

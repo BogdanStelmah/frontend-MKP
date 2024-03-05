@@ -58,7 +58,7 @@ const SignIn: React.FC = () => {
           control={control}
         />
 
-        <View className="mt-7">
+        <View className="mt-10">
           <Button
             label={i18n.t('forgot-password.reset-password')}
             type="filled"

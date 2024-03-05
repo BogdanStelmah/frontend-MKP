@@ -1,19 +1,11 @@
 import React from 'react';
 import { Controller } from 'react-hook-form';
-import { KeyboardType } from 'react-native';
 
-import TextInput from './TextInput';
+import TextInput, { TextInputProps } from './TextInput';
 
 import { FormProps } from '@/common/types';
 
-interface FormTextInputProps extends FormProps {
-  placeholder: string;
-  label: string;
-  maxLength?: number;
-  isSecureTextEntry?: boolean;
-  extraStyles?: string;
-  keyboardType?: KeyboardType;
-}
+interface FormTextInputProps extends FormProps, TextInputProps {}
 
 const FormTextInput: React.FC<FormTextInputProps> = ({ name, control, ...props }) => {
   return (

@@ -60,12 +60,14 @@ const SignIn: React.FC = () => {
         <View>
           <ScreenTitle title={i18n.t('sign-in.title')} extraStyles="mb-[56px]" />
 
-          <FormTextInput
-            name="email"
-            label={i18n.t('registration.email')}
-            placeholder="e.g. bohdan@gmail.com"
-            control={control}
-          />
+          <View className="mb-3">
+            <FormTextInput
+              name="email"
+              label={i18n.t('registration.email')}
+              placeholder="e.g. bohdan@gmail.com"
+              control={control}
+            />
+          </View>
 
           <FormPasswordInput
             name="password"
@@ -74,7 +76,7 @@ const SignIn: React.FC = () => {
             control={control}
           />
 
-          <View className="mt-7">
+          <View className="mt-10">
             <Button
               label={i18n.t('sign-in.sign-in')}
               type="filled"

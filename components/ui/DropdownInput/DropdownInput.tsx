@@ -9,7 +9,7 @@ import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import RadioGroup from '@/components/ui/RadioGroup';
 
-interface DropdownInputProps {
+export interface DropdownInputProps {
   title: string;
   label: string;
   buttonLabel: string;
