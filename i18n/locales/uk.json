@@ -57,6 +57,31 @@
     "code": "Код",
     "verify": "Перевірити"
   },
+  "change-password": {
+    "title": "Встановлення нового паролю",
+    "new-password": "Новий пароль",
+    "new-password-placeholder": "Введіть новий пароль",
+    "confirm-new-password": "Підтвердіть новий пароль",
+    "confirm-new-password-placeholder": "Підтвердіть новий пароль",
+    "change-password": "Змінити"
+  },
+  "personal-info": {
+    "title": "Особиста інформація",
+    "description": "Заповніть поля нижче. Ми нікуди не передамо вашу особисту інформацію.",
+    "first-name": "Ім'я",
+    "first-name-placeholder": "наприклад, Богдан",
+    "last-name": "Прізвище",
+    "last-name-placeholder": "наприклад, Дубинченко",
+    "gender": "Стать",
+    "gender-placeholder": "Оберіть свою стать",
+    "gender-title": "Ваша стать",
+    "save": "Зберегти"
+  },
+  "gender": {
+    "female": "Жінка",
+    "male": "Чоловік",
+    "unspecified": "Інше"
+  },
   "validations": {
     "email-incorrect": "Невірна адреса електронної пошти",
     "code-incorrect": "Невірний код",

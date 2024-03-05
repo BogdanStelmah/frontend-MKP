@@ -12,6 +12,7 @@ import FormDropdownInput from '@/components/ui/DropdownInput/FormDropdownInput';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import ScreenTitle from '@/components/ui/ScreenTitle';
 import { FormTextInput } from '@/components/ui/TextInput';
+import i18n from '@/i18n';
 import { useUserStore } from '@/store/userStore';
 
 interface IFormInput {
@@ -46,31 +47,31 @@ const PersonalInfo = () => {
       <View className="mx-4 pb-4 h-full flex justify-between">
         <View>
           <ScreenTitle
-            title="Personal information"
-            description="Fill in the fields above. We won't share your personal information anywhere."
+            title={i18n.t('personal-info.title')}
+            description={i18n.t('personal-info.description')}
           />
 
           <View className="space-y-1 mt-6">
             <FormTextInput
               name="firstName"
-              label="First Name"
-              placeholder="e.g. Bohdan"
+              label={i18n.t('personal-info.first-name')}
+              placeholder={i18n.t('personal-info.first-name-placeholder')}
               control={control}
             />
 
             <FormTextInput
               name="lastName"
-              label="Last Name"
-              placeholder="e.g. Dubynchenko"
+              label={i18n.t('personal-info.last-name')}
+              placeholder={i18n.t('personal-info.last-name-placeholder')}
               control={control}
             />
 
             <FormDropdownInput
               name="gender"
-              label="Стать"
-              buttonLabel="Зберегти"
-              placeholder="Оберіть свою стать"
-              title="Ваша стать"
+              label={i18n.t('personal-info.gender')}
+              buttonLabel={i18n.t('personal-info.save')}
+              placeholder={i18n.t('personal-info.gender-placeholder')}
+              title={i18n.t('personal-info.gender-title')}
               options={genderDictionary}
               control={control}
             />
@@ -78,7 +79,7 @@ const PersonalInfo = () => {
         </View>
 
         <Button
-          label="Зберегти"
+          label={i18n.t('personal-info.save')}
           type="filled"
           isDisabled={!isValid}
           isLoading={isLoading}

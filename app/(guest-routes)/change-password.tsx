@@ -9,7 +9,6 @@ import Button from '@/components/ui/Button';
 import { FormPasswordInput } from '@/components/ui/PasswordInput';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import ScreenTitle from '@/components/ui/ScreenTitle';
-import { FormTextInput } from '@/components/ui/TextInput';
 import i18n from '@/i18n';
 import { useUserStore } from '@/store/userStore';
 
@@ -46,25 +45,25 @@ const SignIn: React.FC = () => {
   return (
     <ScreenContainer>
       <View className="mx-4">
-        <ScreenTitle title="Встановлення нового пароль" extraStyles="mb-[56px]" />
+        <ScreenTitle title={i18n.t('change-password.title')} extraStyles="mb-[56px]" />
 
         <FormPasswordInput
           name="password"
-          label={i18n.t('registration.password')}
-          placeholder={i18n.t('registration.password-placeholder')}
+          label={i18n.t('change-password.new-password')}
+          placeholder={i18n.t('change-password.new-password-placeholder')}
           control={control}
         />
 
         <FormPasswordInput
           name="confirmPassword"
-          label={i18n.t('registration.confirm-password')}
-          placeholder={i18n.t('registration.confirm-password-placeholder')}
+          label={i18n.t('change-password.confirm-new-password')}
+          placeholder={i18n.t('change-password.confirm-new-password-placeholder')}
           control={control}
         />
 
         <View className="mt-7">
           <Button
-            label="Змінити"
+            label={i18n.t('change-password.change-password')}
             type="filled"
             isDisabled={!isValid}
             isLoading={isLoading}

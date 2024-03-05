@@ -57,6 +57,31 @@
     "code": "Code",
     "verify": "Verify"
   },
+  "change-password": {
+    "title": "Set a new password",
+    "new-password": "New password",
+    "new-password-placeholder": "Enter the new password",
+    "confirm-new-password": "Confirm the new password",
+    "confirm-new-password-placeholder": "Confirm the new password",
+    "change-password": "Change"
+  },
+  "personal-info": {
+    "title": "Personal information",
+    "description": "Fill in the fields above. We won't share your personal information anywhere.",
+    "first-name": "First Name",
+    "first-name-placeholder": "e.g. Bohdan",
+    "last-name": "Last Name",
+    "last-name-placeholder": "e.g. Dubynchenko",
+    "gender": "Gender",
+    "gender-placeholder": "Choose your gender",
+    "gender-title": "Your gender",
+    "save": "Save"
+  },
+  "gender": {
+    "female": "Female",
+    "male": "Male",
+    "unspecified": "Unspecified"
+  },
   "validations": {
     "email-incorrect": "Invalid email address",
     "code-incorrect": "Invalid code",
