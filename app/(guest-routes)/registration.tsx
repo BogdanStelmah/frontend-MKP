@@ -36,7 +36,7 @@ const Registration: React.FC = () => {
   });
 
   const redirectToBack = () => router.back();
-  const redirectToPersonalIno = () => router.push('');
+  const redirectToMainRoute = () => router.push('');
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
     setIsLoadingSubmitForm(true);
@@ -52,7 +52,7 @@ const Registration: React.FC = () => {
 
     registerUser({ email, password })
       .then(() => {
-        redirectToPersonalIno();
+        redirectToMainRoute();
         setIsLoadingSubmitForm(false);
       })
       .catch((error) => console.error(error.message))

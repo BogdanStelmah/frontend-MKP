@@ -38,11 +38,11 @@ const SignIn: React.FC = () => {
     resolver: yupResolver(signInSchema)
   });
 
-  const redirectToPersonalIno = () => router.push('');
+  const redirectToMainRoute = () => router.push('');
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
     loginUser({ email, password })
-      .then(() => redirectToPersonalIno())
+      .then(() => redirectToMainRoute())
       .catch(() =>
         setError('password', { message: i18n.t('sign-in.password-or-email-incorrect') })
       );
@@ -50,7 +50,7 @@ const SignIn: React.FC = () => {
 
   const handleGoogleLogin = ({ idToken }: IGoogleUser) => {
     googleLoginUser(idToken || '')
-      .then(() => redirectToPersonalIno())
+      .then(() => redirectToMainRoute())
       .catch((error) => console.error(error.message));
   };
 

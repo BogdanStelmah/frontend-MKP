@@ -1,4 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup';
+import { router } from 'expo-router';
 import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
@@ -11,7 +12,6 @@ import FormDropdownInput from '@/components/ui/DropdownInput/FormDropdownInput';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import ScreenTitle from '@/components/ui/ScreenTitle';
 import { FormTextInput } from '@/components/ui/TextInput';
-import i18n from '@/i18n';
 import { useUserStore } from '@/store/userStore';
 
 interface IFormInput {
@@ -22,20 +22,23 @@ interface IFormInput {
 
 const PersonalInfo = () => {
   const isLoading = useUserStore.use.isLoading();
+  const updateUserInfoByToken = useUserStore.use.updateUserInfoByToken();
 
   const {
     control,
     handleSubmit,
-    formState: { isValid }
+    formState: { isValid },
+    setError
   } = useForm<IFormInput>({
     mode: 'onChange',
     resolver: yupResolver(partnerPersonalDetails)
   });
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ firstName, lastName, gender }) => {
-    console.log(firstName, lastName, gender);
-    try {
-    } catch (e: any) {}
+    console.log(firstName, lastName, gender.value);
+    updateUserInfoByToken({ firstName, lastName, gender: gender.value })
+      .then(() => router.push('recipe-search'))
+      .catch((message) => setError('gender', { message }));
   };
 
   return (
@@ -75,7 +78,7 @@ const PersonalInfo = () => {
         </View>
 
         <Button
-          label={i18n.t('forgot-password.reset-password')}
+          label="Зберегти"
           type="filled"
           isDisabled={!isValid}
           isLoading={isLoading}

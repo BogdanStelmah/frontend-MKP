@@ -7,8 +7,9 @@ export interface IUser {
   password: string;
 }
 
-export interface IUserEntity extends IUser {
-  id: number;
+export interface IUserPersonalInfo {
+  firstName: string;
+  lastName: string;
   gender: GenderEnum;
 }
 

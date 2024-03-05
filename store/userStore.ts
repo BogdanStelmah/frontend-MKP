@@ -2,7 +2,7 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AxiosError } from 'axios';
 import { create } from 'zustand';
 
-import { IUser } from '@/common/types';
+import { IUser, IUserPersonalInfo } from '@/common/types';
 import i18n from '@/i18n';
 import { userApi, writeToken } from '@/service';
 import { removeToken } from '@/service/helper';
@@ -26,6 +26,7 @@ type UserActions = {
   verifyResetCode: (code: string) => Promise<void>;
   changePassword: (password: string) => Promise<void>;
   isUserHasPersonalInfo: () => Promise<boolean | undefined>;
+  updateUserInfoByToken: (userInfo: IUserPersonalInfo) => Promise<void>;
 };
 
 const initialUserState: UserState = {
@@ -149,6 +150,20 @@ export const useUserStoreBase = create<UserState & UserActions>()((set, getState
       return await userApi.isUserHasPersonalInfo();
     } catch (e) {
       console.log(e);
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  updateUserInfoByToken: async (userInfo: IUserPersonalInfo) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      await userApi.updateUserInfoByToken(userInfo);
+    } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);
       }

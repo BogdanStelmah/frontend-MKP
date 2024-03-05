@@ -1,14 +1,16 @@
-import { IUser } from '@/common/types/types';
+import { IUser, IUserPersonalInfo } from '@/common/types/types';
 import { requestApi, requestApiUnauthorized } from '@/service/apiAxios';
 
 const REGISTER_API = '/auth/register';
 const LOGIN_API = '/auth/login';
 const GOOGLE_LOGIN_API = '/auth/loginWithGoogle';
-const IS_EMAIL_EXISTS_API = '/users/isEmailExists';
-const IS_USER_HAS_PERSONAL_INFO_API = '/users/isUserHasPersonalInfo';
 const RESET_PASSWORD_API = '/auth/resetPassword';
 const VERIFY_RESET_CODE_API = '/auth/verifyResetCode';
 const UPDATE_PASSWORD_API = '/auth/updatePassword';
+
+const IS_EMAIL_EXISTS_API = '/users/isEmailExists';
+const IS_USER_HAS_PERSONAL_INFO_API = '/users/isUserHasPersonalInfo';
+const UPDATE_USER_INFO_BY_TOKEN_API = '/users/updateByToken';
 
 export interface IRegisterResult {
   access_token: string;
@@ -53,6 +55,10 @@ const updatePassword = async (password: string, email: string, code: string) => 
   ).data;
 };
 
+const updateUserInfoByToken = async (userData: IUserPersonalInfo) => {
+  return (await requestApi<void>('PATCH', UPDATE_USER_INFO_BY_TOKEN_API, { data: userData })).data;
+};
+
 const isUserHasPersonalInfo = async () => {
   return (await requestApi<boolean>('GET', IS_USER_HAS_PERSONAL_INFO_API)).data;
 };
@@ -65,5 +71,6 @@ export const userApi = {
   verifyResetCode,
   isEmailExists,
   updatePassword,
-  isUserHasPersonalInfo
+  isUserHasPersonalInfo,
+  updateUserInfoByToken
 };

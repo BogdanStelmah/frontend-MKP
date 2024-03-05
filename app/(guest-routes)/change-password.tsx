@@ -32,12 +32,12 @@ const SignIn: React.FC = () => {
     resolver: yupResolver(changePasswordScheme)
   });
 
-  const navigateToPersonalInfo = () => router.navigate('/personal-info');
+  const redirectToMainRoute = () => router.push('');
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ password }) => {
     try {
       await changePassword(password);
-      navigateToPersonalInfo();
+      redirectToMainRoute();
     } catch (e: any) {
       setError('password', { message: e?.message });
     }
