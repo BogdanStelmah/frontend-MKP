@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View } from 'react-native';
+import { Keyboard, View } from 'react-native';
 
 import ChevronDownIcon from '../../../assets/icons/chevron-down.svg';
 import TextInput from '../TextInput/TextInput';
@@ -31,8 +31,16 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   const [selectedOption, setSelectedOption] = useState<TypeOption | undefined>(value);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const showModal = () => setIsModalVisible(true);
+  const showModal = () => {
+    Keyboard.dismiss();
+    setIsModalVisible(true);
+  };
   const hideModal = () => setIsModalVisible(false);
+
+  const onSelectedOption = (option: TypeOption) => {
+    setSelectedOption(option);
+    onSelect(option);
+  };
 
   const onSave = () => {
     hideModal();
@@ -60,7 +68,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
       <Modal isVisible={isModalVisible} onClose={hideModal} title={title}>
         <RadioGroup
           options={options}
-          onSelect={setSelectedOption}
+          onSelect={onSelectedOption}
           extraStylesRadioButton="my-4"
           value={selectedOption}
         />

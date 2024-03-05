@@ -29,16 +29,19 @@ const PersonalInfo = () => {
     control,
     handleSubmit,
     formState: { isValid },
-    setError
+    setError,
+    reset
   } = useForm<IFormInput>({
     mode: 'onChange',
     resolver: yupResolver(partnerPersonalDetails)
   });
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ firstName, lastName, gender }) => {
-    console.log(firstName, lastName, gender.value);
     updateUserInfoByToken({ firstName, lastName, gender: gender.value })
-      .then(() => router.push('recipe-search'))
+      .then(() => {
+        router.push('recipe-search');
+        reset();
+      })
       .catch((message) => setError('gender', { message }));
   };
 

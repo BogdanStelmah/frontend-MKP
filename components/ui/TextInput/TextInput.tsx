@@ -30,19 +30,14 @@ interface TextInputProps {
 
 const TextInput: React.FC<TextInputProps> = ({
   label,
-  placeholder,
   error,
   helperText,
-  onChangeText,
-  onBlur,
-  value,
   isSecureTextEntry = false,
-  keyboardType,
-  extraStyles,
-  maxLength,
   autoCapitalize = 'none',
+  extraStyles,
   isEditable = true,
-  onPress
+  onPress,
+  ...props
 }) => {
   return (
     <TouchableOpacity className="h-[96px]" activeOpacity={100} onPress={onPress}>
@@ -60,14 +55,9 @@ const TextInput: React.FC<TextInputProps> = ({
           extraStyles
         ].join(' ')}
         editable={isEditable}
-        placeholder={placeholder}
-        value={value}
         secureTextEntry={isSecureTextEntry}
         autoCapitalize={autoCapitalize}
-        keyboardType={keyboardType}
-        maxLength={maxLength}
-        onChangeText={onChangeText}
-        onBlur={onBlur}
+        {...props}
       />
 
       {error && (
