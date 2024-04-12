@@ -28,7 +28,7 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
     try {
       const previewRecipes = await recipeApi.fetchPreviewRecipesByCategoryId(categoryId);
 
-      set(() => ({ previewRecipes, isLoading: false }));
+      set(() => ({ previewRecipes }));
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);
