@@ -39,7 +39,7 @@ const PersonalInfo = () => {
   const onSubmit: SubmitHandler<IFormInput> = async ({ firstName, lastName, gender }) => {
     updateUserInfoByToken({ firstName, lastName, gender: gender.value })
       .then(() => {
-        router.push('recipe-search');
+        router.push('/recipe-search');
         reset();
       })
       .catch((message) => setError('gender', { message }));

@@ -36,7 +36,7 @@ const Registration: React.FC = () => {
   });
 
   const redirectToBack = () => router.back();
-  const redirectToMainRoute = () => router.push('');
+  const redirectToMainRoute = () => router.push('/');
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ email, password }) => {
     setIsLoadingSubmitForm(true);

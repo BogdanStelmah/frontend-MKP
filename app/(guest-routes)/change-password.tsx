@@ -31,7 +31,7 @@ const SignIn: React.FC = () => {
     resolver: yupResolver(changePasswordScheme)
   });
 
-  const redirectToMainRoute = () => router.push('');
+  const redirectToMainRoute = () => router.push('/');
 
   const onSubmit: SubmitHandler<IFormInput> = async ({ password }) => {
     try {

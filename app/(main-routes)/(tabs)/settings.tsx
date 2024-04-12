@@ -33,7 +33,7 @@ const Settings = () => {
 
   const onLogout = () => {
     logout();
-    router.push('introduction');
+    router.push('/introduction');
   };
 
   return (
