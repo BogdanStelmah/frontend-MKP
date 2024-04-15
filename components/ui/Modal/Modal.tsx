@@ -1,20 +1,40 @@
+import classNames from 'classnames';
 import React from 'react';
 import { View } from 'react-native';
 import ReactNativeModal from 'react-native-modal';
 
-import CloseIcon from '@/assets/icons/close.svg';
-import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
-import Button from '@/components/ui/Button';
-import Text2Md from '@/components/ui/Typography/Text2md';
-
 interface ModalProps {
-  title: string;
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
   children: React.ReactNode;
+  extraStyles?: string;
+  isFullHeight?: boolean;
   isVisible?: boolean;
   onClose?: () => void;
 }
 
-const Modal: React.FC<ModalProps> = ({ title, onClose, children, isVisible }) => {
+const Modal: React.FC<ModalProps> = ({
+  onClose,
+  children,
+  isVisible,
+  header,
+  footer,
+  isFullHeight,
+  extraStyles
+}) => {
+  const styleMainBlock = classNames(
+    {
+      'p-4 bg-background': true,
+      'flex-1': isFullHeight,
+      'rounded-t-lg': !isFullHeight
+    },
+    extraStyles
+  );
+
+  const styleChildren = classNames({
+    'flex-1': isFullHeight
+  });
+
   if (!isVisible) return null;
 
   return (
@@ -24,18 +44,12 @@ const Modal: React.FC<ModalProps> = ({ title, onClose, children, isVisible }) =>
       backdropOpacity={0.3}
       onBackdropPress={onClose}
     >
-      <View className="flex-1" />
+      {!isFullHeight && <View className="flex-1" />}
 
-      <View className="p-4 bg-background rounded-t-lg">
-        <View className="flex flex-row items-center justify-between pb-4">
-          <Text2Md fontWeight={FontWeightEnum.BOLD}>{title}</Text2Md>
-
-          <Button onPress={onClose}>
-            <CloseIcon />
-          </Button>
-        </View>
-
-        <View>{children}</View>
+      <View className={styleMainBlock}>
+        {header}
+        <View className={styleChildren}>{children}</View>
+        {footer}
       </View>
     </ReactNativeModal>
   );

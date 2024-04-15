@@ -7,21 +7,24 @@ import Text2Xs from '@/components/ui/Typography/Text2xs';
 
 interface RecipeCardProps {
   recipe: IPreviewRecipe;
+  onPress?: () => void;
 }
 
-const RecipeCard: React.FC<RecipeCardProps> = ({ recipe }) => {
+const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onPress }) => {
   return (
     <View className="w-[131px]">
-      <Image style={{ height: 82 }} source={{ uri: recipe.imageUrl }} className="rounded-sm" />
+      <TouchableOpacity onPress={onPress} activeOpacity={100}>
+        <Image style={{ height: 82 }} source={{ uri: recipe.imageUrl }} className="rounded-sm" />
 
-      {recipe.title && (
-        <Text2Xs
-          fontWeight={FontWeightEnum.SEMIBOLD}
-          extraStyles="leading-[17px] mt-[2px] mx-[2px]"
-        >
-          {recipe.title}
-        </Text2Xs>
-      )}
+        {recipe.title && (
+          <Text2Xs
+            fontWeight={FontWeightEnum.SEMIBOLD}
+            extraStyles="leading-[17px] mt-[2px] mx-[2px]"
+          >
+            {recipe.title}
+          </Text2Xs>
+        )}
+      </TouchableOpacity>
     </View>
   );
 };

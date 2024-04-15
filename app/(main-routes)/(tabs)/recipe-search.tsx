@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
+import useModal from '@/common/hooks/useModal';
 import RecipeFeed from '@/components/business/RecipeFeed/RecipeFeed';
+import { RecipeOverviewModal } from '@/components/business/RecipeOverviewModal';
 import { FilterButton } from '@/components/ui/FilterButton';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import { SearchInput } from '@/components/ui/SearchInput';
@@ -9,13 +11,26 @@ import TabTitle from '@/components/ui/TabTitle';
 import { useRecipeStore } from '@/store/recipeStore';
 
 const RecipeSearch = () => {
+  const [isModalVisible, showModal, hideModal] = useModal();
+  const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
+
   const fetchRecipesByCategory = useRecipeStore.use.fetchPreviewRecipes();
-  const isLoading = useRecipeStore.use.isLoading();
   const previewRecipes = useRecipeStore.use.previewRecipes();
+
+  const fetchRecipeById = useRecipeStore.use.fetchRecipeById();
+  const recipeById = useRecipeStore.use.recipeById();
+
+  const isLoading = useRecipeStore.use.isLoading();
 
   useEffect(() => {
     fetchRecipesByCategory(1).catch((error) => console.error(error.message));
   }, []);
+
+  const onPressOnRecipeHandler = (recipeId: number) => {
+    fetchRecipeById(recipeId).catch((error) => console.error(error.message));
+    setSelectedRecipeId(recipeId);
+    showModal();
+  };
 
   return (
     <ScreenContainer isTouchableWithoutFeedback={false}>
@@ -31,9 +46,22 @@ const RecipeSearch = () => {
         </View>
 
         <View className="pt-[20px]">
-          <RecipeFeed title="Перші страви" recipes={previewRecipes} isLoading={isLoading} />
+          <RecipeFeed
+            title="Перші страви"
+            recipes={previewRecipes}
+            isLoading={isLoading}
+            onPressOnRecipe={onPressOnRecipeHandler}
+          />
         </View>
       </ScrollView>
+
+      {selectedRecipeId && recipeById && (
+        <RecipeOverviewModal
+          isModalVisible={isModalVisible}
+          recipe={recipeById}
+          hideModal={hideModal}
+        />
+      )}
     </ScreenContainer>
   );
 };

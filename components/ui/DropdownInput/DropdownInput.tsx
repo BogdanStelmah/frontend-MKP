@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { Keyboard, View } from 'react-native';
+import { View } from 'react-native';
 
 import ChevronDownIcon from '../../../assets/icons/chevron-down.svg';
 import TextInput from '../TextInput/TextInput';
 
+import CloseIcon from '@/assets/icons/close.svg';
+import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
+import useModal from '@/common/hooks/useModal';
 import { TypeOption } from '@/common/types';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import RadioGroup from '@/components/ui/RadioGroup';
+import Text2Md from '@/components/ui/Typography/Text2md';
 
 export interface DropdownInputProps {
   title: string;
@@ -29,13 +33,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   onSelect
 }) => {
   const [selectedOption, setSelectedOption] = useState<TypeOption | undefined>(value);
-  const [isModalVisible, setIsModalVisible] = useState(false);
-
-  const showModal = () => {
-    Keyboard.dismiss();
-    setIsModalVisible(true);
-  };
-  const hideModal = () => setIsModalVisible(false);
+  const [isModalVisible, showModal, hideModal] = useModal();
 
   const onSelectedOption = (option: TypeOption) => {
     setSelectedOption(option);
@@ -65,7 +63,19 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
         </View>
       </View>
 
-      <Modal isVisible={isModalVisible} onClose={hideModal} title={title}>
+      <Modal
+        isVisible={isModalVisible}
+        onClose={hideModal}
+        header={
+          <View className="flex flex-row items-center justify-between pb-4">
+            {title && <Text2Md fontWeight={FontWeightEnum.BOLD}>{title}</Text2Md>}
+
+            <Button onPress={hideModal}>
+              <CloseIcon />
+            </Button>
+          </View>
+        }
+      >
         <RadioGroup
           options={options}
           onSelect={onSelectedOption}

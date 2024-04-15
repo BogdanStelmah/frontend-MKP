@@ -11,9 +11,15 @@ interface RecipeFeedProps {
   title?: string;
   recipes: IPreviewRecipe[];
   isLoading?: boolean;
+  onPressOnRecipe?: (recipeId: number) => void;
 }
 
-const RecipeFeed: React.FC<RecipeFeedProps> = ({ title, recipes, isLoading = false }) => {
+const RecipeFeed: React.FC<RecipeFeedProps> = ({
+  title,
+  recipes,
+  isLoading = false,
+  onPressOnRecipe
+}) => {
   return (
     <View>
       {title && (
@@ -26,7 +32,10 @@ const RecipeFeed: React.FC<RecipeFeedProps> = ({ title, recipes, isLoading = fal
         <ScrollView horizontal showsHorizontalScrollIndicator={false} className="gap-x-[15px]">
           {recipes.map((recipe) => (
             <View key={recipe.id}>
-              <RecipeCard recipe={recipe} />
+              <RecipeCard
+                recipe={recipe}
+                onPress={() => onPressOnRecipe && onPressOnRecipe(recipe.id)}
+              />
             </View>
           ))}
         </ScrollView>
