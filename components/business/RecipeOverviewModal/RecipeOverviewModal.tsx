@@ -12,6 +12,7 @@ import Modal from '@/components/ui/Modal';
 import Text2md from '@/components/ui/Typography/Text2md';
 import Text2Sm from '@/components/ui/Typography/Text2sm';
 import Text2xs from '@/components/ui/Typography/Text2xs';
+import i18n from '@/i18n';
 
 interface RecipeOverviewModalProps {
   recipe: IRecipe;
@@ -55,7 +56,11 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
         }
         footer={
           <View className="pt-4">
-            <Button label="Додати до розкладу" type="filled" borderRadius="rounded-lg" />
+            <Button
+              label={i18n.t('recipe-search.modal.add-to-reschedule')}
+              type="filled"
+              borderRadius="rounded-lg"
+            />
           </View>
         }
       >
@@ -75,7 +80,10 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
 
             {recipe.user && (
               <View className="flex-row">
-                <Text2xs fontWeight={FontWeightEnum.MEDIUM}>Від </Text2xs>
+                <Text2xs fontWeight={FontWeightEnum.MEDIUM}>
+                  {i18n.t('recipe-search.modal.from')}
+                </Text2xs>
+
                 <Text2xs fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-green-secondary-2">
                   {formatUserName(recipe.user)}
                 </Text2xs>
@@ -84,14 +92,19 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
           </View>
 
           <View>
-            <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>ОПИС</Text2Sm>
+            <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>
+              {i18n.t('recipe-search.modal.description')}
+            </Text2Sm>
+
             <Text2xs fontWeight={FontWeightEnum.REGULAR} extraStyles="text-justify">
               {recipe.description}
             </Text2xs>
           </View>
 
           <View>
-            <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>ІНГРЕДІЄНТИ</Text2Sm>
+            <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>
+              {i18n.t('recipe-search.modal.ingredients')}
+            </Text2Sm>
 
             <View className="mt-[1px]">
               {recipe.ingredientToRecipes &&
@@ -104,7 +117,10 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
           </View>
 
           <View>
-            <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>КРОКИ ПРИГОТУВАННЯ</Text2Sm>
+            <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>
+              {i18n.t('recipe-search.modal.instructions')}
+            </Text2Sm>
+
             <Text2xs fontWeight={FontWeightEnum.REGULAR}>
               {formatOfTransfer(recipe.cookingInstructions)}
             </Text2xs>
@@ -112,18 +128,28 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
 
           <View className="flex-row">
             <View className="flex-1">
-              <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>КАЛОРІЙНІСТЬ</Text2Sm>
+              <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>
+                {i18n.t('recipe-search.modal.calories')}
+              </Text2Sm>
+
               <Text2xs fontWeight={FontWeightEnum.REGULAR}>{recipe.calorieContent}</Text2xs>
             </View>
+
             <View className="flex-1">
-              <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>ВАГА ПОРЦІЇ</Text2Sm>
+              <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>
+                {i18n.t('recipe-search.modal.weight')}
+              </Text2Sm>
+
               <Text2xs fontWeight={FontWeightEnum.REGULAR}>{recipe.weight}</Text2xs>
             </View>
           </View>
 
           <View className="flex-row">
             <View className="flex-1">
-              <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>КІЛЬКІСТЬ ПОРЦІЙ</Text2Sm>
+              <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>
+                {i18n.t('recipe-search.modal.number-of-servings')}
+              </Text2Sm>
+
               <Text2xs fontWeight={FontWeightEnum.REGULAR}>{recipe.numberOfServings}</Text2xs>
             </View>
           </View>

@@ -7,6 +7,7 @@ import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import Text2Md from '@/components/ui/Typography/Text2md';
 import Text2sm from '@/components/ui/Typography/Text2sm';
+import i18n from '@/i18n';
 
 interface RecipeSettingsModalProps {
   isModalVisible: boolean;
@@ -15,10 +16,10 @@ interface RecipeSettingsModalProps {
 
 const RecipeSettingsModal: React.FC<RecipeSettingsModalProps> = ({ isModalVisible, hideModal }) => {
   const recipeOptions = [
-    { label: 'Модифікувати', onPress: () => {} },
-    { label: 'Переглянути орігінал', onPress: () => {} },
-    { label: 'Видалити модифікування', onPress: () => {} },
-    { label: 'Ніколи не показувати', onPress: () => {} }
+    { label: i18n.t('recipe-search.setting-up-a-recipe.modify'), onPress: () => {} },
+    { label: i18n.t('recipe-search.setting-up-a-recipe.view-original'), onPress: () => {} },
+    { label: i18n.t('recipe-search.setting-up-a-recipe.remove-modifications'), onPress: () => {} },
+    { label: i18n.t('recipe-search.setting-up-a-recipe.never-show'), onPress: () => {} }
   ];
 
   return (
@@ -30,7 +31,10 @@ const RecipeSettingsModal: React.FC<RecipeSettingsModalProps> = ({ isModalVisibl
           <Button onPress={hideModal} extraStyles="mr-[8px]">
             <AntDesign name="arrowleft" size={24} color="#454545" />
           </Button>
-          <Text2Md fontWeight={FontWeightEnum.BOLD}>Налаштування рецепту</Text2Md>
+
+          <Text2Md fontWeight={FontWeightEnum.BOLD}>
+            {i18n.t('recipe-search.setting-up-a-recipe.title')}
+          </Text2Md>
         </View>
       }
     >

@@ -82,6 +82,36 @@
     "male": "Male",
     "unspecified": "Unspecified"
   },
+  "recipe-search": {
+    "tab-title": "Choose a recipe to start your meal plan",
+    "search-placeholder": "Find recipe",
+    "first-dishes": "First dishes",
+    "modal": {
+      "add-to-reschedule": "Add to schedule",
+      "from": "From ",
+      "description": "DESCRIPTION",
+      "ingredients": "INGREDIENTS",
+      "instructions": "COOKING STEPS",
+      "calories": "CALORIES",
+      "weight": "WEIGHT OF THE DISH",
+      "number-of-servings": "NUMBER OF SERVINGS"
+    },
+    "setting-up-a-recipe": {
+      "title": "Customize the recipe",
+      "modify": "Modify",
+      "view-original": "View the original",
+      "remove-modifications": "Remove modifications",
+      "never-show": "Never show"
+    }
+  },
+  "settings": {
+    "tab-title": "Customize your profile to your preferences",
+    "personal-info": "Personal data",
+    "personalize-your-app": "Personalization of the application",
+    "notifications": "Notifications",
+    "log-out-of-your-account": "Log out of your account",
+    "delete-account": "Delete your account"
+  },
   "validations": {
     "email-incorrect": "Invalid email address",
     "code-incorrect": "Invalid code",

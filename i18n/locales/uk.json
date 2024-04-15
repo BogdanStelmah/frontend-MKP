@@ -82,6 +82,36 @@
     "male": "Чоловік",
     "unspecified": "Інше"
   },
+  "recipe-search": {
+    "tab-title": "Виберіть рецепт, щоб почати свою трапезу",
+    "search-placeholder": "Знайти рецепт",
+    "first-dishes": "Перші страви",
+    "modal": {
+      "add-to-reschedule": "Додати до розкладу",
+      "from": "Від ",
+      "description": "ОПИС",
+      "ingredients": "ІНГРЕДІЄНТИ",
+      "instructions": "КРОКИ ПРИГОТУВАННЯ",
+      "calories": "КАЛОРІЙНІСТЬ",
+      "weight": "ВАГА СТРАВИ",
+      "number-of-servings": "КІЛЬКІСТЬ ПОРЦІЙ",
+    },
+    "setting-up-a-recipe": {
+      "title": "Налаштування рецепту",
+      "modify": "Модифікувати",
+      "view-original": "Переглянути орігінал",
+      "remove-modifications": "Видалити модифікування",
+      "never-show": "Ніколи не показувати"
+    }
+  },
+  "settings": {
+    "tab-title": "Налаштуйте свій профіль під свої вподобання",
+    "personal-info": "Персональні дані",
+    "personalize-your-app": "Персоналізація додатку",
+    "notifications": "Сповіщення",
+    "log-out-of-your-account": "Вийти з облікового запису",
+    "delete-account": "Видалити обліковий запис"
+  },
   "validations": {
     "email-incorrect": "Невірна адреса електронної пошти",
     "code-incorrect": "Невірний код",

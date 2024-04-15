@@ -39,15 +39,12 @@ const Settings = () => {
   return (
     <ScreenContainer>
       <ScrollView className="mx-4" showsVerticalScrollIndicator={false}>
-        <TabTitle
-          title="Налаштуйте свій профіль під свої вподобання"
-          extraTitleStyles="w-[250px]"
-        />
+        <TabTitle title={i18n.t('settings.tab-title')} extraTitleStyles="w-[250px]" />
 
         <View className="pt-[19px] space-y-[30px]">
           <View>
             <Text2md fontWeight={FontWeightEnum.BOLD} extraStyles="text-black-greyscale-main">
-              Персональні дані
+              {i18n.t('settings.personal-info')}
             </Text2md>
 
             <View className="pt-[5px]">
@@ -79,7 +76,7 @@ const Settings = () => {
 
           <View>
             <Text2md fontWeight={FontWeightEnum.BOLD} extraStyles="text-black-greyscale-main">
-              Персоналізація додатку
+              {i18n.t('settings.personalize-your-app')}
             </Text2md>
 
             <View className="pt-[5px]">
@@ -101,19 +98,19 @@ const Settings = () => {
 
           <View>
             <Text2md fontWeight={FontWeightEnum.BOLD} extraStyles="text-black-greyscale-main">
-              Сповіщення
+              {i18n.t('settings.notifications')}
             </Text2md>
           </View>
 
           <View>
             <Button
-              label="Вийти з облікового запису"
+              label={i18n.t('settings.log-out-of-your-account')}
               type="outlined"
               borderRadius="rounded-lg"
               onPress={onLogout}
             />
             <Button
-              label="Видалити обліковий запис"
+              label={i18n.t('settings.delete-account')}
               type="outlined"
               borderRadius="rounded-lg"
               extraStyles="my-4"

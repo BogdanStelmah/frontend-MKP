@@ -8,6 +8,7 @@ import { FilterButton } from '@/components/ui/FilterButton';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import { SearchInput } from '@/components/ui/SearchInput';
 import TabTitle from '@/components/ui/TabTitle';
+import i18n from '@/i18n';
 import { useRecipeStore } from '@/store/recipeStore';
 
 const RecipeSearch = () => {
@@ -35,11 +36,11 @@ const RecipeSearch = () => {
   return (
     <ScreenContainer isTouchableWithoutFeedback={false}>
       <ScrollView className="mx-4" showsVerticalScrollIndicator={false}>
-        <TabTitle title="Виберіть рецепт, щоб почати свою трапезу" extraTitleStyles="w-[250px]" />
+        <TabTitle title={i18n.t('recipe-search.tab-title')} extraTitleStyles="w-[250px]" />
 
         <View className="mt-[6px] flex-row">
           <View className="mr-[10px] flex-1">
-            <SearchInput placeholder="Знайти рецепт" maxLength={30} />
+            <SearchInput placeholder={i18n.t('recipe-search.search-placeholder')} maxLength={30} />
           </View>
 
           <FilterButton />
@@ -47,7 +48,7 @@ const RecipeSearch = () => {
 
         <View className="pt-[20px]">
           <RecipeFeed
-            title="Перші страви"
+            title={i18n.t('recipe-search.first-dishes')}
             recipes={previewRecipes}
             isLoading={isLoading}
             onPressOnRecipe={onPressOnRecipeHandler}
