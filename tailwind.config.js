@@ -36,6 +36,7 @@ module.exports = {
         red: {
           secondary: '#D34E24'
         },
+        placeholder: '#909590',
         disable: '#8D949E',
         chosen: '#F2F5F7',
         notification: '#169873',
