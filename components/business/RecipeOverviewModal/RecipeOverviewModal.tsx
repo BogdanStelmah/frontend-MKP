@@ -5,10 +5,16 @@ import { Image, ScrollView, View } from 'react-native';
 import { IRecipe } from '@/common/entities';
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
 import useModal from '@/common/hooks/useModal';
-import { formatUserName, generateIngredientText, formatOfTransfer } from '@/common/utils';
+import {
+  formatUserName,
+  generateIngredientText,
+  formatOfTransfer,
+  formatPFC
+} from '@/common/utils';
 import RecipeSettingsModal from '@/components/business/RecipeOverviewModal/RecipeSettingsModal';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
+import { Rating } from '@/components/ui/Rating';
 import Text2md from '@/components/ui/Typography/Text2md';
 import Text2Sm from '@/components/ui/Typography/Text2sm';
 import Text2xs from '@/components/ui/Typography/Text2xs';
@@ -74,9 +80,15 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
           </View>
 
           <View>
-            <Text2md fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="font-extrabold">
-              {recipe.title}
-            </Text2md>
+            <View className="flex-row justify-between">
+              <Text2md fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="font-extrabold">
+                {recipe.title}
+              </Text2md>
+
+              <View className="top-[5px]">
+                <Rating value={recipe.rating?.calculatedRating} />
+              </View>
+            </View>
 
             {recipe.user && (
               <View className="flex-row">
@@ -132,7 +144,10 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
                 {i18n.t('recipe-search.modal.calories')}
               </Text2Sm>
 
-              <Text2xs fontWeight={FontWeightEnum.REGULAR}>{recipe.calorieContent}</Text2xs>
+              <Text2xs fontWeight={FontWeightEnum.REGULAR}>
+                {recipe.calorieContent}{' '}
+                {i18n.t('recipe-search.modal.measurement-units-for-calories')}
+              </Text2xs>
             </View>
 
             <View className="flex-1">
@@ -140,7 +155,7 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
                 {i18n.t('recipe-search.modal.weight')}
               </Text2Sm>
 
-              <Text2xs fontWeight={FontWeightEnum.REGULAR}>{recipe.weight}</Text2xs>
+              <Text2xs fontWeight={FontWeightEnum.REGULAR}>{recipe.weight} г</Text2xs>
             </View>
           </View>
 
@@ -151,6 +166,14 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
               </Text2Sm>
 
               <Text2xs fontWeight={FontWeightEnum.REGULAR}>{recipe.numberOfServings}</Text2xs>
+            </View>
+
+            <View className="flex-1">
+              <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>
+                {i18n.t('recipe-search.modal.pfc')}
+              </Text2Sm>
+
+              <Text2xs fontWeight={FontWeightEnum.REGULAR}>{formatPFC(recipe)}</Text2xs>
             </View>
           </View>
         </ScrollView>

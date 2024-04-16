@@ -6,8 +6,12 @@ export interface IRecipe extends IPreviewRecipe {
   calorieContent: string;
   weight: number;
   numberOfServings: number;
+  protein?: number;
+  fat?: number;
+  carbohydrates?: number;
   user?: IRecipeAuthor;
   ingredientToRecipes?: IIngredientToRecipe[];
+  rating: IRecipeRating;
 }
 
 export interface IPreviewRecipe {
@@ -30,4 +34,11 @@ export interface IIngredient {
   id: number;
   name: string;
   description?: string;
+}
+
+export interface IRecipeRating {
+  id: number;
+  totalRating: number;
+  totalUsersRated: number;
+  calculatedRating: number;
 }

@@ -95,6 +95,8 @@
       "calories": "КАЛОРІЙНІСТЬ",
       "weight": "ВАГА СТРАВИ",
       "number-of-servings": "КІЛЬКІСТЬ ПОРЦІЙ",
+      "pfc": "БЖВ",
+      "measurement-units-for-calories": "ккал"
     },
     "setting-up-a-recipe": {
       "title": "Налаштування рецепту",

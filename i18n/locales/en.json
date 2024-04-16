@@ -94,7 +94,9 @@
       "instructions": "COOKING STEPS",
       "calories": "CALORIES",
       "weight": "WEIGHT OF THE DISH",
-      "number-of-servings": "NUMBER OF SERVINGS"
+      "number-of-servings": "NUMBER OF SERVINGS",
+      "pfc": "PFC",
+      "measurement-units-for-calories": "kcal"
     },
     "setting-up-a-recipe": {
       "title": "Customize the recipe",
