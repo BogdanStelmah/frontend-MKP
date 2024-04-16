@@ -1,4 +1,5 @@
 import { Feather } from '@expo/vector-icons';
+import classNames from 'classnames';
 import React from 'react';
 import {
   GestureResponderEvent,
@@ -28,6 +29,16 @@ const SearchInput: React.FC<SearchInputProps> = ({
   onPress,
   ...props
 }) => {
+  const styleMap = {
+    textInput: classNames(
+      {
+        'font-lato-medium h-[40px] text-black-greyscale-main px-[8px] pb-[1px] text-2sm flex-1':
+          true
+      },
+      extraStyles
+    )
+  };
+
   return (
     <View className="h-[40px] rounded-lg bg-chosen flex-1">
       <TouchableOpacity activeOpacity={100} onPress={onPress}>
@@ -36,10 +47,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
 
           <DefaultTextInput
             placeholderTextColor="#909590"
-            className={[
-              'font-lato-medium h-[40px] text-black-greyscale-main px-[8px] pb-[1px] text-2sm',
-              extraStyles
-            ].join(' ')}
+            className={styleMap.textInput}
             autoCapitalize={autoCapitalize}
             {...props}
           />

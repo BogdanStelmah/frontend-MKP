@@ -4,7 +4,7 @@ import { Image, ScrollView, View } from 'react-native';
 
 import { IRecipe } from '@/common/entities';
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
-import useModal from '@/common/hooks/useModal';
+import { useModal } from '@/common/hooks/useModal';
 import {
   formatUserName,
   generateIngredientText,
@@ -103,15 +103,17 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
             )}
           </View>
 
-          <View>
-            <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>
-              {i18n.t('recipe-search.modal.description')}
-            </Text2Sm>
+          {recipe?.description && (
+            <View>
+              <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>
+                {i18n.t('recipe-search.modal.description')}
+              </Text2Sm>
 
-            <Text2xs fontWeight={FontWeightEnum.REGULAR} extraStyles="text-justify">
-              {recipe.description}
-            </Text2xs>
-          </View>
+              <Text2xs fontWeight={FontWeightEnum.REGULAR} extraStyles="text-justify">
+                {recipe?.description}
+              </Text2xs>
+            </View>
+          )}
 
           <View>
             <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD}>
