@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import useModal from '@/common/hooks/useModal';
+import { IPreviewRecipe } from '@/common/entities';
+import { useLazyLoadData } from '@/common/hooks';
+import { useModal } from '@/common/hooks/useModal';
 import RecipeFeed from '@/components/business/RecipeFeed/RecipeFeed';
 import { RecipeOverviewModal } from '@/components/business/RecipeOverviewModal';
 import { FilterButton } from '@/components/ui/FilterButton';
@@ -15,17 +17,16 @@ const RecipeSearch = () => {
   const [isModalVisible, showModal, hideModal] = useModal();
   const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
 
-  const fetchRecipesByCategory = useRecipeStore.use.fetchPreviewRecipes();
-  const previewRecipes = useRecipeStore.use.previewRecipes();
-
+  const fetchRecipesByCategory = useRecipeStore.use.fetchRecipesByCategory();
   const fetchRecipeById = useRecipeStore.use.fetchRecipeById();
+
+  const [recipesByCategory, paginationParamsForRecipesByCategory, loadMoreRecipesByCategory] =
+    useLazyLoadData<IPreviewRecipe, any>(5, () =>
+      fetchRecipesByCategory(1, paginationParamsForRecipesByCategory)
+    );
+
   const recipeById = useRecipeStore.use.recipeById();
-
   const isLoading = useRecipeStore.use.isLoading();
-
-  useEffect(() => {
-    fetchRecipesByCategory(1).catch((error) => console.error(error.message));
-  }, []);
 
   const onPressOnRecipeHandler = (recipeId: number) => {
     fetchRecipeById(recipeId).catch((error) => console.error(error.message));
@@ -49,9 +50,10 @@ const RecipeSearch = () => {
         <View className="pt-[20px]">
           <RecipeFeed
             title={i18n.t('recipe-search.first-dishes')}
-            recipes={previewRecipes}
+            recipes={recipesByCategory}
             isLoading={isLoading}
             onPressOnRecipe={onPressOnRecipeHandler}
+            onScrollEndReached={loadMoreRecipesByCategory}
           />
         </View>
       </ScrollView>

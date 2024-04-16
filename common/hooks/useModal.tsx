@@ -3,7 +3,7 @@ import { Keyboard } from 'react-native'; // Якщо ви використову
 
 type ModalHookReturnType = [boolean, () => void, () => void];
 
-const useModal = (initialVisible: boolean = false): ModalHookReturnType => {
+export const useModal = (initialVisible: boolean = false): ModalHookReturnType => {
   const [isVisible, setIsVisible] = useState<boolean>(initialVisible);
 
   const showModal = (): void => {
@@ -15,5 +15,3 @@ const useModal = (initialVisible: boolean = false): ModalHookReturnType => {
 
   return [isVisible, showModal, hideModal];
 };
-
-export default useModal;

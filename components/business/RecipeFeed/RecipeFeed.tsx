@@ -1,9 +1,10 @@
 import React from 'react';
-import { ScrollView, View } from 'react-native';
+import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, View } from 'react-native';
 
 import { IPreviewRecipe } from '@/common/entities';
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
 import RecipeCard from '@/components/business/RecipeCard/RecipeCard';
+import RecipeCardSkeleton from '@/components/ui/Skeletons/RecipeCardSkeleton';
 import RecipeFeedSkeleton from '@/components/ui/Skeletons/RecipeFeedSkeleton';
 import Text2Md from '@/components/ui/Typography/Text2md';
 
@@ -12,14 +13,24 @@ interface RecipeFeedProps {
   recipes: IPreviewRecipe[];
   isLoading?: boolean;
   onPressOnRecipe?: (recipeId: number) => void;
+  onScrollEndReached?: () => void;
 }
 
 const RecipeFeed: React.FC<RecipeFeedProps> = ({
   title,
   recipes,
   isLoading = false,
-  onPressOnRecipe
+  onPressOnRecipe = () => {},
+  onScrollEndReached = () => {}
 }) => {
+  const handleScroll = (event: NativeSyntheticEvent<NativeScrollEvent>) => {
+    const { layoutMeasurement, contentSize, contentOffset } = event.nativeEvent;
+
+    const isEndReached = layoutMeasurement.width + contentOffset.x >= contentSize.width - 10;
+
+    if (isEndReached && !isLoading) onScrollEndReached();
+  };
+
   return (
     <View>
       {title && (
@@ -28,19 +39,29 @@ const RecipeFeed: React.FC<RecipeFeedProps> = ({
         </Text2Md>
       )}
 
-      {!isLoading ? (
-        <ScrollView horizontal showsHorizontalScrollIndicator={false} className="gap-x-[15px]">
+      {isLoading && recipes.length === 0 && <RecipeFeedSkeleton numberOfSkeletons={4} />}
+
+      {recipes.length !== 0 && (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          onScroll={handleScroll}
+          scrollEventThrottle={10}
+          className="gap-x-[15px]"
+          contentContainerStyle={{ paddingRight: 80 }}
+        >
           {recipes.map((recipe) => (
             <View key={recipe.id}>
-              <RecipeCard
-                recipe={recipe}
-                onPress={() => onPressOnRecipe && onPressOnRecipe(recipe.id)}
-              />
+              <RecipeCard recipe={recipe} onPress={() => onPressOnRecipe(recipe.id)} />
             </View>
           ))}
+
+          {isLoading && (
+            <View>
+              <RecipeCardSkeleton />
+            </View>
+          )}
         </ScrollView>
-      ) : (
-        <RecipeFeedSkeleton numberOfSkeletons={4} />
       )}
     </View>
   );
