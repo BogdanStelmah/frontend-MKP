@@ -6,7 +6,7 @@ import TextInput from '../TextInput/TextInput';
 
 import CloseIcon from '@/assets/icons/close.svg';
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
-import useModal from '@/common/hooks/useModal';
+import { useModal } from '@/common/hooks/useModal';
 import { TypeOption } from '@/common/types';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';

@@ -79,10 +79,15 @@ export const useUserStoreBase = create<UserState & UserActions>()((set, getState
 
   logout: async () => {
     set(() => ({ isLoading: true }));
-    await removeToken();
-    await GoogleSignin.signOut();
 
-    set(() => ({ ...initialUserState }));
+    try {
+      await removeToken();
+      await GoogleSignin.signOut();
+    } catch (e) {
+      console.error(e);
+    } finally {
+      set(() => ({ ...initialUserState }));
+    }
   },
 
   registerUser: async (user: IUser) => {
