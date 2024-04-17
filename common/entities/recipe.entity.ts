@@ -22,18 +22,11 @@ export interface IPreviewRecipe {
 
 export interface IIngredientToRecipe {
   id: number;
-  unitOfMeasure: string;
   quantity?: number;
-  comment?: string;
-  recipeId: number;
-  ingredientId: number;
-  ingredient: IIngredient;
-}
-
-export interface IIngredient {
-  id: number;
   name: string;
   description?: string;
+  unitOfMeasure: string;
+  comment?: string;
 }
 
 export interface IRecipeRating {

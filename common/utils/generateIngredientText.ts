@@ -1,8 +1,10 @@
 import { IIngredientToRecipe } from '@/common/entities';
 
 export const generateIngredientText = (ingredientToRecipeData: IIngredientToRecipe): string => {
-  const { name } = ingredientToRecipeData.ingredient;
-  const { quantity, unitOfMeasure } = ingredientToRecipeData;
+  const { quantity, unitOfMeasure, name, comment, description } = ingredientToRecipeData;
 
-  return `${name} - ${quantity || ''} ${unitOfMeasure}`;
+  const textDescription = description ? ` (${description})` : '';
+  const textComment = comment ? `, ${comment}` : '';
+
+  return `${name}${textDescription} - ${quantity || ''} ${unitOfMeasure}${textComment}`;
 };
