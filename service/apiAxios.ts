@@ -1,5 +1,6 @@
 import axios, { AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse, Method } from 'axios';
 
+import { getDeviceLanguage } from '@/common/utils';
 import config from '@/config';
 import { retrieveToken } from '@/service/helper';
 
@@ -23,11 +24,16 @@ export const apiAxiosUnauthorized = axios.create({
 
 apiAxios.interceptors.request.use(async (requestConfig) => {
   const userAccessToken = await retrieveToken();
-
   if (!userAccessToken) throw new InvalidSessionError();
 
   requestConfig.headers = { Authorization: `Bearer ${userAccessToken}` } as AxiosRequestHeaders;
+  requestConfig.params = { ...requestConfig.params, lang: getDeviceLanguage() };
 
+  return requestConfig;
+});
+
+apiAxiosUnauthorized.interceptors.request.use(async (requestConfig) => {
+  requestConfig.params = { ...requestConfig.params, lang: getDeviceLanguage() };
   return requestConfig;
 });
 
