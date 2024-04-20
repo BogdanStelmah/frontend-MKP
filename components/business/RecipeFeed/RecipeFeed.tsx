@@ -28,7 +28,7 @@ const RecipeFeed: React.FC<RecipeFeedProps> = ({
 
     const isEndReached = layoutMeasurement.width + contentOffset.x >= contentSize.width - 10;
 
-    if (isEndReached && !isLoading) onScrollEndReached();
+    if (isEndReached && !isLoading && recipes.length >= 3) onScrollEndReached();
   };
 
   return (

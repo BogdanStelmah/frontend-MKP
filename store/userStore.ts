@@ -80,6 +80,11 @@ export const useUserStoreBase = create<UserState & UserActions>()((set, getState
   logout: async () => {
     set(() => ({ isLoading: true }));
 
+    GoogleSignin.configure({
+      scopes: [],
+      webClientId: process.env.EXPO_PUBLIC_WEB_CLIENT_ID
+    });
+
     try {
       await removeToken();
       await GoogleSignin.signOut();
