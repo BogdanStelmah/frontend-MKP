@@ -105,6 +105,9 @@
       "view-original": "View the original",
       "remove-modifications": "Remove modifications",
       "never-show": "Never show"
+    },
+    "filters": {
+      "title": "Filters"
     }
   },
   "settings": {

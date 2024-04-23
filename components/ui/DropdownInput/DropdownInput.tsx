@@ -10,7 +10,7 @@ import { useModal } from '@/common/hooks/useModal';
 import { TypeOption } from '@/common/types';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
-import RadioGroup from '@/components/ui/RadioGroup';
+import { RadioGroup } from '@/components/ui/RadioGroup';
 import Text2Md from '@/components/ui/Typography/Text2md';
 
 export interface DropdownInputProps {

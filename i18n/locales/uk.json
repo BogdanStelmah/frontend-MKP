@@ -105,6 +105,9 @@
       "view-original": "Переглянути орігінал",
       "remove-modifications": "Видалити модифікування",
       "never-show": "Ніколи не показувати"
+    },
+    "filters": {
+      "title": "Фільтри"
     }
   },
   "settings": {

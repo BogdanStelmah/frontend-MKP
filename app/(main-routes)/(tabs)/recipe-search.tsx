@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { useDebounce } from 'use-debounce';
 
 import { useModal } from '@/common/hooks/useModal';
+import RecipeFiltersModal from '@/components/business/ModalWithFilters/RecipeFiltersModal';
 import { RecipeOverviewModal } from '@/components/business/RecipeOverviewModal';
 import RecipesByCategory from '@/components/business/RecipesByCategory/RecipesByCategory';
 import { RecipesByParameters } from '@/components/business/RecipesByParameters';
@@ -19,6 +20,7 @@ const RecipeSearch = () => {
 
   const [debouncedSearchText] = useDebounce(searchText, 1000);
   const [isModalVisible, showModal, hideModal] = useModal();
+  const [isRecipeFiltersModalVisible, showRecipeFiltersModal, hideRecipeFiltersModal] = useModal();
 
   const fetchRecipeById = useRecipeStore.use.fetchRecipeById();
   const recipeById = useRecipeStore.use.recipeById();
@@ -46,7 +48,7 @@ const RecipeSearch = () => {
             />
           </View>
 
-          <FilterButton />
+          <FilterButton onPress={showRecipeFiltersModal} />
         </View>
       </View>
 
@@ -58,6 +60,7 @@ const RecipeSearch = () => {
           onPressOnRecipeHandler={onPressOnRecipeHandler}
         />
       )}
+
       {selectedRecipeId && recipeById && (
         <RecipeOverviewModal
           isModalVisible={isModalVisible}
@@ -65,6 +68,11 @@ const RecipeSearch = () => {
           hideModal={hideModal}
         />
       )}
+
+      <RecipeFiltersModal
+        isModalVisible={isRecipeFiltersModalVisible}
+        hideModal={hideRecipeFiltersModal}
+      />
     </ScreenContainer>
   );
 };

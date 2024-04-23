@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { TypeOption } from '@/common/types';
 import RadioButton from '@/components/ui/RadioButton/RadioButton';
 
-interface RadioGroupProps {
+export interface RadioGroupProps {
   options: TypeOption[];
   onSelect: (selectedOption: TypeOption) => void;
   value?: TypeOption;
