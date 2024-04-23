@@ -2,7 +2,7 @@ import { AxiosError } from 'axios';
 import { create } from 'zustand';
 
 import { IPreviewRecipe, IRecipe } from '@/common/entities';
-import { PaginationParams } from '@/common/interfaces';
+import { FilterRecipeParams, PaginationParams, SearchParam } from '@/common/interfaces';
 import { recipeApi } from '@/service';
 import { createSelectors } from '@/store/helper';
 
@@ -17,6 +17,9 @@ type RecipeActions = {
     paginationParams?: PaginationParams
   ) => Promise<IPreviewRecipe[] | undefined>;
   fetchRecipeById: (recipeId: string | number) => Promise<void>;
+  fetchPreviewRecipes: (
+    queryParams: Partial<PaginationParams & SearchParam & FilterRecipeParams>
+  ) => Promise<IPreviewRecipe[] | undefined>;
 };
 
 const initialRecipeState: RecipeState = {
@@ -31,7 +34,7 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
     set(() => ({ isLoading: true }));
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 4000));
+      await new Promise((resolve) => setTimeout(resolve, 3000));
       return await recipeApi.fetchPreviewRecipesByCategoryId(categoryId, paginationParams);
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
@@ -53,6 +56,21 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
       const recipeById = await recipeApi.fetchRecipeById(recipeId);
 
       set(() => ({ recipeById }));
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  fetchPreviewRecipes: async (queryParams) => {
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    set(() => ({ isLoading: true }));
+
+    try {
+      return await recipeApi.fetchPreviewRecipes(queryParams);
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);
