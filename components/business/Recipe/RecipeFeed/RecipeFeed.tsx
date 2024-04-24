@@ -3,7 +3,7 @@ import { NativeScrollEvent, NativeSyntheticEvent, ScrollView, View } from 'react
 
 import { IPreviewRecipe } from '@/common/entities';
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
-import RecipeCard from '@/components/business/RecipeCard/RecipeCard';
+import RecipeCard from '@/components/business/Recipe/RecipeCard/RecipeCard';
 import RecipeCardSkeleton from '@/components/ui/Skeletons/RecipeCardSkeleton';
 import RecipeFeedSkeleton from '@/components/ui/Skeletons/RecipeFeedSkeleton';
 import Text2Md from '@/components/ui/Typography/Text2md';

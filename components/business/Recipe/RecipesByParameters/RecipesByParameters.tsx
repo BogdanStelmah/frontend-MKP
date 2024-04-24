@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import RecipeListSkeleton from '../../ui/Skeletons/RecipeListSkeleton';
+import RecipeListSkeleton from '../../../ui/Skeletons/RecipeListSkeleton';
 import RecipeCard from '../RecipeCard/RecipeCard';
 
 import { IPreviewRecipe } from '@/common/entities';
@@ -37,18 +37,20 @@ const RecipesByParameters: React.FC<RecipesByParametersProps> = ({
         })
         .finally(() => setIsLoading(false));
     }
-  }, [queryParams]);
+  }, [queryParams.searchQuery]);
 
   // TODO: Implement loadMoreData function
 
   return (
     <ScrollView showsHorizontalScrollIndicator={false} className="mb-20">
-      {!isLoading ? (
+      {!isLoading && (
         <View className="flex-wrap flex-row m-4">
           {previewRecipes.map((recipe, index) => (
-            <View className={index % 2 !== 1 ? 'pr-2 w-[50%] mb-4' : 'pl-2 w-[50%] mb-4'}>
+            <View
+              key={recipe.id}
+              className={index % 2 !== 1 ? 'pr-2 w-[50%] mb-4' : 'pl-2 w-[50%] mb-4'}
+            >
               <RecipeCard
-                key={recipe.id}
                 recipe={recipe}
                 onPress={() => onPressOnRecipeHandler(recipe.id)}
                 size="medium"
@@ -56,9 +58,9 @@ const RecipesByParameters: React.FC<RecipesByParametersProps> = ({
             </View>
           ))}
         </View>
-      ) : (
-        <RecipeListSkeleton numberOfSkeletons={16} />
       )}
+
+      {isLoading && <RecipeListSkeleton numberOfSkeletons={16} />}
     </ScrollView>
   );
 };

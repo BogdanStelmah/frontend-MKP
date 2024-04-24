@@ -6,9 +6,15 @@ export interface CheckboxGroupProps {
   options: { value: string; label: string }[];
   selectedValues: string[];
   onChange: (newSelectedValues: string[]) => void;
+  extraStylesRadioButton?: string;
 }
 
-const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ options, selectedValues, onChange }) => {
+const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
+  options,
+  selectedValues,
+  onChange,
+  extraStylesRadioButton
+}) => {
   const handleCheckboxChange = (value: string) => {
     const newSelectedValues = [...selectedValues];
     const index = newSelectedValues.indexOf(value);
@@ -30,6 +36,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({ options, selectedValues, 
           label={option.label}
           checked={selectedValues.includes(option.value)}
           onChange={() => handleCheckboxChange(option.value)}
+          extraStyles={extraStylesRadioButton}
         />
       ))}
     </View>

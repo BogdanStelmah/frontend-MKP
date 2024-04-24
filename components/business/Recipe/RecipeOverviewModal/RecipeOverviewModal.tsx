@@ -11,7 +11,7 @@ import {
   formatOfTransfer,
   formatPFC
 } from '@/common/utils';
-import RecipeSettingsModal from '@/components/business/RecipeOverviewModal/RecipeSettingsModal';
+import RecipeSettingsModal from '@/components/business/Recipe/RecipeOverviewModal/RecipeSettingsModal';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import { Rating } from '@/components/ui/Rating';
