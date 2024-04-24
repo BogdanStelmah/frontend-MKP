@@ -150,6 +150,13 @@
     "create-recipe-button": "Create a recipe",
     "not-have-any-recipes": "You don't have any recipes yet"
   },
+  "calendar": {
+    "tab-title": "Select a day to view or customize it",
+    "calendar-options": {
+      "this-week": "This week",
+      "this-year": "This year"
+    }
+  },
   "settings": {
     "tab-title": "Customize your profile to your preferences",
     "personal-info": "Personal data",

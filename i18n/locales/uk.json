@@ -150,6 +150,13 @@
     "create-recipe-button": "Створити рецепт",
     "not-have-any-recipes": "У вас ще немає рецептів"
   },
+  "calendar": {
+    "tab-title": "Оберіть день для його перегляду або налаштування",
+    "calendar-options": {
+      "this-week": "Цей тиждень",
+      "this-year": "Цей рік"
+    }
+  },
   "settings": {
     "tab-title": "Налаштуйте свій профіль під свої вподобання",
     "personal-info": "Персональні дані",
