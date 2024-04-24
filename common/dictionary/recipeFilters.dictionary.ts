@@ -1,35 +1,38 @@
 import { TypeOption } from '@/common/types';
+import i18n from '@/i18n';
 
 export const generalOptions: TypeOption[] = [
-  { label: 'В польових умовах', value: '1' },
-  { label: 'Швидке приготування', value: '2' },
-  { label: 'Калорійні', value: '3' },
-  { label: 'На вогнищі', value: '4' },
-  { label: 'Довготривале зберігання', value: '5' },
-  { label: 'Без кухонного успадкування', value: '6' }
+  { label: i18n.t('recipe-search.filters.general-options.in-the-field'), value: '1' },
+  { label: i18n.t('recipe-search.filters.general-options.quick-cooking'), value: '2' },
+  { label: i18n.t('recipe-search.filters.general-options.calories'), value: '3' },
+  { label: i18n.t('recipe-search.filters.general-options.at-the-campfire'), value: '4' },
+  { label: i18n.t('recipe-search.filters.general-options.long-term-storage'), value: '5' },
+  { label: i18n.t('recipe-search.filters.general-options.no-kitchen-inheritance'), value: '6' }
 ];
 
 export const recipeAuthors: TypeOption[] = [
-  { label: 'Від додатку', value: '1' },
-  { label: 'Від користувачів', value: '2' }
+  { label: i18n.t('recipe-search.filters.recipe-authors.from-the-app'), value: '1' },
+  { label: i18n.t('recipe-search.filters.recipe-authors.from-the-users'), value: '2' }
 ];
 
 export const ingredientAmountsOptions: TypeOption[] = [
-  { label: 'Менше 5', value: '1' },
-  { label: 'Від 5 до 10', value: '2' },
-  { label: 'Більше 10', value: '3' }
+  { label: i18n.t('recipe-search.filters.amount-of-ingredients-options.less-than-5'), value: '1' },
+  { label: i18n.t('recipe-search.filters.amount-of-ingredients-options.5-10'), value: '2' },
+  { label: i18n.t('recipe-search.filters.amount-of-ingredients-options.more-than-10'), value: '3' }
 ];
 
 export const cookingTimeOptions: TypeOption[] = [
-  { label: 'Менше 15 хв', value: '1' },
-  { label: 'Від 15 до 30 хв', value: '2' },
-  { label: 'Більше 30 хв', value: '3' }
+  { label: i18n.t('recipe-search.filters.cooking-time-options.less-than-15-minutes'), value: '1' },
+  { label: i18n.t('recipe-search.filters.cooking-time-options.15-30-minutes'), value: '2' },
+  { label: i18n.t('recipe-search.filters.cooking-time-options.30-60-minutes'), value: '3' },
+  { label: i18n.t('recipe-search.filters.cooking-time-options.more-than-60-minutes'), value: '4' }
 ];
 
 export const CalorieContentOptions: TypeOption[] = [
-  { label: 'Менше 200 ккал', value: '1' },
-  { label: 'Від 200 до 500 ккал', value: '2' },
-  { label: 'Більше 500 ккал', value: '3' }
+  { label: i18n.t('recipe-search.filters.calories-options.less-than-100'), value: '1' },
+  { label: i18n.t('recipe-search.filters.calories-options.100-200'), value: '2' },
+  { label: i18n.t('recipe-search.filters.calories-options.200-500'), value: '3' },
+  { label: i18n.t('recipe-search.filters.calories-options.more-than-500'), value: '4' }
 ];
 
 export const TagsOptions: TypeOption[] = [

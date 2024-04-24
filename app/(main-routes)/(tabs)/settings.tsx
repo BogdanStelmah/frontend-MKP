@@ -41,7 +41,7 @@ const Settings = () => {
       <ScrollView className="mx-4" showsVerticalScrollIndicator={false}>
         <TabTitle title={i18n.t('settings.tab-title')} extraTitleStyles="w-[250px]" />
 
-        <View className="pt-[19px] space-y-[30px]">
+        <View className="pt-[19px] space-y-[20px]">
           <View>
             <Text2md fontWeight={FontWeightEnum.BOLD} extraStyles="text-black-greyscale-main">
               {i18n.t('settings.personal-info')}
@@ -82,15 +82,15 @@ const Settings = () => {
             <View className="pt-[5px]">
               <FormTextInput
                 name="firstName"
-                label={i18n.t('personal-info.first-name')}
-                placeholder={i18n.t('personal-info.first-name-placeholder')}
+                label={i18n.t('settings.language')}
+                placeholder={i18n.t('settings.language-placeholder')}
                 control={control}
               />
 
               <FormTextInput
                 name="lastName"
-                label={i18n.t('personal-info.last-name')}
-                placeholder={i18n.t('personal-info.last-name-placeholder')}
+                label={i18n.t('settings.theme')}
+                placeholder={i18n.t('settings.theme-placeholder')}
                 control={control}
               />
             </View>
@@ -102,7 +102,7 @@ const Settings = () => {
             </Text2md>
           </View>
 
-          <View>
+          <View className="pt-6">
             <Button
               label={i18n.t('settings.log-out-of-your-account')}
               type="outlined"

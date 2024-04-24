@@ -107,13 +107,57 @@
       "never-show": "Never show"
     },
     "filters": {
-      "title": "Filters"
+      "title": "Filters",
+      "general": "General",
+      "amount-of-ingredients": "Amount of ingredients",
+      "cooking-time": "Cooking Time",
+      "calories": "Calories",
+      "tags": "Tags",
+      "recipes": "Recipes",
+      "general-options": {
+        "in-the-field": "In the Field",
+        "quick-cooking": "Quick Cooking",
+        "calories": "Calorie-conscious",
+        "at-the-campfire": "At the Campfire",
+        "long-term-storage": "Long-Term Storage",
+        "no-kitchen-inheritance": "No Kitchen Inheritance"
+      },
+      "recipe-authors": {
+        "from-the-app": "From the App",
+        "from-the-users": "From Users"
+      },
+      "amount-of-ingredients-options": {
+        "less-than-5": "Less than 5",
+        "5-10": "5 to 10",
+        "more-than-10": "More than 10"
+      },
+      "cooking-time-options": {
+        "less-than-15-minutes": "Less than 15 minutes",
+        "15-30-minutes": "15 to 30 minutes",
+        "30-60-minutes": "30 to 60 minutes",
+        "more-than-60-minutes": "More than 60 minutes"
+      },
+      "calories-options": {
+        "less-than-100": "Less than 100",
+        "100-200": "100 to 200",
+        "200-500": "200 to 500",
+        "more-than-500": "More than 500"
+      }
     }
+  },
+  "my-recipes": {
+    "tab-title": "Your recipes are displayed here",
+    "create-recipe-button": "Create a recipe",
+    "not-have-any-recipes": "You don't have any recipes yet"
   },
   "settings": {
     "tab-title": "Customize your profile to your preferences",
     "personal-info": "Personal data",
     "personalize-your-app": "Personalization of the application",
+    "language": "Language",
+    "language-placeholder": "Select a language",
+    "theme": "Theme",
+    "theme-placeholder": "Choose a theme",
     "notifications": "Notifications",
     "log-out-of-your-account": "Log out of your account",
     "delete-account": "Delete your account"
@@ -136,6 +180,7 @@
     "confirm-password-is-required": "Confirm password is a required field",
     "passwords-must-match": "Passwords must match",
     "please-complete-this-required-field": "Please complete this required field",
+    "email-already-exists": "This email address already has an account",
     "code-is-required": "Code is a required field",
     "code-must-be-6-digits-long": "Code must be 6 digits long",
     "code-must-contain-only-numbers": "Code must contain only numbers"

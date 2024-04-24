@@ -15,7 +15,7 @@ const MyRecipes: React.FC = () => {
   return (
     <ScreenContainer isTouchableWithoutFeedback={false}>
       <View className="mx-4">
-        <TabTitle title="Тут відображаються ваші рецепти" extraTitleStyles="w-[240px]" />
+        <TabTitle title={i18n.t('my-recipes.tab-title')} extraTitleStyles="w-[240px]" />
 
         <View className="mt-[6px]">
           <SearchInput
@@ -26,14 +26,14 @@ const MyRecipes: React.FC = () => {
           />
 
           <Button
-            label="Створити рецепт"
+            label={i18n.t('my-recipes.create-recipe-button')}
             type="outlined"
             borderRadius="border-0"
             extraStyles="mt-2"
           />
         </View>
 
-        <BlockInsteadOfRecipe title="У вас ще немає рецептів" />
+        <BlockInsteadOfRecipe title={i18n.t('my-recipes.not-have-any-recipes')} />
       </View>
     </ScreenContainer>
   );

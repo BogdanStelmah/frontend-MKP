@@ -54,7 +54,9 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
     >
       <ScrollView className="flex-col gap-y-[12px]" showsVerticalScrollIndicator={false}>
         <View>
-          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>Загальні</Text2Md>
+          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
+            {i18n.t('recipe-search.filters.general')}
+          </Text2Md>
 
           <RadioGroup
             options={generalOptions}
@@ -65,7 +67,9 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
         </View>
 
         <View>
-          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>Кількість інгредієнтів</Text2Md>
+          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
+            {i18n.t('recipe-search.filters.amount-of-ingredients')}
+          </Text2Md>
 
           <RadioGroup
             options={ingredientAmountsOptions}
@@ -76,7 +80,9 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
         </View>
 
         <View>
-          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>Час приготування</Text2Md>
+          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
+            {i18n.t('recipe-search.filters.cooking-time')}
+          </Text2Md>
 
           <RadioGroup
             options={cookingTimeOptions}
@@ -87,7 +93,9 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
         </View>
 
         <View>
-          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>Калорійність</Text2Md>
+          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
+            {i18n.t('recipe-search.filters.calories')}
+          </Text2Md>
 
           <RadioGroup
             options={CalorieContentOptions}
@@ -98,7 +106,9 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
         </View>
 
         <View>
-          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>Теги</Text2Md>
+          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
+            {i18n.t('recipe-search.filters.tags')}
+          </Text2Md>
 
           <RadioGroup
             options={CalorieContentOptions}
@@ -109,7 +119,9 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
         </View>
 
         <View>
-          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>Рецепти</Text2Md>
+          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
+            {i18n.t('recipe-search.filters.recipes')}
+          </Text2Md>
 
           <CheckboxGroup
             options={recipeAuthors}

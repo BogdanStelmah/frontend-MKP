@@ -107,13 +107,57 @@
       "never-show": "Ніколи не показувати"
     },
     "filters": {
-      "title": "Фільтри"
+      "title": "Фільтри",
+      "general": "Загальні",
+      "amount-of-ingredients": "Кількість інгредієнтів",
+      "cooking-time": "Час приготування",
+      "calories": "Калорії",
+      "tags": "Теги",
+      "recipes": "Рецепти",
+      "general-options": {
+        "in-the-field": "В польових умовах",
+        "quick-cooking": "Швидке приготування",
+        "calories": "Калорійні",
+        "at-the-campfire": "На вогнищі",
+        "long-term-storage": "Довготривале зберігання",
+        "no-kitchen-inheritance": "Без кухонного успадкування"
+      },
+      "recipe-authors": {
+        "from-the-app": "Від додатку",
+        "from-the-users": "Від користувачів"
+      },
+      "amount-of-ingredients-options": {
+        "less-than-5": "Менше 5",
+        "5-10": "Від 5 до 10",
+        "more-than-10": "Більше 10"
+      },
+      "cooking-time-options": {
+        "less-than-15-minutes": "Менше 15 хвилин",
+        "15-30-minutes": "Від 15 до 30 хвилин",
+        "30-60-minutes": "Від 30 до 60 хвилин",
+        "more-than-60-minutes": "Більше 60 хвилин"
+      },
+      "calories-options": {
+        "less-than-100": "Менше 100",
+        "100-200": "Від 100 до 200",
+        "200-500": "Від 200 до 500",
+        "more-than-500": "Більше 500"
+      }
     }
+  },
+  "my-recipes": {
+    "tab-title": "Тут відображаються ваші рецепти",
+    "create-recipe-button": "Створити рецепт",
+    "not-have-any-recipes": "У вас ще немає рецептів"
   },
   "settings": {
     "tab-title": "Налаштуйте свій профіль під свої вподобання",
     "personal-info": "Персональні дані",
     "personalize-your-app": "Персоналізація додатку",
+    "language": "Мова",
+    "language-placeholder": "Оберіть мову",
+    "theme": "Тема",
+    "theme-placeholder": "Оберіть тему",
     "notifications": "Сповіщення",
     "log-out-of-your-account": "Вийти з облікового запису",
     "delete-account": "Видалити обліковий запис"
