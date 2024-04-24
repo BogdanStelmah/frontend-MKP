@@ -32,15 +32,14 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const styleMap = {
     textInput: classNames(
       {
-        'font-lato-medium h-[40px] text-black-greyscale-main px-[8px] pb-[1px] text-2sm flex-1':
-          true
+        'font-lato-medium h-[40px] text-black-greyscale-main px-[8px] pb-[1px] text-2sm': true
       },
       extraStyles
     )
   };
 
   return (
-    <View className="h-[40px] rounded-lg bg-chosen flex-1">
+    <View className="h-[40px] rounded-lg bg-chosen">
       <TouchableOpacity activeOpacity={100} onPress={onPress}>
         <View className="flex-row px-[8px] items-center">
           <Feather size={22} name="search" color="#909590" />
