@@ -5,6 +5,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { months, weekdays } from '@/common/dictionary';
 import { FontWeightEnum } from '@/common/enums';
 import { daysInMonth, getCalendarDays } from '@/common/utils';
+import { CalendarMonthSkeleton } from '@/components/ui/Skeletons';
 import Text2sm from '@/components/ui/Typography/Text2sm';
 
 interface CalendarMonthProps {
@@ -84,33 +85,28 @@ const CalendarMonth: React.FC<CalendarMonthProps> = ({ year, month }) => {
     }
   };
 
-  // TODO: optimize this
+  return !isLoading ? (
+    <View>
+      <Text2sm fontWeight={FontWeightEnum.BOLD} extraStyles="mb-[4px]">
+        {month}
+      </Text2sm>
 
-  return (
-    !isLoading && (
-      <View>
-        <Text2sm fontWeight={FontWeightEnum.BOLD} extraStyles="mb-[4px]">
-          {month}
-        </Text2sm>
-
-        <View className="flex-row flex-wrap gap-y-[8px]">
-          {monthDays.map((day) => (
-            <View
-              key={getKetForDay(day)}
-              className="w-[14.28%] h-[36px] items-center justify-center"
+      <View className="flex-row flex-wrap gap-y-[8px]">
+        {monthDays.map((day) => (
+          <View key={getKetForDay(day)} className="w-[14.28%] h-[36px] items-center justify-center">
+            <TouchableOpacity
+              onPress={() => pressOnDate(day?.day, monthNumber, year)}
+              activeOpacity={100}
+              className="w-[36px] h-[36px] items-center justify-center"
             >
-              <TouchableOpacity
-                onPress={() => pressOnDate(day?.day, monthNumber, year)}
-                activeOpacity={100}
-                className="w-[36px] h-[36px] items-center justify-center"
-              >
-                <Text2sm fontWeight={FontWeightEnum.REGULAR}>{day?.day}</Text2sm>
-              </TouchableOpacity>
-            </View>
-          ))}
-        </View>
+              <Text2sm fontWeight={FontWeightEnum.REGULAR}>{day?.day}</Text2sm>
+            </TouchableOpacity>
+          </View>
+        ))}
       </View>
-    )
+    </View>
+  ) : (
+    <CalendarMonthSkeleton month={month} />
   );
 };
 
