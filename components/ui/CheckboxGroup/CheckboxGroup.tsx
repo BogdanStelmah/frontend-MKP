@@ -1,11 +1,12 @@
 import { View } from 'react-native';
 
+import { TypeOption } from '@/common/types';
 import Checkbox from '@/components/ui/Checkbox/Checkbox';
 
 export interface CheckboxGroupProps {
-  options: { value: string; label: string }[];
-  selectedValues: string[];
-  onChange: (newSelectedValues: string[]) => void;
+  options: TypeOption[];
+  selectedValues: (string | number | number[] | undefined)[];
+  onChange: (newSelectedValues: (string | number | number[] | undefined)[]) => void;
   extraStylesRadioButton?: string;
 }
 
@@ -15,7 +16,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
   onChange,
   extraStylesRadioButton
 }) => {
-  const handleCheckboxChange = (value: string) => {
+  const handleCheckboxChange = (value: string | number | number[] | undefined) => {
     const newSelectedValues = [...selectedValues];
     const index = newSelectedValues.indexOf(value);
 
@@ -32,7 +33,7 @@ const CheckboxGroup: React.FC<CheckboxGroupProps> = ({
     <View>
       {options.map((option) => (
         <Checkbox
-          key={option.value}
+          key={option.label}
           label={option.label}
           checked={selectedValues.includes(option.value)}
           onChange={() => handleCheckboxChange(option.value)}

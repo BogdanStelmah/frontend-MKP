@@ -6,3 +6,5 @@ export * from './getDeviceLanguage';
 export * from './getDaysFromMonth';
 export * from './getCurrentYear';
 export * from './getCurrentNameMonth';
+export * from './countSelectedFilters';
+export * from './mapperForRecipeFilters';

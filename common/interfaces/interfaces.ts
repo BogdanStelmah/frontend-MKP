@@ -13,7 +13,7 @@ export interface FilterRecipeParams {
   tagIds: number[];
   categoryIds: number[];
   ingredientIds: number[];
-  maxAmountOfIngredients: number;
   calorieRange: number[];
   recipeFrom: UsersTypeEnum;
+  cookingTime: number[];
 }

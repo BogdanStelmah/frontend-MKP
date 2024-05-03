@@ -1,33 +1,46 @@
 import { AntDesign } from '@expo/vector-icons';
-import React, { useState } from 'react';
+import React from 'react';
 import { ScrollView, View } from 'react-native';
 
 import {
   CalorieContentOptions,
   cookingTimeOptions,
+  defaultRecipeFilters,
   generalOptions,
-  ingredientAmountsOptions,
-  recipeAuthors
+  recipeAuthors,
+  TagsOptions
 } from '@/common/dictionary';
-import { FontWeightEnum } from '@/common/enums';
-import { TypeOption } from '@/common/types';
+import { FontWeightEnum, UsersTypeEnum } from '@/common/enums';
+import { RecipeFiltersType } from '@/common/types';
 import Button from '@/components/ui/Button';
 import { CheckboxGroup } from '@/components/ui/CheckboxGroup';
 import Modal from '@/components/ui/Modal';
 import { RadioGroup } from '@/components/ui/RadioGroup';
 import Text2Md from '@/components/ui/Typography/Text2md';
+import Text2Xs from '@/components/ui/Typography/Text2xs';
 import i18n from '@/i18n';
 
 interface RecipeFiltersModalProps {
   isModalVisible: boolean;
   hideModal: () => void;
+  selectedFilters: RecipeFiltersType;
+  setSelectedFilters: (filters: RecipeFiltersType) => void;
+  selectedFiltersCount?: number;
 }
 
-const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible, hideModal }) => {
-  const [selectedGeneralOption, setSelectedGeneralOption] = useState<TypeOption | undefined>();
-  const [amountOfFilters, setAmountOfFilters] = useState<number>(0);
-
-  const [selectedRecipeAuthors, setRecipeAuthor] = React.useState<string[]>([]);
+const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({
+  isModalVisible,
+  hideModal,
+  setSelectedFilters,
+  selectedFilters,
+  selectedFiltersCount = 0
+}) => {
+  const setSelectedOption = (newFilters: Partial<RecipeFiltersType>) => {
+    setSelectedFilters({
+      ...selectedFilters,
+      ...newFilters
+    });
+  };
 
   return (
     <Modal
@@ -46,8 +59,14 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
           <View className="w-full items-center absolute">
             <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
               {i18n.t('recipe-search.filters.title')}{' '}
-              {amountOfFilters > 0 && `(${amountOfFilters})`}
+              {selectedFiltersCount > 0 && `(${selectedFiltersCount})`}
             </Text2Md>
+          </View>
+
+          <View>
+            <Button onPress={() => setSelectedOption({ ...defaultRecipeFilters })}>
+              <Text2Xs fontWeight={FontWeightEnum.SEMIBOLD}>Очистити</Text2Xs>
+            </Button>
           </View>
         </View>
       }
@@ -60,21 +79,8 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
 
           <RadioGroup
             options={generalOptions}
-            value={selectedGeneralOption}
-            onSelect={setSelectedGeneralOption}
-            extraStylesRadioButton="mb-1"
-          />
-        </View>
-
-        <View>
-          <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
-            {i18n.t('recipe-search.filters.amount-of-ingredients')}
-          </Text2Md>
-
-          <RadioGroup
-            options={ingredientAmountsOptions}
-            value={selectedGeneralOption}
-            onSelect={setSelectedGeneralOption}
+            value={selectedFilters.general}
+            onSelect={(option) => setSelectedOption({ general: option })}
             extraStylesRadioButton="mb-1"
           />
         </View>
@@ -86,8 +92,8 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
 
           <RadioGroup
             options={cookingTimeOptions}
-            value={selectedGeneralOption}
-            onSelect={setSelectedGeneralOption}
+            value={selectedFilters.cookingTime}
+            onSelect={(option) => setSelectedOption({ cookingTime: option })}
             extraStylesRadioButton="mb-1"
           />
         </View>
@@ -99,8 +105,8 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
 
           <RadioGroup
             options={CalorieContentOptions}
-            value={selectedGeneralOption}
-            onSelect={setSelectedGeneralOption}
+            value={selectedFilters.calories}
+            onSelect={(option) => setSelectedOption({ calories: option })}
             extraStylesRadioButton="mb-1"
           />
         </View>
@@ -111,9 +117,9 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
           </Text2Md>
 
           <RadioGroup
-            options={CalorieContentOptions}
-            value={selectedGeneralOption}
-            onSelect={setSelectedGeneralOption}
+            options={TagsOptions}
+            value={selectedFilters.tags}
+            onSelect={(option) => setSelectedOption({ tags: option })}
             extraStylesRadioButton="mb-1"
           />
         </View>
@@ -125,8 +131,8 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({ isModalVisible,
 
           <CheckboxGroup
             options={recipeAuthors}
-            selectedValues={selectedRecipeAuthors}
-            onChange={setRecipeAuthor}
+            selectedValues={selectedFilters.recipeAuthors}
+            onChange={(options) => setSelectedOption({ recipeAuthors: options as UsersTypeEnum[] })}
             extraStylesRadioButton="mb-1"
           />
         </View>

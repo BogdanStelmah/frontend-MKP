@@ -34,7 +34,6 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
     set(() => ({ isLoading: true }));
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 3000));
       return await recipeApi.fetchPreviewRecipesByCategoryId(categoryId, paginationParams);
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
@@ -66,7 +65,6 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
   },
 
   fetchPreviewRecipes: async (queryParams) => {
-    await new Promise((resolve) => setTimeout(resolve, 3000));
     set(() => ({ isLoading: true }));
 
     try {

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import { TypeOption } from '@/common/types';
@@ -21,6 +21,10 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
 }) => {
   const [selectedOption, setSelectedOption] = useState<TypeOption | undefined>(value);
 
+  useEffect(() => {
+    setSelectedOption(value);
+  }, [value]);
+
   const handleOptionSelect = (option: TypeOption) => {
     setSelectedOption(option);
     onSelect(option);
@@ -35,7 +39,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
     <View className={extraStyles}>
       {options.map((option) => (
         <RadioButton
-          key={option.value}
+          key={option.label}
           option={option}
           checked={handlerChecked(option)}
           onPress={handleOptionSelect}

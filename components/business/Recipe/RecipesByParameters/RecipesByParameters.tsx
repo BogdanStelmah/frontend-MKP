@@ -37,7 +37,7 @@ const RecipesByParameters: React.FC<RecipesByParametersProps> = ({
         })
         .finally(() => setIsLoading(false));
     }
-  }, [queryParams.searchQuery]);
+  }, [queryParams]);
 
   // TODO: Implement loadMoreData function
 
