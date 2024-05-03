@@ -1,0 +1,44 @@
+import { Feather } from '@expo/vector-icons';
+import React from 'react';
+import { TouchableOpacity, View } from 'react-native';
+
+import { FontWeightEnum } from '@/common/enums';
+import { formatDayNumber } from '@/common/utils';
+import { formatDayName } from '@/common/utils/formatDayName';
+import { formatShortMonthName } from '@/common/utils/formatShortMonthName';
+import TextMd from '@/components/ui/Typography/TextMd';
+import TextSm from '@/components/ui/Typography/TextSm';
+
+interface PlanningDayProps {
+  date: Date;
+  onPressOnSettings: (date: Date) => void;
+}
+
+const PlanningDay: React.FC<PlanningDayProps> = ({ date, onPressOnSettings }) => {
+  return (
+    <View className="flex-row justify-between items-center">
+      <View className="flex-row items-center">
+        <View className="bg-green-secondary-2 rounded-[10px] px-[5px] pt-[2px] pb-[3px] items-center mr-[5px]">
+          <TextSm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-background">
+            {formatDayNumber(date)}
+          </TextSm>
+          <TextSm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-background">
+            {formatShortMonthName(date)}
+          </TextSm>
+        </View>
+
+        <View>
+          <TextMd fontWeight={FontWeightEnum.SEMIBOLD}>{formatDayName(date)}</TextMd>
+        </View>
+      </View>
+
+      <View>
+        <TouchableOpacity onPress={() => onPressOnSettings(date)}>
+          <Feather name="settings" size={24} color="#4F7942" />
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
+
+export default PlanningDay;

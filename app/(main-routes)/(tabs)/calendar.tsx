@@ -3,6 +3,7 @@ import { View } from 'react-native';
 
 import { calendarOptionsDictionary } from '@/common/dictionary';
 import { TypeOption } from '@/common/types';
+import CalendarForCurrentWeek from '@/components/business/Calendar/CalendarForCurrentWeek';
 import CalendarForYear from '@/components/business/Calendar/CalendarForYear';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import StandardDropdownInput from '@/components/ui/StandardDropdownInput/StandardDropdownInput';
@@ -29,7 +30,7 @@ const Calendar = () => {
           />
         </View>
 
-        {selectedRange?.value === 'thisYear' ? <CalendarForYear /> : <View />}
+        {selectedRange?.value === 'thisYear' ? <CalendarForYear /> : <CalendarForCurrentWeek />}
       </View>
     </ScreenContainer>
   );

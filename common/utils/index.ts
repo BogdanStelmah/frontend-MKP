@@ -8,3 +8,5 @@ export * from './getCurrentYear';
 export * from './getCurrentNameMonth';
 export * from './countSelectedFilters';
 export * from './mapperForRecipeFilters';
+export * from './getDatesOfCurrentWeek';
+export * from './formatDayNumber';

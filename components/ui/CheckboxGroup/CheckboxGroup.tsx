@@ -3,10 +3,12 @@ import { View } from 'react-native';
 import { TypeOption } from '@/common/types';
 import Checkbox from '@/components/ui/Checkbox/Checkbox';
 
+export type CheckboxValue = string | number | number[] | undefined;
+
 export interface CheckboxGroupProps {
   options: TypeOption[];
-  selectedValues: (string | number | number[] | undefined)[];
-  onChange: (newSelectedValues: (string | number | number[] | undefined)[]) => void;
+  selectedValues: CheckboxValue[];
+  onChange: (newSelectedValues: CheckboxValue[]) => void;
   extraStylesRadioButton?: string;
 }
 

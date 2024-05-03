@@ -15,14 +15,8 @@ const CalendarMonthSkeleton: React.FC<CalendarMonthSkeletonProps> = ({ month }) 
 
       <View className="flex-row flex-wrap gap-y-[18px]">
         {Array.from({ length: 5 }).map((_, index) => (
-          <View>
-            <Skeleton
-              key={index.toString() + month?.toString()}
-              colorMode="light"
-              width="100%"
-              height={30}
-              radius={2}
-            />
+          <View key={index.toString() + month.toString()}>
+            <Skeleton colorMode="light" width="100%" height={30} radius={2} />
           </View>
         ))}
       </View>
