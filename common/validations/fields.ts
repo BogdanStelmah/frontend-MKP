@@ -1,7 +1,8 @@
 import * as yup from 'yup';
 
+import { LangEnum, ThemeEnum } from '@/common/enums';
 import { GenderEnum } from '@/common/enums/gender.enum';
-import { GenderOption } from '@/common/types';
+import { GenderOption, LangOption, ThemeOption } from '@/common/types';
 import i18n from '@/i18n';
 
 export const IS_REQUIRED = i18n.t('validations.please-complete-this-required-field');
@@ -92,5 +93,15 @@ export const fields = {
   gender: yup.object<GenderOption>().shape({
     label: yup.string().required(),
     value: yup.mixed<GenderEnum>().oneOf(Object.values(GenderEnum)).required()
+  }),
+
+  theme: yup.object<ThemeOption>().shape({
+    label: yup.string().required(),
+    value: yup.mixed<ThemeEnum>().oneOf(Object.values(ThemeEnum)).required()
+  }),
+
+  language: yup.object<LangOption>().shape({
+    label: yup.string().required(),
+    value: yup.mixed<LangEnum>().oneOf(Object.values(LangEnum)).required()
   })
 };

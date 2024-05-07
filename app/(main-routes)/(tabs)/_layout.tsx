@@ -42,7 +42,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="settings"
         options={{
-          tabBarIcon: ({ color }) => <Feather size={32} name="settings" color={color} />
+          tabBarIcon: ({ color }) => <Feather size={32} name="settings" color={color} />,
+          unmountOnBlur: true
         }}
       />
     </Tabs>

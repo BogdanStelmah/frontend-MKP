@@ -2,13 +2,14 @@ import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { AxiosError } from 'axios';
 import { create } from 'zustand';
 
-import { IUser, IUserPersonalInfo } from '@/common/types';
+import { ISettings, IUser, IUserFullInfo, IUserPersonalInfo } from '@/common/types';
 import i18n from '@/i18n';
-import { userApi, writeToken } from '@/service';
+import { settingApi, userApi, writeToken } from '@/service';
 import { removeToken } from '@/service/helper';
 import { createSelectors } from '@/store/helper';
 
 type UserState = {
+  me: IUserFullInfo | null;
   email: string;
   code: string;
   isAuthenticated: boolean;
@@ -27,9 +28,12 @@ type UserActions = {
   changePassword: (password: string) => Promise<void>;
   isUserHasPersonalInfo: () => Promise<boolean | undefined>;
   updateUserInfoByToken: (userInfo: IUserPersonalInfo) => Promise<void>;
+  fetchMe: () => Promise<void>;
+  updateSettings: (settings: Partial<ISettings>) => Promise<void>;
 };
 
 const initialUserState: UserState = {
+  me: null,
   email: '',
   code: '',
   isAuthenticated: false,
@@ -159,7 +163,6 @@ export const useUserStoreBase = create<UserState & UserActions>()((set, getState
     try {
       return await userApi.isUserHasPersonalInfo();
     } catch (e) {
-      console.log(e);
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);
       }
@@ -173,6 +176,47 @@ export const useUserStoreBase = create<UserState & UserActions>()((set, getState
 
     try {
       await userApi.updateUserInfoByToken(userInfo);
+
+      const { me } = getState();
+
+      if (me) {
+        set(() => ({ me: { ...me, ...userInfo } }));
+      } else {
+        const me = await userApi.fetchMe();
+        set(() => ({ me }));
+      }
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  fetchMe: async () => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      const me = await userApi.fetchMe();
+      set(() => ({ me }));
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  updateSettings: async ({ language, theme }) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      await settingApi.updateSettingByToken({ language, theme });
+
+      const me = await userApi.fetchMe();
+      set(() => ({ me }));
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);

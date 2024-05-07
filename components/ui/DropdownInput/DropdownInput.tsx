@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View } from 'react-native';
 
 import ChevronDownIcon from '../../../assets/icons/chevron-down.svg';
@@ -44,6 +44,10 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
     hideModal();
     onSelect(selectedOption);
   };
+
+  useEffect(() => {
+    setSelectedOption(value);
+  }, [value]);
 
   return (
     <>

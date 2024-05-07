@@ -1,4 +1,4 @@
-import { IUser, IUserPersonalInfo } from '@/common/types/types';
+import { IUser, IUserFullInfo, IUserPersonalInfo } from '@/common/types/types';
 import { requestApi, requestApiUnauthorized } from '@/service/apiAxios';
 
 const REGISTER_API = '/auth/register';
@@ -11,6 +11,7 @@ const UPDATE_PASSWORD_API = '/auth/updatePassword';
 const IS_EMAIL_EXISTS_API = '/users/isEmailExists';
 const IS_USER_HAS_PERSONAL_INFO_API = '/users/isUserHasPersonalInfo';
 const UPDATE_USER_INFO_BY_TOKEN_API = '/users/updateByToken';
+const FETCH_ME_API = '/users/me';
 
 export interface IRegisterResult {
   access_token: string;
@@ -63,6 +64,10 @@ const isUserHasPersonalInfo = async () => {
   return (await requestApi<boolean>('GET', IS_USER_HAS_PERSONAL_INFO_API)).data;
 };
 
+const fetchMe = async () => {
+  return (await requestApi<IUserFullInfo>('GET', FETCH_ME_API)).data;
+};
+
 export const userApi = {
   registerUser,
   loginUser,
@@ -72,5 +77,6 @@ export const userApi = {
   isEmailExists,
   updatePassword,
   isUserHasPersonalInfo,
-  updateUserInfoByToken
+  updateUserInfoByToken,
+  fetchMe
 };

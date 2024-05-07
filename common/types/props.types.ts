@@ -1,6 +1,6 @@
 import { Control } from 'react-hook-form';
 
-import { UsersTypeEnum } from '@/common/enums';
+import { LangEnum, ThemeEnum, UsersTypeEnum } from '@/common/enums';
 import { GenderEnum } from '@/common/enums/gender.enum';
 
 export type TypeOption = {
@@ -16,6 +16,16 @@ export interface FormProps {
 export interface GenderOption {
   label: string;
   value: GenderEnum;
+}
+
+export interface LangOption {
+  label: string;
+  value: LangEnum;
+}
+
+export interface ThemeOption {
+  label: string;
+  value: ThemeEnum;
 }
 
 export interface RecipeFiltersType {
