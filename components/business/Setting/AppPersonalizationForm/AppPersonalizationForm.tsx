@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
-import { langDictionary, themeDictionary } from '@/common/dictionary';
+import { langDictionary, getThemeDictionary } from '@/common/dictionary';
 import { FontWeightEnum } from '@/common/enums';
 import { LangOption, ThemeOption } from '@/common/types';
 import { changeAppPersonalization } from '@/common/validations';
@@ -43,7 +43,7 @@ const AppPersonalizationForm = () => {
   useEffect(() => {
     if (me) {
       const { theme, language } = me.setting;
-      const themeOption = themeDictionary.find((themeD) => themeD.value === theme);
+      const themeOption = getThemeDictionary().find((themeD) => themeD.value === theme);
       if (themeOption) setValue('theme', themeOption);
 
       const languageOption = langDictionary.find((langD) => langD.value === language);
@@ -95,7 +95,7 @@ const AppPersonalizationForm = () => {
           placeholder={i18n.t('settings.theme-placeholder')}
           buttonLabel={i18n.t('personal-info.save')}
           title={i18n.t('settings.theme')}
-          options={themeDictionary}
+          options={getThemeDictionary()}
           control={control}
         />
 

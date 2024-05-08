@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
-import { calendarOptionsDictionary } from '@/common/dictionary';
+import { getCalendarOptionsDictionary } from '@/common/dictionary';
 import { TypeOption } from '@/common/types';
 import CalendarForCurrentWeek from '@/components/business/Calendar/CalendarForCurrentWeek';
 import CalendarForYear from '@/components/business/Calendar/CalendarForYear';
@@ -12,7 +12,7 @@ import i18n from '@/i18n';
 
 const Calendar = () => {
   const [selectedRange, setSelectedRange] = useState<TypeOption | undefined>(
-    calendarOptionsDictionary[1]
+    getCalendarOptionsDictionary()[1]
   );
 
   return (
@@ -24,7 +24,7 @@ const Calendar = () => {
       <View className="mx-4">
         <View className="items-center mb-[10px]">
           <StandardDropdownInput
-            options={calendarOptionsDictionary}
+            options={getCalendarOptionsDictionary()}
             onSelect={setSelectedRange}
             value={selectedRange}
           />

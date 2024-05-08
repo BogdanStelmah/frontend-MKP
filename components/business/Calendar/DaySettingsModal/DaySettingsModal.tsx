@@ -4,7 +4,7 @@ import { ScrollView, View } from 'react-native';
 
 import MealCard from '../MealCard/MealCard';
 
-import { generalOptions } from '@/common/dictionary';
+import { getGeneralOptions } from '@/common/dictionary';
 import { FontWeightEnum } from '@/common/enums';
 import { formatDayNumber } from '@/common/utils';
 import { formatShortMonthName } from '@/common/utils/formatShortMonthName';
@@ -75,7 +75,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
           </Text2Sm>
 
           <CheckboxGroup
-            options={generalOptions}
+            options={getGeneralOptions()}
             selectedValues={selectedGeneralOptions}
             onChange={setSelectedGeneralOptions}
             extraStylesRadioButton="mb-1"

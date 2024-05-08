@@ -4,7 +4,7 @@ import React from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
-import { genderDictionary } from '@/common/dictionary';
+import { getGenderDictionary } from '@/common/dictionary';
 import { GenderOption } from '@/common/types';
 import { partnerPersonalDetails } from '@/common/validations';
 import Button from '@/components/ui/Button';
@@ -80,7 +80,7 @@ const PersonalInfo = () => {
                 buttonLabel={i18n.t('personal-info.save')}
                 placeholder={i18n.t('personal-info.gender-placeholder')}
                 title={i18n.t('personal-info.gender-title')}
-                options={genderDictionary}
+                options={getGenderDictionary()}
                 control={control}
               />
             </View>

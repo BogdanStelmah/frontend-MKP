@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { View } from 'react-native';
 
-import { genderDictionary } from '@/common/dictionary';
+import { getGenderDictionary } from '@/common/dictionary';
 import { FontWeightEnum } from '@/common/enums';
 import { GenderOption } from '@/common/types';
 import { partnerPersonalDetails } from '@/common/validations';
@@ -47,7 +47,7 @@ const PersonalInfoForm = () => {
       setValue('firstName', me.firstName);
       setValue('lastName', me.lastName);
 
-      const genderOption = genderDictionary.find((gender) => gender.value === me.gender);
+      const genderOption = getGenderDictionary().find((gender) => gender.value === me.gender);
       if (genderOption) setValue('gender', genderOption);
     }
   }, [me]);
@@ -104,7 +104,7 @@ const PersonalInfoForm = () => {
           buttonLabel={i18n.t('personal-info.save')}
           placeholder={i18n.t('personal-info.gender-placeholder')}
           title={i18n.t('personal-info.gender-title')}
-          options={genderDictionary}
+          options={getGenderDictionary()}
           control={control}
         />
 

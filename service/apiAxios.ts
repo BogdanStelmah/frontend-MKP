@@ -1,7 +1,7 @@
 import axios, { AxiosRequestConfig, AxiosRequestHeaders, AxiosResponse, Method } from 'axios';
 
-import { getDeviceLanguage } from '@/common/utils';
 import config from '@/config';
+import i18n from '@/i18n';
 import { retrieveToken } from '@/service/helper';
 
 export class InvalidSessionError extends Error {
@@ -27,13 +27,13 @@ apiAxios.interceptors.request.use(async (requestConfig) => {
   if (!userAccessToken) throw new InvalidSessionError();
 
   requestConfig.headers = { Authorization: `Bearer ${userAccessToken}` } as AxiosRequestHeaders;
-  requestConfig.params = { ...requestConfig.params, lang: getDeviceLanguage() };
+  requestConfig.params = { ...requestConfig.params, lang: i18n.locale };
 
   return requestConfig;
 });
 
 apiAxiosUnauthorized.interceptors.request.use(async (requestConfig) => {
-  requestConfig.params = { ...requestConfig.params, lang: getDeviceLanguage() };
+  requestConfig.params = { ...requestConfig.params, lang: i18n.locale };
   return requestConfig;
 });
 

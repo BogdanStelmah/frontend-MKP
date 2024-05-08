@@ -4,8 +4,7 @@ import { create } from 'zustand';
 
 import { ISettings, IUser, IUserFullInfo, IUserPersonalInfo } from '@/common/types';
 import i18n from '@/i18n';
-import { settingApi, userApi, writeToken } from '@/service';
-import { removeToken } from '@/service/helper';
+import { clearAsyncStorage, settingApi, userApi, writeToken } from '@/service';
 import { createSelectors } from '@/store/helper';
 
 type UserState = {
@@ -90,7 +89,7 @@ export const useUserStoreBase = create<UserState & UserActions>()((set, getState
     });
 
     try {
-      await removeToken();
+      await clearAsyncStorage();
       await GoogleSignin.signOut();
     } catch (e) {
       console.error(e);

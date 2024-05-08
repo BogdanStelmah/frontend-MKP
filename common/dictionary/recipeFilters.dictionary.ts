@@ -2,7 +2,7 @@ import { UsersTypeEnum } from '@/common/enums';
 import { TypeOption } from '@/common/types';
 import i18n from '@/i18n';
 
-export const generalOptions: TypeOption[] = [
+export const getGeneralOptions = (): TypeOption[] => [
   { label: i18n.t('recipe-search.filters.general-options.in-the-field'), value: '1' },
   { label: i18n.t('recipe-search.filters.general-options.quick-cooking'), value: '2' },
   { label: i18n.t('recipe-search.filters.general-options.calories'), value: '3' },
@@ -11,7 +11,7 @@ export const generalOptions: TypeOption[] = [
   { label: i18n.t('recipe-search.filters.general-options.no-kitchen-inheritance'), value: '6' }
 ];
 
-export const recipeAuthors: TypeOption[] = [
+export const getRecipeAuthors = (): TypeOption[] => [
   { label: i18n.t('recipe-search.filters.recipe-authors.from-the-app'), value: UsersTypeEnum.MKP },
   {
     label: i18n.t('recipe-search.filters.recipe-authors.from-the-users'),
@@ -19,7 +19,7 @@ export const recipeAuthors: TypeOption[] = [
   }
 ];
 
-export const cookingTimeOptions: TypeOption[] = [
+export const getCookingTimeOptions = (): TypeOption[] => [
   {
     label: i18n.t('recipe-search.filters.cooking-time-options.less-than-15-minutes'),
     value: [0, 15]
@@ -32,14 +32,14 @@ export const cookingTimeOptions: TypeOption[] = [
   }
 ];
 
-export const CalorieContentOptions: TypeOption[] = [
+export const getCalorieContentOptions = (): TypeOption[] => [
   { label: i18n.t('recipe-search.filters.calories-options.less-than-100'), value: [0, 100] },
   { label: i18n.t('recipe-search.filters.calories-options.100-200'), value: [100, 200] },
   { label: i18n.t('recipe-search.filters.calories-options.200-500'), value: [200, 500] },
   { label: i18n.t('recipe-search.filters.calories-options.more-than-500'), value: [500, 0] }
 ];
 
-export const TagsOptions: TypeOption[] = [
+export const getTagsOptions = (): TypeOption[] => [
   { label: 'Гриль', value: '1' },
   { label: 'Вегетаріанське', value: '2' },
   { label: 'Швидкій обід', value: '2' },

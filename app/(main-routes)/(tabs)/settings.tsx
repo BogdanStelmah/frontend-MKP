@@ -1,10 +1,8 @@
 import { router } from 'expo-router';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { ScrollView, View } from 'react-native';
 
-import AppPersonalizationForm from '../../../components/business/Setting/AppPersonalizationForm/AppPersonalizationForm';
-
-import PersonalInfoForm from '@/components/business/Setting/PersonalInfoForm/PersonalInfoForm';
+import { AppPersonalizationForm, PersonalInfoForm } from '@/components/business/Setting';
 import Button from '@/components/ui/Button';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import TabTitle from '@/components/ui/TabTitle/TabTitle';
@@ -13,13 +11,6 @@ import { useUserStore } from '@/store';
 
 const Settings = () => {
   const logout = useUserStore.use.logout();
-  const fetchMe = useUserStore.use.fetchMe();
-
-  useEffect(() => {
-    fetchMe().catch(() => {
-      console.log('Error fetching user info');
-    });
-  }, []);
 
   const onLogout = () => {
     logout();

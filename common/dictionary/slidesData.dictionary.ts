@@ -1,6 +1,6 @@
 import i18n from '@/i18n';
 
-export const slidesData = [
+export const getSlidesData = () => [
   {
     id: '1',
     title: i18n.t('introduction.slide1.title'),

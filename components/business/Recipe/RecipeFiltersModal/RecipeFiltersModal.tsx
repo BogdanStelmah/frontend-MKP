@@ -3,12 +3,12 @@ import React from 'react';
 import { ScrollView, View } from 'react-native';
 
 import {
-  CalorieContentOptions,
-  cookingTimeOptions,
+  getCalorieContentOptions,
+  getCookingTimeOptions,
   defaultRecipeFilters,
-  generalOptions,
-  recipeAuthors,
-  TagsOptions
+  getGeneralOptions,
+  getRecipeAuthors,
+  getTagsOptions
 } from '@/common/dictionary';
 import { FontWeightEnum, UsersTypeEnum } from '@/common/enums';
 import { RecipeFiltersType } from '@/common/types';
@@ -78,7 +78,7 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({
           </Text2Md>
 
           <RadioGroup
-            options={generalOptions}
+            options={getGeneralOptions()}
             value={selectedFilters.general}
             onSelect={(option) => setSelectedOption({ general: option })}
             extraStylesRadioButton="mb-1"
@@ -91,7 +91,7 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({
           </Text2Md>
 
           <RadioGroup
-            options={cookingTimeOptions}
+            options={getCookingTimeOptions()}
             value={selectedFilters.cookingTime}
             onSelect={(option) => setSelectedOption({ cookingTime: option })}
             extraStylesRadioButton="mb-1"
@@ -104,7 +104,7 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({
           </Text2Md>
 
           <RadioGroup
-            options={CalorieContentOptions}
+            options={getCalorieContentOptions()}
             value={selectedFilters.calories}
             onSelect={(option) => setSelectedOption({ calories: option })}
             extraStylesRadioButton="mb-1"
@@ -117,7 +117,7 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({
           </Text2Md>
 
           <RadioGroup
-            options={TagsOptions}
+            options={getTagsOptions()}
             value={selectedFilters.tags}
             onSelect={(option) => setSelectedOption({ tags: option })}
             extraStylesRadioButton="mb-1"
@@ -130,7 +130,7 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({
           </Text2Md>
 
           <CheckboxGroup
-            options={recipeAuthors}
+            options={getRecipeAuthors()}
             selectedValues={selectedFilters.recipeAuthors}
             onChange={(options) => setSelectedOption({ recipeAuthors: options as UsersTypeEnum[] })}
             extraStylesRadioButton="mb-1"

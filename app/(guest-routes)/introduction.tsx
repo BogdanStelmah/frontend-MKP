@@ -2,7 +2,7 @@ import { router } from 'expo-router';
 import React, { useCallback, useRef, useState } from 'react';
 import { FlatList, View } from 'react-native';
 
-import { slidesData } from '@/common/dictionary/slidesData.dictionary';
+import { getSlidesData } from '@/common/dictionary/slidesData.dictionary';
 import Button from '@/components/ui/Button';
 import Paginator from '@/components/ui/Paginator';
 import ProgressButton from '@/components/ui/ProgressButton';
@@ -25,7 +25,7 @@ const Introduction: React.FC<IntroductionProps> = () => {
   const redirectToSignIn = () => router.navigate('/signIn');
 
   const handleScroll = () => {
-    if (currentSlideIndex < slidesData.length - 1) {
+    if (currentSlideIndex < getSlidesData().length - 1) {
       sliderRef.current.scrollToIndex({ index: currentSlideIndex + 1 });
     }
   };
@@ -35,10 +35,10 @@ const Introduction: React.FC<IntroductionProps> = () => {
   };
 
   const getButton = () => {
-    if (currentSlideIndex < slidesData.length - 1) {
+    if (currentSlideIndex < getSlidesData().length - 1) {
       return (
         <ProgressButton
-          progress={(currentSlideIndex + 1) / slidesData.length}
+          progress={(currentSlideIndex + 1) / getSlidesData().length}
           handleScroll={handleScroll}
         />
       );
@@ -68,13 +68,13 @@ const Introduction: React.FC<IntroductionProps> = () => {
       <View className="h-full flex justify-between">
         <View className="h-4/5">
           <View className="flex flex-row-reverse ml-5 my-[17px] h-5">
-            {currentSlideIndex < slidesData.length - 1 && (
+            {currentSlideIndex < getSlidesData().length - 1 && (
               <Button label={i18n.t('introduction.skip')} onPress={handleSkip} />
             )}
           </View>
 
           <FlatList
-            data={slidesData}
+            data={getSlidesData()}
             renderItem={({ item }) => <Slide item={item} />}
             keyExtractor={(item) => item.id}
             onViewableItemsChanged={handleViewableItemsChanged}
@@ -86,7 +86,7 @@ const Introduction: React.FC<IntroductionProps> = () => {
           />
 
           <View className="mb-10">
-            <Paginator currentSlideIndex={currentSlideIndex} slidesData={slidesData} />
+            <Paginator currentSlideIndex={currentSlideIndex} slidesData={getSlidesData()} />
           </View>
         </View>
 
