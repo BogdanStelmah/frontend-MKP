@@ -1,4 +1,5 @@
 import { MaterialIcons } from '@expo/vector-icons';
+import { useColorScheme } from 'nativewind';
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
@@ -17,6 +18,7 @@ const StandardDropdownInput: React.FC<StandardDropdownInputProps> = ({
   options,
   onSelect
 }) => {
+  const { colorScheme } = useColorScheme();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState<TypeOption | undefined>(value);
 
@@ -40,9 +42,17 @@ const StandardDropdownInput: React.FC<StandardDropdownInputProps> = ({
           </Text2md>
 
           {!isOpen ? (
-            <MaterialIcons name="keyboard-arrow-down" size={30} color="#454545" />
+            <MaterialIcons
+              name="keyboard-arrow-down"
+              size={30}
+              color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
+            />
           ) : (
-            <MaterialIcons name="keyboard-arrow-up" size={30} color="#454545" />
+            <MaterialIcons
+              name="keyboard-arrow-up"
+              size={30}
+              color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
+            />
           )}
         </View>
       </TouchableOpacity>

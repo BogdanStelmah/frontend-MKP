@@ -24,7 +24,7 @@ const Modal: React.FC<ModalProps> = ({
 }) => {
   const styleMainBlock = classNames(
     {
-      'p-4 bg-background': true,
+      'p-4 bg-background dark:bg-background-dark': true,
       'flex-1': isFullHeight,
       'rounded-t-lg': !isFullHeight
     },

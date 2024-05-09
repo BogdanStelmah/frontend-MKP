@@ -1,4 +1,5 @@
 import { AntDesign, Entypo, Feather } from '@expo/vector-icons';
+import { useColorScheme } from 'nativewind';
 import React from 'react';
 import { Image, ScrollView, View } from 'react-native';
 
@@ -31,6 +32,7 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
   hideModal,
   recipe
 }) => {
+  const { colorScheme } = useColorScheme();
   const [isRecipeSettingsModalVisible, showRecipeSettingsModal, hideRecipeSettingsModal] =
     useModal();
 
@@ -45,17 +47,29 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
           <View className="flex-row items-center justify-between h-[32px] mb-[14px]">
             <View>
               <Button onPress={hideModal}>
-                <AntDesign name="arrowleft" size={24} color="#454545" />
+                <AntDesign
+                  name="arrowleft"
+                  size={24}
+                  color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
+                />
               </Button>
             </View>
 
             <View className="flex-row items-center">
               <Button extraStyles="mr-[14px]">
-                <Feather name="heart" size={24} color="#454545" />
+                <Feather
+                  name="heart"
+                  size={24}
+                  color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
+                />
               </Button>
 
               <Button onPress={showRecipeSettingsModal}>
-                <Entypo name="dots-three-horizontal" size={24} color="#454545" />
+                <Entypo
+                  name="dots-three-horizontal"
+                  size={24}
+                  color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
+                />
               </Button>
             </View>
           </View>
@@ -96,7 +110,10 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
                   {i18n.t('recipe-search.modal.from')}
                 </Text2xs>
 
-                <Text2xs fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-green-secondary-2">
+                <Text2xs
+                  fontWeight={FontWeightEnum.MEDIUM}
+                  extraStyles="text-green-secondary-2 dark:text-green-secondary-2-dark"
+                >
                   {formatUserName(recipe.user)}
                 </Text2xs>
               </View>

@@ -10,7 +10,13 @@ interface TextXsProps {
 }
 
 const TextXs: React.FC<TextXsProps> = ({ children, extraStyles, fontWeight }) => {
-  return <Text className={`font-lato-${fontWeight} text-xs ${extraStyles}`}>{children}</Text>;
+  return (
+    <Text
+      className={`font-lato-${fontWeight} text-xs text-black-greyscale-main dark:text-black-greyscale-main-dark ${extraStyles}`}
+    >
+      {children}
+    </Text>
+  );
 };
 
 export default TextXs;

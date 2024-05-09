@@ -25,9 +25,12 @@ const TimeInput: React.FC<TimeInputProps> = ({ onChange, value }) => {
     <View>
       <TouchableOpacity
         onPress={() => setShow(true)}
-        className="border border-brown-camouflage rounded-lg px-[10px] py-[1px]"
+        className="border border-brown-camouflage dark:border-brown-camouflage-dark rounded-lg px-[10px] py-[1px]"
       >
-        <Text2sm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-black-greyscale-main">
+        <Text2sm
+          fontWeight={FontWeightEnum.MEDIUM}
+          extraStyles="text-black-greyscale-main dark:text-black-greyscale-main-dark"
+        >
           {formatTime(value)}
         </Text2sm>
       </TouchableOpacity>

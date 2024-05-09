@@ -23,7 +23,10 @@ const Paginator: React.FC<PaginatorProps> = ({ currentSlideIndex, slidesData }) 
       {slidesData.map((_, i) => {
         return (
           <View
-            className={'bg-green-secondary h-1.5 w-5 rounded inline ' + getOpacity(i)}
+            className={
+              'bg-green-secondary dark:bg-green-secondary-dark h-1.5 w-5 rounded inline ' +
+              getOpacity(i)
+            }
             key={i.toString()}
           />
         );

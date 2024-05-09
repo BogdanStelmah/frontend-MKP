@@ -10,7 +10,13 @@ interface Text2lgProps {
 }
 
 const Text2lg: React.FC<Text2lgProps> = ({ children, extraStyles, fontWeight }) => {
-  return <Text className={`font-lato-${fontWeight} text-lg ${extraStyles}`}>{children}</Text>;
+  return (
+    <Text
+      className={`font-lato-${fontWeight} text-lg text-black-greyscale-main dark:text-black-greyscale-main-dark ${extraStyles}`}
+    >
+      {children}
+    </Text>
+  );
 };
 
 export default Text2lg;

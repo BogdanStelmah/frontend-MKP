@@ -19,11 +19,11 @@ const Checkbox: React.FC<CheckboxProps> = ({ label, checked, onChange, extraStyl
     }),
     checkboxStyles: classNames({
       'h-[23px] w-[23px] rounded border-2 items-center justify-center': true,
-      'border-green-secondary': checked,
+      'border-green-secondary dark:border-green-secondary-dark': checked,
       'border-gray-500': !checked
     }),
     insideRadioStyles: classNames({
-      'h-[14px] w-[14px] rounded-sm bg-green-secondary': true
+      'h-[14px] w-[14px] rounded-sm bg-green-secondary dark:bg-green-secondary-dark': true
     })
   };
 

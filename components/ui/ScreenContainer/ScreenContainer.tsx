@@ -1,4 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
+import { useColorScheme } from 'nativewind';
 import React from 'react';
 import { Keyboard, TouchableWithoutFeedback, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -12,14 +13,16 @@ const ScreenContainer: React.FC<ScreenContainerProps> = ({
   children,
   isTouchableWithoutFeedback = true
 }) => {
+  const { colorScheme } = useColorScheme();
+
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
       <TouchableWithoutFeedback
         onPress={isTouchableWithoutFeedback ? Keyboard.dismiss : undefined}
         accessible={false}
       >
-        <View className="h-full bg-background">
+        <View className="h-full bg-background dark:bg-background-dark">
           <SafeAreaView>{children}</SafeAreaView>
         </View>
       </TouchableWithoutFeedback>

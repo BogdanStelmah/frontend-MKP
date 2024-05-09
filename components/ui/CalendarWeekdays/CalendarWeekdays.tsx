@@ -27,7 +27,10 @@ const CalendarWeekdays: React.FC<CalendarWeekdaysProps> = ({ extraStyles }) => {
     <View className={styleMap.mainBlock}>
       {weekdays.map((weekday) => (
         <View key={weekday} className={styleMap.weekday}>
-          <TextSm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-disable">
+          <TextSm
+            fontWeight={FontWeightEnum.SEMIBOLD}
+            extraStyles="text-disable dark:text-disable-dark"
+          >
             {weekday}
           </TextSm>
         </View>

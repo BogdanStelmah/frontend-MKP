@@ -1,4 +1,5 @@
 import { Ionicons } from '@expo/vector-icons';
+import { useColorScheme } from 'nativewind';
 import React, { useState } from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
@@ -9,6 +10,8 @@ import Text2md from '@/components/ui/Typography/Text2md';
 import Text2sm from '@/components/ui/Typography/Text2sm';
 
 const MealCard = () => {
+  const { colorScheme } = useColorScheme();
+
   const [settings, setSettings] = useState({
     preparationStartTime: new Date(),
     preparationEndTime: new Date(),
@@ -22,7 +25,11 @@ const MealCard = () => {
       <View className="flex-row items-center justify-between mb-[10px]">
         <Text2md fontWeight={FontWeightEnum.BOLD}>Сніданок</Text2md>
         <TouchableOpacity>
-          <Ionicons name="close" size={24} color="#4F7942" />
+          <Ionicons
+            name="close"
+            size={24}
+            color={colorScheme === 'light' ? '#4F7942' : '#3F8B28'}
+          />
         </TouchableOpacity>
       </View>
 

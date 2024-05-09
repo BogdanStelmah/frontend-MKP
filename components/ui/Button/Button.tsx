@@ -35,22 +35,24 @@ const Button: React.FC<ButtonProps> = ({
       {
         transition: true,
         'w-full': size === 'full-width',
-        'border border-green-secondary-2 p-3 h-[48px]': type === 'outlined',
-        'bg-green-secondary-2 p-3 h-[48px]': type === 'filled',
-        'bg-disable': _isDisabled && type === 'filled',
+        'border border-green-secondary-2 dark:border-green-secondary-2-dark p-3 h-[48px]':
+          type === 'outlined',
+        'bg-green-secondary-2 dark:bg-green-secondary-2-dark p-3 h-[48px]': type === 'filled',
+        'bg-disable dark:bg-disable-dark': _isDisabled && type === 'filled',
 
-        'border-red-secondary': type === 'outlined' && isWarning,
-        'bg-red-secondary': type === 'filled' && isWarning
+        'border-red-secondary dark:border-red-secondary-dark': type === 'outlined' && isWarning,
+        'bg-red-secondary dark:bg-red-secondary-dark': type === 'filled' && isWarning
       },
       borderRadius,
       extraStyles
     ),
     textStyle: classNames({
-      'font-lato-semibold text-green-secondary-2 text-md': type === 'outlined',
+      'font-lato-semibold text-green-secondary-2 dark:text-green-secondary-2-dark text-md':
+        type === 'outlined',
       'font-lato-semibold text-white-primary text-md': type === 'filled',
-      'font-lato-regular text-disable text-sm': type === 'text',
+      'font-lato-regular text-disable dark:text-disable-dark text-sm': type === 'text',
 
-      'text-red-secondary': type === 'outlined' && isWarning
+      'text-red-secondary dark:text-red-secondary-dark': type === 'outlined' && isWarning
     })
   };
 

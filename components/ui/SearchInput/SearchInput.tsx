@@ -32,7 +32,7 @@ const SearchInput: React.FC<SearchInputProps> = ({
   const styleMap = {
     textInput: classNames(
       {
-        'font-lato-medium h-[40px] text-black-greyscale-main px-[8px] pb-[1px] text-2sm w-full':
+        'font-lato-medium h-[40px] text-black-greyscale-main dark:text-black-greyscale-main-dark px-[8px] pb-[1px] text-2sm w-full':
           true
       },
       extraStyles

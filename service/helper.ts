@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-import { LangEnum } from '@/common/enums';
+import { LangEnum, ThemeEnum } from '@/common/enums';
 
 export const retrieveToken = async () => {
   try {
@@ -37,6 +37,22 @@ export const retrieveLanguage = async (): Promise<LangEnum | undefined> => {
 export const writeLanguage = async (language: LangEnum) => {
   try {
     await AsyncStorage.setItem('language', language);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const retrieveTheme = async (): Promise<ThemeEnum | undefined> => {
+  try {
+    return (await AsyncStorage.getItem('theme')) as ThemeEnum;
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+export const writeTheme = async (theme: ThemeEnum) => {
+  try {
+    await AsyncStorage.setItem('theme', theme);
   } catch (error) {
     console.error(error);
   }

@@ -1,4 +1,5 @@
 import { Feather } from '@expo/vector-icons';
+import { useColorScheme } from 'nativewind';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
@@ -15,14 +16,22 @@ interface PlanningDayProps {
 }
 
 const PlanningDay: React.FC<PlanningDayProps> = ({ date, onPressOnSettings }) => {
+  const { colorScheme } = useColorScheme();
+
   return (
     <View className="flex-row justify-between items-center">
       <View className="flex-row items-center">
-        <View className="bg-green-secondary-2 rounded-[10px] px-[5px] pt-[2px] pb-[3px] items-center mr-[5px]">
-          <TextSm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-background">
+        <View className="bg-green-secondary-2 dark:bg-green-secondary-2-dark rounded-[10px] px-[5px] pt-[2px] pb-[3px] items-center mr-[5px]">
+          <TextSm
+            fontWeight={FontWeightEnum.SEMIBOLD}
+            extraStyles="text-background dark:text-background-dark"
+          >
             {formatDayNumber(date)}
           </TextSm>
-          <TextSm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-background">
+          <TextSm
+            fontWeight={FontWeightEnum.SEMIBOLD}
+            extraStyles="text-background dark:text-background-dark"
+          >
             {formatShortMonthName(date)}
           </TextSm>
         </View>
@@ -34,7 +43,11 @@ const PlanningDay: React.FC<PlanningDayProps> = ({ date, onPressOnSettings }) =>
 
       <View>
         <TouchableOpacity onPress={() => onPressOnSettings(date)}>
-          <Feather name="settings" size={24} color="#4F7942" />
+          <Feather
+            name="settings"
+            size={24}
+            color={colorScheme === 'light' ? '#4F7942' : '#3F8B28'}
+          />
         </TouchableOpacity>
       </View>
     </View>

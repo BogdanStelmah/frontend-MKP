@@ -20,11 +20,11 @@ const RadioButton: React.FC<RadioButtonProps> = ({ option, onPress, extraStyles,
     }),
     radioStyles: classNames({
       'h-[23px] w-[23px] rounded-full border-2 items-center justify-center': true,
-      'border-green-secondary': checked,
+      'border-green-secondary dark:border-green-secondary-dark': checked,
       'border-gray-500': !checked
     }),
     insideRadioStyles: classNames({
-      'h-[14px] w-[14px] rounded-full bg-green-secondary': true
+      'h-[14px] w-[14px] rounded-full bg-green-secondary dark:bg-green-secondary-dark': true
     })
   };
 

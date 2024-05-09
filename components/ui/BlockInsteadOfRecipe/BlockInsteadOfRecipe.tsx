@@ -20,7 +20,7 @@ const BlockInsteadOfRecipe: React.FC<BlockInsteadOfRecipeProps> = ({ title }) =>
       <View className="items-center mt-1">
         <Text2md
           fontWeight={FontWeightEnum.SEMIBOLD}
-          extraStyles="leading-[17px] mt-[2px] mx-[2px] text-placeholder"
+          extraStyles="leading-[17px] mt-[2px] mx-[2px] text-placeholder dark:text-brown-camouflage-dark"
         >
           {title}
         </Text2md>

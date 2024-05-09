@@ -1,3 +1,4 @@
+import { useColorScheme } from 'nativewind';
 import React from 'react';
 import {
   GestureResponderEvent,
@@ -39,21 +40,24 @@ const TextInput: React.FC<TextInputProps> = ({
   onPress,
   ...props
 }) => {
+  const { colorScheme } = useColorScheme();
+
   return (
     <TouchableOpacity className="h-[84px]" activeOpacity={100} onPress={onPress}>
       <TextXs
         fontWeight={FontWeightEnum.MEDIUM}
-        extraStyles="inline-block text-brown-camouflage mb-0.5"
+        extraStyles="inline-block text-brown-camouflage dark:text-brown-camouflage-dark mb-0.5"
       >
         {label}
       </TextXs>
 
       <DefaultTextInput
         className={[
-          'font-lato-medium w-full h-[46px] text-black-greyscale-main border border-brown-camouflage px-3 pb-[2px] rounded-lg text-[15px] focus:border-yellow-camouflage',
-          error && 'border-red-secondary',
+          'font-lato-medium w-full h-[46px] text-black-greyscale-main dark:text-black-greyscale-main-dark border border-brown-camouflage dark:border-brown-camouflage-dark px-3 pb-[2px] rounded-lg text-[15px] focus:border-yellow-camouflage',
+          error && 'border-red-secondary dark:border-red-secondary-dark',
           extraStyles
         ].join(' ')}
+        placeholderTextColor={colorScheme === 'dark' ? '#827A60' : '#909590'}
         editable={isEditable}
         secureTextEntry={isSecureTextEntry}
         autoCapitalize={autoCapitalize}
@@ -61,7 +65,10 @@ const TextInput: React.FC<TextInputProps> = ({
       />
 
       {error && (
-        <TextXs fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-red-secondary h-[20px]">
+        <TextXs
+          fontWeight={FontWeightEnum.MEDIUM}
+          extraStyles="text-red-secondary dark:text-red-secondary-dark h-[20px]"
+        >
           {helperText}
         </TextXs>
       )}

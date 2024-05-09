@@ -14,12 +14,18 @@ interface ScreenTitleProps {
 const ScreenTitle: React.FC<ScreenTitleProps> = ({ title, description, extraStyles }) => {
   return (
     <View className={extraStyles}>
-      <Text2lg fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-black-greyscale-main">
+      <Text2lg
+        fontWeight={FontWeightEnum.SEMIBOLD}
+        extraStyles="text-black-greyscale-main dark:text-black-greyscale-main-dark"
+      >
         {title}
       </Text2lg>
 
       {description && (
-        <TextSm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-black-greyscale-main mt-3">
+        <TextSm
+          fontWeight={FontWeightEnum.MEDIUM}
+          extraStyles="text-black-greyscale-main dark:text-black-greyscale-main-dark mt-3"
+        >
           {description}
         </TextSm>
       )}

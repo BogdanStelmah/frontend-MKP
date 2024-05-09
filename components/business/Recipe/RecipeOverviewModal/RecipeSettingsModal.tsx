@@ -1,4 +1,5 @@
 import { AntDesign } from '@expo/vector-icons';
+import { useColorScheme } from 'nativewind';
 import React from 'react';
 import { View } from 'react-native';
 
@@ -15,6 +16,7 @@ interface RecipeSettingsModalProps {
 }
 
 const RecipeSettingsModal: React.FC<RecipeSettingsModalProps> = ({ isModalVisible, hideModal }) => {
+  const { colorScheme } = useColorScheme();
   const recipeOptions = [
     { label: i18n.t('recipe-search.setting-up-a-recipe.modify'), onPress: () => {} },
     { label: i18n.t('recipe-search.setting-up-a-recipe.view-original'), onPress: () => {} },
@@ -29,7 +31,11 @@ const RecipeSettingsModal: React.FC<RecipeSettingsModalProps> = ({ isModalVisibl
       header={
         <View className="flex flex-row items-center mb-4">
           <Button onPress={hideModal} extraStyles="mr-[8px]">
-            <AntDesign name="arrowleft" size={24} color="#454545" />
+            <AntDesign
+              name="arrowleft"
+              size={24}
+              color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
+            />
           </Button>
 
           <Text2Md fontWeight={FontWeightEnum.BOLD}>

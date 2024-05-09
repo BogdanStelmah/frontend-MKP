@@ -42,7 +42,7 @@ export const getCalorieContentOptions = (): TypeOption[] => [
 export const getTagsOptions = (): TypeOption[] => [
   { label: 'Гриль', value: '1' },
   { label: 'Вегетаріанське', value: '2' },
-  { label: 'Швидкій обід', value: '2' },
+  { label: 'Швидкій обід', value: '4' },
   { label: 'Нові рецепти', value: '3' }
 ];
 

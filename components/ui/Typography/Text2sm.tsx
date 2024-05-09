@@ -12,7 +12,10 @@ interface Text2SmProps {
 
 const Text2Sm: React.FC<Text2SmProps> = ({ children, extraStyles, fontWeight, onPress }) => {
   return (
-    <Text className={`font-lato-${fontWeight} text-2sm ${extraStyles}`} onPress={onPress}>
+    <Text
+      className={`font-lato-${fontWeight} text-2sm text-black-greyscale-main dark:text-black-greyscale-main-dark ${extraStyles}`}
+      onPress={onPress}
+    >
       {children}
     </Text>
   );

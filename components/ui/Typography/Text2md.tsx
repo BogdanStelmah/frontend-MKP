@@ -10,7 +10,13 @@ interface Text2MdProps {
 }
 
 const Text2md: React.FC<Text2MdProps> = ({ children, extraStyles, fontWeight }) => {
-  return <Text className={`font-lato-${fontWeight} text-2md ${extraStyles}`}>{children}</Text>;
+  return (
+    <Text
+      className={`font-lato-${fontWeight} text-2md text-black-greyscale-main dark:text-black-greyscale-main-dark ${extraStyles}`}
+    >
+      {children}
+    </Text>
+  );
 };
 
 export default Text2md;

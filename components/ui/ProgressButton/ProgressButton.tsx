@@ -25,7 +25,7 @@ const ProgressButton: React.FC<ProgressButtonProps> = ({ progress, handleScroll 
             cx={center}
             cy={center}
             strokeWidth={strokeWidth}
-            className="stroke-green-secondary opacity-30"
+            className="stroke-green-secondary dark:stroke-green-secondary-dark opacity-30"
           />
           <Circle
             r={radius}
@@ -34,14 +34,14 @@ const ProgressButton: React.FC<ProgressButtonProps> = ({ progress, handleScroll 
             strokeWidth={strokeWidth}
             strokeDasharray={circumference}
             strokeDashoffset={circumference - circumference * progress}
-            className="stroke-green-secondary"
+            className="stroke-green-secondary dark:stroke-green-secondary-dark"
           />
         </G>
       </Svg>
       <TouchableOpacity
         activeOpacity={0.6}
         onPress={handleScroll}
-        className="bg-green-secondary w-16 h-16 rounded-full absolute ml-2 mt-2"
+        className="bg-green-secondary dark:bg-green-secondary-dark w-16 h-16 rounded-full absolute ml-2 mt-2"
       >
         <View className="mt-5 ml-6">
           <NextIcon />

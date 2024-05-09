@@ -1,25 +1,45 @@
 import { router, SplashScreen } from 'expo-router';
 import * as Updates from 'expo-updates';
+import { useColorScheme } from 'nativewind';
 import { useEffect } from 'react';
-import { DevSettings } from 'react-native';
+import { DevSettings, Appearance } from 'react-native';
 
 import i18n, { changeLanguage } from '@/i18n';
-import { retrieveToken, writeLanguage } from '@/service/helper';
+import { retrieveToken, writeLanguage, writeTheme } from '@/service/helper';
 import { useUserStore } from '@/store';
 
 export const reloadAsync = __DEV__ ? DevSettings.reload : Updates.reloadAsync;
 
 const Index = () => {
+  const { setColorScheme } = useColorScheme();
+
   const login = useUserStore.use.login();
   const isUserHasPersonalInfo = useUserStore.use.isUserHasPersonalInfo();
   const fetchMe = useUserStore.use.fetchMe();
   const me = useUserStore.use.me();
 
   useEffect(() => {
-    if (me?.setting.language && me.setting.language !== i18n.locale) {
-      writeLanguage(me.setting.language).then(() => {
-        changeLanguage(me.setting.language);
+    const theme = me?.setting.theme;
+    const language = me?.setting.language;
+
+    if (language && language !== i18n.locale) {
+      writeLanguage(language).then(() => {
+        changeLanguage(language);
         reloadAsync();
+      });
+    }
+
+    if (theme) {
+      writeTheme(theme).then(() => {
+        if (theme === 'light') {
+          setColorScheme(theme);
+          Appearance.setColorScheme(theme);
+        }
+
+        if (theme === 'dark') {
+          setColorScheme(theme);
+          Appearance.setColorScheme(theme);
+        }
       });
     }
   }, [me]);

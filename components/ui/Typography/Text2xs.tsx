@@ -10,7 +10,13 @@ interface Text2XsProps {
 }
 
 const Text2Xs: React.FC<Text2XsProps> = ({ children, extraStyles, fontWeight }) => {
-  return <Text className={`font-lato-${fontWeight} text-2xs ${extraStyles}`}>{children}</Text>;
+  return (
+    <Text
+      className={`font-lato-${fontWeight} text-2xs text-black-greyscale-main dark:text-black-greyscale-main-dark ${extraStyles}`}
+    >
+      {children}
+    </Text>
+  );
 };
 
 export default Text2Xs;

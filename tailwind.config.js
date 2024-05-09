@@ -19,28 +19,35 @@ module.exports = {
         green: {
           primary: '#4B5320',
           secondary: '#335C33',
-          'secondary-2': '#4F7942'
+          'secondary-dark': '#407440',
+          'secondary-2': '#4F7942',
+          'secondary-2-dark': '#3F8B28'
         },
         brown: {
-          camouflage: '#827A60'
+          camouflage: '#827A60',
+          'camouflage-dark': '#DED4B2'
         },
         yellow: {
           camouflage: '#C2B280'
         },
         black: {
-          'greyscale-main': '#454545'
+          'greyscale-main': '#454545',
+          'greyscale-main-dark': '#BFBFBF'
         },
         white: {
           primary: '#F2F2F2'
         },
         red: {
-          secondary: '#D34E24'
+          secondary: '#D34E24',
+          'secondary-dark': '#FF5C28'
         },
         placeholder: '#909590',
         disable: '#8D949E',
+        'disable-dark': '#5F6061',
         chosen: '#F2F5F7',
         notification: '#169873',
-        background: '#FCFCFC'
+        background: '#FCFCFC',
+        'background-dark': '#2A2929'
       },
       fontSize: {
         xs: ['12px', '18px'],

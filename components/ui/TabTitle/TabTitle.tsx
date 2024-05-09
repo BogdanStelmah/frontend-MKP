@@ -17,7 +17,7 @@ const TabTitle: React.FC<TabTitleProps> = ({ title, extraStyles, extraTitleStyle
       'my-[7px] flex items-center': true
     }),
     title: classNames(extraTitleStyles, {
-      'text-black-greyscale-main text-center': true
+      'text-black-greyscale-main dark:text-black-greyscale-main-dark text-center': true
     })
   };
 

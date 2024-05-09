@@ -14,13 +14,16 @@ interface FooterProps {
 const Footer: React.FC<FooterProps> = ({ text, linkText, onPress, extraStyles }) => {
   return (
     <View className={['flex-row justify-center', extraStyles].join(' ')}>
-      <TextSm fontWeight={FontWeightEnum.REGULAR} extraStyles="text-black-greyscale-main">
+      <TextSm
+        fontWeight={FontWeightEnum.REGULAR}
+        extraStyles="text-black-greyscale-main dark:text-black-greyscale-main-dark"
+      >
         {text}
       </TextSm>
 
       <TextSm
         fontWeight={FontWeightEnum.MEDIUM}
-        extraStyles="text-green-secondary-2 pl-1"
+        extraStyles="text-green-secondary-2 dark:text-green-secondary-2-dark pl-1"
         onPress={onPress}
       >
         {linkText}

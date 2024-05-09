@@ -79,7 +79,10 @@ const PersonalInfoForm = () => {
 
   return (
     <View>
-      <Text2md fontWeight={FontWeightEnum.BOLD} extraStyles="text-black-greyscale-main">
+      <Text2md
+        fontWeight={FontWeightEnum.BOLD}
+        extraStyles="text-black-greyscale-main dark:text-black-greyscale-main-dark"
+      >
         {i18n.t('settings.personal-info')}
       </Text2md>
 

@@ -89,18 +89,23 @@ const SignIn: React.FC = () => {
 
           <TextSm
             fontWeight={FontWeightEnum.MEDIUM}
-            extraStyles="text-green-secondary-2 my-4 opacity-70 text-center"
+            extraStyles="text-green-secondary-2 dark:text-green-secondary-2-dark my-4 opacity-70 text-center"
             onPress={() => router.navigate('/forgot-password')}
           >
             {i18n.t('sign-in.forgot-password')}
           </TextSm>
 
           <View className="flex-row items-center mb-4">
-            <View className="flex-1 h-px bg-disable opacity-60" />
-            <TextSm fontWeight={FontWeightEnum.MEDIUM} extraStyles="w-12 text-center text-disable">
+            <View className="flex-1 h-px bg-disable dark:bg-disable-dark opacity-60" />
+
+            <TextSm
+              fontWeight={FontWeightEnum.MEDIUM}
+              extraStyles="w-12 text-center text-disable dark:text-disable-dark"
+            >
               {i18n.t('sign-in.or')}
             </TextSm>
-            <View className="flex-1 h-px bg-disable opacity-60" />
+
+            <View className="flex-1 h-px bg-disable dark:bg-disable-dark opacity-60" />
           </View>
 
           <GoogleButton handleGetUserInfo={handleGoogleLogin} />

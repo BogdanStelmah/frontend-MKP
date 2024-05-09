@@ -1,18 +1,24 @@
 import { Feather } from '@expo/vector-icons';
 import { Tabs } from 'expo-router';
+import { useColorScheme } from 'nativewind';
 import React from 'react';
 
 export default function TabLayout() {
+  const { colorScheme } = useColorScheme();
+
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: '#FCFCFC',
-        tabBarInactiveTintColor: '#335C33',
-        tabBarInactiveBackgroundColor: '#4F7942',
-        tabBarActiveBackgroundColor: '#4F7942',
+        tabBarActiveTintColor: colorScheme === 'light' ? '#FCFCFC' : '#cecece',
+        tabBarInactiveTintColor: colorScheme === 'light' ? '#335C33' : '#407440',
+        tabBarInactiveBackgroundColor: colorScheme === 'light' ? '#4F7942' : '#28541a',
+        tabBarActiveBackgroundColor: colorScheme === 'light' ? '#4F7942' : '#28541a',
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: { height: 52 }
+        tabBarStyle: {
+          height: 52,
+          borderTopWidth: 0
+        }
       }}
     >
       <Tabs.Screen
