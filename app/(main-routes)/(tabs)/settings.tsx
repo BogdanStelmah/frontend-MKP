@@ -1,20 +1,35 @@
 import { router } from 'expo-router';
-import React from 'react';
+import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
+import DeleteAccountModal from '../../../components/business/Setting/DeleteAccountModal/DeleteAccountModal';
+
+import { useModal } from '@/common/hooks';
 import { AppPersonalizationForm, PersonalInfoForm } from '@/components/business/Setting';
 import Button from '@/components/ui/Button';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import TabTitle from '@/components/ui/TabTitle/TabTitle';
 import i18n from '@/i18n';
+import { userApi } from '@/service';
 import { useUserStore } from '@/store';
 
 const Settings = () => {
+  const [isDeleteAccountModalVisible, showDeleteAccountModal, hideDeleteAccountModal] = useModal();
+  const [isLoading, setIsLoading] = useState(false);
   const logout = useUserStore.use.logout();
 
   const onLogout = () => {
     logout();
     router.push('/introduction');
+  };
+
+  const onSubmitDeleteAccount = async () => {
+    setIsLoading(true);
+
+    await userApi.deleteUser();
+    onLogout();
+
+    setIsLoading(false);
   };
 
   return (
@@ -51,10 +66,18 @@ const Settings = () => {
               borderRadius="rounded-lg"
               extraStyles="my-4"
               isWarning
+              isLoading={isLoading}
+              onPress={showDeleteAccountModal}
             />
           </View>
         </View>
       </ScrollView>
+
+      <DeleteAccountModal
+        isVisible={isDeleteAccountModalVisible}
+        hideModal={hideDeleteAccountModal}
+        onSubmit={onSubmitDeleteAccount}
+      />
     </ScreenContainer>
   );
 };

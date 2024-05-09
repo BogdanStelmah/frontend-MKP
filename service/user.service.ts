@@ -12,6 +12,7 @@ const IS_EMAIL_EXISTS_API = '/users/isEmailExists';
 const IS_USER_HAS_PERSONAL_INFO_API = '/users/isUserHasPersonalInfo';
 const UPDATE_USER_INFO_BY_TOKEN_API = '/users/updateByToken';
 const FETCH_ME_API = '/users/me';
+const DELETE_USER_API = '/users';
 
 export interface IRegisterResult {
   access_token: string;
@@ -68,6 +69,10 @@ const fetchMe = async () => {
   return (await requestApi<IUserFullInfo>('GET', FETCH_ME_API)).data;
 };
 
+const deleteUser = async () => {
+  return (await requestApi<void>('DELETE', DELETE_USER_API)).data;
+};
+
 export const userApi = {
   registerUser,
   loginUser,
@@ -78,5 +83,6 @@ export const userApi = {
   updatePassword,
   isUserHasPersonalInfo,
   updateUserInfoByToken,
-  fetchMe
+  fetchMe,
+  deleteUser
 };
