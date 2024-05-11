@@ -4,15 +4,26 @@ import { ScrollView, View } from 'react-native';
 import CalendarMonth from '../CalendarMonth/CalendarMonth';
 
 import { months } from '@/common/dictionary';
-import { getCurrentNameMonth, getCurrentYear } from '@/common/utils';
+import { IPlan } from '@/common/entities';
+import { filterPlansByMonth, getCurrentNameMonth, getCurrentYear } from '@/common/utils';
+import { calculateMonthNumber } from '@/common/utils/calculateMonthNumber';
 import { CalendarWeekdays } from '@/components/ui/CalendarWeekdays';
 
 interface CalendarFullProps {
+  isLoading?: boolean;
+  plans?: IPlan[];
   extraStyles?: string;
   isScrollingToCurrentMonth?: boolean;
+  onPressOnDay?: (date: Date) => void;
 }
 
-const CalendarFull: React.FC<CalendarFullProps> = ({ extraStyles, isScrollingToCurrentMonth }) => {
+const CalendarFull: React.FC<CalendarFullProps> = ({
+  extraStyles,
+  isScrollingToCurrentMonth,
+  isLoading,
+  onPressOnDay,
+  plans = []
+}) => {
   const scrollViewRef = useRef<ScrollView>(null);
   const targetCurrentMonth = useRef<View>(null);
 
@@ -40,15 +51,21 @@ const CalendarFull: React.FC<CalendarFullProps> = ({ extraStyles, isScrollingToC
 
       <ScrollView showsVerticalScrollIndicator={false} ref={scrollViewRef}>
         <View className="flex-col gap-y-[20px]" onStartShouldSetResponder={() => true}>
-          {months.map((month) => (
-            <View
-              key={month}
-              ref={month === getCurrentNameMonth() ? targetCurrentMonth : null}
-              onLayout={() => setYCoordinateForCurrentMonth(month)}
-            >
-              <CalendarMonth month={month} year={getCurrentYear()} />
-            </View>
-          ))}
+          {!isLoading &&
+            months.map((month) => (
+              <View
+                key={month}
+                ref={month === getCurrentNameMonth() ? targetCurrentMonth : null}
+                onLayout={() => setYCoordinateForCurrentMonth(month)}
+              >
+                <CalendarMonth
+                  month={month}
+                  year={getCurrentYear()}
+                  onPressOnDay={onPressOnDay}
+                  daysData={filterPlansByMonth(plans, calculateMonthNumber(month))}
+                />
+              </View>
+            ))}
         </View>
       </ScrollView>
     </View>

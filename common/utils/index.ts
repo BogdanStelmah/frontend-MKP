@@ -10,3 +10,4 @@ export * from './countSelectedFilters';
 export * from './mapperForRecipeFilters';
 export * from './getDatesOfCurrentWeek';
 export * from './formatDayNumber';
+export * from './filterPlansByMonth';
