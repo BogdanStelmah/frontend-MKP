@@ -37,7 +37,7 @@ const Settings = () => {
       <ScrollView className="mx-4" showsVerticalScrollIndicator={false}>
         <TabTitle title={i18n.t('settings.tab-title')} extraTitleStyles="w-[250px]" />
 
-        <View className="pt-[19px] space-y-[20px]">
+        <View className="pt-[19px] space-y-[20px]" onStartShouldSetResponder={() => true}>
           <View>
             <PersonalInfoForm />
           </View>

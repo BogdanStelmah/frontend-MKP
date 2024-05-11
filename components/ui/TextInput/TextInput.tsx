@@ -46,14 +46,14 @@ const TextInput: React.FC<TextInputProps> = ({
     <TouchableOpacity className="h-[84px]" activeOpacity={100} onPress={onPress}>
       <TextXs
         fontWeight={FontWeightEnum.MEDIUM}
-        extraStyles="inline-block text-brown-camouflage dark:text-brown-camouflage-dark mb-0.5"
+        extraStyles="inline-block text-brown-camouflage dark:text-black-greyscale-main-dark mb-0.5"
       >
         {label}
       </TextXs>
 
       <DefaultTextInput
         className={[
-          'font-lato-medium w-full h-[46px] text-black-greyscale-main dark:text-black-greyscale-main-dark border border-brown-camouflage dark:border-brown-camouflage-dark px-3 pb-[2px] rounded-lg text-[15px] focus:border-yellow-camouflage',
+          'font-lato-medium w-full h-[46px] text-black-greyscale-main dark:text-black-greyscale-main-dark border border-brown-camouflage dark:border-black-greyscale-main-dark px-3 pb-[2px] rounded-lg text-[15px] focus:border-yellow-camouflage',
           error && 'border-red-secondary dark:border-red-secondary-dark',
           extraStyles
         ].join(' ')}
