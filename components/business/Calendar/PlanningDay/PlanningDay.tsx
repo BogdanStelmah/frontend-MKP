@@ -3,6 +3,8 @@ import { useColorScheme } from 'nativewind';
 import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
+import MealPlanSkeleton from '../../../ui/Skeletons/MealPlanSkeleton';
+
 import { IPlan } from '@/common/entities';
 import { FontWeightEnum } from '@/common/enums';
 import { formatDayNumber } from '@/common/utils';
@@ -67,8 +69,10 @@ const PlanningDay: React.FC<PlanningDayProps> = ({ date, onPressOnSettings, plan
         </View>
       </View>
 
+      {isLoading && <MealPlanSkeleton />}
+
       {!isLoading && !!plan?.mealPlan?.length && (
-        <View className="flex-col">
+        <View className="flex-col mt-1">
           {plan.mealPlan.map((mealPlan) => (
             <View className="ml-[15px]" key={plan.id + '_' + mealPlan.id}>
               <View className="flex-row">

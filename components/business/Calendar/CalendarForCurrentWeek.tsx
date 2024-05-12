@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View } from 'react-native';
+import { ScrollView, View } from 'react-native';
 
 import DaySettingsModal from './DaySettingsModal/DaySettingsModal';
 
@@ -34,18 +34,20 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = () => {
 
   return (
     <>
-      <View className="flex-col gap-y-[20px]">
-        {getDatesOfCurrentWeek().map((date) => (
-          <View key={date.toString()}>
-            <PlanningDay
-              date={date}
-              onPressOnSettings={handlePressOnSettings}
-              plan={getPlanForDay(date)}
-              isLoading={isLoading}
-            />
-          </View>
-        ))}
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false} className="mb-[220px]">
+        <View className="flex-col gap-y-[20px]" onStartShouldSetResponder={() => true}>
+          {getDatesOfCurrentWeek().map((date) => (
+            <View key={date.toString()}>
+              <PlanningDay
+                date={date}
+                onPressOnSettings={handlePressOnSettings}
+                plan={getPlanForDay(date)}
+                isLoading={isLoading}
+              />
+            </View>
+          ))}
+        </View>
+      </ScrollView>
 
       {selectedWeekDay && (
         <DaySettingsModal
