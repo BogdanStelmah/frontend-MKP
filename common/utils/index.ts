@@ -11,3 +11,6 @@ export * from './mapperForRecipeFilters';
 export * from './getDatesOfCurrentWeek';
 export * from './formatDayNumber';
 export * from './filterPlansByMonth';
+export * from './getFirstAndLastDayOfCurrentWeek';
+export * from './isInCurrentWeek';
+export * from './compareDatesWithoutTime';
