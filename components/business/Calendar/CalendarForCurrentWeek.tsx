@@ -1,9 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import DaySettingsModal from './DaySettingsModal/DaySettingsModal';
 
 import { useModal } from '@/common/hooks';
+import { mealCardSettingToMealPlan } from '@/common/mappers';
+import { MealCardSetting } from '@/common/types';
 import { compareDatesWithoutTime, getDatesOfCurrentWeek } from '@/common/utils';
 import { PlanningDay } from '@/components/business/Calendar/PlanningDay';
 import { usePlanStore } from '@/store/planStore';
@@ -18,18 +20,37 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = () => {
   const isLoading = usePlanStore.use.isLoading();
 
   const fetchPlansForCurrentWeek = usePlanStore.use.fetchPlansForCurrentWeek();
+  const createPlanWithMealPlans = usePlanStore.use.createPlanWithMealPlans();
+  const updatePlanWithMealPlans = usePlanStore.use.updatePlanWithMealPlans();
 
   useEffect(() => {
     fetchPlansForCurrentWeek().catch((err) => console.error(err));
   }, []);
 
-  const getPlanForDay = (date: Date) => {
-    return plansForCurrentWeek.find((plan) => compareDatesWithoutTime(plan.date, date));
-  };
+  const getPlanForDay = useCallback(
+    (date: Date) => plansForCurrentWeek.find((plan) => compareDatesWithoutTime(plan.date, date)),
+    [plansForCurrentWeek]
+  );
 
   const handlePressOnSettings = (date: Date) => {
     setSelectedWeekDay(date);
     showModal();
+  };
+
+  const handleSaveDaySettings = async (
+    date: Date | string,
+    mealPlans: MealCardSetting[],
+    planId: number | null,
+    deletedMealCardIds?: number[]
+  ) => {
+    const formattedDate = typeof date === 'string' ? new Date(date) : date;
+    const formattedMealPlans = mealPlans.map((mealPlan) => mealCardSettingToMealPlan(mealPlan));
+
+    if (!planId) {
+      return await createPlanWithMealPlans(formattedDate, formattedMealPlans);
+    }
+
+    await updatePlanWithMealPlans(planId, formattedDate, formattedMealPlans, deletedMealCardIds);
   };
 
   return (
@@ -51,9 +72,13 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = () => {
 
       {selectedWeekDay && (
         <DaySettingsModal
+          key={selectedWeekDay.toString()}
+          onSaveMealSettings={handleSaveDaySettings}
           isModalVisible={isModalVisible}
           hideModal={hideModal}
           selectedWeekDay={selectedWeekDay}
+          planBySelectedDate={getPlanForDay(selectedWeekDay)}
+          isLoading={isLoading}
         />
       )}
     </>

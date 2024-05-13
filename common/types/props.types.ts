@@ -35,3 +35,13 @@ export interface RecipeFiltersType {
   tags: TypeOption | undefined;
   recipeAuthors: UsersTypeEnum[];
 }
+
+export interface MealCardSetting {
+  id: number;
+  name: string;
+  preparationStartTime: Date | null;
+  preparationEndTime: Date | null;
+  mealStartTime: Date | null;
+  mealEndTime: Date | null;
+  totalNumberOfServings: number;
+}

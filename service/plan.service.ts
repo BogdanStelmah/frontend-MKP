@@ -35,7 +35,8 @@ const deletePlan = async (planId: number) => {
 const updatePlanWithMealPlans = async (
   planId: number,
   date: Date,
-  mealPlans: Partial<IMealPlan>[]
+  mealPlans: Partial<IMealPlan>[],
+  deletedMealCardIds?: number[]
 ) => {
   mealPlans.forEach((mealPlan) => {
     if (!mealPlan.id && !mealPlan.name) throw new Error('Meal plan id or name is required');
@@ -43,7 +44,7 @@ const updatePlanWithMealPlans = async (
 
   return (
     await requestApi('PATCH', `${UPDATE_PLAN_WITH_MEAL_PLANS_API}/${planId}`, {
-      data: { date, mealPlans }
+      data: { date, mealPlans, deletedMealCardIds }
     })
   ).data;
 };

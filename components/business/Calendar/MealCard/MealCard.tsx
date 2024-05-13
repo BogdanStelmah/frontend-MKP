@@ -1,30 +1,30 @@
 import { Ionicons } from '@expo/vector-icons';
 import { useColorScheme } from 'nativewind';
-import React, { useState } from 'react';
+import React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 
+import NumberInput from '../../../ui/NumberInput/NumberInput';
 import TimeInput from '../../../ui/TimeInput/TimeInput';
 
 import { FontWeightEnum } from '@/common/enums';
+import { MealCardSetting } from '@/common/types';
 import Text2md from '@/components/ui/Typography/Text2md';
 import Text2sm from '@/components/ui/Typography/Text2sm';
 
-const MealCard = () => {
-  const { colorScheme } = useColorScheme();
+interface MealCardProps {
+  mealPlan: MealCardSetting;
+  onChange: (settings: MealCardSetting) => void;
+  onDelete: (mealCardId: number) => void;
+}
 
-  const [settings, setSettings] = useState({
-    preparationStartTime: new Date(),
-    preparationEndTime: new Date(),
-    mealStartTime: new Date(),
-    mealEndTime: new Date(),
-    portions: 1
-  });
+const MealCard: React.FC<MealCardProps> = ({ mealPlan, onChange, onDelete }) => {
+  const { colorScheme } = useColorScheme();
 
   return (
     <View className="p-[5px] bg-chosen rounded-lg">
       <View className="flex-row items-center justify-between mb-[10px]">
-        <Text2md fontWeight={FontWeightEnum.BOLD}>Сніданок</Text2md>
-        <TouchableOpacity>
+        <Text2md fontWeight={FontWeightEnum.BOLD}>{mealPlan.name}</Text2md>
+        <TouchableOpacity onPress={() => onDelete(mealPlan.id)}>
           <Ionicons
             name="close"
             size={24}
@@ -41,26 +41,56 @@ const MealCard = () => {
             <Text2sm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="mr-[10px]">
               від
             </Text2sm>
+
             <TimeInput
-              value={settings.preparationStartTime}
-              onChange={(value) => setSettings({ ...settings, preparationStartTime: value })}
+              value={mealPlan.preparationStartTime}
+              onChange={(value) => onChange({ ...mealPlan, preparationStartTime: value })}
             />
+
             <Text2sm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="mx-[10px]">
               до
             </Text2sm>
+
             <TimeInput
-              value={settings.preparationEndTime}
-              onChange={(value) => setSettings({ ...settings, preparationEndTime: value })}
+              value={mealPlan.preparationEndTime}
+              onChange={(value) => onChange({ ...mealPlan, preparationEndTime: value })}
             />
           </View>
         </View>
 
         <View>
           <Text2sm fontWeight={FontWeightEnum.SEMIBOLD}>Час трапези:</Text2sm>
+
+          <View className="flex-row items-center mt-[2px]">
+            <Text2sm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="mr-[10px]">
+              від
+            </Text2sm>
+
+            <TimeInput
+              value={mealPlan.mealStartTime}
+              onChange={(value) => onChange({ ...mealPlan, mealStartTime: value })}
+            />
+
+            <Text2sm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="mx-[10px]">
+              до
+            </Text2sm>
+
+            <TimeInput
+              value={mealPlan.mealEndTime}
+              onChange={(value) => onChange({ ...mealPlan, mealEndTime: value })}
+            />
+          </View>
         </View>
 
-        <View>
+        <View className="flex-row items-center mt-[2px]">
           <Text2sm fontWeight={FontWeightEnum.SEMIBOLD}>Кількість порцій:</Text2sm>
+
+          <View className="ml-[10px]">
+            <NumberInput
+              value={mealPlan.totalNumberOfServings}
+              onChangeText={(value) => onChange({ ...mealPlan, totalNumberOfServings: +value })}
+            />
+          </View>
         </View>
       </View>
     </View>

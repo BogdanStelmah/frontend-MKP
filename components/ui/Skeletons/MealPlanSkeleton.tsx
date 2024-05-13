@@ -10,7 +10,7 @@ const MealPlanSkeleton = () => {
       </View>
 
       {Array.from({ length: 2 }).map((_, index) => (
-        <View className="flex-row items-center mt-2">
+        <View className="flex-row items-center mt-2" key={index}>
           <Image
             style={{ height: 41, width: 63 }}
             source={require('../../../assets/images/slide-1.png')}

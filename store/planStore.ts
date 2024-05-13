@@ -21,7 +21,8 @@ type PlanActions = {
   updatePlanWithMealPlans: (
     planId: number,
     date: Date,
-    mealPlans: Partial<IMealPlan>[]
+    mealPlans: Partial<IMealPlan>[],
+    deletedMealCardIds?: number[]
   ) => Promise<void>;
 };
 
@@ -129,11 +130,11 @@ export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getStat
     }
   },
 
-  updatePlanWithMealPlans: async (planId, date, mealPlans) => {
+  updatePlanWithMealPlans: async (planId, date, mealPlans, deletedMealCardIds) => {
     set(() => ({ isLoading: true }));
 
     try {
-      await planApi.updatePlanWithMealPlans(planId, date, mealPlans);
+      await planApi.updatePlanWithMealPlans(planId, date, mealPlans, deletedMealCardIds);
 
       // TODO: improve this logic
       if (isInCurrentWeek(new Date(date))) {

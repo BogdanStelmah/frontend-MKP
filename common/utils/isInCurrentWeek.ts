@@ -2,5 +2,22 @@ import { getFirstAndLastDayOfCurrentWeek } from '@/common/utils/getFirstAndLastD
 
 export const isInCurrentWeek = (dateToCheck: Date) => {
   const { firstDayOfWeek, lastDayOfWeek } = getFirstAndLastDayOfCurrentWeek();
-  return dateToCheck >= firstDayOfWeek && dateToCheck <= lastDayOfWeek;
+
+  const startOfFirstDay = new Date(
+    firstDayOfWeek.getFullYear(),
+    firstDayOfWeek.getMonth(),
+    firstDayOfWeek.getDate()
+  );
+
+  const endOfLastDay = new Date(
+    lastDayOfWeek.getFullYear(),
+    lastDayOfWeek.getMonth(),
+    lastDayOfWeek.getDate(),
+    23,
+    59,
+    59,
+    999
+  );
+
+  return dateToCheck >= startOfFirstDay && dateToCheck <= endOfLastDay;
 };

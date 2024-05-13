@@ -7,16 +7,22 @@ import { formatTime } from '@/common/utils/formatTime';
 import Text2sm from '@/components/ui/Typography/Text2sm';
 
 interface TimeInputProps {
-  value: Date;
-  onChange: (value: Date) => void;
+  value: Date | null;
+  onChange: (value: Date | null) => void;
 }
 
 const TimeInput: React.FC<TimeInputProps> = ({ onChange, value }) => {
   const [show, setShow] = useState(false);
 
   const handleChange = (event: DateTimePickerEvent, date?: Date | undefined) => {
-    if (!date) return setShow(false);
+    if (event.type === 'dismissed') return setShow(false);
 
+    if (event.type === 'neutralButtonPressed') {
+      onChange && onChange(null);
+      return setShow(false);
+    }
+
+    if (!date) return setShow(false);
     onChange && onChange(date);
     setShow(false);
   };
@@ -31,12 +37,19 @@ const TimeInput: React.FC<TimeInputProps> = ({ onChange, value }) => {
           fontWeight={FontWeightEnum.MEDIUM}
           extraStyles="text-black-greyscale-main dark:text-black-greyscale-main-dark"
         >
-          {formatTime(value)}
+          {value ? formatTime(value) : 'XX:XX'}
         </Text2sm>
       </TouchableOpacity>
 
       {show && (
-        <RNDateTimePicker value={value} mode="time" display="spinner" onChange={handleChange} />
+        <RNDateTimePicker
+          value={value || new Date()}
+          mode="time"
+          display="spinner"
+          onChange={handleChange}
+          neutralButton={{ label: 'Очистити' }}
+          negativeButton={{ label: '' }}
+        />
       )}
     </View>
   );

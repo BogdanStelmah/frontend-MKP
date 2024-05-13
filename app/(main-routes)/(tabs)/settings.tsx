@@ -2,12 +2,11 @@ import { router } from 'expo-router';
 import React, { useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import DeleteAccountModal from '../../../components/business/Setting/DeleteAccountModal/DeleteAccountModal';
-
 import { useModal } from '@/common/hooks';
 import { AppPersonalizationForm, PersonalInfoForm } from '@/components/business/Setting';
 import Button from '@/components/ui/Button';
 import ScreenContainer from '@/components/ui/ScreenContainer';
+import SubmitModal from '@/components/ui/SubmitModal/SubmitModal';
 import TabTitle from '@/components/ui/TabTitle/TabTitle';
 import i18n from '@/i18n';
 import { userApi } from '@/service';
@@ -73,10 +72,11 @@ const Settings = () => {
         </View>
       </ScrollView>
 
-      <DeleteAccountModal
+      <SubmitModal
+        description="Будь ласка, підтвердіть, що ви хочете повністю видалити свій обліковий запис і втратити доступ до сховища рецептів?"
+        onSubmit={onSubmitDeleteAccount}
         isVisible={isDeleteAccountModalVisible}
         hideModal={hideDeleteAccountModal}
-        onSubmit={onSubmitDeleteAccount}
       />
     </ScreenContainer>
   );
