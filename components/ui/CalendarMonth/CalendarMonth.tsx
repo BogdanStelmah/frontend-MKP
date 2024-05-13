@@ -5,7 +5,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { weekdays } from '@/common/dictionary';
 import { IPlan } from '@/common/entities';
 import { FontWeightEnum } from '@/common/enums';
-import { daysInMonth, getCalendarDays } from '@/common/utils';
+import { compareDatesWithoutTime, daysInMonth, getCalendarDays } from '@/common/utils';
 import { calculateMonthNumber } from '@/common/utils/calculateMonthNumber';
 import { CalendarMonthSkeleton } from '@/components/ui/Skeletons';
 import Text2sm from '@/components/ui/Typography/Text2sm';
@@ -69,18 +69,23 @@ const CalendarMonth: React.FC<CalendarMonthProps> = ({
       const d = {
         day: date.getDate(),
         dayOfTheWeek: date.getDay(),
-        daysName: date.toLocaleString('en-us', { weekday: 'short' })
+        daysName: date.toLocaleString('en-us', { weekday: 'short' }),
+        additionalStyles: {
+          border: '',
+          block: '',
+          text: ''
+        }
       };
+
+      const today = new Date();
+      if (compareDatesWithoutTime(date, today)) {
+        d.additionalStyles.border = 'border-[3px] border-disable dark:border-disable-dark';
+      }
 
       const plan = daysData.find((p) => new Date(p.date).getDate() === d.day);
       if (plan) {
-        return {
-          ...d,
-          additionalStyles: {
-            block: 'bg-green-secondary-2 dark:bg-green-secondary-2-dark',
-            text: 'text-background dark:text-background-dark'
-          }
-        };
+        d.additionalStyles.block = 'bg-green-secondary-2 dark:bg-green-secondary-2-dark';
+        d.additionalStyles.text = 'text-background dark:text-background-dark';
       }
 
       return d;
@@ -109,7 +114,9 @@ const CalendarMonth: React.FC<CalendarMonthProps> = ({
               activeOpacity={100}
               className={
                 'w-[36px] h-[36px] items-center justify-center rounded-[10px] ' +
-                day?.additionalStyles?.block
+                day?.additionalStyles?.block +
+                ' ' +
+                day?.additionalStyles?.border
               }
             >
               <Text2sm
