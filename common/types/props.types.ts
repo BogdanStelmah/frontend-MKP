@@ -37,7 +37,7 @@ export interface RecipeFiltersType {
 }
 
 export interface MealCardSetting {
-  id: number;
+  id: number | string;
   name: string;
   preparationStartTime: Date | null;
   preparationEndTime: Date | null;

@@ -14,7 +14,7 @@ import Text2sm from '@/components/ui/Typography/Text2sm';
 interface MealCardProps {
   mealPlan: MealCardSetting;
   onChange: (settings: MealCardSetting) => void;
-  onDelete: (mealCardId: number) => void;
+  onDelete: (mealCardId: number | string) => void;
 }
 
 const MealCard: React.FC<MealCardProps> = ({ mealPlan, onChange, onDelete }) => {

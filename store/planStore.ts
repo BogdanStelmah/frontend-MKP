@@ -21,7 +21,7 @@ type PlanActions = {
   updatePlanWithMealPlans: (
     planId: number,
     date: Date,
-    mealPlans: Partial<IMealPlan>[],
+    mealPlans: (Partial<IMealPlan> | Omit<IMealPlan, 'id'>)[],
     deletedMealCardIds?: number[]
   ) => Promise<void>;
 };

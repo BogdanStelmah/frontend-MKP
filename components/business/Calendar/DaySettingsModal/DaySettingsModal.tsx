@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import isEqual from 'react-fast-compare';
 import { ScrollView, View } from 'react-native';
 
+import AddMealModal from '../AddMealModal/AddMealModal';
 import MealCard from '../MealCard/MealCard';
 
 import { getGeneralOptions } from '@/common/dictionary';
@@ -50,10 +51,11 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
   });
   const [plan, setPlan] = useState({ ...oldPlan });
   const [showSaveButton, setShowSaveButton] = useState(false);
-  const [deleteMealCardId, setDeleteMealCardId] = useState<number | null>(null);
+  const [deleteMealCardId, setDeleteMealCardId] = useState<number | string | null>(null);
   const [deletedMealCardIds, setDeletedMealCardIds] = useState<number[]>([]);
 
   const [isSubmitModalVisible, showSubmitModal, hideSubmitModal] = useModal();
+  const [isAddMealCardModalVisible, showAddMealCardModal, hideAddMealCardModal] = useModal();
   const { colorScheme } = useColorScheme();
   const [selectedGeneralOptions, setSelectedGeneralOptions] = React.useState<CheckboxValue[]>([]);
 
@@ -63,7 +65,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
     setShowSaveButton(true);
   }, [plan, oldPlan]);
 
-  const onChangeMealCard = (mealCard: MealCardSetting) => {
+  const handleChangeMealCard = (mealCard: MealCardSetting) => {
     const updatedMealPlan = plan.mealPlan?.map((mealPlan) =>
       mealPlan.id === mealCard.id ? mealCard : mealPlan
     );
@@ -71,21 +73,24 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
     setPlan({ ...plan, mealPlan: updatedMealPlan });
   };
 
-  const onDeleteMealCard = () => {
+  const handleDeleteMealCard = () => {
     if (!deleteMealCardId) return;
     const updatedMealPlan = plan.mealPlan?.filter((mealPlan) => mealPlan.id !== deleteMealCardId);
 
-    setDeletedMealCardIds([...deletedMealCardIds, deleteMealCardId]);
+    if (typeof deleteMealCardId === 'number') {
+      setDeletedMealCardIds([...deletedMealCardIds, deleteMealCardId]);
+    }
+
     setPlan({ ...plan, mealPlan: updatedMealPlan });
     setDeleteMealCardId(null);
   };
 
-  const onHideModal = () => {
+  const handleHideModal = () => {
     hideModal();
     if (showSaveButton) setPlan(oldPlan);
   };
 
-  const onSaveSettings = () => {
+  const handleSaveSettings = () => {
     onSaveMealSettings(
       planBySelectedDate?.date || selectedWeekDay,
       plan.mealPlan,
@@ -93,6 +98,28 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
       deletedMealCardIds
     );
     setShowSaveButton(false);
+  };
+
+  const handleAddMealCard = (name: string) => {
+    const newMealCard: MealCardSetting = {
+      id: new Date().toLocaleString(),
+      name,
+      preparationEndTime: null,
+      preparationStartTime: null,
+      mealStartTime: null,
+      mealEndTime: null,
+      totalNumberOfServings: 1
+    };
+
+    setPlan({ ...plan, mealPlan: [...plan.mealPlan, newMealCard] });
+    hideAddMealCardModal();
+  };
+
+  const generateDescriptionForSubmitModal = (): string => {
+    const defaultDescription = 'Ви впевнені, що хочете видалити цей прийом їжі?';
+
+    if (typeof deleteMealCardId !== 'number') return defaultDescription;
+    return defaultDescription + ' ' + 'Це призведе до видалення всіх доданих рецептів';
   };
 
   return (
@@ -105,7 +132,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
         header={
           <View className="flex-row items-center justify-between h-[32px] mb-[25px]">
             <View>
-              <Button onPress={onHideModal}>
+              <Button onPress={handleHideModal}>
                 <AntDesign
                   name="arrowleft"
                   size={24}
@@ -129,6 +156,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
               type="outlined"
               borderRadius="rounded-lg"
               extraStyles="flex-1"
+              onPress={showAddMealCardModal}
             />
 
             {showSaveButton && (
@@ -137,7 +165,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
                 type="filled"
                 borderRadius="rounded-lg"
                 extraStyles="flex-1 ml-4"
-                onPress={onSaveSettings}
+                onPress={handleSaveSettings}
                 isLoading={isLoading}
               />
             )}
@@ -163,7 +191,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
               <View key={mealPlan.id}>
                 <MealCard
                   mealPlan={mealPlan}
-                  onChange={onChangeMealCard}
+                  onChange={handleChangeMealCard}
                   onDelete={(mealCardId) => {
                     setDeleteMealCardId(mealCardId);
                     showSubmitModal();
@@ -177,9 +205,15 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
       <SubmitModal
         isVisible={isSubmitModalVisible}
         hideModal={hideSubmitModal}
-        onSubmit={onDeleteMealCard}
+        onSubmit={handleDeleteMealCard}
         onCancel={() => setDeleteMealCardId(null)}
-        description="Ви впевнені, що хочете видалити налаштований день? Це призведе до видалення всіх доданих рецептів"
+        description={generateDescriptionForSubmitModal()}
+      />
+
+      <AddMealModal
+        isVisible={isAddMealCardModalVisible}
+        hideModal={hideAddMealCardModal}
+        onCreateMeal={handleAddMealCard}
       />
     </>
   );
