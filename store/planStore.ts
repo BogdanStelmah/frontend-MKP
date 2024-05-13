@@ -9,12 +9,14 @@ import { createSelectors } from '@/store/helper';
 type PlaneState = {
   plansForCurrentWeek: IPlan[];
   plansForCurrentYear: IPlan[];
+  planBySelectedDate: IPlan | undefined;
   isLoading: boolean;
 };
 
 type PlanActions = {
   fetchPlansForCurrentYear: () => Promise<IPlan[]>;
   fetchPlansForCurrentWeek: () => Promise<IPlan[]>;
+  fetchPlanByDate: (date: Date) => Promise<IPlan | undefined>;
   createPlan: (date: Date) => Promise<IPlan | undefined>;
   createPlanWithMealPlans: (date: Date, mealPlans: Omit<IMealPlan, 'id'>[]) => Promise<void>;
   deletePlan: (planId: number) => Promise<void>;
@@ -29,6 +31,7 @@ type PlanActions = {
 const initialPlanState: PlaneState = {
   plansForCurrentWeek: [],
   plansForCurrentYear: [],
+  planBySelectedDate: undefined,
   isLoading: false
 };
 
@@ -68,6 +71,26 @@ export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getStat
       set(() => ({ plansForCurrentWeek }));
 
       return plansForCurrentWeek;
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  fetchPlanByDate: async (date) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      const planByDate = await planApi.fetchPlanByDate(date);
+
+      if (planByDate) {
+        set(() => ({ planBySelectedDate: planByDate }));
+      }
+
+      return planByDate;
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);

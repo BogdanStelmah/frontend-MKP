@@ -13,7 +13,7 @@ import { FontWeightEnum } from '@/common/enums';
 import { useModal } from '@/common/hooks';
 import { mealPlanToMealCardSetting } from '@/common/mappers';
 import { MealCardSetting } from '@/common/types';
-import { formatDayNumber } from '@/common/utils';
+import { formatDayNumber, isPastDay } from '@/common/utils';
 import { formatShortMonthName } from '@/common/utils/formatShortMonthName';
 import Button from '@/components/ui/Button';
 import { CheckboxGroup } from '@/components/ui/CheckboxGroup';
@@ -150,26 +150,28 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
           </View>
         }
         footer={
-          <View className="pt-4 flex-row">
-            <Button
-              label="Додати прийом їжі"
-              type="outlined"
-              borderRadius="rounded-lg"
-              extraStyles="flex-1"
-              onPress={showAddMealCardModal}
-            />
-
-            {showSaveButton && (
+          !isPastDay(selectedWeekDay) && (
+            <View className="pt-4 flex-row">
               <Button
-                label="Зберегти"
-                type="filled"
+                label="Додати прийом їжі"
+                type="outlined"
                 borderRadius="rounded-lg"
-                extraStyles="flex-1 ml-4"
-                onPress={handleSaveSettings}
-                isLoading={isLoading}
+                extraStyles="flex-1"
+                onPress={showAddMealCardModal}
               />
-            )}
-          </View>
+
+              {showSaveButton && (
+                <Button
+                  label="Зберегти"
+                  type="filled"
+                  borderRadius="rounded-lg"
+                  extraStyles="flex-1 ml-4"
+                  onPress={handleSaveSettings}
+                  isLoading={isLoading}
+                />
+              )}
+            </View>
+          )
         }
       >
         <ScrollView className="flex-col gap-y-5" showsVerticalScrollIndicator={false}>

@@ -3,6 +3,7 @@ import { requestApi } from '@/service/apiAxios';
 
 const FETCH_PLANS_FOR_CURRENT_YEAR_API = '/plan/getForCurrentYear';
 const FETCH_PLANS_FOR_CURRENT_WEEK_API = '/plan/getForCurrentWeek';
+const FETCH_PLAN_BY_DATE_API = '/plan/getByDate';
 const CREATE_PLAN_WITH_MEAL_PLANS_API = '/plan/createWithMealPlans';
 const CREATE_PLAN_API = '/plan';
 const DELETE_PLAN_API = '/plan';
@@ -14,6 +15,10 @@ const fetchPlansForCurrentYear = async () => {
 
 const fetchPlansForCurrentWeek = async () => {
   return (await requestApi('GET', FETCH_PLANS_FOR_CURRENT_WEEK_API)).data;
+};
+
+const fetchPlanByDate = async (date: Date) => {
+  return (await requestApi('GET', `${FETCH_PLAN_BY_DATE_API}/${date}`)).data;
 };
 
 const createPlan = async (date: Date) => {
@@ -55,5 +60,6 @@ export const planApi = {
   createPlan,
   createPlanWithMealPlans,
   deletePlan,
-  updatePlanWithMealPlans
+  updatePlanWithMealPlans,
+  fetchPlanByDate
 };

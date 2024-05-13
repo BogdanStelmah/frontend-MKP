@@ -14,3 +14,4 @@ export * from './filterPlansByMonth';
 export * from './getFirstAndLastDayOfCurrentWeek';
 export * from './isInCurrentWeek';
 export * from './compareDatesWithoutTime';
+export * from './isPastDay';

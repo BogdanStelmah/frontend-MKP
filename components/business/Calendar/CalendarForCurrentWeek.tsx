@@ -10,21 +10,30 @@ import { compareDatesWithoutTime, getDatesOfCurrentWeek } from '@/common/utils';
 import { PlanningDay } from '@/components/business/Calendar/PlanningDay';
 import { usePlanStore } from '@/store/planStore';
 
-interface CalendarForCurrentWeekProps {}
+interface CalendarForCurrentWeekProps {
+  selectedDate?: Date;
+}
 
-const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = () => {
+const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({ selectedDate }) => {
   const [selectedWeekDay, setSelectedWeekDay] = useState<Date | null>(null);
   const [isModalVisible, showModal, hideModal] = useModal();
 
   const plansForCurrentWeek = usePlanStore.use.plansForCurrentWeek();
+  const planBySelectedDate = usePlanStore.use.planBySelectedDate();
   const isLoading = usePlanStore.use.isLoading();
 
   const fetchPlansForCurrentWeek = usePlanStore.use.fetchPlansForCurrentWeek();
+  const fetchPlanByDate = usePlanStore.use.fetchPlanByDate();
+
   const createPlanWithMealPlans = usePlanStore.use.createPlanWithMealPlans();
   const updatePlanWithMealPlans = usePlanStore.use.updatePlanWithMealPlans();
 
   useEffect(() => {
-    fetchPlansForCurrentWeek().catch((err) => console.error(err));
+    if (selectedDate) {
+      fetchPlanByDate(selectedDate).catch((err) => console.error(err));
+    } else {
+      fetchPlansForCurrentWeek().catch((err) => console.error(err));
+    }
   }, []);
 
   const getPlanForDay = useCallback(
@@ -57,16 +66,27 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = () => {
     <>
       <ScrollView showsVerticalScrollIndicator={false} className="mb-[220px]">
         <View className="flex-col gap-y-[20px]" onStartShouldSetResponder={() => true}>
-          {getDatesOfCurrentWeek().map((date) => (
-            <View key={date.toString()}>
+          {!selectedDate ? (
+            getDatesOfCurrentWeek().map((date) => (
+              <View key={date.toString()}>
+                <PlanningDay
+                  date={date}
+                  onPressOnSettings={handlePressOnSettings}
+                  plan={getPlanForDay(date)}
+                  isLoading={isLoading}
+                />
+              </View>
+            ))
+          ) : (
+            <View key={selectedDate.toString()}>
               <PlanningDay
-                date={date}
+                date={selectedDate}
                 onPressOnSettings={handlePressOnSettings}
-                plan={getPlanForDay(date)}
+                plan={planBySelectedDate}
                 isLoading={isLoading}
               />
             </View>
-          ))}
+          )}
         </View>
       </ScrollView>
 
