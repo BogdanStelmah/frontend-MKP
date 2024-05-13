@@ -10,6 +10,7 @@ import { FontWeightEnum } from '@/common/enums';
 import { MealCardSetting } from '@/common/types';
 import Text2md from '@/components/ui/Typography/Text2md';
 import Text2sm from '@/components/ui/Typography/Text2sm';
+import i18n from '@/i18n';
 
 interface MealCardProps {
   mealPlan: MealCardSetting;
@@ -35,11 +36,13 @@ const MealCard: React.FC<MealCardProps> = ({ mealPlan, onChange, onDelete }) => 
 
       <View className="flex gap-y-[20px]">
         <View>
-          <Text2sm fontWeight={FontWeightEnum.SEMIBOLD}>Виділений час для приготування:</Text2sm>
+          <Text2sm fontWeight={FontWeightEnum.SEMIBOLD}>
+            {i18n.t('calendar.plan.meal-plan.allocated-cooking-time')}
+          </Text2sm>
 
           <View className="flex-row items-center mt-[2px]">
             <Text2sm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="mr-[10px]">
-              від
+              {i18n.t('calendar.plan.meal-plan.from')}
             </Text2sm>
 
             <TimeInput
@@ -48,7 +51,7 @@ const MealCard: React.FC<MealCardProps> = ({ mealPlan, onChange, onDelete }) => 
             />
 
             <Text2sm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="mx-[10px]">
-              до
+              {i18n.t('calendar.plan.meal-plan.to')}
             </Text2sm>
 
             <TimeInput
@@ -59,11 +62,13 @@ const MealCard: React.FC<MealCardProps> = ({ mealPlan, onChange, onDelete }) => 
         </View>
 
         <View>
-          <Text2sm fontWeight={FontWeightEnum.SEMIBOLD}>Час трапези:</Text2sm>
+          <Text2sm fontWeight={FontWeightEnum.SEMIBOLD}>
+            {i18n.t('calendar.plan.meal-plan.meal-time')}
+          </Text2sm>
 
           <View className="flex-row items-center mt-[2px]">
             <Text2sm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="mr-[10px]">
-              від
+              {i18n.t('calendar.plan.meal-plan.from')}
             </Text2sm>
 
             <TimeInput
@@ -72,7 +77,7 @@ const MealCard: React.FC<MealCardProps> = ({ mealPlan, onChange, onDelete }) => 
             />
 
             <Text2sm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="mx-[10px]">
-              до
+              {i18n.t('calendar.plan.meal-plan.to')}
             </Text2sm>
 
             <TimeInput
@@ -83,7 +88,9 @@ const MealCard: React.FC<MealCardProps> = ({ mealPlan, onChange, onDelete }) => 
         </View>
 
         <View className="flex-row items-center mt-[2px]">
-          <Text2sm fontWeight={FontWeightEnum.SEMIBOLD}>Кількість порцій:</Text2sm>
+          <Text2sm fontWeight={FontWeightEnum.SEMIBOLD}>
+            {i18n.t('calendar.plan.meal-plan.number-of-servings')}
+          </Text2sm>
 
           <View className="ml-[10px]">
             <NumberInput

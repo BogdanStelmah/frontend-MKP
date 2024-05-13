@@ -8,6 +8,7 @@ import CalendarForCurrentWeek from '@/components/business/Calendar/CalendarForCu
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import Text2Md from '@/components/ui/Typography/Text2md';
+import i18n from '@/i18n';
 
 interface PlanForSelectedDayModalProps {
   isModalVisible: boolean;
@@ -41,7 +42,9 @@ const PlanForSelectedDayModal: React.FC<PlanForSelectedDayModalProps> = ({
           </View>
 
           <View className="w-full items-center absolute">
-            <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>Перегляд обраного дня</Text2Md>
+            <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
+              {i18n.t('calendar.plan.view-the-selected-day')}
+            </Text2Md>
           </View>
         </View>
       }

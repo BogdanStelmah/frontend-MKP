@@ -7,6 +7,7 @@ import { FontWeightEnum } from '@/common/enums';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import Text2Md from '@/components/ui/Typography/Text2md';
+import i18n from '@/i18n';
 
 interface AddMealModalProps {
   isVisible: boolean;
@@ -23,7 +24,9 @@ const AddMealModal: React.FC<AddMealModalProps> = ({ onCreateMeal, isVisible, hi
       onClose={hideModal}
       header={
         <View className="flex flex-row items-center justify-between pb-4">
-          <Text2Md fontWeight={FontWeightEnum.BOLD}>Створення прийому їжі</Text2Md>
+          <Text2Md fontWeight={FontWeightEnum.BOLD}>
+            {i18n.t('calendar.plan.meal-plan.creating-a-meal')}
+          </Text2Md>
         </View>
       }
       footer={
@@ -36,7 +39,7 @@ const AddMealModal: React.FC<AddMealModalProps> = ({ onCreateMeal, isVisible, hi
               }}
               type="outlined"
               borderRadius="rounded-lg"
-              label="Скасувати"
+              label={i18n.t('general.cancel-label')}
             />
           </View>
 
@@ -49,7 +52,7 @@ const AddMealModal: React.FC<AddMealModalProps> = ({ onCreateMeal, isVisible, hi
               isDisabled={!mealName || mealName.length === 0}
               type="filled"
               borderRadius="rounded-lg"
-              label="Створити"
+              label={i18n.t('general.create-label')}
             />
           </View>
         </View>
@@ -58,8 +61,8 @@ const AddMealModal: React.FC<AddMealModalProps> = ({ onCreateMeal, isVisible, hi
       <TextInput
         onChangeText={setMealName}
         value={mealName}
-        label="Назва трапези"
-        placeholder="напр., Сніданок"
+        label={i18n.t('calendar.plan.meal-plan.name-of-the-meal-label')}
+        placeholder={i18n.t('calendar.plan.meal-plan.name-of-the-meal-placeholder')}
       />
     </Modal>
   );

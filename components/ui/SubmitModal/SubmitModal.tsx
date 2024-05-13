@@ -7,6 +7,7 @@ import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import Text2Md from '@/components/ui/Typography/Text2md';
 import Text2sm from '@/components/ui/Typography/Text2sm';
+import i18n from '@/i18n';
 
 interface SubmitModalProps {
   description: string;
@@ -39,7 +40,7 @@ const SubmitModal: React.FC<SubmitModalProps> = ({
       onClose={handleCancel}
       header={
         <View className="flex flex-row items-center justify-between pb-4">
-          <Text2Md fontWeight={FontWeightEnum.BOLD}>Підтвердження</Text2Md>
+          <Text2Md fontWeight={FontWeightEnum.BOLD}>{i18n.t('general.confirmation-label')}</Text2Md>
 
           <Button onPress={handleCancel}>
             <CloseIcon />
@@ -53,7 +54,7 @@ const SubmitModal: React.FC<SubmitModalProps> = ({
               onPress={handleCancel}
               type="outlined"
               borderRadius="rounded-lg"
-              label="Скасувати"
+              label={i18n.t('general.cancel-label')}
             />
           </View>
 
@@ -62,7 +63,7 @@ const SubmitModal: React.FC<SubmitModalProps> = ({
               onPress={handleSuccess}
               type="filled"
               borderRadius="rounded-lg"
-              label="Підтвердити"
+              label={i18n.t('general.confirm-label')}
             />
           </View>
         </View>

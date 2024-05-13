@@ -73,7 +73,7 @@ const Settings = () => {
       </ScrollView>
 
       <SubmitModal
-        description="Будь ласка, підтвердіть, що ви хочете повністю видалити свій обліковий запис і втратити доступ до сховища рецептів?"
+        description={i18n.t('settings.delete-account-description')}
         onSubmit={onSubmitDeleteAccount}
         isVisible={isDeleteAccountModalVisible}
         hideModal={hideDeleteAccountModal}

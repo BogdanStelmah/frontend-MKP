@@ -72,7 +72,9 @@ const RecipeFiltersModal: React.FC<RecipeFiltersModalProps> = ({
 
           <View>
             <Button onPress={() => setSelectedOption({ ...defaultRecipeFilters })}>
-              <Text2Xs fontWeight={FontWeightEnum.SEMIBOLD}>Очистити</Text2Xs>
+              <Text2Xs fontWeight={FontWeightEnum.SEMIBOLD}>
+                {i18n.t('general.time-input.clear')}
+              </Text2Xs>
             </Button>
           </View>
         </View>

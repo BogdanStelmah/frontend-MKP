@@ -22,6 +22,7 @@ import Modal from '@/components/ui/Modal';
 import { SubmitModal } from '@/components/ui/SubmitModal';
 import Text2Md from '@/components/ui/Typography/Text2md';
 import Text2Sm from '@/components/ui/Typography/Text2sm';
+import i18n from '@/i18n';
 
 interface DaySettingsModalProps {
   isModalVisible: boolean;
@@ -116,10 +117,13 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
   };
 
   const generateDescriptionForSubmitModal = (): string => {
-    const defaultDescription = 'Ви впевнені, що хочете видалити цей прийом їжі?';
+    const defaultDescription = i18n.t('calendar.plan.meal-plan.delete-this-meal-description');
+    const additionalDescription = i18n.t(
+      'calendar.plan.meal-plan.delete-this-meal-description-additional'
+    );
 
     if (typeof deleteMealCardId !== 'number') return defaultDescription;
-    return defaultDescription + ' ' + 'Це призведе до видалення всіх доданих рецептів';
+    return defaultDescription + ' ' + additionalDescription;
   };
 
   return (
@@ -143,7 +147,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
 
             <View className="w-full items-center absolute">
               <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
-                Налаштування дня (
+                {i18n.t('calendar.plan.meal-plan.setting-up-the-day')} (
                 {formatDayNumber(selectedWeekDay) + ' ' + formatShortMonthName(selectedWeekDay)})
               </Text2Md>
             </View>
@@ -153,7 +157,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
           !isPastDay(selectedWeekDay) && (
             <View className="pt-4 flex-row">
               <Button
-                label="Додати прийом їжі"
+                label={i18n.t('calendar.plan.meal-plan.add-a-meal')}
                 type="outlined"
                 borderRadius="rounded-lg"
                 extraStyles="flex-1"
@@ -162,7 +166,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
 
               {showSaveButton && (
                 <Button
-                  label="Зберегти"
+                  label={i18n.t('personal-info.save')}
                   type="filled"
                   borderRadius="rounded-lg"
                   extraStyles="flex-1 ml-4"
@@ -177,7 +181,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
         <ScrollView className="flex-col gap-y-5" showsVerticalScrollIndicator={false}>
           <View>
             <Text2Sm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="mb-[8px]">
-              Оберіть критерії які опишуть ваші умови для приготування:
+              {i18n.t('calendar.plan.meal-plan.cooking-conditions-description')}
             </Text2Sm>
 
             <CheckboxGroup

@@ -155,6 +155,24 @@
     "calendar-options": {
       "this-week": "Цей тиждень",
       "this-year": "Цей рік"
+    },
+    "plan": {
+      "view-the-selected-day": "View the selected day",
+      "meal-plan": {
+        "allocated-cooking-time": "Виділений час для приготування:",
+        "meal-time": "Час трапези:",
+        "number-of-servings": "Кількість порцій:",
+        "from": "від",
+        "to": "до",
+        "delete-this-meal-description": "Ви впевнені, що хочете видалити цей прийом їжі?",
+        "delete-this-meal-description-additional": "Це призведе до видалення всіх доданих рецептів",
+        "setting-up-the-day": "Налаштування дня",
+        "add-a-meal": "Додати прийом їжі",
+        "cooking-conditions-description": "Оберіть критерії які опишуть ваші умови для приготування:",
+        "creating-a-meal": "Створення прийому їжі",
+        "name-of-the-meal-label": "Назва трапези",
+        "name-of-the-meal-placeholder": "напр., Сніданок"
+      }
     }
   },
   "settings": {
@@ -167,7 +185,21 @@
     "theme-placeholder": "Оберіть тему",
     "notifications": "Сповіщення",
     "log-out-of-your-account": "Вийти з облікового запису",
-    "delete-account": "Видалити обліковий запис"
+    "delete-account": "Видалити обліковий запис",
+    "delete-account-description": "Будь ласка, підтвердіть, що ви хочете повністю видалити свій обліковий запис і втратити доступ до сховища рецептів?"
+  },
+  "general": {
+    "time-input": {
+      "clear": "Очистити"
+    },
+    "cancel-label": "Скасувати",
+    "create-label": "Створити",
+    "confirm-label": "Підтвердити",
+    "confirmation-label": "Підтвердження",
+    "theme": {
+      "light": "Світла",
+      "dark": "Темна"
+    }
   },
   "validations": {
     "email-incorrect": "Невірна адреса електронної пошти",

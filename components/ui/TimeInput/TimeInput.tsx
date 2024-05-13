@@ -5,6 +5,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { FontWeightEnum } from '@/common/enums';
 import { formatTime } from '@/common/utils/formatTime';
 import Text2sm from '@/components/ui/Typography/Text2sm';
+import i18n from '@/i18n';
 
 interface TimeInputProps {
   value: Date | null;
@@ -47,7 +48,7 @@ const TimeInput: React.FC<TimeInputProps> = ({ onChange, value }) => {
           mode="time"
           display="spinner"
           onChange={handleChange}
-          neutralButton={{ label: 'Очистити' }}
+          neutralButton={{ label: i18n.t('general.time-input.clear') }}
           negativeButton={{ label: '' }}
         />
       )}

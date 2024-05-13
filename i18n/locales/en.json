@@ -155,6 +155,24 @@
     "calendar-options": {
       "this-week": "This week",
       "this-year": "This year"
+    },
+    "plan": {
+      "view-the-selected-day": "View the selected day",
+      "meal-plan": {
+        "allocated-cooking-time": "Allocated cooking time:",
+        "meal-time": "Meal Time:",
+        "number-of-servings": "Number of Servings:",
+        "from": "from",
+        "to": "to",
+        "delete-this-meal-description": "Are you sure you want to delete this meal?",
+        "delete-this-meal-description-additional": "This will result in the deletion of all added recipes",
+        "setting-up-the-day": "Setting up the Day",
+        "add-a-meal": "Add a Meal",
+        "cooking-conditions-description": "Choose criteria to describe your cooking conditions:",
+        "creating-a-meal": "Creating a Meal",
+        "name-of-the-meal-label": "Name of the Meal",
+        "name-of-the-meal-placeholder": "e.g., Breakfast"
+      }
     }
   },
   "settings": {
@@ -167,7 +185,21 @@
     "theme-placeholder": "Choose a theme",
     "notifications": "Notifications",
     "log-out-of-your-account": "Log out of your account",
-    "delete-account": "Delete your account"
+    "delete-account": "Delete your account",
+    "delete-account-description": "Please confirm that you want to completely delete your account and lose access to the prescription storage?"
+  },
+  "general": {
+    "time-input": {
+      "clear": "Clear"
+    },
+    "cancel-label": "Cancel",
+    "create-label": "Create",
+    "confirm-label": "Confirm",
+    "confirmation-label": "Confirmation",
+    "theme": {
+      "light": "Light",
+      "dark": "Dark"
+    }
   },
   "validations": {
     "email-incorrect": "Invalid email address",
