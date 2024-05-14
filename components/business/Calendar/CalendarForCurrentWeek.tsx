@@ -1,11 +1,10 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import DaySettingsModal from './DaySettingsModal/DaySettingsModal';
+import DaySettingsModal, { SaveMealSettingsData } from './DaySettingsModal/DaySettingsModal';
 
 import { useModal } from '@/common/hooks';
 import { mealCardSettingToMealPlan } from '@/common/mappers';
-import { MealCardSetting } from '@/common/types';
 import { compareDatesWithoutTime, getDatesOfCurrentWeek } from '@/common/utils';
 import { PlanningDay } from '@/components/business/Calendar/PlanningDay';
 import { usePlanStore } from '@/store/planStore';
@@ -46,20 +45,29 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({ selecte
     showModal();
   };
 
-  const handleSaveDaySettings = async (
-    date: Date | string,
-    mealPlans: MealCardSetting[],
-    planId: number | null,
-    deletedMealCardIds?: number[]
-  ) => {
+  const handleSaveDaySettings = async ({
+    date,
+    mealPlans,
+    planId,
+    deletedMealCardIds,
+    deletedCategoryIds,
+    categoryIds
+  }: SaveMealSettingsData) => {
     const formattedDate = typeof date === 'string' ? new Date(date) : date;
     const formattedMealPlans = mealPlans.map((mealPlan) => mealCardSettingToMealPlan(mealPlan));
 
     if (!planId) {
-      return await createPlanWithMealPlans(formattedDate, formattedMealPlans);
+      return await createPlanWithMealPlans(formattedDate, formattedMealPlans, categoryIds);
     }
 
-    await updatePlanWithMealPlans(planId, formattedDate, formattedMealPlans, deletedMealCardIds);
+    await updatePlanWithMealPlans({
+      planId,
+      categoryIds,
+      deletedCategoryIds,
+      deletedMealCardIds,
+      date: formattedDate,
+      mealPlans: formattedMealPlans
+    });
   };
 
   return (

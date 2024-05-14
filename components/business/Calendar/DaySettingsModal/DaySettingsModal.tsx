@@ -1,6 +1,6 @@
 import { AntDesign } from '@expo/vector-icons';
 import { useColorScheme } from 'nativewind';
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import isEqual from 'react-fast-compare';
 import { ScrollView, View } from 'react-native';
 
@@ -13,7 +13,7 @@ import { FontWeightEnum } from '@/common/enums';
 import { useModal } from '@/common/hooks';
 import { mealPlanToMealCardSetting } from '@/common/mappers';
 import { MealCardSetting } from '@/common/types';
-import { formatDayNumber, isPastDay } from '@/common/utils';
+import { formatDayNumber, isPastDayOfWeek } from '@/common/utils';
 import { formatShortMonthName } from '@/common/utils/formatShortMonthName';
 import Button from '@/components/ui/Button';
 import { CheckboxGroup } from '@/components/ui/CheckboxGroup';
@@ -24,17 +24,21 @@ import Text2Md from '@/components/ui/Typography/Text2md';
 import Text2Sm from '@/components/ui/Typography/Text2sm';
 import i18n from '@/i18n';
 
+export interface SaveMealSettingsData {
+  date: Date | string;
+  mealPlans: MealCardSetting[];
+  planId: number | null;
+  categoryIds: number[];
+  deletedCategoryIds: number[];
+  deletedMealCardIds?: number[];
+}
+
 interface DaySettingsModalProps {
   isModalVisible: boolean;
   hideModal: () => void;
   selectedWeekDay: Date;
   planBySelectedDate?: IPlan;
-  onSaveMealSettings: (
-    date: Date | string,
-    mealPlans: MealCardSetting[],
-    planId: number | null,
-    deletedMealCardIds?: number[]
-  ) => void;
+  onSaveMealSettings: (data: SaveMealSettingsData) => void;
   isLoading?: boolean;
 }
 
@@ -58,13 +62,26 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
   const [isSubmitModalVisible, showSubmitModal, hideSubmitModal] = useModal();
   const [isAddMealCardModalVisible, showAddMealCardModal, hideAddMealCardModal] = useModal();
   const { colorScheme } = useColorScheme();
-  const [selectedGeneralOptions, setSelectedGeneralOptions] = React.useState<CheckboxValue[]>([]);
+
+  const categoryIds = useCallback((): number[] => {
+    if (!planBySelectedDate) return [];
+
+    if (!planBySelectedDate?.categoryToPlans) return [];
+
+    return (
+      planBySelectedDate.categoryToPlans.map((categoryToPlan) => categoryToPlan.categoryId) || []
+    );
+  }, [planBySelectedDate]);
+
+  const [selectedGeneralOptions, setSelectedGeneralOptions] =
+    React.useState<CheckboxValue[]>(categoryIds());
 
   useEffect(() => {
-    if (isEqual(oldPlan, plan)) return setShowSaveButton(false);
+    if (isEqual(oldPlan, plan) && isEqual(categoryIds(), selectedGeneralOptions))
+      return setShowSaveButton(false);
 
     setShowSaveButton(true);
-  }, [plan, oldPlan]);
+  }, [plan, oldPlan, selectedGeneralOptions]);
 
   const handleChangeMealCard = (mealCard: MealCardSetting) => {
     const updatedMealPlan = plan.mealPlan?.map((mealPlan) =>
@@ -92,12 +109,15 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
   };
 
   const handleSaveSettings = () => {
-    onSaveMealSettings(
-      planBySelectedDate?.date || selectedWeekDay,
-      plan.mealPlan,
-      planBySelectedDate?.id || null,
+    onSaveMealSettings({
+      date: planBySelectedDate?.date || selectedWeekDay,
+      mealPlans: plan.mealPlan,
+      planId: planBySelectedDate?.id || null,
+      categoryIds: getUniqueIdsFromArray(selectedGeneralOptions, categoryIds()),
+      deletedCategoryIds: getUniqueIdsFromArray(categoryIds(), selectedGeneralOptions),
       deletedMealCardIds
-    );
+    });
+
     setShowSaveButton(false);
   };
 
@@ -124,6 +144,13 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
 
     if (typeof deleteMealCardId !== 'number') return defaultDescription;
     return defaultDescription + ' ' + additionalDescription;
+  };
+
+  const getUniqueIdsFromArray = (
+    arr1: number[] | CheckboxValue[],
+    arr2: number[] | CheckboxValue[]
+  ): number[] => {
+    return arr1.filter((value) => value && !arr2.includes(+value)) as number[];
   };
 
   return (
@@ -154,7 +181,7 @@ const DaySettingsModal: React.FC<DaySettingsModalProps> = ({
           </View>
         }
         footer={
-          !isPastDay(selectedWeekDay) && (
+          !isPastDayOfWeek(selectedWeekDay) && (
             <View className="pt-4 flex-row">
               <Button
                 label={i18n.t('calendar.plan.meal-plan.add-a-meal')}

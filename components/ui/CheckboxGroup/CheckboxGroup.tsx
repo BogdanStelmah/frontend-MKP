@@ -1,3 +1,4 @@
+import React from 'react';
 import { View } from 'react-native';
 
 import { TypeOption } from '@/common/types';

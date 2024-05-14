@@ -120,7 +120,9 @@
         "calories": "Calorie-conscious",
         "at-the-campfire": "At the Campfire",
         "long-term-storage": "Long-Term Storage",
-        "no-kitchen-inheritance": "No Kitchen Inheritance"
+        "no-kitchen-inheritance": "No Kitchen Inheritance",
+        "first-dish": "First dish",
+        "second-dish": "Second dish"
       },
       "recipe-authors": {
         "from-the-app": "From the App",

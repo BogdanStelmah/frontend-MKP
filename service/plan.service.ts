@@ -27,7 +27,8 @@ const createPlan = async (date: Date) => {
 
 const createPlanWithMealPlans = async (
   date: Date,
-  mealPlans: Omit<IMealPlan, 'id'>[]
+  mealPlans: Omit<IMealPlan, 'id'>[],
+  categoryIds: number[]
 ): Promise<IPlan> => {
   return (await requestApi('POST', CREATE_PLAN_WITH_MEAL_PLANS_API, { data: { date, mealPlans } }))
     .data;
@@ -37,19 +38,23 @@ const deletePlan = async (planId: number) => {
   return (await requestApi('DELETE', `${DELETE_PLAN_API}/${planId}`)).data;
 };
 
-const updatePlanWithMealPlans = async (
-  planId: number,
-  date: Date,
-  mealPlans: Partial<IMealPlan>[],
-  deletedMealCardIds?: number[]
-) => {
+const updatePlanWithMealPlans = async (data: {
+  planId: number;
+  date: Date;
+  mealPlans: Partial<IMealPlan>[];
+  categoryIds: number[];
+  deletedCategoryIds: number[];
+  deletedMealCardIds?: number[];
+}) => {
+  const { mealPlans, planId, ...rest } = data;
+
   mealPlans.forEach((mealPlan) => {
     if (!mealPlan.id && !mealPlan.name) throw new Error('Meal plan id or name is required');
   });
 
   return (
     await requestApi('PATCH', `${UPDATE_PLAN_WITH_MEAL_PLANS_API}/${planId}`, {
-      data: { date, mealPlans, deletedMealCardIds }
+      data: { mealPlans, ...rest }
     })
   ).data;
 };

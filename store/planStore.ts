@@ -18,14 +18,20 @@ type PlanActions = {
   fetchPlansForCurrentWeek: () => Promise<IPlan[]>;
   fetchPlanByDate: (date: Date) => Promise<IPlan | undefined>;
   createPlan: (date: Date) => Promise<IPlan | undefined>;
-  createPlanWithMealPlans: (date: Date, mealPlans: Omit<IMealPlan, 'id'>[]) => Promise<void>;
-  deletePlan: (planId: number) => Promise<void>;
-  updatePlanWithMealPlans: (
-    planId: number,
+  createPlanWithMealPlans: (
     date: Date,
-    mealPlans: (Partial<IMealPlan> | Omit<IMealPlan, 'id'>)[],
-    deletedMealCardIds?: number[]
+    mealPlans: Omit<IMealPlan, 'id'>[],
+    categoryIds: number[]
   ) => Promise<void>;
+  deletePlan: (planId: number) => Promise<void>;
+  updatePlanWithMealPlans: (data: {
+    planId: number;
+    date: Date;
+    mealPlans: (Partial<IMealPlan> | Omit<IMealPlan, 'id'>)[];
+    categoryIds: number[];
+    deletedCategoryIds: number[];
+    deletedMealCardIds?: number[];
+  }) => Promise<void>;
 };
 
 const initialPlanState: PlaneState = {
@@ -114,11 +120,11 @@ export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getStat
     }
   },
 
-  createPlanWithMealPlans: async (date, mealPlans) => {
+  createPlanWithMealPlans: async (date, mealPlans, categoryIds) => {
     set(() => ({ isLoading: true }));
 
     try {
-      const newPlan = await planApi.createPlanWithMealPlans(date, mealPlans);
+      const newPlan = await planApi.createPlanWithMealPlans(date, mealPlans, categoryIds);
 
       if (isInCurrentWeek(new Date(newPlan.date))) {
         set(() => ({ plansForCurrentWeek: [...getState().plansForCurrentWeek, newPlan] }));
@@ -153,14 +159,14 @@ export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getStat
     }
   },
 
-  updatePlanWithMealPlans: async (planId, date, mealPlans, deletedMealCardIds) => {
+  updatePlanWithMealPlans: async (data) => {
     set(() => ({ isLoading: true }));
 
     try {
-      await planApi.updatePlanWithMealPlans(planId, date, mealPlans, deletedMealCardIds);
+      await planApi.updatePlanWithMealPlans(data);
 
       // TODO: improve this logic
-      if (isInCurrentWeek(new Date(date))) {
+      if (isInCurrentWeek(new Date(data.date))) {
         await getState().fetchPlansForCurrentWeek();
       } else {
         await getState().fetchPlansForCurrentYear();

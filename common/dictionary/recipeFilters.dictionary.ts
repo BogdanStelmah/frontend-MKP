@@ -2,13 +2,16 @@ import { UsersTypeEnum } from '@/common/enums';
 import { TypeOption } from '@/common/types';
 import i18n from '@/i18n';
 
+// TODO: Need to load from the server
 export const getGeneralOptions = (): TypeOption[] => [
-  { label: i18n.t('recipe-search.filters.general-options.in-the-field'), value: '1' },
-  { label: i18n.t('recipe-search.filters.general-options.quick-cooking'), value: '2' },
-  { label: i18n.t('recipe-search.filters.general-options.calories'), value: '3' },
-  { label: i18n.t('recipe-search.filters.general-options.at-the-campfire'), value: '4' },
-  { label: i18n.t('recipe-search.filters.general-options.long-term-storage'), value: '5' },
-  { label: i18n.t('recipe-search.filters.general-options.no-kitchen-inheritance'), value: '6' }
+  { label: i18n.t('recipe-search.filters.general-options.in-the-field'), value: 3 },
+  { label: i18n.t('recipe-search.filters.general-options.quick-cooking'), value: 4 },
+  { label: i18n.t('recipe-search.filters.general-options.calories'), value: 6 },
+  { label: i18n.t('recipe-search.filters.general-options.at-the-campfire'), value: 5 },
+  { label: i18n.t('recipe-search.filters.general-options.long-term-storage'), value: 7 },
+  { label: i18n.t('recipe-search.filters.general-options.no-kitchen-inheritance'), value: 8 },
+  { label: i18n.t('recipe-search.filters.general-options.first-dish'), value: 1 },
+  { label: i18n.t('recipe-search.filters.general-options.second-dish'), value: 2 }
 ];
 
 export const getRecipeAuthors = (): TypeOption[] => [
@@ -39,6 +42,7 @@ export const getCalorieContentOptions = (): TypeOption[] => [
   { label: i18n.t('recipe-search.filters.calories-options.more-than-500'), value: [500, 0] }
 ];
 
+// TODO: Need to load from the server
 export const getTagsOptions = (): TypeOption[] => [
   { label: 'Гриль', value: '1' },
   { label: 'Вегетаріанське', value: '2' },

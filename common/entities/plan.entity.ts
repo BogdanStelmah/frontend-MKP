@@ -5,6 +5,7 @@ export interface IPlan {
   date: string;
   user?: IUser;
   mealPlan?: IMealPlan[];
+  categoryToPlans?: ICategoryToPlan[];
 }
 
 export interface IMealPlan {
@@ -15,4 +16,10 @@ export interface IMealPlan {
   mealStartTime?: string;
   mealEndTime?: string;
   totalNumberOfServings: number;
+}
+
+export interface ICategoryToPlan {
+  id: number;
+  planId: number;
+  categoryId: number;
 }
