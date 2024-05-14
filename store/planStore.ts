@@ -96,6 +96,8 @@ export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getStat
 
       if (planByDate) {
         set(() => ({ planBySelectedDate: planByDate }));
+      } else {
+        set(() => ({ planBySelectedDate: undefined }));
       }
 
       return planByDate;
