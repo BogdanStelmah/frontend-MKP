@@ -11,6 +11,7 @@ type PlaneState = {
   plansForCurrentYear: IPlan[];
   planBySelectedDate: IPlan | undefined;
   isLoading: boolean;
+  isLoadedPlansForCurrentYear: boolean;
 };
 
 type PlanActions = {
@@ -38,14 +39,15 @@ const initialPlanState: PlaneState = {
   plansForCurrentWeek: [],
   plansForCurrentYear: [],
   planBySelectedDate: undefined,
-  isLoading: false
+  isLoading: false,
+  isLoadedPlansForCurrentYear: true
 };
 
 export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getState) => ({
   ...initialPlanState,
 
   fetchPlansForCurrentYear: async () => {
-    set(() => ({ isLoading: true }));
+    set(() => ({ isLoadedPlansForCurrentYear: true }));
 
     try {
       if (getState().plansForCurrentYear.length) {
@@ -61,7 +63,7 @@ export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getStat
         throw new Error(e.response.data.message);
       }
     } finally {
-      set(() => ({ isLoading: false }));
+      set(() => ({ isLoadedPlansForCurrentYear: false }));
     }
   },
 

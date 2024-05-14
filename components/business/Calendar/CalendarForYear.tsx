@@ -8,11 +8,10 @@ import { usePlanStore } from '@/store/planStore';
 const CalendarForYear = () => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [isModalVisible, showModal, hideModal] = useModal();
-  const [isLoadingCalendar, setIsLoadingCalendar] = useState(true);
 
   const plansForCurrentYear = usePlanStore.use.plansForCurrentYear();
   const fetchPlansForCurrentYear = usePlanStore.use.fetchPlansForCurrentYear();
-  const isLoading = usePlanStore.use.isLoading();
+  const isLoading = usePlanStore.use.isLoadedPlansForCurrentYear();
 
   useEffect(() => {
     fetchPlansForCurrentYear().catch((err) => console.error(err));
@@ -28,16 +27,12 @@ const CalendarForYear = () => {
     hideModal();
   };
 
-  useEffect(() => {
-    if (!isLoading) setIsLoadingCalendar(false);
-  }, [isLoading]);
-
   return (
     <>
       <CalendarFull
         extraStyles="mb-[90px]"
         isScrollingToCurrentMonth
-        isLoading={isLoadingCalendar}
+        isLoading={isLoading}
         plans={plansForCurrentYear}
         onPressOnDay={handlePressOnDay}
       />
