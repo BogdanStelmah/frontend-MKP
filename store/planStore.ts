@@ -33,6 +33,8 @@ type PlanActions = {
     deletedCategoryIds: number[];
     deletedMealCardIds?: number[];
   }) => Promise<void>;
+  addRecipeToMealPlan: (recipeId: number, mealPlanId: number) => Promise<void>;
+  deleteRecipeFromMealPlan: (recipeToMealPlanId: number) => Promise<void>;
 };
 
 const initialPlanState: PlaneState = {
@@ -175,6 +177,36 @@ export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getStat
       } else {
         await getState().fetchPlansForCurrentYear();
       }
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  addRecipeToMealPlan: async (recipeId, mealPlanId) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      await planApi.addRecipeToMealPlan({ recipeId, mealPlanId });
+      await getState().fetchPlansForCurrentWeek();
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  deleteRecipeFromMealPlan: async (recipeToMealPlanId) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      await planApi.deleteRecipeFromMealPlan({ recipeToMealPlanId });
+      await getState().fetchPlansForCurrentWeek();
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);

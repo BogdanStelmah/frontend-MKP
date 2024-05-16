@@ -9,6 +9,8 @@ import { FontWeightEnum } from '@/common/enums';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import Text2Md from '@/components/ui/Typography/Text2md';
+import { usePlanStore } from '@/store/planStore';
+
 interface AddRecipeToMealPlanModalProps {
   isModalVisible: boolean;
   hideModal: () => void;
@@ -21,10 +23,11 @@ const AddRecipeToMealPlanModal: React.FC<AddRecipeToMealPlanModalProps> = ({
   recipeId
 }) => {
   const { colorScheme } = useColorScheme();
+  const addRecipeToMealPlan = usePlanStore.use.addRecipeToMealPlan();
 
   const handleAddToReschedule = (mealPlanId: number) => {
-    console.log('mealPlanId', mealPlanId);
-    console.log('recipeId', recipeId);
+    addRecipeToMealPlan(recipeId, mealPlanId).catch((e) => console.error(e));
+    hideModal();
   };
 
   return (
