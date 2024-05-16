@@ -52,10 +52,6 @@ export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getStat
     set(() => ({ isLoadedPlansForCurrentYear: true }));
 
     try {
-      if (getState().plansForCurrentYear.length) {
-        return getState().plansForCurrentYear;
-      }
-
       const plansForCurrentYear = await planApi.fetchPlansForCurrentYear();
       set(() => ({ plansForCurrentYear }));
 
@@ -132,10 +128,11 @@ export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getStat
     try {
       const newPlan = await planApi.createPlanWithMealPlans(date, mealPlans, categoryIds);
 
+      // TODO: improve this logic
       if (isInCurrentWeek(new Date(newPlan.date))) {
-        set(() => ({ plansForCurrentWeek: [...getState().plansForCurrentWeek, newPlan] }));
+        await getState().fetchPlansForCurrentWeek();
       } else {
-        set(() => ({ plansForCurrentYear: [...getState().plansForCurrentYear, newPlan] }));
+        await getState().fetchPlansForCurrentYear();
       }
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {

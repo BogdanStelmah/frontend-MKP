@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useCallback, useRef } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import CalendarMonth from '../CalendarMonth/CalendarMonth';
@@ -45,6 +45,13 @@ const CalendarFull: React.FC<CalendarFullProps> = ({
     }
   };
 
+  const daysData = useCallback(
+    (month: string) => {
+      return filterPlansByMonth(plans, calculateMonthNumber(month));
+    },
+    [plans]
+  );
+
   return (
     <View className={extraStyles}>
       <CalendarWeekdays extraStyles="mb-[10px]" />
@@ -62,7 +69,7 @@ const CalendarFull: React.FC<CalendarFullProps> = ({
                   month={month}
                   year={getCurrentYear()}
                   onPressOnDay={onPressOnDay}
-                  daysData={filterPlansByMonth(plans, calculateMonthNumber(month))}
+                  daysData={daysData(month)}
                 />
               </View>
             ))}

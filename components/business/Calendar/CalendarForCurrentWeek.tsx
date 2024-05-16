@@ -75,17 +75,21 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
     const formattedMealPlans = mealPlans.map((mealPlan) => mealCardSettingToMealPlan(mealPlan));
 
     if (!planId) {
-      return await createPlanWithMealPlans(formattedDate, formattedMealPlans, categoryIds);
+      await createPlanWithMealPlans(formattedDate, formattedMealPlans, categoryIds);
+    } else {
+      await updatePlanWithMealPlans({
+        planId,
+        categoryIds,
+        deletedCategoryIds,
+        deletedMealCardIds,
+        date: formattedDate,
+        mealPlans: formattedMealPlans
+      });
     }
 
-    await updatePlanWithMealPlans({
-      planId,
-      categoryIds,
-      deletedCategoryIds,
-      deletedMealCardIds,
-      date: formattedDate,
-      mealPlans: formattedMealPlans
-    });
+    if (selectedDate) {
+      fetchPlanByDate(selectedDate).catch((err) => console.error(err));
+    }
   };
 
   const handlePressToRecipe = (mealPlanToRecipeId: number, recipeId: number) => {
