@@ -7,7 +7,9 @@ import { useModal } from '@/common/hooks';
 import { mealCardSettingToMealPlan } from '@/common/mappers';
 import { compareDatesWithoutTime, getDatesOfCurrentWeek } from '@/common/utils';
 import { PlanningDay } from '@/components/business/Calendar/PlanningDay';
+import { RecipeOverviewModal } from '@/components/business/Recipe/RecipeOverviewModal';
 import { usePlanStore } from '@/store/planStore';
+import { useRecipeStore } from '@/store/recipeStore';
 
 interface CalendarForCurrentWeekProps {
   selectedDate?: Date;
@@ -21,17 +23,27 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
   onPressAddToReschedule
 }) => {
   const [selectedWeekDay, setSelectedWeekDay] = useState<Date | null>(null);
+  const [selectedRecipe, setSelectedRecipe] = useState<{
+    mealPlanToRecipeId: number;
+    recipeId: number;
+  } | null>(null);
+
+  const [isRecipeOverviewModalVisible, showRecipeOverviewModal, hideRecipeOverviewModal] =
+    useModal();
   const [isModalVisible, showModal, hideModal] = useModal();
 
   const plansForCurrentWeek = usePlanStore.use.plansForCurrentWeek();
   const planBySelectedDate = usePlanStore.use.planBySelectedDate();
+  const recipeById = useRecipeStore.use.recipeById();
   const isLoading = usePlanStore.use.isLoading();
 
   const fetchPlansForCurrentWeek = usePlanStore.use.fetchPlansForCurrentWeek();
   const fetchPlanByDate = usePlanStore.use.fetchPlanByDate();
+  const fetchRecipeById = useRecipeStore.use.fetchRecipeById();
 
   const createPlanWithMealPlans = usePlanStore.use.createPlanWithMealPlans();
   const updatePlanWithMealPlans = usePlanStore.use.updatePlanWithMealPlans();
+  const deleteRecipeFromMealPlan = usePlanStore.use.deleteRecipeFromMealPlan();
 
   useEffect(() => {
     if (selectedDate) {
@@ -76,6 +88,22 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
     });
   };
 
+  const handlePressToRecipe = (mealPlanToRecipeId: number, recipeId: number) => {
+    fetchRecipeById(recipeId).then(() => {
+      setSelectedRecipe({ mealPlanToRecipeId, recipeId });
+      showRecipeOverviewModal();
+    });
+  };
+
+  const handlePressRemoveFromReschedule = () => {
+    if (!selectedRecipe) return;
+
+    deleteRecipeFromMealPlan(selectedRecipe.mealPlanToRecipeId).then(() => {
+      hideRecipeOverviewModal();
+      setSelectedRecipe(null);
+    });
+  };
+
   const getPlansForCurrentWeek = () => {
     return getDatesOfCurrentWeek().map((date) => {
       const plan = getPlanForDay(date);
@@ -91,6 +119,7 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
             isLoading={isLoading}
             isAddRecipeToMealPlan={isAddRecipeToMealPlan}
             onPressAddToReschedule={onPressAddToReschedule}
+            onPressOnRecipe={handlePressToRecipe}
           />
         </View>
       );
@@ -99,7 +128,7 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
 
   return (
     <>
-      <ScrollView showsVerticalScrollIndicator={false} className="mb-[220px]">
+      <ScrollView showsVerticalScrollIndicator={false} className="mb-[200px]">
         <View className="flex-col gap-y-[20px]" onStartShouldSetResponder={() => true}>
           {!selectedDate ? (
             getPlansForCurrentWeek()
@@ -111,6 +140,7 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
                 plan={planBySelectedDate}
                 isLoading={isLoading}
                 onPressAddToReschedule={onPressAddToReschedule}
+                onPressOnRecipe={handlePressToRecipe}
               />
             </View>
           )}
@@ -126,6 +156,17 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
           selectedWeekDay={selectedWeekDay}
           planBySelectedDate={getPlanForDay(selectedWeekDay)}
           isLoading={isLoading}
+        />
+      )}
+
+      {selectedRecipe?.recipeId && recipeById && (
+        <RecipeOverviewModal
+          isModalVisible={isRecipeOverviewModalVisible}
+          recipe={recipeById}
+          hideModal={hideRecipeOverviewModal}
+          isRemoveFromReschedule
+          onPressAddToReschedule={() => {}}
+          onPressRemoveFromReschedule={handlePressRemoveFromReschedule}
         />
       )}
     </>

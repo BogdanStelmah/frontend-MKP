@@ -35,8 +35,11 @@ const createPlanWithMealPlans = async (
   mealPlans: Omit<IMealPlan, 'id'>[],
   categoryIds: number[]
 ): Promise<IPlan> => {
-  return (await requestApi('POST', CREATE_PLAN_WITH_MEAL_PLANS_API, { data: { date, mealPlans } }))
-    .data;
+  return (
+    await requestApi('POST', CREATE_PLAN_WITH_MEAL_PLANS_API, {
+      data: { date, mealPlans, categoryIds }
+    })
+  ).data;
 };
 
 const deletePlan = async (planId: number) => {

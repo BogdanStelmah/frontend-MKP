@@ -89,6 +89,7 @@
     "main-dishes": "Другі страви",
     "modal": {
       "add-to-reschedule": "Додати до розкладу",
+      "delete-from-schedule": "Видалити з розкладу",
       "from": "Від ",
       "description": "ОПИС",
       "ingredients": "ІНГРЕДІЄНТИ",
@@ -159,7 +160,7 @@
       "this-year": "Цей рік"
     },
     "plan": {
-      "view-the-selected-day": "View the selected day",
+      "view-the-selected-day": "Переглянути обраний день",
       "meal-plan": {
         "allocated-cooking-time": "Виділений час для приготування:",
         "meal-time": "Час трапези:",

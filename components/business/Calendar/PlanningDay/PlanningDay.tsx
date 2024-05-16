@@ -1,7 +1,7 @@
 import { AntDesign, Entypo, Feather } from '@expo/vector-icons';
 import { useColorScheme } from 'nativewind';
 import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
+import { Image, TouchableOpacity, View } from 'react-native';
 
 import MealPlanSkeleton from '../../../ui/Skeletons/MealPlanSkeleton';
 
@@ -11,6 +11,7 @@ import { formatDayNumber } from '@/common/utils';
 import { formatDayName } from '@/common/utils/formatDayName';
 import { formatShortMonthName } from '@/common/utils/formatShortMonthName';
 import { formatTime } from '@/common/utils/formatTime';
+import Text2xs from '@/components/ui/Typography/Text2xs';
 import TextMd from '@/components/ui/Typography/TextMd';
 import TextSm from '@/components/ui/Typography/TextSm';
 
@@ -21,6 +22,7 @@ interface PlanningDayProps {
   isAddRecipeToMealPlan?: boolean;
   onPressOnSettings: (date: Date) => void;
   onPressAddToReschedule?: (mealPlanId: number) => void;
+  onPressOnRecipe?: (mealPlanToRecipeId: number, recipeId: number) => void;
 }
 
 const PlanningDay: React.FC<PlanningDayProps> = ({
@@ -29,7 +31,8 @@ const PlanningDay: React.FC<PlanningDayProps> = ({
   isLoading,
   isAddRecipeToMealPlan = false,
   onPressOnSettings,
-  onPressAddToReschedule
+  onPressAddToReschedule,
+  onPressOnRecipe
 }) => {
   const { colorScheme } = useColorScheme();
 
@@ -108,6 +111,33 @@ const PlanningDay: React.FC<PlanningDayProps> = ({
                   </View>
                 </View>
               </TouchableOpacity>
+
+              <View className="mt-[5px]">
+                {mealPlan.mealPlanToRecipes?.map(({ recipe, id }) => (
+                  <View key={[id, mealPlan.id, recipe.id].join('_')} className="mb-[10px]">
+                    <TouchableOpacity
+                      activeOpacity={100}
+                      onPress={() => onPressOnRecipe?.(id, recipe.id)}
+                      className="flex-row"
+                    >
+                      <Image
+                        style={{ height: 45, width: 73 }}
+                        source={{ uri: recipe.imageUrl }}
+                        className="rounded-sm"
+                      />
+
+                      {recipe.title && (
+                        <Text2xs
+                          fontWeight={FontWeightEnum.SEMIBOLD}
+                          extraStyles="ml-[10px] w-[220px]"
+                        >
+                          {recipe.title}
+                        </Text2xs>
+                      )}
+                    </TouchableOpacity>
+                  </View>
+                ))}
+              </View>
             </View>
           ))}
         </View>

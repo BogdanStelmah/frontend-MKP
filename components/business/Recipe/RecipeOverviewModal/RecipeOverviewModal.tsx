@@ -24,15 +24,19 @@ import i18n from '@/i18n';
 interface RecipeOverviewModalProps {
   recipe: IRecipe;
   isModalVisible: boolean;
+  isRemoveFromReschedule?: boolean;
   hideModal: () => void;
   onPressAddToReschedule: (recipe: IRecipe) => void;
+  onPressRemoveFromReschedule?: (recipe: IRecipe) => void;
 }
 
 const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
   isModalVisible,
   hideModal,
   recipe,
-  onPressAddToReschedule
+  onPressAddToReschedule,
+  isRemoveFromReschedule = false,
+  onPressRemoveFromReschedule
 }) => {
   const { colorScheme } = useColorScheme();
   const [isRecipeSettingsModalVisible, showRecipeSettingsModal, hideRecipeSettingsModal] =
@@ -57,32 +61,42 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
               </Button>
             </View>
 
-            <View className="flex-row items-center">
-              <Button extraStyles="mr-[14px]">
-                <Feather
-                  name="heart"
-                  size={24}
-                  color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
-                />
-              </Button>
+            {!isRemoveFromReschedule && (
+              <View className="flex-row items-center">
+                <Button extraStyles="mr-[14px]">
+                  <Feather
+                    name="heart"
+                    size={24}
+                    color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
+                  />
+                </Button>
 
-              <Button onPress={showRecipeSettingsModal}>
-                <Entypo
-                  name="dots-three-horizontal"
-                  size={24}
-                  color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
-                />
-              </Button>
-            </View>
+                <Button onPress={showRecipeSettingsModal}>
+                  <Entypo
+                    name="dots-three-horizontal"
+                    size={24}
+                    color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
+                  />
+                </Button>
+              </View>
+            )}
           </View>
         }
         footer={
           <View className="pt-4">
             <Button
-              label={i18n.t('recipe-search.modal.add-to-reschedule')}
+              label={
+                !isRemoveFromReschedule
+                  ? i18n.t('recipe-search.modal.add-to-reschedule')
+                  : i18n.t('recipe-search.modal.delete-from-schedule')
+              }
               type="filled"
               borderRadius="rounded-lg"
-              onPress={() => onPressAddToReschedule(recipe)}
+              onPress={() =>
+                !isRemoveFromReschedule
+                  ? onPressAddToReschedule(recipe)
+                  : onPressRemoveFromReschedule?.(recipe)
+              }
             />
           </View>
         }

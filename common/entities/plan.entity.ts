@@ -1,3 +1,4 @@
+import { IPreviewRecipe } from '@/common/entities/recipe.entity';
 import { IUser } from '@/common/types';
 
 export interface IPlan {
@@ -16,10 +17,17 @@ export interface IMealPlan {
   mealStartTime?: string;
   mealEndTime?: string;
   totalNumberOfServings: number;
+  mealPlanToRecipes?: IMealPlanToRecipe[];
 }
 
 export interface ICategoryToPlan {
   id: number;
   planId: number;
   categoryId: number;
+}
+
+export interface IMealPlanToRecipe {
+  id: number;
+  servingRatio: number;
+  recipe: IPreviewRecipe;
 }

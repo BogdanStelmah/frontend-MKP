@@ -89,6 +89,7 @@
     "main-dishes": "Main dishes",
     "modal": {
       "add-to-reschedule": "Add to schedule",
+      "delete-from-schedule": "Delete from schedule",
       "from": "From ",
       "description": "DESCRIPTION",
       "ingredients": "INGREDIENTS",
