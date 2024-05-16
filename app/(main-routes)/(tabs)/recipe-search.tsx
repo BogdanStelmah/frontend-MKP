@@ -9,6 +9,7 @@ import { RecipeFilters } from '@/components/business/Recipe/RecipeFilters';
 import { RecipeOverviewModal } from '@/components/business/Recipe/RecipeOverviewModal';
 import { RecipesByCategory } from '@/components/business/Recipe/RecipesByCategory';
 import { RecipesByParameters } from '@/components/business/Recipe/RecipesByParameters';
+import { AddRecipeToMealPlanModal } from '@/components/business/RecipeSearch/AddRecipeToMealPlanModal';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import TabTitle from '@/components/ui/TabTitle';
 import i18n from '@/i18n';
@@ -21,7 +22,13 @@ const RecipeSearch = () => {
   const [countSelectedFilters, setCountSelectedFilters] = useState<number>(0);
   const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
 
-  const [isModalVisible, showModal, hideModal] = useModal();
+  const [isRecipeOverviewModalVisible, showRecipeOverviewModal, hideRecipeOverviewModal] =
+    useModal();
+  const [
+    isAddRecipeToMealPlanModalVisible,
+    showAddRecipeToMealPlanModal,
+    hideAddRecipeToMealPlanModal
+  ] = useModal();
 
   const fetchRecipeById = useRecipeStore.use.fetchRecipeById();
   const recipeById = useRecipeStore.use.recipeById();
@@ -29,7 +36,7 @@ const RecipeSearch = () => {
   const onPressOnRecipeHandler = (recipeId: number) => {
     fetchRecipeById(recipeId).catch((error) => console.error(error.message));
     setSelectedRecipeId(recipeId);
-    showModal();
+    showRecipeOverviewModal();
   };
 
   const handleSetSelectedFilters = (filters: RecipeFiltersType & SearchParam) => {
@@ -38,6 +45,10 @@ const RecipeSearch = () => {
 
   const handleCountSelectedFilters = (countFilter: number) => {
     setCountSelectedFilters(countFilter);
+  };
+
+  const handlePressAddToReschedule = () => {
+    showAddRecipeToMealPlanModal();
   };
 
   return (
@@ -62,11 +73,20 @@ const RecipeSearch = () => {
       )}
 
       {selectedRecipeId && recipeById && (
-        <RecipeOverviewModal
-          isModalVisible={isModalVisible}
-          recipe={recipeById}
-          hideModal={hideModal}
-        />
+        <>
+          <RecipeOverviewModal
+            isModalVisible={isRecipeOverviewModalVisible}
+            recipe={recipeById}
+            hideModal={hideRecipeOverviewModal}
+            onPressAddToReschedule={handlePressAddToReschedule}
+          />
+
+          <AddRecipeToMealPlanModal
+            recipeId={selectedRecipeId}
+            hideModal={hideAddRecipeToMealPlanModal}
+            isModalVisible={isAddRecipeToMealPlanModalVisible}
+          />
+        </>
       )}
     </ScreenContainer>
   );

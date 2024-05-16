@@ -11,9 +11,15 @@ import { usePlanStore } from '@/store/planStore';
 
 interface CalendarForCurrentWeekProps {
   selectedDate?: Date;
+  isAddRecipeToMealPlan?: boolean;
+  onPressAddToReschedule?: (mealPlanId: number) => void;
 }
 
-const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({ selectedDate }) => {
+const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
+  selectedDate,
+  isAddRecipeToMealPlan = false,
+  onPressAddToReschedule
+}) => {
   const [selectedWeekDay, setSelectedWeekDay] = useState<Date | null>(null);
   const [isModalVisible, showModal, hideModal] = useModal();
 
@@ -70,21 +76,33 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({ selecte
     });
   };
 
+  const getPlansForCurrentWeek = () => {
+    return getDatesOfCurrentWeek().map((date) => {
+      const plan = getPlanForDay(date);
+
+      if (isAddRecipeToMealPlan && !plan?.mealPlan?.length) return null;
+
+      return (
+        <View key={date.toString()}>
+          <PlanningDay
+            date={date}
+            onPressOnSettings={handlePressOnSettings}
+            plan={getPlanForDay(date)}
+            isLoading={isLoading}
+            isAddRecipeToMealPlan={isAddRecipeToMealPlan}
+            onPressAddToReschedule={onPressAddToReschedule}
+          />
+        </View>
+      );
+    });
+  };
+
   return (
     <>
       <ScrollView showsVerticalScrollIndicator={false} className="mb-[220px]">
         <View className="flex-col gap-y-[20px]" onStartShouldSetResponder={() => true}>
           {!selectedDate ? (
-            getDatesOfCurrentWeek().map((date) => (
-              <View key={date.toString()}>
-                <PlanningDay
-                  date={date}
-                  onPressOnSettings={handlePressOnSettings}
-                  plan={getPlanForDay(date)}
-                  isLoading={isLoading}
-                />
-              </View>
-            ))
+            getPlansForCurrentWeek()
           ) : (
             <View key={selectedDate.toString()}>
               <PlanningDay
@@ -92,6 +110,7 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({ selecte
                 onPressOnSettings={handlePressOnSettings}
                 plan={planBySelectedDate}
                 isLoading={isLoading}
+                onPressAddToReschedule={onPressAddToReschedule}
               />
             </View>
           )}

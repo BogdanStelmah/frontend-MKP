@@ -43,6 +43,7 @@ const Modal: React.FC<ModalProps> = ({
       className="m-0"
       backdropOpacity={0.3}
       onBackdropPress={onClose}
+      hideModalContentWhileAnimating
     >
       {!isFullHeight && <View className="flex-1" />}
 

@@ -25,12 +25,14 @@ interface RecipeOverviewModalProps {
   recipe: IRecipe;
   isModalVisible: boolean;
   hideModal: () => void;
+  onPressAddToReschedule: (recipe: IRecipe) => void;
 }
 
 const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
   isModalVisible,
   hideModal,
-  recipe
+  recipe,
+  onPressAddToReschedule
 }) => {
   const { colorScheme } = useColorScheme();
   const [isRecipeSettingsModalVisible, showRecipeSettingsModal, hideRecipeSettingsModal] =
@@ -80,6 +82,7 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
               label={i18n.t('recipe-search.modal.add-to-reschedule')}
               type="filled"
               borderRadius="rounded-lg"
+              onPress={() => onPressAddToReschedule(recipe)}
             />
           </View>
         }

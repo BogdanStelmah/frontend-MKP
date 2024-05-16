@@ -18,10 +18,19 @@ interface PlanningDayProps {
   date: Date;
   plan?: IPlan;
   isLoading?: boolean;
+  isAddRecipeToMealPlan?: boolean;
   onPressOnSettings: (date: Date) => void;
+  onPressAddToReschedule?: (mealPlanId: number) => void;
 }
 
-const PlanningDay: React.FC<PlanningDayProps> = ({ date, onPressOnSettings, plan, isLoading }) => {
+const PlanningDay: React.FC<PlanningDayProps> = ({
+  date,
+  plan,
+  isLoading,
+  isAddRecipeToMealPlan = false,
+  onPressOnSettings,
+  onPressAddToReschedule
+}) => {
   const { colorScheme } = useColorScheme();
 
   return (
@@ -49,7 +58,7 @@ const PlanningDay: React.FC<PlanningDayProps> = ({ date, onPressOnSettings, plan
         </View>
 
         <View className="flex-row items-center">
-          {plan && (
+          {plan && !isAddRecipeToMealPlan && (
             <TouchableOpacity className="mr-2">
               <AntDesign
                 name="exclamationcircleo"
@@ -59,13 +68,15 @@ const PlanningDay: React.FC<PlanningDayProps> = ({ date, onPressOnSettings, plan
             </TouchableOpacity>
           )}
 
-          <TouchableOpacity onPress={() => onPressOnSettings(date)}>
-            <Feather
-              name="settings"
-              size={26}
-              color={colorScheme === 'light' ? '#4F7942' : '#3F8B28'}
-            />
-          </TouchableOpacity>
+          {!isAddRecipeToMealPlan && (
+            <TouchableOpacity onPress={() => onPressOnSettings(date)}>
+              <Feather
+                name="settings"
+                size={26}
+                color={colorScheme === 'light' ? '#4F7942' : '#3F8B28'}
+              />
+            </TouchableOpacity>
+          )}
         </View>
       </View>
 
@@ -75,26 +86,28 @@ const PlanningDay: React.FC<PlanningDayProps> = ({ date, onPressOnSettings, plan
         <View className="flex-col mt-1">
           {plan.mealPlan.map((mealPlan) => (
             <View className="ml-[15px]" key={plan.id + '_' + mealPlan.id}>
-              <View className="flex-row">
-                <TextSm fontWeight={FontWeightEnum.SEMIBOLD}>{mealPlan.name}</TextSm>
+              <TouchableOpacity onPress={() => onPressAddToReschedule?.(mealPlan.id)}>
+                <View className="flex-row">
+                  <TextSm fontWeight={FontWeightEnum.SEMIBOLD}>{mealPlan.name}</TextSm>
 
-                {mealPlan.mealStartTime && (
-                  <TextSm
-                    fontWeight={FontWeightEnum.SEMIBOLD}
-                    extraStyles="text-disable dark:text-disable-dark ml-2"
-                  >
-                    {formatTime(new Date(mealPlan.mealStartTime))}
-                  </TextSm>
-                )}
+                  {mealPlan.mealStartTime && (
+                    <TextSm
+                      fontWeight={FontWeightEnum.SEMIBOLD}
+                      extraStyles="text-disable dark:text-disable-dark ml-2"
+                    >
+                      {formatTime(new Date(mealPlan.mealStartTime))}
+                    </TextSm>
+                  )}
 
-                <View className="ml-1">
-                  <Entypo
-                    name="plus"
-                    size={22}
-                    color={colorScheme === 'light' ? '#4F7942' : '#3F8B28'}
-                  />
+                  <View className="ml-1">
+                    <Entypo
+                      name="plus"
+                      size={22}
+                      color={colorScheme === 'light' ? '#4F7942' : '#3F8B28'}
+                    />
+                  </View>
                 </View>
-              </View>
+              </TouchableOpacity>
             </View>
           ))}
         </View>
