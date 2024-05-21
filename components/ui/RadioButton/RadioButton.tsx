@@ -8,7 +8,7 @@ import Text2Sm from '@/components/ui/Typography/Text2sm';
 
 interface RadioButtonProps {
   option: TypeOption;
-  checked: boolean;
+  checked?: boolean;
   onPress?: (option: TypeOption) => void;
   extraStyles?: string;
 }

@@ -5,11 +5,17 @@ import { TextInput, TouchableOpacity, View } from 'react-native';
 
 interface NoteInputProps {
   value?: string;
+  isDisabled?: boolean;
   onChangeText: (text: string) => void;
   onPressPlus: () => void;
 }
 
-const NoteInput: React.FC<NoteInputProps> = ({ value = '', onChangeText, onPressPlus }) => {
+const NoteInput: React.FC<NoteInputProps> = ({
+  value = '',
+  onChangeText,
+  onPressPlus,
+  isDisabled
+}) => {
   const { colorScheme } = useColorScheme();
 
   return (
@@ -19,6 +25,7 @@ const NoteInput: React.FC<NoteInputProps> = ({ value = '', onChangeText, onPress
           placeholder="Додати інгредієнт"
           value={value}
           onChangeText={onChangeText}
+          editable={!isDisabled}
           className="font-lato-medium w-full h-[30px] text-black-greyscale-main dark:text-black-greyscale-main-dark border border-brown-camouflage dark:border-black-greyscale-main-dark px-3 pb-[2px] rounded-lg text-[15px] focus:border-yellow-camouflage"
         />
       </View>
