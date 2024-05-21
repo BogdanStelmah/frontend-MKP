@@ -8,6 +8,7 @@ import { createSelectors } from '@/store/helper';
 
 type RecipeState = {
   recipeById: null | IRecipe;
+  calculatedRecipeForMealPlanById: null | IRecipe;
   isLoading: boolean;
 };
 
@@ -20,10 +21,15 @@ type RecipeActions = {
   fetchPreviewRecipes: (
     queryParams: Partial<PaginationParams & SearchParam & FilterRecipeParams>
   ) => Promise<IPreviewRecipe[] | undefined>;
+  fetchCalculatedRecipeForMealPlanById: (
+    mealPlanToRecipeId: number,
+    recipeId: number
+  ) => Promise<void>;
 };
 
 const initialRecipeState: RecipeState = {
   recipeById: null,
+  calculatedRecipeForMealPlanById: null,
   isLoading: false
 };
 
@@ -69,6 +75,25 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
 
     try {
       return await recipeApi.fetchPreviewRecipes(queryParams);
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  fetchCalculatedRecipeForMealPlanById: async (mealPlanToRecipeId, recipeId) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      const calculatedRecipeForMealPlanById = await recipeApi.fetchCalculatedRecipeForMealPlanById({
+        mealPlanToRecipeId,
+        recipeId
+      });
+
+      set(() => ({ calculatedRecipeForMealPlanById }));
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);

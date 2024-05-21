@@ -34,12 +34,12 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
 
   const plansForCurrentWeek = usePlanStore.use.plansForCurrentWeek();
   const planBySelectedDate = usePlanStore.use.planBySelectedDate();
-  const recipeById = useRecipeStore.use.recipeById();
+  const recipeById = useRecipeStore.use.calculatedRecipeForMealPlanById();
   const isLoading = usePlanStore.use.isLoading();
 
   const fetchPlansForCurrentWeek = usePlanStore.use.fetchPlansForCurrentWeek();
   const fetchPlanByDate = usePlanStore.use.fetchPlanByDate();
-  const fetchRecipeById = useRecipeStore.use.fetchRecipeById();
+  const fetchCalculatedRecipeById = useRecipeStore.use.fetchCalculatedRecipeForMealPlanById();
 
   const createPlanWithMealPlans = usePlanStore.use.createPlanWithMealPlans();
   const updatePlanWithMealPlans = usePlanStore.use.updatePlanWithMealPlans();
@@ -93,7 +93,7 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
   };
 
   const handlePressToRecipe = (mealPlanToRecipeId: number, recipeId: number) => {
-    fetchRecipeById(recipeId).then(() => {
+    fetchCalculatedRecipeById(mealPlanToRecipeId, recipeId).then(() => {
       setSelectedRecipe({ mealPlanToRecipeId, recipeId });
       showRecipeOverviewModal();
     });
