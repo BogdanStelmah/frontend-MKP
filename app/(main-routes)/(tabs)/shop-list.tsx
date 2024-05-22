@@ -1,18 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
-import { getGeneralOptions, getRecipeAuthors } from '@/common/dictionary';
 import { IPlanItem } from '@/common/entities';
-import { FontWeightEnum, UsersTypeEnum } from '@/common/enums';
 import { TypeOption } from '@/common/types';
-import { CheckboxGroup } from '@/components/ui/CheckboxGroup';
 import DateInput from '@/components/ui/DateInput/DateInput';
+import { ListItems } from '@/components/ui/ListItems';
 import NoteInput from '@/components/ui/NoteInput/NoteInput';
-import RadioButton from '@/components/ui/RadioButton';
-import { RadioGroup } from '@/components/ui/RadioGroup';
 import ScreenContainer from '@/components/ui/ScreenContainer';
+import { ListItemsSkeleton } from '@/components/ui/Skeletons';
 import TabTitle from '@/components/ui/TabTitle';
-import Text2md from '@/components/ui/Typography/Text2md';
 import { usePlanItemStore } from '@/store';
 
 const ShopList = () => {
@@ -90,74 +86,39 @@ const ShopList = () => {
           />
         </View>
 
-        <ScrollView
-          className="flex-col gap-y-[12px] w-full mt-[2px]"
-          showsVerticalScrollIndicator={false}
-        >
-          {unboughtItems.length > 0 && (
-            <View>
-              <Text2md
-                fontWeight={FontWeightEnum.SEMIBOLD}
-                extraStyles="text-green-secondary-2 dark:text-green-secondary-2-dark mb-1"
-              >
-                Продукти
-              </Text2md>
+        {isLoading ? (
+          <ListItemsSkeleton numberOfSkeletons={3} />
+        ) : (
+          <ScrollView
+            className="flex-col gap-y-[12px] w-full mt-[2px]"
+            showsVerticalScrollIndicator={false}
+          >
+            {unboughtItems.length > 0 && (
+              <ListItems
+                title="Продукти"
+                options={getOptions(unboughtItems)}
+                handleOptionSelect={(option) => handleOptionSelect(option, 'unbought')}
+              />
+            )}
 
-              {getOptions(unboughtItems).map((option) => (
-                <View className="mb-1">
-                  <RadioButton
-                    key={option.label}
-                    option={option}
-                    onPress={(option) => handleOptionSelect(option, 'unbought')}
-                  />
-                </View>
-              ))}
-            </View>
-          )}
+            {customItems.length > 0 && (
+              <ListItems
+                title="Додаткові"
+                options={getOptions(customItems)}
+                handleOptionSelect={(option) => handleOptionSelect(option, 'custom')}
+              />
+            )}
 
-          {customItems.length > 0 && (
-            <View>
-              <Text2md
-                fontWeight={FontWeightEnum.SEMIBOLD}
-                extraStyles="text-green-secondary-2 dark:text-green-secondary-2-dark mb-1"
-              >
-                Додаткові
-              </Text2md>
-
-              {getOptions(customItems).map((option) => (
-                <View className="mb-1">
-                  <RadioButton
-                    key={option.label}
-                    option={option}
-                    onPress={(option) => handleOptionSelect(option, 'custom')}
-                  />
-                </View>
-              ))}
-            </View>
-          )}
-
-          {boughtItems.length > 0 && (
-            <View>
-              <Text2md
-                fontWeight={FontWeightEnum.SEMIBOLD}
-                extraStyles="text-green-secondary-2 dark:text-green-secondary-2-dark mb-1"
-              >
-                Куплені
-              </Text2md>
-
-              {getOptions(boughtItems).map((option) => (
-                <View className="mb-1">
-                  <RadioButton
-                    key={option.label}
-                    option={option}
-                    checked
-                    onPress={(option) => handleOptionSelect(option, 'bought')}
-                  />
-                </View>
-              ))}
-            </View>
-          )}
-        </ScrollView>
+            {boughtItems.length > 0 && (
+              <ListItems
+                title="Куплені"
+                options={getOptions(boughtItems)}
+                handleOptionSelect={(option) => handleOptionSelect(option, 'bought')}
+                isChecked
+              />
+            )}
+          </ScrollView>
+        )}
       </View>
     </ScreenContainer>
   );
