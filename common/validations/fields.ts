@@ -103,5 +103,7 @@ export const fields = {
   language: yup.object<LangOption>().shape({
     label: yup.string().required(),
     value: yup.mixed<LangEnum>().oneOf(Object.values(LangEnum)).required()
-  })
+  }),
+
+  imageUri: yup.string().required(IS_REQUIRED)
 };

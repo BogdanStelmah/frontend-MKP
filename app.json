@@ -32,7 +32,13 @@
     },
     "plugins": [
       "expo-router",
-      "expo-localization"
+      "expo-localization",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos so you can share food photos with others."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
