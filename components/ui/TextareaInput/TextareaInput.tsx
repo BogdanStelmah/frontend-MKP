@@ -3,7 +3,6 @@ import { useColorScheme } from 'nativewind';
 import React from 'react';
 import {
   GestureResponderEvent,
-  KeyboardType,
   NativeSyntheticEvent,
   TextInput as DefaultTextInput,
   TextInputFocusEventData,
@@ -13,46 +12,35 @@ import {
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
 import TextXs from '@/components/ui/Typography/TextXs';
 
-export interface TextInputProps {
+export interface TextareaInputProps {
   label: string;
   placeholder: string;
   value?: string;
   error?: boolean;
   helperText?: string;
-  isSecureTextEntry?: boolean;
-  isEditable?: boolean;
-  isMultiline?: boolean;
-  maxLength?: number;
   extraStyles?: string;
-  keyboardType?: KeyboardType;
-  autoCapitalize?: 'none' | 'sentences' | 'words' | 'characters' | undefined;
   onChangeText?: (value: string) => void;
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   onPress?: (event: GestureResponderEvent) => void;
 }
 
-const TextInput: React.FC<TextInputProps> = ({
+const TextareaInput: React.FC<TextareaInputProps> = ({
   label,
   error,
   helperText,
-  isSecureTextEntry = false,
-  autoCapitalize = 'none',
   extraStyles,
-  isEditable = true,
   onPress,
-  isMultiline = false,
   ...props
 }) => {
   const styleMap = {
     mainBlock: classNames({
-      'h-auto': true
+      'h-[84px]': true
     }),
     label: 'inline-block text-brown-camouflage dark:text-black-greyscale-main-dark mb-0.5',
     textInput: classNames(
       {
-        'h-[46px] pb-[2px]': !isMultiline,
-        'min-h-[84px] py-[12px]': isMultiline,
-        'w-full px-3 rounded-lg': true,
+        'h-[46px]': true,
+        'w-full px-3 pb-[2px] rounded-lg': true,
         'font-lato-medium text-black-greyscale-main dark:text-black-greyscale-main-dark text-[15px]':
           true,
         'border border-brown-camouflage dark:border-black-greyscale-main-dark focus:border-yellow-camouflage':
@@ -74,13 +62,9 @@ const TextInput: React.FC<TextInputProps> = ({
 
       <DefaultTextInput
         className={styleMap.textInput}
-        multiline
         placeholderTextColor={colorScheme === 'dark' ? '#827A60' : '#909590'}
-        editable={isEditable}
-        secureTextEntry={isSecureTextEntry}
-        autoCapitalize={autoCapitalize}
-        numberOfLines={isMultiline ? 4 : 1}
-        textAlignVertical={isMultiline ? 'top' : 'center'}
+        numberOfLines={4}
+        autoCapitalize="words"
         {...props}
       />
 
@@ -93,4 +77,4 @@ const TextInput: React.FC<TextInputProps> = ({
   );
 };
 
-export default TextInput;
+export default TextareaInput;

@@ -18,7 +18,7 @@ const MyRecipes: React.FC = () => {
 
   return (
     <>
-      <ScreenContainer isTouchableWithoutFeedback={false}>
+      <ScreenContainer isTouchableWithoutFeedback>
         <View className="mx-4">
           <TabTitle title={i18n.t('my-recipes.tab-title')} extraTitleStyles="w-[240px]" />
 

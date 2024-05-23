@@ -2,7 +2,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useColorScheme } from 'nativewind';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { SubmitHandler, useForm } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
 
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
@@ -10,10 +10,21 @@ import { createRecipeScheme } from '@/common/validations';
 import Button from '@/components/ui/Button';
 import FormImageInput from '@/components/ui/ImageInput/FormImageInput';
 import Modal from '@/components/ui/Modal';
+import { FormTextInput } from '@/components/ui/TextInput';
 import Text2Md from '@/components/ui/Typography/Text2md';
 
 interface IFormInput {
   imageUri: string;
+  title: string;
+  description?: string;
+  cookingInstructions: string;
+  // calorieContent: number;
+  // weight: number;
+  // numberOfServings: number;
+  // protein?: number;
+  // fat?: number;
+  // carbohydrates?: number;
+  // cookingTime: number;
 }
 
 interface CreateRecipeModalModalProps {
@@ -38,6 +49,10 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
     resolver: yupResolver(createRecipeScheme)
   });
 
+  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
+    console.log(data);
+  };
+
   const handleHideModal = () => {
     hideModal();
     reset();
@@ -51,7 +66,7 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
         isFullHeight
         extraStyles="pt-0"
         header={
-          <View className="flex-row items-center justify-between h-[32px] mb-[25px]">
+          <View className="flex-row items-center justify-between h-[32px] mb-[20px]">
             <View>
               <Button onPress={handleHideModal}>
                 <AntDesign
@@ -73,14 +88,45 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
               label="Зберегти"
               type="filled"
               borderRadius="rounded-lg"
-              onPress={() => {}}
+              onPress={handleSubmit(onSubmit)}
               isDisabled={!isValid}
             />
           </View>
         }
       >
-        <ScrollView className="flex-col gap-y-[14px]" showsVerticalScrollIndicator={false}>
-          <FormImageInput name="imageUri" control={control} />
+        <ScrollView className="flex-col gap-y-[15px]" showsVerticalScrollIndicator={false}>
+          <View>
+            <FormImageInput name="imageUri" control={control} />
+          </View>
+
+          <View>
+            <FormTextInput
+              name="title"
+              control={control}
+              label="Назва"
+              placeholder="напр., Курка-гриль"
+            />
+          </View>
+
+          <View>
+            <FormTextInput
+              name="description"
+              control={control}
+              label="Опис (необов'язково)"
+              placeholder="Додати короткий опис"
+              isMultiline
+            />
+          </View>
+
+          <View>
+            <FormTextInput
+              name="cookingInstructions"
+              control={control}
+              label="Як приготувати"
+              placeholder={`Додати інструкцію\n1. ...\n2. ...`}
+              isMultiline
+            />
+          </View>
         </ScrollView>
       </Modal>
     </>
