@@ -3,6 +3,7 @@ import { create } from 'zustand';
 
 import { IPreviewRecipe, IRecipe } from '@/common/entities';
 import { FilterRecipeParams, PaginationParams, SearchParam } from '@/common/interfaces';
+import { ICreateRecipeFormInput } from '@/components/business/MyRecipes/CreateRecipeModal/CreateRecipeModal';
 import { recipeApi } from '@/service';
 import { createSelectors } from '@/store/helper';
 
@@ -25,6 +26,7 @@ type RecipeActions = {
     mealPlanToRecipeId: number,
     recipeId: number
   ) => Promise<void>;
+  createRecipe: (data: ICreateRecipeFormInput) => Promise<void>;
 };
 
 const initialRecipeState: RecipeState = {
@@ -94,6 +96,34 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
       });
 
       set(() => ({ calculatedRecipeForMealPlanById }));
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  createRecipe: async (data) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      const bodyFormData = new FormData();
+
+      // It is problem with FormData type in React Native (Expo)
+      // @ts-ignore
+      bodyFormData.append('image', {
+        uri: data.imageUri,
+        name: 'image.jpeg',
+        type: 'image/jpeg'
+      });
+
+      bodyFormData.append('title', data.title);
+      bodyFormData.append('description', data.description || '');
+      bodyFormData.append('cookingInstructions', data.cookingInstructions);
+
+      await recipeApi.createRecipe(bodyFormData);
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);

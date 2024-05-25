@@ -18,8 +18,9 @@ import IngredientItem from '@/components/ui/IngredientItem/IngredientItem';
 import Modal from '@/components/ui/Modal';
 import { FormTextInput } from '@/components/ui/TextInput';
 import Text2Md from '@/components/ui/Typography/Text2md';
+import { useRecipeStore } from '@/store';
 
-interface IFormInput {
+export interface ICreateRecipeFormInput {
   imageUri: string;
   title: string;
   description?: string;
@@ -46,8 +47,9 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
   const [ingredientsString, setIngredientsString] = useState<string[]>([]);
 
   const { colorScheme } = useColorScheme();
-
   const [isAddIngredientModalVisible, showAddIngredientModal, hideAddIngredientModal] = useModal();
+
+  const createRecipe = useRecipeStore.use.createRecipe();
 
   const {
     control,
@@ -57,7 +59,7 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
     setValue,
     watch,
     reset
-  } = useForm<IFormInput>({
+  } = useForm<ICreateRecipeFormInput>({
     mode: 'onChange',
     resolver: yupResolver(createRecipeScheme),
     defaultValues: {
@@ -74,8 +76,8 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
     }
   }, [ingredientsWatcher]);
 
-  const onSubmit: SubmitHandler<IFormInput> = async (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<ICreateRecipeFormInput> = async (data) => {
+    await createRecipe(data);
   };
 
   const handleAddIngredient = (data: IAddIngredientFormInput) => {
