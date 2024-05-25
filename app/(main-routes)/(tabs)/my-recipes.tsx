@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import BlockInsteadOfRecipe from '../../../components/ui/BlockInsteadOfRecipe/BlockInsteadOfRecipe';
 
 import { useModal } from '@/common/hooks';
-import { CreateRecipeModal } from '@/components/business/MyRecipes';
+import { CreateRecipeModal } from '@/components/business/MyRecipes/CreateRecipeModal';
 import Button from '@/components/ui/Button';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import { SearchInput } from '@/components/ui/SearchInput';

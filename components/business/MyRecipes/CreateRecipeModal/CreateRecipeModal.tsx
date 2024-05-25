@@ -1,14 +1,20 @@
 import { AntDesign } from '@expo/vector-icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useColorScheme } from 'nativewind';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
 
 import { FontWeightEnum } from '@/common/enums/fontWeight.enum';
+import { useModal } from '@/common/hooks';
+import { formatIngredient } from '@/common/utils';
 import { createRecipeScheme } from '@/common/validations';
+import AddIngredientModal, {
+  IAddIngredientFormInput
+} from '@/components/business/MyRecipes/AddIngredientModal/AddIngredientModal';
 import Button from '@/components/ui/Button';
 import FormImageInput from '@/components/ui/ImageInput/FormImageInput';
+import IngredientItem from '@/components/ui/IngredientItem/IngredientItem';
 import Modal from '@/components/ui/Modal';
 import { FormTextInput } from '@/components/ui/TextInput';
 import Text2Md from '@/components/ui/Typography/Text2md';
@@ -18,6 +24,7 @@ interface IFormInput {
   title: string;
   description?: string;
   cookingInstructions: string;
+  ingredients: IAddIngredientFormInput[];
   // calorieContent: number;
   // weight: number;
   // numberOfServings: number;
@@ -36,26 +43,55 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
   isModalVisible,
   hideModal
 }) => {
+  const [ingredientsString, setIngredientsString] = useState<string[]>([]);
+
   const { colorScheme } = useColorScheme();
+
+  const [isAddIngredientModalVisible, showAddIngredientModal, hideAddIngredientModal] = useModal();
 
   const {
     control,
     handleSubmit,
     formState: { isValid },
-    setError,
+    getValues,
+    setValue,
+    watch,
     reset
   } = useForm<IFormInput>({
     mode: 'onChange',
-    resolver: yupResolver(createRecipeScheme)
+    resolver: yupResolver(createRecipeScheme),
+    defaultValues: {
+      ingredients: []
+    }
   });
+
+  const ingredientsWatcher = watch('ingredients');
+
+  useEffect(() => {
+    if (ingredientsWatcher) {
+      const formattedIngredients = ingredientsWatcher.map(formatIngredient);
+      setIngredientsString(formattedIngredients);
+    }
+  }, [ingredientsWatcher]);
 
   const onSubmit: SubmitHandler<IFormInput> = async (data) => {
     console.log(data);
   };
 
+  const handleAddIngredient = (data: IAddIngredientFormInput) => {
+    setValue('ingredients', [...getValues('ingredients'), data]);
+  };
+
   const handleHideModal = () => {
     hideModal();
     reset();
+  };
+
+  const handleDeleteIngredient = (index: number) => {
+    const ingredients = getValues('ingredients');
+
+    ingredients.splice(index, 1);
+    setValue('ingredients', ingredients);
   };
 
   return (
@@ -119,6 +155,22 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
           </View>
 
           <View>
+            <IngredientItem
+              ingredientsString={ingredientsString}
+              handleDeleteIngredient={handleDeleteIngredient}
+            />
+
+            <View className="pt-4">
+              <Button
+                label="Додати інгредієнт"
+                type="outlined"
+                borderRadius="rounded-lg"
+                onPress={showAddIngredientModal}
+              />
+            </View>
+          </View>
+
+          <View>
             <FormTextInput
               name="cookingInstructions"
               control={control}
@@ -129,6 +181,12 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
           </View>
         </ScrollView>
       </Modal>
+
+      <AddIngredientModal
+        isModalVisible={isAddIngredientModalVisible}
+        hideModal={hideAddIngredientModal}
+        onAddIngredient={handleAddIngredient}
+      />
     </>
   );
 };

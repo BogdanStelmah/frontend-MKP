@@ -16,3 +16,4 @@ export * from './isInCurrentWeek';
 export * from './compareDatesWithoutTime';
 export * from './isPastDayOfWeek';
 export * from './getRandomNumber';
+export * from './formatIngredient';
