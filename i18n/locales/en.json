@@ -146,12 +146,47 @@
         "200-500": "200 to 500",
         "more-than-500": "More than 500"
       }
+    },
+    "add-recipe-to-meal": {
+      "title": "Select a day to add the recipe to the meal plan"
     }
   },
   "my-recipes": {
     "tab-title": "Your recipes are displayed here",
     "create-recipe-button": "Create a recipe",
-    "not-have-any-recipes": "You don't have any recipes yet"
+    "not-have-any-recipes": "You don't have any recipes yet",
+    "create-ingredient": {
+      "add-ingredient": "Add Ingredient",
+      "add": "Add",
+      "name": "Ingredient Name",
+      "name-label": "e.g., Potato",
+      "quantity": "Quantity (optional)",
+      "quantity-label": "e.g., 2.5",
+      "unitOfMeasure": "Unit of Measure",
+      "unitOfMeasure-label": "e.g., kg",
+      "comment": "Comment (optional)",
+      "comment-label": "e.g., Medium"
+    },
+    "create-recipe": {
+      "title": "Create New Recipe",
+      "name": "Name",
+      "name-placeholder": "e.g., Borscht",
+      "description": "Description (optional)",
+      "description-placeholder": "Add a short description",
+      "cookingInstructions": "Cooking Instructions",
+      "cookingInstructions-placeholder": "Add instructions\n1. ...\n2. ...",
+      "cookingTime": "Cooking Time",
+      "cookingTime-placeholder": "min",
+      "weight": "Portion Weight",
+      "weight-placeholder": "grams",
+      "calorieContent": "Caloric Content",
+      "calorieContent-placeholder": "kcal",
+      "numberOfServings": "Number of Servings",
+      "protein": "Protein",
+      "fat": "Fat",
+      "carbohydrates": "Carbohydrates",
+      "choose-category": "Choose the criteria that match your recipe"
+    }
   },
   "calendar": {
     "tab-title": "Select a day to view or customize it",
@@ -191,10 +226,20 @@
     "delete-account": "Delete your account",
     "delete-account-description": "Please confirm that you want to completely delete your account and lose access to the prescription storage?"
   },
+  "shop-list": {
+    "tab-title": "View the shopping list on selected days"
+  },
   "general": {
     "time-input": {
       "clear": "Clear"
     },
+    "add-ingredient": "Add Ingredient",
+    "add-new": "Add New",
+    "choose-image": "Choose Image",
+    "choose-option": "Choose Option",
+    "products": "Products",
+    "additional": "Additional",
+    "bought": "Bought",
     "cancel-label": "Cancel",
     "create-label": "Create",
     "confirm-label": "Confirm",

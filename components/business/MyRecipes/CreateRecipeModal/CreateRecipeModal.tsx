@@ -22,6 +22,7 @@ import FormNumberInput from '@/components/ui/NumberInput/FormTimeInput';
 import { FormTextInput } from '@/components/ui/TextInput';
 import Text2Md from '@/components/ui/Typography/Text2md';
 import Text2sm from '@/components/ui/Typography/Text2sm';
+import i18n from '@/i18n';
 import { useRecipeStore } from '@/store';
 
 export interface ICreateRecipeFormInput {
@@ -123,14 +124,16 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
             </View>
 
             <View className="w-full items-center absolute">
-              <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>Створення нового рецепту</Text2Md>
+              <Text2Md fontWeight={FontWeightEnum.SEMIBOLD}>
+                {i18n.t('my-recipes.create-recipe.title')}
+              </Text2Md>
             </View>
           </View>
         }
         footer={
           <View className="pt-4">
             <Button
-              label="Зберегти"
+              label={i18n.t('personal-info.save')}
               type="filled"
               borderRadius="rounded-lg"
               onPress={handleSubmit(onSubmit)}
@@ -148,8 +151,8 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
             <FormTextInput
               name="title"
               control={control}
-              label="Назва"
-              placeholder="напр., Курка-гриль"
+              label={i18n.t('my-recipes.create-recipe.name')}
+              placeholder={i18n.t('my-recipes.create-recipe.name-placeholder')}
             />
           </View>
 
@@ -157,8 +160,8 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
             <FormTextInput
               name="description"
               control={control}
-              label="Опис (необов'язково)"
-              placeholder="Додати короткий опис"
+              label={i18n.t('my-recipes.create-recipe.description')}
+              placeholder={i18n.t('my-recipes.create-recipe.description-placeholder')}
               isMultiline
             />
           </View>
@@ -171,7 +174,7 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
 
             <View className="pt-4">
               <Button
-                label="Додати інгредієнт"
+                label={i18n.t('general.add-ingredient')}
                 type="outlined"
                 borderRadius="rounded-lg"
                 onPress={showAddIngredientModal}
@@ -183,15 +186,17 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
             <FormTextInput
               name="cookingInstructions"
               control={control}
-              label="Як приготувати"
-              placeholder={`Додати інструкцію\n1. ...\n2. ...`}
+              label={i18n.t('my-recipes.create-recipe.cookingInstructions')}
+              placeholder={i18n.t('my-recipes.create-recipe.cookingInstructions-placeholder')}
               isMultiline
             />
           </View>
 
           <View className="flex-row">
             <View className="flex-1">
-              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>Час приготування</Text2sm>
+              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>
+                {i18n.t('my-recipes.create-recipe.cookingTime')}
+              </Text2sm>
 
               <View className="flex-row items-center mt-[2px]">
                 <View className="w-[60px]">
@@ -199,13 +204,15 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
                 </View>
 
                 <Text2sm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-center ml-2">
-                  хв
+                  {i18n.t('my-recipes.create-recipe.cookingTime-placeholder')}
                 </Text2sm>
               </View>
             </View>
 
             <View className="flex-1">
-              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>Вага порції</Text2sm>
+              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>
+                {i18n.t('my-recipes.create-recipe.weight')}
+              </Text2sm>
 
               <View className="flex-row items-center mt-[2px]">
                 <View className="w-[60px]">
@@ -213,7 +220,7 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
                 </View>
 
                 <Text2sm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-center ml-2">
-                  грам
+                  {i18n.t('my-recipes.create-recipe.weight-placeholder')}
                 </Text2sm>
               </View>
             </View>
@@ -221,7 +228,9 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
 
           <View className="flex-row">
             <View className="flex-1">
-              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>Калорійність</Text2sm>
+              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>
+                {i18n.t('my-recipes.create-recipe.calorieContent')}
+              </Text2sm>
 
               <View className="flex-row items-center mt-[2px]">
                 <View className="w-[60px]">
@@ -229,13 +238,15 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
                 </View>
 
                 <Text2sm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-center ml-2">
-                  Ккал
+                  {i18n.t('my-recipes.create-recipe.calorieContent-placeholder')}
                 </Text2sm>
               </View>
             </View>
 
             <View className="flex-1">
-              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>Кількість порцій</Text2sm>
+              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>
+                {i18n.t('my-recipes.create-recipe.numberOfServings')}
+              </Text2sm>
 
               <View className="flex-row items-center mt-[2px]">
                 <View className="w-[60px]">
@@ -247,7 +258,9 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
 
           <View className="flex-row">
             <View className="flex-1">
-              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>Білки</Text2sm>
+              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>
+                {i18n.t('my-recipes.create-recipe.protein')}
+              </Text2sm>
 
               <View className="flex-row items-center mt-[2px]">
                 <View className="w-[60px]">
@@ -257,7 +270,9 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
             </View>
 
             <View className="flex-1">
-              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>Жири</Text2sm>
+              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>
+                {i18n.t('my-recipes.create-recipe.fat')}
+              </Text2sm>
 
               <View className="flex-row items-center mt-[2px]">
                 <View className="w-[60px]">
@@ -267,7 +282,9 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
             </View>
 
             <View className="flex-1">
-              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>Вуглеводи</Text2sm>
+              <Text2sm fontWeight={FontWeightEnum.MEDIUM}>
+                {i18n.t('my-recipes.create-recipe.carbohydrates')}
+              </Text2sm>
 
               <View className="flex-row items-center mt-[2px]">
                 <View className="w-[60px]">
@@ -279,7 +296,7 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
 
           <View>
             <Text2sm fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="mb-[8px]">
-              Оберіть критерії які відповідають вашому рецепту
+              {i18n.t('my-recipes.create-recipe.choose-category')}
             </Text2sm>
 
             <FormCheckboxGroup

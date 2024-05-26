@@ -146,12 +146,47 @@
         "200-500": "Від 200 до 500",
         "more-than-500": "Більше 500"
       }
+    },
+    "add-recipe-to-meal": {
+      "title": "Оберіть день для додавання рецепту до плану харчування"
     }
   },
   "my-recipes": {
     "tab-title": "Тут відображаються ваші рецепти",
     "create-recipe-button": "Створити рецепт",
-    "not-have-any-recipes": "У вас ще немає рецептів"
+    "not-have-any-recipes": "У вас ще немає рецептів",
+    "create-ingredient": {
+      "add-ingredient": "Додати інгредієнт",
+      "add": "Додати",
+      "name": "Назва інгредієнту",
+      "name-label": "напр., Картопля",
+      "quantity": "Кількість (необов'язково)",
+      "quantity-label": "напр., 2.5",
+      "unitOfMeasure": "Одиниця виміру",
+      "unitOfMeasure-label": "напр., кг",
+      "comment": "Коментар (необов'язково)",
+      "comment-label": "напр., Середня"
+    },
+    "create-recipe": {
+      "title": "Створення нового рецепту",
+      "name": "Назва",
+      "name-placeholder": "напр., Борщ",
+      "description": "Опис (необов'язково)",
+      "description-placeholder": "Додати короткий опис",
+      "cookingInstructions": "Як приготувати",
+      "cookingInstructions-placeholder": "Додати інструкцію\n1. ...\n2. ...",
+      "cookingTime": "Час приготування",
+      "cookingTime-placeholder": "хв",
+      "weight": "Вага порції",
+      "weight-placeholder": "грам",
+      "calorieContent": "Калорійність",
+      "calorieContent-placeholder": "ккал",
+      "numberOfServings": "Кількість порцій",
+      "protein": "Білки",
+      "fat": "Жири",
+      "carbohydrates": "Вуглеводи",
+      "choose-category": "Оберіть критерії які відповідають вашому рецепту"
+    }
   },
   "calendar": {
     "tab-title": "Оберіть день для його перегляду або налаштування",
@@ -191,10 +226,20 @@
     "delete-account": "Видалити обліковий запис",
     "delete-account-description": "Будь ласка, підтвердіть, що ви хочете повністю видалити свій обліковий запис і втратити доступ до сховища рецептів?"
   },
+  "shop-list": {
+    "tab-title": "Переглядайте список покупок у налаштовані дні"
+  },
   "general": {
     "time-input": {
       "clear": "Очистити"
     },
+    "add-ingredient": "Додати інгредієнт",
+    "add-new": "Додати новий",
+    "choose-image": "Оберіть зображення",
+    "choose-option": "Оберіть опцію",
+    "products": "Продукти",
+    "additional": "Додаткові",
+    "bought": "Куплені",
     "cancel-label": "Скасувати",
     "create-label": "Створити",
     "confirm-label": "Підтвердити",

@@ -12,6 +12,7 @@ import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import { FormTextInput } from '@/components/ui/TextInput';
 import Text2Md from '@/components/ui/Typography/Text2md';
+import i18n from '@/i18n';
 import { useIngredientStore } from '@/store';
 
 export interface IAddIngredientFormInput {
@@ -86,7 +87,7 @@ const AddIngredientModal: React.FC<AddIngredientModalProps> = ({
 
           <View className="w-[200px]">
             <Text2Md fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-center">
-              Додати інгредієнт
+              {i18n.t('my-recipes.create-ingredient.add-ingredient')}
             </Text2Md>
           </View>
 
@@ -96,7 +97,7 @@ const AddIngredientModal: React.FC<AddIngredientModalProps> = ({
       footer={
         <View className="pt-4">
           <Button
-            label="Додати"
+            label={i18n.t('my-recipes.create-ingredient.add')}
             type="filled"
             borderRadius="rounded-lg"
             onPress={handleSubmit(onSubmit)}
@@ -111,8 +112,8 @@ const AddIngredientModal: React.FC<AddIngredientModalProps> = ({
             suggestions={ingredientNames}
             name="nameIngredient"
             control={control}
-            label="Назва інгредієнту"
-            placeholder="напр., Картопля"
+            label={i18n.t('my-recipes.create-ingredient.name')}
+            placeholder={i18n.t('my-recipes.create-ingredient.name-label')}
           />
         </View>
 
@@ -120,8 +121,8 @@ const AddIngredientModal: React.FC<AddIngredientModalProps> = ({
           <FormTextInput
             name="quantity"
             control={control}
-            label="Кількість (необов'язково)"
-            placeholder="напр., 2.5"
+            label={i18n.t('my-recipes.create-ingredient.quantity')}
+            placeholder={i18n.t('my-recipes.create-ingredient.quantity-label')}
             keyboardType="numeric"
           />
         </View>
@@ -131,8 +132,8 @@ const AddIngredientModal: React.FC<AddIngredientModalProps> = ({
             suggestions={uniqueUnits}
             name="unitOfMeasure"
             control={control}
-            label="Одиниця виміру"
-            placeholder="напр., кг"
+            label={i18n.t('my-recipes.create-ingredient.unitOfMeasure')}
+            placeholder={i18n.t('my-recipes.create-ingredient.unitOfMeasure-label')}
           />
         </View>
 
@@ -140,8 +141,8 @@ const AddIngredientModal: React.FC<AddIngredientModalProps> = ({
           <FormTextInput
             name="comment"
             control={control}
-            label="Коментар (необов'язково)"
-            placeholder="напр., Середня"
+            label={i18n.t('my-recipes.create-ingredient.comment')}
+            placeholder={i18n.t('my-recipes.create-ingredient.comment-label')}
           />
         </View>
       </ScrollView>

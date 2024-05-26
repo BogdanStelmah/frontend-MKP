@@ -4,6 +4,7 @@ import { Image, Platform, TouchableOpacity, View } from 'react-native';
 
 import { FontWeightEnum } from '@/common/enums';
 import Text2md from '@/components/ui/Typography/Text2md';
+import i18n from '@/i18n';
 
 export interface ImageInputProps {
   image: string | null;
@@ -46,7 +47,7 @@ const ImageInput: React.FC<ImageInputProps> = ({ setImage, image }) => {
 
       {!image && (
         <View className="absolute h-[200px] w-full items-center justify-center">
-          <Text2md fontWeight={FontWeightEnum.SEMIBOLD}>Виберіть зображення</Text2md>
+          <Text2md fontWeight={FontWeightEnum.SEMIBOLD}>{i18n.t('general.choose-image')}</Text2md>
         </View>
       )}
     </TouchableOpacity>

@@ -9,6 +9,7 @@ import NoteInput from '@/components/ui/NoteInput/NoteInput';
 import ScreenContainer from '@/components/ui/ScreenContainer';
 import { ListItemsSkeleton } from '@/components/ui/Skeletons';
 import TabTitle from '@/components/ui/TabTitle';
+import i18n from '@/i18n';
 import { usePlanItemStore } from '@/store';
 
 const ShopList = () => {
@@ -68,10 +69,7 @@ const ShopList = () => {
   return (
     <ScreenContainer>
       <View className="mx-4">
-        <TabTitle
-          title="Переглядайте список покупок у налаштовані дні"
-          extraTitleStyles="w-[280px]"
-        />
+        <TabTitle title={i18n.t('shop-list.tab-title')} extraTitleStyles="w-[280px]" />
       </View>
 
       <View className="mx-4 items-center">
@@ -95,7 +93,7 @@ const ShopList = () => {
           >
             {unboughtItems.length > 0 && (
               <ListItems
-                title="Продукти"
+                title={i18n.t('general.products')}
                 options={getOptions(unboughtItems)}
                 handleOptionSelect={(option) => handleOptionSelect(option, 'unbought')}
               />
@@ -103,7 +101,7 @@ const ShopList = () => {
 
             {customItems.length > 0 && (
               <ListItems
-                title="Додаткові"
+                title={i18n.t('general.additional')}
                 options={getOptions(customItems)}
                 handleOptionSelect={(option) => handleOptionSelect(option, 'custom')}
               />
@@ -111,7 +109,7 @@ const ShopList = () => {
 
             {boughtItems.length > 0 && (
               <ListItems
-                title="Куплені"
+                title={i18n.t('general.bought')}
                 options={getOptions(boughtItems)}
                 handleOptionSelect={(option) => handleOptionSelect(option, 'bought')}
                 isChecked

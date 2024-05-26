@@ -6,6 +6,7 @@ import { TouchableOpacity, View } from 'react-native';
 import { FontWeightEnum } from '@/common/enums';
 import { TypeOption } from '@/common/types';
 import Text2md from '@/components/ui/Typography/Text2md';
+import i18n from '@/i18n';
 
 interface StandardDropdownInputProps {
   options: TypeOption[];
@@ -38,7 +39,7 @@ const StandardDropdownInput: React.FC<StandardDropdownInputProps> = ({
       <TouchableOpacity onPress={toggleOptions}>
         <View className="flex-row">
           <Text2md fontWeight={FontWeightEnum.BOLD} extraStyles="mr-[2px]">
-            {selectedOption?.label || 'Виберіть опцію'}
+            {selectedOption?.label || i18n.t('general.choose-option')}
           </Text2md>
 
           {!isOpen ? (

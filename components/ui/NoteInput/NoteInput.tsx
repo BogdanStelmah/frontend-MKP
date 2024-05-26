@@ -3,6 +3,8 @@ import { useColorScheme } from 'nativewind';
 import React from 'react';
 import { TextInput, TouchableOpacity, View } from 'react-native';
 
+import i18n from '@/i18n';
+
 interface NoteInputProps {
   value?: string;
   isDisabled?: boolean;
@@ -22,7 +24,7 @@ const NoteInput: React.FC<NoteInputProps> = ({
     <View className="flex-row items-center">
       <View className="flex-1">
         <TextInput
-          placeholder="Додати інгредієнт"
+          placeholder={i18n.t('general.add-ingredient')}
           value={value}
           onChangeText={onChangeText}
           editable={!isDisabled}

@@ -25,6 +25,7 @@ const MealCard: React.FC<MealCardProps> = ({ mealPlan, onChange, onDelete }) => 
     <View className="p-[5px] bg-chosen rounded-lg">
       <View className="flex-row items-center justify-between mb-[10px]">
         <Text2md fontWeight={FontWeightEnum.BOLD}>{mealPlan.name}</Text2md>
+
         <TouchableOpacity onPress={() => onDelete(mealPlan.id)}>
           <Ionicons
             name="close"

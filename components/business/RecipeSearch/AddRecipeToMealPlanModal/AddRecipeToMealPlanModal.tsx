@@ -9,6 +9,7 @@ import { FontWeightEnum } from '@/common/enums';
 import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import Text2Md from '@/components/ui/Typography/Text2md';
+import i18n from '@/i18n';
 import { usePlanStore } from '@/store/planStore';
 
 interface AddRecipeToMealPlanModalProps {
@@ -50,7 +51,7 @@ const AddRecipeToMealPlanModal: React.FC<AddRecipeToMealPlanModalProps> = ({
 
           <View className="w-[250px]">
             <Text2Md fontWeight={FontWeightEnum.SEMIBOLD} extraStyles="text-center">
-              Оберіть день для додавання рецепту до плану харчування
+              {i18n.t('recipe-search.add-recipe-to-meal.title')}
             </Text2Md>
           </View>
 

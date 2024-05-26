@@ -10,6 +10,7 @@ import {
 import { FontWeightEnum } from '@/common/enums';
 import { TextInput } from '@/components/ui/TextInput';
 import Text2sm from '@/components/ui/Typography/Text2sm';
+import i18n from '@/i18n';
 
 export interface AutoCompleteInputProps {
   value?: string;
@@ -90,7 +91,7 @@ const AutoCompleteInput: React.FC<AutoCompleteInputProps> = ({
               fontWeight={FontWeightEnum.MEDIUM}
               extraStyles="px-[12px] text-disable dark:text-disable-dark"
             >
-              Додати новий
+              {i18n.t('general.add-new')}
             </Text2sm>
           </TouchableOpacity>
 

@@ -47,6 +47,7 @@ const PlanningDay: React.FC<PlanningDayProps> = ({
             >
               {formatDayNumber(date)}
             </TextSm>
+
             <TextSm
               fontWeight={FontWeightEnum.SEMIBOLD}
               extraStyles="text-background dark:text-background-dark"
@@ -102,13 +103,15 @@ const PlanningDay: React.FC<PlanningDayProps> = ({
                     </TextSm>
                   )}
 
-                  <View className="ml-1">
-                    <Entypo
-                      name="plus"
-                      size={22}
-                      color={colorScheme === 'light' ? '#4F7942' : '#3F8B28'}
-                    />
-                  </View>
+                  {isAddRecipeToMealPlan && (
+                    <View className="ml-1">
+                      <Entypo
+                        name="plus"
+                        size={22}
+                        color={colorScheme === 'light' ? '#4F7942' : '#3F8B28'}
+                      />
+                    </View>
+                  )}
                 </View>
               </TouchableOpacity>
 

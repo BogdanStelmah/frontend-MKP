@@ -110,6 +110,7 @@ const AppPersonalizationForm = () => {
             isLoading={isLoading}
             onPress={handleSubmit(onSubmit)}
             borderRadius="rounded-lg"
+            extraStyles="mt-4"
           />
         )}
       </View>

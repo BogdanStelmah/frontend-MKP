@@ -119,6 +119,7 @@ const PersonalInfoForm = () => {
             isLoading={isLoading}
             onPress={handleSubmit(onSubmitPersonalInfo)}
             borderRadius="rounded-lg"
+            extraStyles="mt-4"
           />
         )}
       </View>
