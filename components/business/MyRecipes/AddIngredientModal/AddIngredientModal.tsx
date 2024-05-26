@@ -1,7 +1,7 @@
 import { AntDesign } from '@expo/vector-icons';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useColorScheme } from 'nativewind';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { ScrollView, View } from 'react-native';
 
@@ -12,6 +12,7 @@ import Button from '@/components/ui/Button';
 import Modal from '@/components/ui/Modal';
 import { FormTextInput } from '@/components/ui/TextInput';
 import Text2Md from '@/components/ui/Typography/Text2md';
+import { useIngredientStore } from '@/store';
 
 export interface IAddIngredientFormInput {
   nameIngredient: string;
@@ -32,6 +33,17 @@ const AddIngredientModal: React.FC<AddIngredientModalProps> = ({
   onAddIngredient
 }) => {
   const { colorScheme } = useColorScheme();
+
+  const fetchIngredientNames = useIngredientStore.use.fetchIngredientNames();
+  const fetchUniqueUnits = useIngredientStore.use.fetchUniqueUnits();
+
+  const ingredientNames = useIngredientStore.use.ingredientNames();
+  const uniqueUnits = useIngredientStore.use.uniqueUnits();
+
+  useEffect(() => {
+    fetchIngredientNames();
+    fetchUniqueUnits();
+  }, []);
 
   const {
     control,
@@ -95,7 +107,7 @@ const AddIngredientModal: React.FC<AddIngredientModalProps> = ({
       <ScrollView className="flex-col gap-y-[14px]" showsVerticalScrollIndicator={false}>
         <View>
           <FormAutoCompleteInput
-            suggestions={['Картопля']}
+            suggestions={ingredientNames}
             name="nameIngredient"
             control={control}
             label="Назва інгредієнту"
@@ -115,7 +127,7 @@ const AddIngredientModal: React.FC<AddIngredientModalProps> = ({
 
         <View>
           <FormAutoCompleteInput
-            suggestions={['кг']}
+            suggestions={uniqueUnits}
             name="unitOfMeasure"
             control={control}
             label="Одиниця виміру"
