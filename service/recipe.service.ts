@@ -1,8 +1,7 @@
-import { AxiosRequestHeaders } from 'axios';
-
 import { IPreviewRecipe, IRecipe } from '@/common/entities';
 import { FilterRecipeParams, PaginationParams, SearchParam } from '@/common/interfaces';
 import config from '@/config';
+import i18n from '@/i18n';
 import { requestApi } from '@/service/apiAxios';
 import { retrieveToken } from '@/service/helper';
 
@@ -66,7 +65,7 @@ const createRecipe = async (formData: FormData) => {
     }
   });
 
-  xhr.open('POST', config.baseUrl + CREATE_RECIPE_API);
+  xhr.open('POST', config.baseUrl + CREATE_RECIPE_API + `?lang=${i18n.locale}`);
 
   xhr.setRequestHeader('Authorization', `Bearer ${userAccessToken}`);
 

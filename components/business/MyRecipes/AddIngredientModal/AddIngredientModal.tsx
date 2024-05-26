@@ -58,6 +58,7 @@ const AddIngredientModal: React.FC<AddIngredientModalProps> = ({
   const onSubmit: SubmitHandler<IAddIngredientFormInput> = async (data) => {
     onAddIngredient(data);
     hideModal();
+    reset();
   };
 
   const handleHideModal = () => {

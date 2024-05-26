@@ -122,6 +122,15 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
       bodyFormData.append('title', data.title);
       bodyFormData.append('description', data.description || '');
       bodyFormData.append('cookingInstructions', data.cookingInstructions);
+      bodyFormData.append('calorieContent', data.calorieContent.toString());
+      bodyFormData.append('weight', data.weight.toString());
+      bodyFormData.append('numberOfServings', data.numberOfServings.toString());
+      bodyFormData.append('protein', data.protein?.toString() || '');
+      bodyFormData.append('fat', data.fat?.toString() || '');
+      bodyFormData.append('carbohydrates', data.carbohydrates?.toString() || '');
+      bodyFormData.append('cookingTime', data.cookingTime.toString());
+      bodyFormData.append('categoryIds', JSON.stringify(data.categoryIds));
+      bodyFormData.append('ingredients', JSON.stringify(data.ingredients));
 
       await recipeApi.createRecipe(bodyFormData);
     } catch (e) {

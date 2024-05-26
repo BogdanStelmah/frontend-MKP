@@ -21,19 +21,21 @@ export const createRecipeScheme = yup.object().shape({
 
   cookingInstructions: yup.string().required(IS_REQUIRED).trim().min(2).max(2000),
 
-  ingredients: yup.array().of(addIngredientScheme).min(1).required(IS_REQUIRED)
+  ingredients: yup.array().of(addIngredientScheme).min(1).required(IS_REQUIRED),
 
-  // calorieContent: yup.number().required(IS_REQUIRED).min(1),
-  //
-  // weight: yup.number().required(IS_REQUIRED).min(1),
-  //
-  // numberOfServings: yup.number().required(IS_REQUIRED).min(1),
-  //
-  // protein: yup.number().optional().min(1),
-  //
-  // fat: yup.number().optional().min(1),
-  //
-  // carbohydrates: yup.number().optional().min(0),
-  //
-  // cookingTime: yup.number().required(IS_REQUIRED).min(1)
+  calorieContent: yup.number().required(IS_REQUIRED).min(1),
+
+  weight: yup.number().required(IS_REQUIRED).min(1),
+
+  numberOfServings: yup.number().required(IS_REQUIRED).min(1),
+
+  protein: yup.number().optional().min(1),
+
+  fat: yup.number().optional().min(1),
+
+  carbohydrates: yup.number().optional().min(0),
+
+  cookingTime: yup.number().required(IS_REQUIRED).min(1),
+
+  categoryIds: yup.array().of(yup.number().required(IS_REQUIRED)).required(IS_REQUIRED)
 });

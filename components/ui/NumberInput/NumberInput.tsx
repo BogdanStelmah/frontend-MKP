@@ -8,8 +8,8 @@ import {
 } from 'react-native';
 
 export interface NumberInputProps {
-  value: number;
-  onChangeText: (value: number) => void;
+  value?: number;
+  onChangeText?: (value: number) => void;
   onPress?: (event: GestureResponderEvent) => void;
   onBlur?: (e: NativeSyntheticEvent<TextInputFocusEventData>) => void;
   extraStyles?: string;
@@ -33,8 +33,8 @@ const NumberInput: React.FC<NumberInputProps> = ({
       <TextInput
         className="font-lato-medium text-2sm text-black-greyscale-main dark:text-black-greyscale-main-dark "
         keyboardType="numeric"
-        value={value.toString()}
-        onChangeText={(text) => onChangeText(+text || 0)}
+        value={value?.toString()}
+        onChangeText={(text) => onChangeText?.(+text || 0)}
         onBlur={onBlur}
       />
     </TouchableOpacity>
