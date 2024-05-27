@@ -36,13 +36,15 @@ export default function TabLayout() {
       <Tabs.Screen
         name="recipe-search"
         options={{
-          tabBarIcon: ({ color }) => <Feather size={32} name="search" color={color} />
+          tabBarIcon: ({ color }) => <Feather size={32} name="search" color={color} />,
+          unmountOnBlur: true
         }}
       />
       <Tabs.Screen
         name="shop-list"
         options={{
-          tabBarIcon: ({ color }) => <Feather size={32} name="shopping-cart" color={color} />
+          tabBarIcon: ({ color }) => <Feather size={32} name="shopping-cart" color={color} />,
+          unmountOnBlur: true
         }}
       />
       <Tabs.Screen

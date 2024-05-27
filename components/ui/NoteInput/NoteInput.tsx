@@ -28,6 +28,7 @@ const NoteInput: React.FC<NoteInputProps> = ({
           value={value}
           onChangeText={onChangeText}
           editable={!isDisabled}
+          placeholderTextColor={colorScheme === 'dark' ? '#827A60' : '#909590'}
           className="font-lato-medium w-full h-[30px] text-black-greyscale-main dark:text-black-greyscale-main-dark border border-brown-camouflage dark:border-black-greyscale-main-dark px-3 pb-[2px] rounded-lg text-[15px] focus:border-yellow-camouflage"
         />
       </View>
