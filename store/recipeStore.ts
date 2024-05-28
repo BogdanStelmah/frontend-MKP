@@ -10,6 +10,7 @@ import { createSelectors } from '@/store/helper';
 type RecipeState = {
   recipeById: null | IRecipe;
   isFavoriteRecipe: boolean;
+  myRecipes: IPreviewRecipe[];
   calculatedRecipeForMealPlanById: null | IRecipe;
   isLoading: boolean;
 };
@@ -32,6 +33,7 @@ type RecipeActions = {
   ) => Promise<void>;
   createRecipe: (data: ICreateRecipeFormInput) => Promise<void>;
   fetchIsFavoriteRecipe: (recipeId: number) => Promise<boolean | undefined>;
+  fetchMyRecipes: (paginationParams?: Partial<PaginationParams & SearchParam>) => Promise<void>;
   addRecipeToFavorites: (recipeId: number) => Promise<void>;
   removeRecipeFromFavorites: (recipeId: number) => Promise<void>;
 };
@@ -39,6 +41,7 @@ type RecipeActions = {
 const initialRecipeState: RecipeState = {
   isFavoriteRecipe: false,
   recipeById: null,
+  myRecipes: [],
   calculatedRecipeForMealPlanById: null,
   isLoading: false
 };
@@ -204,6 +207,21 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
     try {
       await recipeApi.removeRecipeFromFavorites(recipeId);
       set(() => ({ isFavoriteRecipe: false }));
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  fetchMyRecipes: async (paginationParams) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      const myRecipes = await recipeApi.fetchMyRecipes(paginationParams);
+      set(() => ({ myRecipes }));
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);

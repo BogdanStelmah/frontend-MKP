@@ -12,17 +12,35 @@ import i18n from '@/i18n';
 
 interface RecipeSettingsModalProps {
   isModalVisible: boolean;
+  isYourRecipe?: boolean;
+  isPublicRecipe?: boolean;
   hideModal: () => void;
 }
 
-const RecipeSettingsModal: React.FC<RecipeSettingsModalProps> = ({ isModalVisible, hideModal }) => {
+const RecipeSettingsModal: React.FC<RecipeSettingsModalProps> = ({
+  isModalVisible,
+  isYourRecipe = false,
+  isPublicRecipe = false,
+  hideModal
+}) => {
   const { colorScheme } = useColorScheme();
-  const recipeOptions = [
-    { label: i18n.t('recipe-search.setting-up-a-recipe.modify'), onPress: () => {} },
-    { label: i18n.t('recipe-search.setting-up-a-recipe.view-original'), onPress: () => {} },
-    { label: i18n.t('recipe-search.setting-up-a-recipe.remove-modifications'), onPress: () => {} },
-    { label: i18n.t('recipe-search.setting-up-a-recipe.never-show'), onPress: () => {} }
-  ];
+
+  const recipeOptions = !isYourRecipe
+    ? [
+        { label: i18n.t('recipe-search.setting-up-a-recipe.modify'), onPress: () => {} },
+        { label: i18n.t('recipe-search.setting-up-a-recipe.view-original'), onPress: () => {} },
+        {
+          label: i18n.t('recipe-search.setting-up-a-recipe.remove-modifications'),
+          onPress: () => {}
+        },
+        { label: i18n.t('recipe-search.setting-up-a-recipe.never-show'), onPress: () => {} }
+      ]
+    : [
+        { label: 'Видалити рецепт', onPress: () => {} },
+        !isPublicRecipe
+          ? { label: 'Опублікувати рецепт', onPress: () => {} }
+          : { label: 'Приховати рецепт', onPress: () => {} }
+      ];
 
   return (
     <Modal

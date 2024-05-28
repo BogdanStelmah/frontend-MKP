@@ -20,7 +20,7 @@ const RecipesByParameters: React.FC<RecipesByParametersProps> = ({
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [previewRecipes, setPreviewRecipes] = useState<IPreviewRecipe[]>([]);
   const [offset, setOffset] = useState<number>(0);
-  const [limit] = useState<number>(16);
+  const [limit] = useState<number>(30);
 
   const fetchPreviewRecipes = useRecipeStore.use.fetchPreviewRecipes();
 

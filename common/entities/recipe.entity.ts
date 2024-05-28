@@ -12,6 +12,7 @@ export interface IRecipe extends IPreviewRecipe {
   user?: IRecipeAuthor;
   ingredientToRecipes?: IIngredientToRecipe[];
   rating: IRecipeRating;
+  isPublished: boolean;
 }
 
 export interface IPreviewRecipe {

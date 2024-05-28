@@ -26,6 +26,7 @@ interface RecipeOverviewModalProps {
   isModalVisible: boolean;
   isRemoveFromReschedule?: boolean;
   isFavorite?: boolean;
+  isYourRecipe?: boolean;
   hideModal: () => void;
   onPressAddToReschedule: (recipe: IRecipe) => void;
   onPressRemoveFromReschedule?: (recipe: IRecipe) => void;
@@ -39,6 +40,7 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
   recipe,
   onPressAddToReschedule,
   isRemoveFromReschedule = false,
+  isYourRecipe = false,
   isFavorite = false,
   onPressRemoveFromReschedule,
   onPressAddToFavorites,
@@ -69,25 +71,27 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
 
             {!isRemoveFromReschedule && (
               <View className="flex-row items-center">
-                <Button extraStyles="mr-[14px]">
-                  {!isFavorite ? (
-                    <TouchableOpacity onPress={() => onPressAddToFavorites?.(recipe)}>
-                      <Feather
-                        name="heart"
-                        size={24}
-                        color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
-                      />
-                    </TouchableOpacity>
-                  ) : (
-                    <TouchableOpacity onPress={() => onPressRemoveFromFavorites?.(recipe)}>
-                      <AntDesign
-                        name="heart"
-                        size={24}
-                        color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
-                      />
-                    </TouchableOpacity>
-                  )}
-                </Button>
+                {!isYourRecipe && (
+                  <Button extraStyles="mr-[14px]">
+                    {!isFavorite ? (
+                      <TouchableOpacity onPress={() => onPressAddToFavorites?.(recipe)}>
+                        <Feather
+                          name="heart"
+                          size={24}
+                          color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
+                        />
+                      </TouchableOpacity>
+                    ) : (
+                      <TouchableOpacity onPress={() => onPressRemoveFromFavorites?.(recipe)}>
+                        <AntDesign
+                          name="heart"
+                          size={24}
+                          color={colorScheme === 'light' ? '#454545' : '#BFBFBF'}
+                        />
+                      </TouchableOpacity>
+                    )}
+                  </Button>
+                )}
 
                 <Button onPress={showRecipeSettingsModal}>
                   <Entypo
@@ -236,6 +240,8 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
       <RecipeSettingsModal
         isModalVisible={isRecipeSettingsModalVisible}
         hideModal={hideRecipeSettingsModal}
+        isYourRecipe={isYourRecipe}
+        isPublicRecipe={recipe.isPublished}
       />
     </>
   );

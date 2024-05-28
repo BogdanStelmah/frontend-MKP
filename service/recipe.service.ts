@@ -12,6 +12,7 @@ const FETCH_CALCULATED_RECIPE_FOR_MEAL_PLAN_BY_ID_API =
   '/mealPlan/getCalculatedRecipeForMealPlanById';
 const FETCH_IS_FAVORITE_RECIPE_API = '/recipe/isFavorite';
 const FETCH_PREVIEW_RECIPES = '/recipe/getPreviewRecipes';
+const FETCH_MY_RECIPES_API = '/recipe/getMyRecipes';
 
 const CREATE_RECIPE_API = '/recipe';
 const ADD_RECIPE_TO_FAVORITES_API = '/recipe/addFavorite';
@@ -39,6 +40,12 @@ const fetchRecipeById = async (recipeId: number | string) => {
 const fetchFavoriteRecipes = async (paginationParams?: PaginationParams) => {
   return (
     await requestApi<IRecipe[]>('GET', FETCH_FAVORITE_RECIPES_API, { params: paginationParams })
+  ).data;
+};
+
+const fetchMyRecipes = async (paginationParams?: Partial<PaginationParams & SearchParam>) => {
+  return (
+    await requestApi<IRecipe[]>('GET', FETCH_MY_RECIPES_API, { params: { ...paginationParams } })
   ).data;
 };
 
@@ -103,5 +110,6 @@ export const recipeApi = {
   createRecipe,
   isFavoriteRecipe,
   addRecipeToFavorites,
-  removeRecipeFromFavorites
+  removeRecipeFromFavorites,
+  fetchMyRecipes
 };
