@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View } from 'react-native';
 
+import { IRecipe } from '@/common/entities';
 import { useModal } from '@/common/hooks/useModal';
 import { FilterRecipeParams, SearchParam } from '@/common/interfaces';
 import { RecipeFiltersType } from '@/common/types';
@@ -31,10 +32,18 @@ const RecipeSearch = () => {
   ] = useModal();
 
   const fetchRecipeById = useRecipeStore.use.fetchRecipeById();
+  const fetchIsFavoriteRecipe = useRecipeStore.use.fetchIsFavoriteRecipe();
+
+  const addRecipeToFavorites = useRecipeStore.use.addRecipeToFavorites();
+  const removeRecipeFromFavorites = useRecipeStore.use.removeRecipeFromFavorites();
+
   const recipeById = useRecipeStore.use.recipeById();
+  const isFavorite = useRecipeStore.use.isFavoriteRecipe();
 
   const onPressOnRecipeHandler = (recipeId: number) => {
+    fetchIsFavoriteRecipe(recipeId).catch((error) => console.error(error.message));
     fetchRecipeById(recipeId).catch((error) => console.error(error.message));
+
     setSelectedRecipeId(recipeId);
     showRecipeOverviewModal();
   };
@@ -51,6 +60,14 @@ const RecipeSearch = () => {
     showAddRecipeToMealPlanModal();
   };
 
+  const handlePressAddToFavorites = (recipe: IRecipe) => {
+    addRecipeToFavorites(recipe.id).catch((error) => console.error(error.message));
+  };
+
+  const handlePressRemoveFromFavorites = (recipe: IRecipe) => {
+    removeRecipeFromFavorites(recipe.id).catch((error) => console.error(error.message));
+  };
+
   return (
     <ScreenContainer isTouchableWithoutFeedback={false}>
       <View className="mx-4">
@@ -64,7 +81,7 @@ const RecipeSearch = () => {
       </View>
 
       {queryParams.searchQuery === '' && countSelectedFilters === 0 ? (
-        <RecipesByCategory onPressOnRecipeHandler={onPressOnRecipeHandler} />
+        <RecipesByCategory onPressOnRecipeHandler={onPressOnRecipeHandler} isUpdate={isFavorite} />
       ) : (
         <RecipesByParameters
           queryParams={queryParams}
@@ -76,9 +93,12 @@ const RecipeSearch = () => {
         <>
           <RecipeOverviewModal
             isModalVisible={isRecipeOverviewModalVisible}
+            isFavorite={isFavorite}
             recipe={recipeById}
             hideModal={hideRecipeOverviewModal}
             onPressAddToReschedule={handlePressAddToReschedule}
+            onPressAddToFavorites={handlePressAddToFavorites}
+            onPressRemoveFromFavorites={handlePressRemoveFromFavorites}
           />
 
           <AddRecipeToMealPlanModal

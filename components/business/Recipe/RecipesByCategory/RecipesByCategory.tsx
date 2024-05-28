@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
 import RecipeFeed from '../RecipeFeed/RecipeFeed';
@@ -10,10 +10,22 @@ import { useRecipeStore } from '@/store/recipeStore';
 
 interface RecipesByCategoryProps {
   onPressOnRecipeHandler: (recipeId: number) => void;
+  isUpdate?: boolean;
 }
 
-const RecipesByCategory: React.FC<RecipesByCategoryProps> = ({ onPressOnRecipeHandler }) => {
+const RecipesByCategory: React.FC<RecipesByCategoryProps> = ({
+  onPressOnRecipeHandler,
+  isUpdate = false
+}) => {
+  const isLoading = useRecipeStore.use.isLoading();
   const fetchRecipesByCategory = useRecipeStore.use.fetchRecipesByCategory();
+  const fetchFavoriteRecipes = useRecipeStore.use.fetchFavoriteRecipes();
+
+  const [favoriteRecipes, setFavoriteRecipes] = useState<IPreviewRecipe[]>([]);
+
+  useEffect(() => {
+    fetchFavoriteRecipes().then((data) => setFavoriteRecipes(data || []));
+  }, [isUpdate]);
 
   const [
     recipesByCategory1,
@@ -33,26 +45,58 @@ const RecipesByCategory: React.FC<RecipesByCategoryProps> = ({ onPressOnRecipeHa
     fetchRecipesByCategory(2, paginationParamsForRecipesByCategory2)
   );
 
+  const [
+    recipesByCategory3,
+    paginationParamsForRecipesByCategory3,
+    loadMoreRecipesByCategory3,
+    isLoadingRecipesForRecipesByCategory3
+  ] = useLazyLoadData<IPreviewRecipe, any>(3, () =>
+    fetchRecipesByCategory(6, paginationParamsForRecipesByCategory3)
+  );
+
   return (
     <ScrollView className="mx-4" showsVerticalScrollIndicator={false}>
-      <View className="pt-[20px]">
-        <RecipeFeed
-          title={i18n.t('recipe-search.first-dishes')}
-          recipes={recipesByCategory1}
-          isLoading={isLoadingRecipesForRecipesByCategory1}
-          onPressOnRecipe={onPressOnRecipeHandler}
-          onScrollEndReached={loadMoreRecipesByCategory1}
-        />
-      </View>
+      <View className="mb-[120px]" onStartShouldSetResponder={() => true}>
+        <View className="pt-[20px]">
+          <RecipeFeed
+            title={i18n.t('recipe-search.first-dishes')}
+            recipes={recipesByCategory1}
+            isLoading={isLoadingRecipesForRecipesByCategory1}
+            onPressOnRecipe={onPressOnRecipeHandler}
+            onScrollEndReached={loadMoreRecipesByCategory1}
+          />
+        </View>
 
-      <View className="pt-[20px]">
-        <RecipeFeed
-          title={i18n.t('recipe-search.main-dishes')}
-          recipes={recipesByCategory2}
-          isLoading={isLoadingRecipesForRecipesByCategory2}
-          onPressOnRecipe={onPressOnRecipeHandler}
-          onScrollEndReached={loadMoreRecipesByCategory2}
-        />
+        <View className="pt-[20px]">
+          <RecipeFeed
+            title={i18n.t('recipe-search.main-dishes')}
+            recipes={recipesByCategory2}
+            isLoading={isLoadingRecipesForRecipesByCategory2}
+            onPressOnRecipe={onPressOnRecipeHandler}
+            onScrollEndReached={loadMoreRecipesByCategory2}
+          />
+        </View>
+
+        <View className="pt-[20px]">
+          <RecipeFeed
+            title="В польових умовах"
+            recipes={recipesByCategory3}
+            isLoading={isLoadingRecipesForRecipesByCategory3}
+            onPressOnRecipe={onPressOnRecipeHandler}
+            onScrollEndReached={loadMoreRecipesByCategory3}
+          />
+        </View>
+
+        {favoriteRecipes.length > 0 && (
+          <View className="pt-[20px]">
+            <RecipeFeed
+              title="Улюблені"
+              recipes={favoriteRecipes}
+              isLoading={isLoading}
+              onPressOnRecipe={onPressOnRecipeHandler}
+            />
+          </View>
+        )}
       </View>
     </ScrollView>
   );

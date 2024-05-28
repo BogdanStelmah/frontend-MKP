@@ -9,6 +9,7 @@ import { createSelectors } from '@/store/helper';
 
 type RecipeState = {
   recipeById: null | IRecipe;
+  isFavoriteRecipe: boolean;
   calculatedRecipeForMealPlanById: null | IRecipe;
   isLoading: boolean;
 };
@@ -16,6 +17,9 @@ type RecipeState = {
 type RecipeActions = {
   fetchRecipesByCategory: (
     categoryId: string | number,
+    paginationParams?: PaginationParams
+  ) => Promise<IPreviewRecipe[] | undefined>;
+  fetchFavoriteRecipes: (
     paginationParams?: PaginationParams
   ) => Promise<IPreviewRecipe[] | undefined>;
   fetchRecipeById: (recipeId: string | number) => Promise<void>;
@@ -27,9 +31,13 @@ type RecipeActions = {
     recipeId: number
   ) => Promise<void>;
   createRecipe: (data: ICreateRecipeFormInput) => Promise<void>;
+  fetchIsFavoriteRecipe: (recipeId: number) => Promise<boolean | undefined>;
+  addRecipeToFavorites: (recipeId: number) => Promise<void>;
+  removeRecipeFromFavorites: (recipeId: number) => Promise<void>;
 };
 
 const initialRecipeState: RecipeState = {
+  isFavoriteRecipe: false,
   recipeById: null,
   calculatedRecipeForMealPlanById: null,
   isLoading: false
@@ -43,6 +51,20 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
 
     try {
       return await recipeApi.fetchPreviewRecipesByCategoryId(categoryId, paginationParams);
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  fetchFavoriteRecipes: async (paginationParams) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      return await recipeApi.fetchFavoriteRecipes(paginationParams);
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);
@@ -133,6 +155,55 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
       bodyFormData.append('ingredients', JSON.stringify(data.ingredients));
 
       await recipeApi.createRecipe(bodyFormData);
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  fetchIsFavoriteRecipe: async (recipeId) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      const result = await recipeApi.isFavoriteRecipe(recipeId);
+
+      set(() => ({ isFavoriteRecipe: result }));
+
+      return result;
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  addRecipeToFavorites: async (recipeId) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      await recipeApi.addRecipeToFavorites(recipeId);
+
+      set(() => ({ isFavoriteRecipe: true }));
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  removeRecipeFromFavorites: async (recipeId) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      await recipeApi.removeRecipeFromFavorites(recipeId);
+      set(() => ({ isFavoriteRecipe: false }));
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);
