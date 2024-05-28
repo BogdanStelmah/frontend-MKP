@@ -15,12 +15,14 @@ interface RecipeSettingsModalProps {
   isYourRecipe?: boolean;
   isPublicRecipe?: boolean;
   hideModal: () => void;
+  onPublishRecipe?: () => void;
 }
 
 const RecipeSettingsModal: React.FC<RecipeSettingsModalProps> = ({
   isModalVisible,
   isYourRecipe = false,
   isPublicRecipe = false,
+  onPublishRecipe,
   hideModal
 }) => {
   const { colorScheme } = useColorScheme();
@@ -38,7 +40,7 @@ const RecipeSettingsModal: React.FC<RecipeSettingsModalProps> = ({
     : [
         { label: 'Видалити рецепт', onPress: () => {} },
         !isPublicRecipe
-          ? { label: 'Опублікувати рецепт', onPress: () => {} }
+          ? { label: 'Опублікувати рецепт', onPress: onPublishRecipe }
           : { label: 'Приховати рецепт', onPress: () => {} }
       ];
 

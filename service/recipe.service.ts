@@ -17,6 +17,7 @@ const FETCH_MY_RECIPES_API = '/recipe/getMyRecipes';
 const CREATE_RECIPE_API = '/recipe';
 const ADD_RECIPE_TO_FAVORITES_API = '/recipe/addFavorite';
 const REMOVE_RECIPE_FROM_FAVORITES_API = '/recipe/removeFavorite';
+const PUBLISH_RECIPE_API = '/recipe/publish';
 
 const fetchPreviewRecipesByCategoryId = async (
   categoryId: number | string,
@@ -101,6 +102,11 @@ const removeRecipeFromFavorites = async (recipeId: number) => {
   return (await requestApi('POST', `${REMOVE_RECIPE_FROM_FAVORITES_API}/${recipeId}`)).data;
 };
 
+const publishRecipe = async (recipeId: number, isPublished: boolean) => {
+  return (await requestApi('POST', `${PUBLISH_RECIPE_API}/${recipeId}`, { data: { isPublished } }))
+    .data;
+};
+
 export const recipeApi = {
   fetchPreviewRecipesByCategoryId,
   fetchRecipeById,
@@ -111,5 +117,6 @@ export const recipeApi = {
   isFavoriteRecipe,
   addRecipeToFavorites,
   removeRecipeFromFavorites,
-  fetchMyRecipes
+  fetchMyRecipes,
+  publishRecipe
 };

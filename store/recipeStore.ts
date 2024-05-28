@@ -36,6 +36,7 @@ type RecipeActions = {
   fetchMyRecipes: (paginationParams?: Partial<PaginationParams & SearchParam>) => Promise<void>;
   addRecipeToFavorites: (recipeId: number) => Promise<void>;
   removeRecipeFromFavorites: (recipeId: number) => Promise<void>;
+  publishRecipe: (recipeId: number, isPublished: boolean) => Promise<void>;
 };
 
 const initialRecipeState: RecipeState = {
@@ -222,6 +223,21 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
     try {
       const myRecipes = await recipeApi.fetchMyRecipes(paginationParams);
       set(() => ({ myRecipes }));
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoading: false }));
+    }
+  },
+
+  publishRecipe: async (recipeId, isPublished) => {
+    set(() => ({ isLoading: true }));
+
+    try {
+      await recipeApi.publishRecipe(recipeId, isPublished);
+      await getState().fetchRecipeById(recipeId);
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);

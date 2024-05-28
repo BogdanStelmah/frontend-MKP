@@ -27,11 +27,13 @@ interface RecipeOverviewModalProps {
   isRemoveFromReschedule?: boolean;
   isFavorite?: boolean;
   isYourRecipe?: boolean;
+  isLoading?: boolean;
   hideModal: () => void;
   onPressAddToReschedule: (recipe: IRecipe) => void;
   onPressRemoveFromReschedule?: (recipe: IRecipe) => void;
   onPressAddToFavorites?: (recipe: IRecipe) => void;
   onPressRemoveFromFavorites?: (recipe: IRecipe) => void;
+  onPublishRecipe?: (recipeId: number) => void;
 }
 
 const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
@@ -42,13 +44,20 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
   isRemoveFromReschedule = false,
   isYourRecipe = false,
   isFavorite = false,
+  isLoading = false,
   onPressRemoveFromReschedule,
   onPressAddToFavorites,
-  onPressRemoveFromFavorites
+  onPressRemoveFromFavorites,
+  onPublishRecipe
 }) => {
   const { colorScheme } = useColorScheme();
   const [isRecipeSettingsModalVisible, showRecipeSettingsModal, hideRecipeSettingsModal] =
     useModal();
+
+  const handlePublishRecipe = () => {
+    hideRecipeSettingsModal();
+    onPublishRecipe?.(recipe.id);
+  };
 
   return (
     <>
@@ -114,6 +123,7 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
               }
               type="filled"
               borderRadius="rounded-lg"
+              isLoading={isLoading}
               onPress={() =>
                 !isRemoveFromReschedule
                   ? onPressAddToReschedule(recipe)
@@ -242,6 +252,7 @@ const RecipeOverviewModal: React.FC<RecipeOverviewModalProps> = ({
         hideModal={hideRecipeSettingsModal}
         isYourRecipe={isYourRecipe}
         isPublicRecipe={recipe.isPublished}
+        onPublishRecipe={handlePublishRecipe}
       />
     </>
   );

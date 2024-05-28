@@ -32,6 +32,7 @@ const MyRecipes: React.FC = () => {
 
   const fetchMyRecipes = useRecipeStore.use.fetchMyRecipes();
   const fetchRecipeById = useRecipeStore.use.fetchRecipeById();
+  const publishRecipe = useRecipeStore.use.publishRecipe();
 
   const [
     isAddRecipeToMealPlanModalVisible,
@@ -53,6 +54,10 @@ const MyRecipes: React.FC = () => {
 
   const handlePressAddToReschedule = () => {
     showAddRecipeToMealPlanModal();
+  };
+
+  const handlePublishRecipe = (recipeId: number) => {
+    publishRecipe(recipeId, true).catch((error) => console.error(error.message));
   };
 
   return (
@@ -113,6 +118,7 @@ const MyRecipes: React.FC = () => {
             recipe={recipeById}
             hideModal={hideRecipeOverviewModal}
             onPressAddToReschedule={handlePressAddToReschedule}
+            onPublishRecipe={handlePublishRecipe}
           />
 
           <AddRecipeToMealPlanModal
