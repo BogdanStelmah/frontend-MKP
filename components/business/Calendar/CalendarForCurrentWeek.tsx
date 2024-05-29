@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { ScrollView, View } from 'react-native';
 
+import AdvicesModal from './AdvicesModal/AdvicesModal';
 import DaySettingsModal, { SaveMealSettingsData } from './DaySettingsModal/DaySettingsModal';
 
 import { useModal } from '@/common/hooks';
@@ -27,19 +28,28 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
     mealPlanToRecipeId: number;
     recipeId: number;
   } | null>(null);
+  const [selectedPlanIdWithDate, setSelectedPlanIdWithDate] = useState<{
+    planId: number;
+    date: string;
+  } | null>(null);
 
   const [isRecipeOverviewModalVisible, showRecipeOverviewModal, hideRecipeOverviewModal] =
     useModal();
-  const [isModalVisible, showModal, hideModal] = useModal();
+  const [isDaySettingsModalVisible, showDaySettingsModal, hideDaySettingsModal] = useModal();
+  const [isAdvicesModalVisible, showAdvicesModal, hideAdvicesModal] = useModal();
+  const [advicesByPlanId, setAdvicesByPlanId] = useState<{ [key: string]: string[] }>({});
 
   const plansForCurrentWeek = usePlanStore.use.plansForCurrentWeek();
   const planBySelectedDate = usePlanStore.use.planBySelectedDate();
   const recipeById = useRecipeStore.use.calculatedRecipeForMealPlanById();
+
   const isLoading = usePlanStore.use.isLoading();
+  const isLoadingAdvices = usePlanStore.use.isLoadingAdvices();
 
   const fetchPlansForCurrentWeek = usePlanStore.use.fetchPlansForCurrentWeek();
   const fetchPlanByDate = usePlanStore.use.fetchPlanByDate();
   const fetchCalculatedRecipeById = useRecipeStore.use.fetchCalculatedRecipeForMealPlanById();
+  const fetchAdvicesByPlanId = usePlanStore.use.fetchAdvicesByPlanId();
 
   const createPlanWithMealPlans = usePlanStore.use.createPlanWithMealPlans();
   const updatePlanWithMealPlans = usePlanStore.use.updatePlanWithMealPlans();
@@ -60,7 +70,7 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
 
   const handlePressOnSettings = (date: Date) => {
     setSelectedWeekDay(date);
-    showModal();
+    showDaySettingsModal();
   };
 
   const handleSaveDaySettings = async ({
@@ -108,6 +118,15 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
     });
   };
 
+  const handlePressOnAdvices = (planId: number, date: string) => {
+    showAdvicesModal();
+    setSelectedPlanIdWithDate({ planId, date });
+
+    fetchAdvicesByPlanId(planId).then((advices) => {
+      setAdvicesByPlanId(advices);
+    });
+  };
+
   const getPlansForCurrentWeek = () => {
     return getDatesOfCurrentWeek().map((date) => {
       const plan = getPlanForDay(date);
@@ -124,6 +143,7 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
             isAddRecipeToMealPlan={isAddRecipeToMealPlan}
             onPressAddToReschedule={onPressAddToReschedule}
             onPressOnRecipe={handlePressToRecipe}
+            onPressOnAdvices={handlePressOnAdvices}
           />
         </View>
       );
@@ -155,8 +175,8 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
         <DaySettingsModal
           key={selectedWeekDay.toString()}
           onSaveMealSettings={handleSaveDaySettings}
-          isModalVisible={isModalVisible}
-          hideModal={hideModal}
+          isModalVisible={isDaySettingsModalVisible}
+          hideModal={hideDaySettingsModal}
           selectedWeekDay={selectedWeekDay}
           planBySelectedDate={getPlanForDay(selectedWeekDay)}
           isLoading={isLoading}
@@ -173,6 +193,14 @@ const CalendarForCurrentWeek: React.FC<CalendarForCurrentWeekProps> = ({
           onPressRemoveFromReschedule={handlePressRemoveFromReschedule}
         />
       )}
+
+      <AdvicesModal
+        isModalVisible={isAdvicesModalVisible}
+        hideModal={hideAdvicesModal}
+        date={new Date(selectedPlanIdWithDate?.date || '')}
+        advices={advicesByPlanId}
+        isLoading={isLoadingAdvices}
+      />
     </>
   );
 };

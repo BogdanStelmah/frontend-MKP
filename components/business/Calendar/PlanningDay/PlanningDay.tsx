@@ -23,6 +23,7 @@ interface PlanningDayProps {
   onPressOnSettings: (date: Date) => void;
   onPressAddToReschedule?: (mealPlanId: number) => void;
   onPressOnRecipe?: (mealPlanToRecipeId: number, recipeId: number) => void;
+  onPressOnAdvices?: (planId: number, date: string) => void;
 }
 
 const PlanningDay: React.FC<PlanningDayProps> = ({
@@ -32,7 +33,8 @@ const PlanningDay: React.FC<PlanningDayProps> = ({
   isAddRecipeToMealPlan = false,
   onPressOnSettings,
   onPressAddToReschedule,
-  onPressOnRecipe
+  onPressOnRecipe,
+  onPressOnAdvices
 }) => {
   const { colorScheme } = useColorScheme();
 
@@ -68,6 +70,7 @@ const PlanningDay: React.FC<PlanningDayProps> = ({
                 name="exclamationcircleo"
                 size={20}
                 color={colorScheme === 'light' ? '#4F7942' : '#3F8B28'}
+                onPress={() => onPressOnAdvices?.(plan.id, plan?.date)}
               />
             </TouchableOpacity>
           )}

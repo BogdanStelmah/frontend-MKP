@@ -12,12 +12,14 @@ type PlaneState = {
   planBySelectedDate: IPlan | undefined;
   isLoading: boolean;
   isLoadedPlansForCurrentYear: boolean;
+  isLoadingAdvices: boolean;
 };
 
 type PlanActions = {
   fetchPlansForCurrentYear: () => Promise<IPlan[]>;
   fetchPlansForCurrentWeek: () => Promise<IPlan[]>;
   fetchPlanByDate: (date: Date) => Promise<IPlan | undefined>;
+  fetchAdvicesByPlanId: (planId: number) => Promise<{ [key: string]: string[] }>;
   createPlan: (date: Date) => Promise<IPlan | undefined>;
   createPlanWithMealPlans: (
     date: Date,
@@ -42,7 +44,8 @@ const initialPlanState: PlaneState = {
   plansForCurrentYear: [],
   planBySelectedDate: undefined,
   isLoading: false,
-  isLoadedPlansForCurrentYear: true
+  isLoadedPlansForCurrentYear: true,
+  isLoadingAdvices: false
 };
 
 export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getState) => ({
@@ -210,6 +213,20 @@ export const usePlanStoreBase = create<PlaneState & PlanActions>()((set, getStat
       }
     } finally {
       set(() => ({ isLoading: false }));
+    }
+  },
+
+  fetchAdvicesByPlanId: async (planId) => {
+    set(() => ({ isLoadingAdvices: true }));
+
+    try {
+      return await planApi.generateAdvicesByPlanId(planId);
+    } catch (e) {
+      if (e instanceof AxiosError && e.response?.status) {
+        throw new Error(e.response.data.message);
+      }
+    } finally {
+      set(() => ({ isLoadingAdvices: false }));
     }
   }
 }));

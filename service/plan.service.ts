@@ -4,6 +4,7 @@ import { requestApi } from '@/service/apiAxios';
 const FETCH_PLANS_FOR_CURRENT_YEAR_API = '/plan/getForCurrentYear';
 const FETCH_PLANS_FOR_CURRENT_WEEK_API = '/plan/getForCurrentWeek';
 const FETCH_PLAN_BY_DATE_API = '/plan/getByDate';
+const FETCH_ADVISES_BY_PLAN_ID_API = '/plan/generateAdvicesByPlanId';
 
 const CREATE_PLAN_WITH_MEAL_PLANS_API = '/plan/createWithMealPlans';
 const CREATE_PLAN_API = '/plan';
@@ -75,6 +76,10 @@ const deleteRecipeFromMealPlan = async (data: { recipeToMealPlanId: number }) =>
   return (await requestApi('DELETE', DELETE_RECIPE_FROM_MEAL_PLAN_API, { data })).data;
 };
 
+const generateAdvicesByPlanId = async (planId: number) => {
+  return (await requestApi('GET', `${FETCH_ADVISES_BY_PLAN_ID_API}/${planId}`)).data;
+};
+
 export const planApi = {
   fetchPlansForCurrentYear,
   fetchPlansForCurrentWeek,
@@ -84,5 +89,6 @@ export const planApi = {
   updatePlanWithMealPlans,
   fetchPlanByDate,
   addRecipeToMealPlan,
-  deleteRecipeFromMealPlan
+  deleteRecipeFromMealPlan,
+  generateAdvicesByPlanId
 };
