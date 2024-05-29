@@ -123,7 +123,8 @@
         "long-term-storage": "Long-Term Storage",
         "no-kitchen-inheritance": "No Kitchen Inheritance",
         "first-dish": "First dish",
-        "second-dish": "Second dish"
+        "second-dish": "Second dish",
+        "favorite": "Favorite"
       },
       "recipe-authors": {
         "from-the-app": "From the App",
@@ -145,6 +146,12 @@
         "100-200": "100 to 200",
         "200-500": "200 to 500",
         "more-than-500": "More than 500"
+      },
+      "tag-options": {
+        "grill": "Grill",
+        "vegetarian": "Vegetarian",
+        "quick-lunch": "Quick lunch",
+        "new-recipes": "New recipes"
       }
     },
     "add-recipe-to-meal": {

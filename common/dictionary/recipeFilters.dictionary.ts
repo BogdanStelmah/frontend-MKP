@@ -44,10 +44,10 @@ export const getCalorieContentOptions = (): TypeOption[] => [
 
 // TODO: Need to load from the server
 export const getTagsOptions = (): TypeOption[] => [
-  { label: 'Гриль', value: '1' },
-  { label: 'Вегетаріанське', value: '2' },
-  { label: 'Швидкій обід', value: '4' },
-  { label: 'Нові рецепти', value: '3' }
+  { label: i18n.t('recipe-search.filters.tag-options.grill'), value: '1' },
+  { label: i18n.t('recipe-search.filters.tag-options.vegetarian'), value: '2' },
+  { label: i18n.t('recipe-search.filters.tag-options.quick-lunch'), value: '4' },
+  { label: i18n.t('recipe-search.filters.tag-options.new-recipes'), value: '3' }
 ];
 
 export const defaultRecipeFilters = {

@@ -123,7 +123,8 @@
         "long-term-storage": "Довготривале зберігання",
         "no-kitchen-inheritance": "Без кухонного успадкування",
         "first-dish": "Перша страва",
-        "second-dish": "Друга страва"
+        "second-dish": "Друга страва",
+        "favorite": "Улюблені"
       },
       "recipe-authors": {
         "from-the-app": "Від додатку",
@@ -145,6 +146,12 @@
         "100-200": "Від 100 до 200",
         "200-500": "Від 200 до 500",
         "more-than-500": "Більше 500"
+      },
+      "tag-options": {
+        "grill": "Гриль",
+        "vegetarian": "Вегетаріанське",
+        "quick-lunch": "Швидкій обід",
+        "new-recipes": "Нові рецепти"
       }
     },
     "add-recipe-to-meal": {

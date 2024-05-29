@@ -92,6 +92,7 @@ const PersonalInfoForm = () => {
           label={i18n.t('personal-info.first-name')}
           placeholder={i18n.t('personal-info.first-name-placeholder')}
           control={control}
+          extraStyles="mb-4"
         />
 
         <FormTextInput
@@ -99,6 +100,7 @@ const PersonalInfoForm = () => {
           label={i18n.t('personal-info.last-name')}
           placeholder={i18n.t('personal-info.last-name-placeholder')}
           control={control}
+          extraStyles="mb-4"
         />
 
         <FormDropdownInput
@@ -109,6 +111,7 @@ const PersonalInfoForm = () => {
           title={i18n.t('personal-info.gender-title')}
           options={getGenderDictionary()}
           control={control}
+          extraStyles="mb-4"
         />
 
         {showSaveButton && (

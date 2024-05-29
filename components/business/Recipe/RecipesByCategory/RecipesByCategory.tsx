@@ -79,7 +79,7 @@ const RecipesByCategory: React.FC<RecipesByCategoryProps> = ({
 
         <View className="pt-[20px]">
           <RecipeFeed
-            title="В польових умовах"
+            title={i18n.t('recipe-search.filters.general-options.in-the-field')}
             recipes={recipesByCategory3}
             isLoading={isLoadingRecipesForRecipesByCategory3}
             onPressOnRecipe={onPressOnRecipeHandler}
@@ -90,7 +90,7 @@ const RecipesByCategory: React.FC<RecipesByCategoryProps> = ({
         {favoriteRecipes.length > 0 && (
           <View className="pt-[20px]">
             <RecipeFeed
-              title="Улюблені"
+              title={i18n.t('recipe-search.filters.general-options.favorite')}
               recipes={favoriteRecipes}
               isLoading={isLoading}
               onPressOnRecipe={onPressOnRecipeHandler}

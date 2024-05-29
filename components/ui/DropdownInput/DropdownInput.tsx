@@ -18,6 +18,7 @@ export interface DropdownInputProps {
   label: string;
   buttonLabel: string;
   placeholder: string;
+  extraStyles?: string;
   options: TypeOption[];
   value?: TypeOption;
   onSelect: (selectedOption: TypeOption | undefined) => void;
@@ -30,7 +31,8 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
   placeholder,
   options,
   title,
-  onSelect
+  onSelect,
+  extraStyles
 }) => {
   const [selectedOption, setSelectedOption] = useState<TypeOption | undefined>(value);
   const [isModalVisible, showModal, hideModal] = useModal();
@@ -58,6 +60,7 @@ const DropdownInput: React.FC<DropdownInputProps> = ({
           isEditable={false}
           onPress={showModal}
           value={selectedOption?.label}
+          extraStyles={extraStyles}
         />
 
         <View className="absolute top-[35px] right-4">

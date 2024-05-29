@@ -90,6 +90,7 @@ const AppPersonalizationForm = () => {
           title={i18n.t('settings.language')}
           options={langDictionary}
           control={control}
+          extraStyles="mb-4"
         />
 
         <FormDropdownInput
@@ -100,6 +101,7 @@ const AppPersonalizationForm = () => {
           title={i18n.t('settings.theme')}
           options={getThemeDictionary()}
           control={control}
+          extraStyles="mb-4"
         />
 
         {showSaveButton && (
