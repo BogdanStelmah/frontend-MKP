@@ -74,7 +74,7 @@ const TextInput: React.FC<TextInputProps> = ({
 
       <DefaultTextInput
         className={styleMap.textInput}
-        multiline
+        multiline={!isSecureTextEntry}
         placeholderTextColor={colorScheme === 'dark' ? '#827A60' : '#909590'}
         editable={isEditable}
         secureTextEntry={isSecureTextEntry}

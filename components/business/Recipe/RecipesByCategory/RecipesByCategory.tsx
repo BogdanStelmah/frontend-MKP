@@ -51,7 +51,7 @@ const RecipesByCategory: React.FC<RecipesByCategoryProps> = ({
     loadMoreRecipesByCategory3,
     isLoadingRecipesForRecipesByCategory3
   ] = useLazyLoadData<IPreviewRecipe, any>(3, () =>
-    fetchRecipesByCategory(6, paginationParamsForRecipesByCategory3)
+    fetchRecipesByCategory(3, paginationParamsForRecipesByCategory3)
   );
 
   return (

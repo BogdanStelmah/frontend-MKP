@@ -31,7 +31,7 @@ const RadioGroup: React.FC<RadioGroupProps> = ({
   };
 
   const handlerChecked = (option: TypeOption): boolean => {
-    if (selectedOption?.value) return selectedOption?.value === option.value;
+    if (selectedOption?.value) return selectedOption?.value.toString() === option.value?.toString();
     return false;
   };
 

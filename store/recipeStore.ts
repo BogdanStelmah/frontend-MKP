@@ -81,7 +81,7 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
   fetchRecipeById: async (recipeId) => {
     const { recipeById } = getState();
 
-    if (recipeById && recipeById.id === recipeId) return;
+    // if (recipeById && recipeById.id === recipeId) return;
 
     set(() => ({ isLoading: true }));
 
@@ -159,6 +159,8 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
       bodyFormData.append('ingredients', JSON.stringify(data.ingredients));
 
       await recipeApi.createRecipe(bodyFormData);
+
+      await getState().fetchMyRecipes();
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {
         throw new Error(e.response.data.message);
@@ -222,6 +224,7 @@ export const useRecipeStoreBase = create<RecipeState & RecipeActions>()((set, ge
 
     try {
       const myRecipes = await recipeApi.fetchMyRecipes(paginationParams);
+      console.log(myRecipes.length);
       set(() => ({ myRecipes }));
     } catch (e) {
       if (e instanceof AxiosError && e.response?.status) {

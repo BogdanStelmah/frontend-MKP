@@ -44,13 +44,16 @@ export interface ICreateRecipeFormInput {
 interface CreateRecipeModalModalProps {
   isModalVisible: boolean;
   hideModal: () => void;
+  onSubmitCreateRecipe?: () => void;
 }
 
 const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
   isModalVisible,
-  hideModal
+  hideModal,
+  onSubmitCreateRecipe
 }) => {
   const [ingredientsString, setIngredientsString] = useState<string[]>([]);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const { colorScheme } = useColorScheme();
   const [isAddIngredientModalVisible, showAddIngredientModal, hideAddIngredientModal] = useModal();
@@ -83,8 +86,12 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
   }, [ingredientsWatcher]);
 
   const onSubmit: SubmitHandler<ICreateRecipeFormInput> = async (data) => {
+    setIsLoading(true);
+
     createRecipe(data).then(() => {
       handleHideModal();
+      onSubmitCreateRecipe?.();
+      setIsLoading(false);
     });
   };
 
@@ -138,6 +145,7 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
               borderRadius="rounded-lg"
               onPress={handleSubmit(onSubmit)}
               isDisabled={!isValid}
+              isLoading={isLoading}
             />
           </View>
         }
@@ -266,6 +274,10 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
                 <View className="w-[60px]">
                   <FormNumberInput name="protein" control={control} />
                 </View>
+
+                <Text2sm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-center ml-2">
+                  {i18n.t('my-recipes.create-recipe.weight-short-placeholder')}
+                </Text2sm>
               </View>
             </View>
 
@@ -278,6 +290,10 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
                 <View className="w-[60px]">
                   <FormNumberInput name="fat" control={control} />
                 </View>
+
+                <Text2sm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-center ml-2">
+                  {i18n.t('my-recipes.create-recipe.weight-short-placeholder')}
+                </Text2sm>
               </View>
             </View>
 
@@ -290,6 +306,10 @@ const CreateRecipeModal: React.FC<CreateRecipeModalModalProps> = ({
                 <View className="w-[60px]">
                   <FormNumberInput name="carbohydrates" control={control} />
                 </View>
+
+                <Text2sm fontWeight={FontWeightEnum.MEDIUM} extraStyles="text-center ml-2">
+                  {i18n.t('my-recipes.create-recipe.weight-short-placeholder')}
+                </Text2sm>
               </View>
             </View>
           </View>

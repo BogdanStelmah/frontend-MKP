@@ -186,6 +186,7 @@
       "cookingTime-placeholder": "min",
       "weight": "Portion Weight",
       "weight-placeholder": "grams",
+      "weight-short-placeholder": "g",
       "calorieContent": "Caloric Content",
       "calorieContent-placeholder": "kcal",
       "numberOfServings": "Number of Servings",

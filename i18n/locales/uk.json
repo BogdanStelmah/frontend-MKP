@@ -186,6 +186,7 @@
       "cookingTime-placeholder": "хв",
       "weight": "Вага порції",
       "weight-placeholder": "грам",
+      "weight-short-placeholder": "г",
       "calorieContent": "Калорійність",
       "calorieContent-placeholder": "ккал",
       "numberOfServings": "Кількість порцій",

@@ -30,7 +30,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="my-recipes"
         options={{
-          tabBarIcon: ({ color }) => <Feather size={32} name="heart" color={color} />
+          tabBarIcon: ({ color }) => <Feather size={32} name="heart" color={color} />,
+          unmountOnBlur: true
         }}
       />
       <Tabs.Screen

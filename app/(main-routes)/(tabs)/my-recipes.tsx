@@ -20,6 +20,7 @@ import { useRecipeStore } from '@/store';
 const MyRecipes: React.FC = () => {
   const [searchText, setSearchText] = useState('');
   const [selectedRecipeId, setSelectedRecipeId] = useState<number | null>(null);
+  const [isLoadingPublish, setIsLoadingPublish] = useState(false);
 
   const [isRecipeOverviewModalVisible, showRecipeOverviewModal, hideRecipeOverviewModal] =
     useModal();
@@ -41,8 +42,12 @@ const MyRecipes: React.FC = () => {
   ] = useModal();
   const [isCreateModalVisible, showCreateModal, hideCreateModal] = useModal();
 
+  const getMyRecipes = async () => {
+    await fetchMyRecipes({ searchQuery: debouncedSearchText });
+  };
+
   useEffect(() => {
-    fetchMyRecipes({ searchQuery: debouncedSearchText });
+    getMyRecipes();
   }, [debouncedSearchText]);
 
   const onPressOnRecipeHandler = (recipeId: number) => {
@@ -57,7 +62,13 @@ const MyRecipes: React.FC = () => {
   };
 
   const handlePublishRecipe = (recipeId: number) => {
-    publishRecipe(recipeId, true).catch((error) => console.error(error.message));
+    setIsLoadingPublish(true);
+
+    publishRecipe(recipeId, true)
+      .then(() => {
+        setIsLoadingPublish(false);
+      })
+      .catch((error) => console.error(error.message));
   };
 
   return (
@@ -88,7 +99,7 @@ const MyRecipes: React.FC = () => {
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} className="mb-40">
-        {!isLoading && (
+        {!isLoading && myRecipes.length !== 0 && (
           <View className="flex-wrap flex-row mx-4 mt-2" onStartShouldSetResponder={() => true}>
             {myRecipes.map((recipe, index) => (
               <View
@@ -108,13 +119,18 @@ const MyRecipes: React.FC = () => {
         {isLoading && <RecipeListSkeleton numberOfSkeletons={16} />}
       </ScrollView>
 
-      <CreateRecipeModal hideModal={hideCreateModal} isModalVisible={isCreateModalVisible} />
+      <CreateRecipeModal
+        hideModal={hideCreateModal}
+        isModalVisible={isCreateModalVisible}
+        onSubmitCreateRecipe={getMyRecipes}
+      />
 
       {selectedRecipeId && recipeById && (
         <>
           <RecipeOverviewModal
             isModalVisible={isRecipeOverviewModalVisible}
             isYourRecipe
+            isLoading={isLoadingPublish}
             recipe={recipeById}
             hideModal={hideRecipeOverviewModal}
             onPressAddToReschedule={handlePressAddToReschedule}
