@@ -1,16 +1,16 @@
 {
   "expo": {
-    "name": "frontend-MKP",
+    "name": "MKP",
     "slug": "frontend-MKP",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/adaptive-icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#FCFCFC"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,18 +19,26 @@
       "supportsTablet": true
     },
     "android": {
+      "userInterfaceStyle": "automatic",
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
+        "backgroundColor": "#454545"
+      },
+      "package": "com.bohdandubynchenko.frontendMKP"
     },
     "web": {
       "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "output": "static"
     },
     "plugins": [
-      "expo-router"
+      "expo-router",
+      "expo-localization",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "The app accesses your photos so you can share food photos with others."
+        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true

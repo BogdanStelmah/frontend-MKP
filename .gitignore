@@ -16,6 +16,7 @@ yarn-error.*
 
 # local env files
 .env*.local
+.env
 
 # typescript
 *.tsbuildinfo
@@ -27,6 +28,7 @@ bare-apps
 .expo/
 dist/
 web-build/
+android
 
 # macOS
 .DS_Store

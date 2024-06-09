@@ -1,0 +1,283 @@
+{
+  "introduction": {
+    "skip": "Пропустити",
+    "get-started": "Почати роботу",
+    "already-have-an-account": "Уже маю обліковий запис",
+    "slide1": {
+      "title": "Military Kitchen Planner",
+      "description": "Додаток допомагає військовим планувати свої трапези, враховуючи калорійність, поживність та легкість приготування."
+    },
+    "slide2": {
+      "title": "Графік прийому їжі",
+      "description": "Військові можуть створювати та переглядати свій щоденний графік прийому їжі, щоб забезпечити оптимальне харчування у військовому положенні."
+    },
+    "slide3": {
+      "title": "Рецепти та харчові обмеження",
+      "description": "\"Military Kitchen Planner\" надає доступ до різноманітних рецептів, враховуючи військові дієтичні обмеження та умови обслуговування."
+    },
+    "slide4": {
+      "title": "Публікування своїх рецептів",
+      "description": "Додаток дозволяє військовим створювати свої рецепти та за потреби публікувати їх для розвитку своєї кулінарної культури."
+    },
+    "slide5": {
+      "title": "Створення облікового запису",
+      "description": "\"MKP\" надає можливість користувачам створити власний обліковий запис, щоб зберігати їхні налаштування, рецепти та графіки харчування у безпеці та зручно доступному форматі."
+    }
+  },
+  "registration": {
+    "sign-up": "Реєстрація",
+    "description": "Після заповнення даних у полях нище, ви отримаєте доступ до всіх функцій додатку.",
+    "email": "Електронна пошта",
+    "password": "Пароль",
+    "password-placeholder": "Введіть пароль",
+    "confirm-password": "Підтвердити пароль",
+    "confirm-password-placeholder": "Підтвердіть пароль",
+    "continue": "Продовжити"
+  },
+  "sign-in": {
+    "title": "Гайда заходь. Тебе не вистачало!",
+    "forgot-password": "Забули пароль?",
+    "password-or-email-incorrect": "Неправильний пароль або адреса електронної пошти",
+    "or": "АБО",
+    "sign-in": "Увійти",
+    "sign-in-with-google": "Увійдіть за допомогою Google",
+    "dont-have-account": "У вас ще немає облікового запису?",
+    "sign-up": "Зареєструватися"
+  },
+  "forgot-password": {
+    "title": "Відновлення паролю",
+    "description": "Введіть свою електронну адресу, і ми надішлемо вам код для зміни пароля.",
+    "reset-password": "Скинути пароль",
+    "remember-your-password": "Пам'ятаєте свій пароль?",
+    "back-to-sign-in": "Увійти"
+  },
+  "code-verification": {
+    "title": "Перевірка коду",
+    "description": "Введіть код, який ми відправили на вашу пошту. Якщо ви не отримали код, натисніть кнопку 'Відправити код ще раз'.",
+    "code": "Код",
+    "verify": "Перевірити"
+  },
+  "change-password": {
+    "title": "Встановлення нового паролю",
+    "new-password": "Новий пароль",
+    "new-password-placeholder": "Введіть новий пароль",
+    "confirm-new-password": "Підтвердіть новий пароль",
+    "confirm-new-password-placeholder": "Підтвердіть новий пароль",
+    "change-password": "Змінити"
+  },
+  "personal-info": {
+    "title": "Особиста інформація",
+    "description": "Заповніть поля нижче. Ми нікуди не передамо вашу особисту інформацію.",
+    "first-name": "Ім'я",
+    "first-name-placeholder": "наприклад, Богдан",
+    "last-name": "Прізвище",
+    "last-name-placeholder": "наприклад, Дубинченко",
+    "gender": "Стать",
+    "gender-placeholder": "Оберіть свою стать",
+    "gender-title": "Ваша стать",
+    "save": "Зберегти"
+  },
+  "gender": {
+    "female": "Жінка",
+    "male": "Чоловік",
+    "unspecified": "Інше"
+  },
+  "recipe-search": {
+    "tab-title": "Виберіть рецепт, щоб почати свою трапезу",
+    "search-placeholder": "Знайти рецепт",
+    "first-dishes": "Перші страви",
+    "main-dishes": "Другі страви",
+    "modal": {
+      "add-to-reschedule": "Додати до розкладу",
+      "delete-from-schedule": "Видалити з розкладу",
+      "from": "Від ",
+      "description": "ОПИС",
+      "ingredients": "ІНГРЕДІЄНТИ",
+      "instructions": "КРОКИ ПРИГОТУВАННЯ",
+      "calories": "КАЛОРІЙНІСТЬ",
+      "weight": "ВАГА СТРАВИ",
+      "number-of-servings": "КІЛЬКІСТЬ ПОРЦІЙ",
+      "pfc": "БЖВ",
+      "measurement-units-for-calories": "ккал"
+    },
+    "setting-up-a-recipe": {
+      "title": "Налаштування рецепту",
+      "modify": "Модифікувати",
+      "view-original": "Переглянути орігінал",
+      "remove-modifications": "Видалити модифікування",
+      "never-show": "Ніколи не показувати"
+    },
+    "filters": {
+      "title": "Фільтри",
+      "general": "Загальні",
+      "amount-of-ingredients": "Кількість інгредієнтів",
+      "cooking-time": "Час приготування",
+      "calories": "Калорії",
+      "tags": "Теги",
+      "recipes": "Рецепти",
+      "general-options": {
+        "in-the-field": "В польових умовах",
+        "quick-cooking": "Швидке приготування",
+        "calories": "Калорійні",
+        "at-the-campfire": "На вогнищі",
+        "long-term-storage": "Довготривале зберігання",
+        "no-kitchen-inheritance": "Без кухонного успадкування",
+        "first-dish": "Перша страва",
+        "second-dish": "Друга страва",
+        "favorite": "Улюблені"
+      },
+      "recipe-authors": {
+        "from-the-app": "Від додатку",
+        "from-the-users": "Від користувачів"
+      },
+      "amount-of-ingredients-options": {
+        "less-than-5": "Менше 5",
+        "5-10": "Від 5 до 10",
+        "more-than-10": "Більше 10"
+      },
+      "cooking-time-options": {
+        "less-than-15-minutes": "Менше 15 хвилин",
+        "15-30-minutes": "Від 15 до 30 хвилин",
+        "30-60-minutes": "Від 30 до 60 хвилин",
+        "more-than-60-minutes": "Більше 60 хвилин"
+      },
+      "calories-options": {
+        "less-than-100": "Менше 100",
+        "100-200": "Від 100 до 200",
+        "200-500": "Від 200 до 500",
+        "more-than-500": "Більше 500"
+      },
+      "tag-options": {
+        "grill": "Гриль",
+        "vegetarian": "Вегетаріанське",
+        "quick-lunch": "Швидкій обід",
+        "new-recipes": "Нові рецепти"
+      }
+    },
+    "add-recipe-to-meal": {
+      "title": "Оберіть день для додавання рецепту до плану харчування"
+    }
+  },
+  "my-recipes": {
+    "tab-title": "Тут відображаються ваші рецепти",
+    "create-recipe-button": "Створити рецепт",
+    "not-have-any-recipes": "У вас ще немає рецептів",
+    "create-ingredient": {
+      "add-ingredient": "Додати інгредієнт",
+      "add": "Додати",
+      "name": "Назва інгредієнту",
+      "name-label": "напр., Картопля",
+      "quantity": "Кількість (необов'язково)",
+      "quantity-label": "напр., 2.5",
+      "unitOfMeasure": "Одиниця виміру",
+      "unitOfMeasure-label": "напр., кг",
+      "comment": "Коментар (необов'язково)",
+      "comment-label": "напр., Середня"
+    },
+    "create-recipe": {
+      "title": "Створення нового рецепту",
+      "name": "Назва",
+      "name-placeholder": "напр., Борщ",
+      "description": "Опис (необов'язково)",
+      "description-placeholder": "Додати короткий опис",
+      "cookingInstructions": "Як приготувати",
+      "cookingInstructions-placeholder": "Додати інструкцію\n1. ...\n2. ...",
+      "cookingTime": "Час приготування",
+      "cookingTime-placeholder": "хв",
+      "weight": "Вага порції",
+      "weight-placeholder": "грам",
+      "weight-short-placeholder": "г",
+      "calorieContent": "Калорійність",
+      "calorieContent-placeholder": "ккал",
+      "numberOfServings": "Кількість порцій",
+      "protein": "Білки",
+      "fat": "Жири",
+      "carbohydrates": "Вуглеводи",
+      "choose-category": "Оберіть критерії які відповідають вашому рецепту"
+    }
+  },
+  "calendar": {
+    "tab-title": "Оберіть день для його перегляду або налаштування",
+    "calendar-options": {
+      "this-week": "Цей тиждень",
+      "this-year": "Цей рік"
+    },
+    "plan": {
+      "view-the-selected-day": "Переглянути обраний день",
+      "meal-plan": {
+        "allocated-cooking-time": "Виділений час для приготування:",
+        "meal-time": "Час трапези:",
+        "number-of-servings": "Кількість порцій:",
+        "from": "від",
+        "to": "до",
+        "delete-this-meal-description": "Ви впевнені, що хочете видалити цей прийом їжі?",
+        "delete-this-meal-description-additional": "Це призведе до видалення всіх доданих рецептів",
+        "setting-up-the-day": "Налаштування дня",
+        "add-a-meal": "Додати прийом їжі",
+        "cooking-conditions-description": "Оберіть критерії які опишуть ваші умови для приготування:",
+        "creating-a-meal": "Створення прийому їжі",
+        "name-of-the-meal-label": "Назва трапези",
+        "name-of-the-meal-placeholder": "напр., Сніданок"
+      }
+    }
+  },
+  "settings": {
+    "tab-title": "Налаштуйте свій профіль під свої вподобання",
+    "personal-info": "Персональні дані",
+    "personalize-your-app": "Персоналізація додатку",
+    "language": "Мова",
+    "language-placeholder": "Оберіть мову",
+    "theme": "Тема",
+    "theme-placeholder": "Оберіть тему",
+    "notifications": "Сповіщення",
+    "log-out-of-your-account": "Вийти з облікового запису",
+    "delete-account": "Видалити обліковий запис",
+    "delete-account-description": "Будь ласка, підтвердіть, що ви хочете повністю видалити свій обліковий запис і втратити доступ до сховища рецептів?"
+  },
+  "shop-list": {
+    "tab-title": "Переглядайте список покупок у налаштовані дні"
+  },
+  "general": {
+    "time-input": {
+      "clear": "Очистити"
+    },
+    "add-ingredient": "Додати інгредієнт",
+    "add-new": "Додати новий",
+    "choose-image": "Оберіть зображення",
+    "choose-option": "Оберіть опцію",
+    "products": "Продукти",
+    "additional": "Додаткові",
+    "bought": "Куплені",
+    "cancel-label": "Скасувати",
+    "create-label": "Створити",
+    "confirm-label": "Підтвердити",
+    "confirmation-label": "Підтвердження",
+    "theme": {
+      "light": "Світла",
+      "dark": "Темна"
+    }
+  },
+  "validations": {
+    "email-incorrect": "Невірна адреса електронної пошти",
+    "code-incorrect": "Невірний код",
+    "invalid-email-format": "Електронний лист має бути правильно відформатований",
+    "email-cannot-be-longer": "Email не може бути довшим за {{number}} літер",
+    "email-must-contain-only": "Електронна пошта повинна містити тільки латинські літери",
+    "first-name-cannot-be-longer": "Ім'я не може бути довшим за {{number}} літер",
+    "first-name-can-contain-only": "Ім'я може містити тільки літери, одинарні лапки, дефіси",
+    "last-name-cannot-be-longer": "Прізвище не може бути довшим за {{number}} літер",
+    "last-name-can-contain-only": "Прізвище може містити тільки літери, одинарні лапки, дефіси",
+    "password-is-required": "Пароль є обов'язковим полем",
+    "password-must-be-at-least-characters-long": "Пароль повинен містити щонайменше {{number}} символів",
+    "password-must-contain-at-least-one-special-symbol": "Пароль повинен містити хоча б один спеціальний символ",
+    "password-must-contain-at-least-one-number": "Пароль повинен містити хоча б одну цифру",
+    "password-must-contain-only": "Пароль повинен містити тільки латинські літери",
+    "confirm-password-is-required": "Підтвердити пароль - обов'язкове поле",
+    "passwords-must-match": "Паролі повинні збігатися",
+    "please-complete-this-required-field": "Будь ласка, заповніть це обов'язкове поле",
+    "email-already-exists": "Ця електронна адреса вже має обліковий запис",
+    "code-is-required": "Код є обов'язковим полем",
+    "code-must-be-6-digits-long": "Код повинен складатися з 6 цифр",
+    "code-must-contain-only-numbers": "Код повинен містити лише цифри"
+  }
+}
